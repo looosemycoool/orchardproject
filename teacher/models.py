@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from reserve.models import Teacher
 
-
 class Consulting(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(null=True, blank=True)
