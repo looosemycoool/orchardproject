@@ -4,8 +4,12 @@ from ..models import Reserve, Teacher, Notice
 
 from datetime import date
 
+import logging
+logger = logging.getLogger('pybo')
+
 @login_required(login_url='common:login')
 def index(request):
+    logger.info("INFO 레벨로 출력")
     teacher_table = Teacher.objects.order_by('id')
     teacher = Teacher.objects.order_by('id')
     notice = Notice.objects.latest('id')
