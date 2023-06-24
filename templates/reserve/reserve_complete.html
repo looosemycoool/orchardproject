@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+<style>
+    .reserve-complete-container {
+        text-align: center;
+        margin: 20px;
+    }
+
+    .reserve-complete-message {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .reserve-complete-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+</style>
+
+<div class="reserve-complete-container">
+<img style="width:376px" src="{% static 'login_signup.png' %}" alt="image"/>
+    <h5 class="reserve-complete-message">예약이 완료되었습니다.</h5>
+    <a href="{% url 'reserve:index' %}" class="btn btn-primary">확인</a>
+</div>
+{% endblock %}

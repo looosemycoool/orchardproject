@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+    <div class="container">
+        <h4 class="my-3 border-bottom pb-2">
+            {{ consulting.date }} {{ consulting.student_name }}학생
+            {% if consulting.consulting_type == 'mentoring' %}
+                멘토링 {% elif consulting.consulting_type == 'new_counseling' %} 신규상담
+            {% elif consulting.consulting_type == 'question' %} 질문 {% endif %}
+
+        </h4>
+        <div class="mb-3">
+            <h2>상담 제목</h2>
+            <div style="border: 1px solid black; border-radius:10px; padding:10px;">
+                <h3>{{ consulting.consulting_subject }}</h3>
+            </div>
+            </br>
+            <h3>상담 내용</h3>
+            <div style="border: 1px solid black; border-radius:10px; padding:10px;">
+                <h4>{{ consulting.consulting_content }}</h4>
+            </div>
+        </div>
+{#        <a href="{% url 'teacher:consulting_create' %}" class="btn btn-primary">수정하기</a>#}
+        <a href="#" class="btn btn-primary">수정하기</a>
+    </div>
+    임시디자인
+{% endblock %}

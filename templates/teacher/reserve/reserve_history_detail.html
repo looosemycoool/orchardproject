@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        .scroll-container {
+            max-height: 600px; /* 스크롤바 표시될 최대 높이 */
+            overflow-y: auto; /* 수직 스크롤바 표시 */
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            {% include 'teacher/reserve/reserve_teacher_table_detail.html' %}
+            {% include 'teacher/reserve/reserve_date_filter_table.html' %}
+
+            <div class="col-md-6">
+                <table class="table align-middle" style="text-align: center">
+                    <thead>
+                    <tr class="table-success">
+                        <th style="width: 10%; white-space: nowrap;">시간</th>
+                        <th style="width: 20%; white-space: nowrap;">예약한 학생</th>
+                        <th style="width: 40%; white-space: nowrap;">코멘트 제목</th>
+                        <th style="width: 20%; white-space: nowrap;">코멘트</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for r in reserve %}
+                        <tr>
+                            <td style="white-space: nowrap">{{ r.time }}</td>
+                            <td style="white-space: nowrap">{{ r.student_name.first_name }}</td>
+                            <td style="white-space: nowrap">
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.is_staff or r.student_name == user %}
+                                        {% if r.comment_subject == blank %}
+
+                                        {% endif %}
+                                        {% if r.comment_subject != blank %}
+                                            {{ r.comment_subject }}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+
+                            <td style="white-space:nowrap">
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.is_staff %}
+
+                                        {% if r.comment_subject == blank %}
+                                            <a href="{% url 'reserve:comment_create' r.id %}"
+                                               class="btn btn-success btn-sm">
+                                                코멘트 등록</a>
+                                        {% endif %}
+
+                                        {% if r.comment_subject != blank %}
+                                            <a href="{% url 'reserve:comment_modify' r.id %}"
+                                               class="btn btn-light btn-sm">
+                                                코멘트 수정</a>
+                                        {% endif %}
+
+                                    {% else %}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

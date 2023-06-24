@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+	<h5 class="my-3 border-bottom pb-2">{{ r.student_name }}질문내용</h5>
+	<form method="post">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="comment_subject" class="form-label">제목</label>
+			<input
+				type="text"
+				class="form-control"
+				name="comment_subject"
+				id="comment_subject"
+				value="{{ form.comment_subject.value|default_if_none:'' }}"
+			/>
+		</div>
+
+		<div class="mb-3">
+			<label for="comment_content" class="form-label">내용</label>
+			<textarea
+				class="form-control"
+				name="comment_content"
+				id="content"
+				rows="10"
+			>
+{{ form.comment_content.value|default_if_none:'' }}</textarea
+			>
+		</div>
+
+		<button type="submit" class="btn btn-primary">저장하기</button>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% block content %}
+    <div class="container">
+        <h5 class="my-3 border-bottom pb-2">상담 일지</h5>
+        <form method="post">
+            {% csrf_token %} {% include 'form_errors.html' %}
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="id_student_name" class="form-label">학생이름</label>
+                    <input type="text" class="form-control" id="id_student_name" name="student_name"
+                           value="{{ form.student_name.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="id_subject" class="form-label">선생님</label>
+                    <input type="text" class="form-control" id="id_subject" name="subject"
+                           value="{{ form.subject.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="id_date" class="form-label">날짜</label>
+                    <input type="date" class="form-control" id="id_date" name="date"
+                           value="{{ form.date.value|default_if_none:'' }}">
+                </div>
+            </div>
+            <!-- 템플릿(Template)에서 context에 추가된 딕셔너리를 참조합니다. -->
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="id_consulting_type" class="form-label">상담 유형</label>
+                    <select class="form-select" id="id_consulting_type" name="consulting_type"
+                            onchange="showHideOtherConsultingType(this)">
+                        {% for key, value in form.consulting_type.field.choices %}
+                            <option value="{{ key }}"
+                                    {% if key == form.consulting_type.value %}selected{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                        <option value="other" {% if form.consulting_type.value == 'other' %}selected{% endif %}>기타
+                        </option>
+                    </select>
+{#                    <div id="id_other_consulting_type_div" style="display:none;">#}
+{#                        <label for="id_other_consulting_type" class="form-label">기타 상담 유형</label>#}
+{#                        <input type="text" class="form-control" id="id_other_consulting_type"#}
+{#                               name="other_consulting_type"#}
+{#                               value="{{ form.other_consulting_type.value|default_if_none:'' }}">#}
+{#                    </div>#}
+                </div>
+                <div class="col-md-9">
+                    <label for="id_consulting_subject" class="form-label">상담 제목</label>
+                    <input type="text" class="form-control" id="id_consulting_subject" name="consulting_subject"
+                           value="{{ form.consulting_subject.value|default_if_none:'' }}">
+                </div>
+{#                <div class="col-md-3 mb-3">#}
+{#                    <div id="id_other_consulting_type_div" style="display:none;">#}
+{#                        <label for="id_other_consulting_type" class="form-label">기타 상담 유형</label>#}
+{#                        <input type="text" class="form-control" id="id_other_consulting_type"#}
+{#                               name="other_consulting_type"#}
+{#                               value="{{ form.other_consulting_type.value|default_if_none:'' }}">#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+{##}
+{#            <script>#}
+{#                function showHideOtherConsultingType(selectEl) {#}
+{#                    var otherConsultingTypeDiv = document.getElementById('id_other_consulting_type_div');#}
+{#                    if (selectEl.value == 'other') {#}
+{#                        otherConsultingTypeDiv.style.display = 'block';#}
+{#                    } else {#}
+{#                        otherConsultingTypeDiv.style.display = 'none';#}
+{#                    }#}
+{#                }#}
+{#            </script>#}
+
+
+            <div class="mb-3">
+                <label for="id_consulting_content" class="form-label">상담 내용</label>
+                <textarea class="form-control" id="id_consulting_content" name="consulting_content"
+                          rows="10">{{ form.consulting_content.value|default_if_none:'' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">저장하기</button>
+        </form>
+    </div>
+{% endblock %}

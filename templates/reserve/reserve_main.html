@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% include 'reserve/reserve_teacher_table_main.html' %}
+            <div class="col-md-6">
+                <!-- 콘텐츠 내용 -->
+                <table class="table align-middle" style="text-align: center">
+                    <thead>
+                    <tr class="table-success">
+                        <th style="width: 20%; white-space: nowrap;">과목</th>
+                        <th style="width: 20%; white-space: nowrap;">선생님</th>
+                        <th style="width: 20%; white-space: nowrap;">요일</th>
+                        <th style="width: 40%; white-space: nowrap;">시간</th>
+                    </tr>
+                    </thead>
+                    {% if teacher %}
+                        {% for t in teacher %}
+                            <tr class="table">
+                                <td style="white-space: nowrap;">{{ t.subject }}</td>
+                                <td style="white-space: nowrap;">{{ t.name }}</td>
+                                <td style="white-space: nowrap;">{{ t.duty_day }}</td>
+                                <td style="white-space: nowrap;">{{ t.duty_time }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-success mb-3" style="max-width: 18rem;">
+                    <div class="card-header bg-success text-light"><strong>공지사항</strong></div>
+                    <div class="card-header text-success">{{ notice.notice_header }}</div>
+                    <div class="card-body">
+                        <p class="card-text">{{ notice.notice_body }}</p>
+                    </div>
+                </div>
+
+                </divclass>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
