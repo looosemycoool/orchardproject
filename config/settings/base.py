@@ -24,7 +24,7 @@ SECRET_KEY = "django-insecure-m21=d-yd)0m!u0axu&rl6)x)xvw=8!ux8y5cmgatn)=ri1vbr#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['43.200.128.160']
+ALLOWED_HOSTS = ['43.200.128.160', 'gwasuwon.kr']
 
 # 로그인 성공 후 이동하는 URL
 LOGIN_REDIRECT_URL = '/'
