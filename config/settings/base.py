@@ -212,16 +212,21 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-GOOGLE_SHEETS_CREDENTIALS = {
-  "type": "service_account",
-  "project_id": "orchard-390906",
-  "private_key_id": "a653ce2b0ee0ebbfb68b052afb133b099be13b96",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDKSvjV578T6O+O\nT2sIY+UBQEeWOzG3FpiNmT5Wic9pHLZNrSJud/L1LIE+nrXiU5vJ9ykGbB6xXF9D\n2gMprX5TUAhUPEIIwahEVx6iXuLenDi/4qwAb8bhZhJqIi5Dmvl17st5wkF7G2Fb\nMyGw/2ePl8NKCbBXzZoh/bYORQjME0iLj7COkxCrEw6TNBCNf27pg0JJt88hdFFj\nfFAxN+p/+poDmvfZdEC7UL9yQ5CiM6pUfmOrtt7Fzt4QgO20gX1RP64HdJig0h0Z\nSuS+txEa6FvMA0jV1bBgO654za6Gvb8Z/pg4G6sjzFkxJf/d49q8UUf9AoWlD7uY\nClJZ34yLAgMBAAECggEAFWrlTZXBCpVER7JA3XKLccZ3Iytr6BE3CvGJQsBJ0BHU\n0K8z+14tFagl8ZX8ISpDpEPMJCdDrfjfB+AH1bHOCM7AaFVjkxRt1vkiVS6WoTBe\nZx0oo3iHe0sYnVlhFzyhN3XrinNMBiyv8hKdI+WRTAgACnwGykUKZ0Q6sj1ni7OO\ncGjgZC7Q6d/nk3qAgMhiwdqJBNHDfMtt7zM+BrgvYSKu6AkgbG1E4Dqs9oxSgL+M\nwj7cMe4IHN94dv4sSsjQc+Jn8hAXlIsUSLipV5q6tumr6CGHR80K7Gx+ECXuyXVH\nJDQPKf1fFta/6eEbzlrVFz5Ev2RNyyb/QSHK5L4dAQKBgQD/4dCTKNswlWlvU1gP\nUrCXSGypr3AT63mRdR4A1tXhe8tFrJV4MkF3AoUQM5qVf0oU/ltVmnuia3UKf83c\nZ2pK1O5MIKaNr4tts7u59DTJ0U11TSn5tbhR3UKjyGjrBsq8C0zZ3tdR6lwQoDdq\nnPsnjq0KJcvf5PJg27kHJQZp2QKBgQDKYtXpKiAsTuSZnXIxBb7F74DYYWit4jHX\n8ErukT/3KOez+BPxxch7sh84JxkzUwu3gi28990zr6qzDmNzW0Q8pIz2GkJfYh/9\nLZeNXSZ/To8v0ylquQsqaVDO/o+y/lLRUWFWIbVapKkZHvajPn/j5q4IAvTVMUdG\nwi6coCZnAwKBgQCj1whBIdjvS8v930S0UwMFavdA0zeVWaI2k+IJMYYzYZuvWik+\nlBc8x51B2XjynlVmCdObhVYCkoGXnmvG42S404xdrE5YzH0fWgUqtQYT73OEV0s4\nO7XwnRbtXgZn7qpjK20i17/REJmwf5XcKvXZx05fAAKBssvLXwUjYP6xSQKBgEeF\nVgLoGCaQWsjOkyQv25MnaGkPQ2bvoJ2nFVPpkKlPk1JOQP4X3xmXgODfMFCq8GER\naAh3r3wsgC52zz5c6mhj3ky6SupaSuO10PDsEka7BG7qOKC2c/Ow9BWycCXZKns+\nPx+pGeXGetudzZsy4w8u3iGGqe8NUxr2VHKVRfzxAoGBAIhoE97lUqgUTx7ohctN\n56PkQv/zPJ69MFCXXnj0yucJClmBX//fYxP9pXZ8S/lggswgiY1jSMsBXOOi022c\nAz8YIFpSfzc5WZ9GnbqemJEs61w70rYAgJ3D68ub8nLQV6XxrGbHtcHi1OD9IoUq\njZdcLZEa/GA2OIHWL+5F6js9\n-----END PRIVATE KEY-----\n",
-  "client_email": "orchard@orchard-390906.iam.gserviceaccount.com",
-  "client_id": "106478051947489167298",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/orchard%40orchard-390906.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
+with open('google_cloud_key.json') as f:
+    google_cloud_key = json.load(f)
+
+GOOGLE_SHEETS_CREDENTIALS = google_cloud_key
+#
+# GOOGLE_SHEETS_CREDENTIALS = {
+#   "type": "service_account",
+#   "project_id": "orchard-390906",
+#   "private_key_id": "a653ce2b0ee0ebbfb68b052afb133b099be13b96",
+#   "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDKSvjV578T6O+O\nT2sIY+UBQEeWOzG3FpiNmT5Wic9pHLZNrSJud/L1LIE+nrXiU5vJ9ykGbB6xXF9D\n2gMprX5TUAhUPEIIwahEVx6iXuLenDi/4qwAb8bhZhJqIi5Dmvl17st5wkF7G2Fb\nMyGw/2ePl8NKCbBXzZoh/bYORQjME0iLj7COkxCrEw6TNBCNf27pg0JJt88hdFFj\nfFAxN+p/+poDmvfZdEC7UL9yQ5CiM6pUfmOrtt7Fzt4QgO20gX1RP64HdJig0h0Z\nSuS+txEa6FvMA0jV1bBgO654za6Gvb8Z/pg4G6sjzFkxJf/d49q8UUf9AoWlD7uY\nClJZ34yLAgMBAAECggEAFWrlTZXBCpVER7JA3XKLccZ3Iytr6BE3CvGJQsBJ0BHU\n0K8z+14tFagl8ZX8ISpDpEPMJCdDrfjfB+AH1bHOCM7AaFVjkxRt1vkiVS6WoTBe\nZx0oo3iHe0sYnVlhFzyhN3XrinNMBiyv8hKdI+WRTAgACnwGykUKZ0Q6sj1ni7OO\ncGjgZC7Q6d/nk3qAgMhiwdqJBNHDfMtt7zM+BrgvYSKu6AkgbG1E4Dqs9oxSgL+M\nwj7cMe4IHN94dv4sSsjQc+Jn8hAXlIsUSLipV5q6tumr6CGHR80K7Gx+ECXuyXVH\nJDQPKf1fFta/6eEbzlrVFz5Ev2RNyyb/QSHK5L4dAQKBgQD/4dCTKNswlWlvU1gP\nUrCXSGypr3AT63mRdR4A1tXhe8tFrJV4MkF3AoUQM5qVf0oU/ltVmnuia3UKf83c\nZ2pK1O5MIKaNr4tts7u59DTJ0U11TSn5tbhR3UKjyGjrBsq8C0zZ3tdR6lwQoDdq\nnPsnjq0KJcvf5PJg27kHJQZp2QKBgQDKYtXpKiAsTuSZnXIxBb7F74DYYWit4jHX\n8ErukT/3KOez+BPxxch7sh84JxkzUwu3gi28990zr6qzDmNzW0Q8pIz2GkJfYh/9\nLZeNXSZ/To8v0ylquQsqaVDO/o+y/lLRUWFWIbVapKkZHvajPn/j5q4IAvTVMUdG\nwi6coCZnAwKBgQCj1whBIdjvS8v930S0UwMFavdA0zeVWaI2k+IJMYYzYZuvWik+\nlBc8x51B2XjynlVmCdObhVYCkoGXnmvG42S404xdrE5YzH0fWgUqtQYT73OEV0s4\nO7XwnRbtXgZn7qpjK20i17/REJmwf5XcKvXZx05fAAKBssvLXwUjYP6xSQKBgEeF\nVgLoGCaQWsjOkyQv25MnaGkPQ2bvoJ2nFVPpkKlPk1JOQP4X3xmXgODfMFCq8GER\naAh3r3wsgC52zz5c6mhj3ky6SupaSuO10PDsEka7BG7qOKC2c/Ow9BWycCXZKns+\nPx+pGeXGetudzZsy4w8u3iGGqe8NUxr2VHKVRfzxAoGBAIhoE97lUqgUTx7ohctN\n56PkQv/zPJ69MFCXXnj0yucJClmBX//fYxP9pXZ8S/lggswgiY1jSMsBXOOi022c\nAz8YIFpSfzc5WZ9GnbqemJEs61w70rYAgJ3D68ub8nLQV6XxrGbHtcHi1OD9IoUq\njZdcLZEa/GA2OIHWL+5F6js9\n-----END PRIVATE KEY-----\n",
+#   "client_email": "orchard@orchard-390906.iam.gserviceaccount.com",
+#   "client_id": "106478051947489167298",
+#   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+#   "token_uri": "https://oauth2.googleapis.com/token",
+#   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+#   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/orchard%40orchard-390906.iam.gserviceaccount.com",
+#   "universe_domain": "googleapis.com"
+# }
