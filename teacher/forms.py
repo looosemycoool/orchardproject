@@ -1,7 +1,6 @@
 from django import forms
 from .models import Consulting
 
-
 class ConsultingForm(forms.ModelForm):
     CHOICES = (
         ('new_counseling', '신규상담'),

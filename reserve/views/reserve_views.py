@@ -6,8 +6,6 @@ from ..models import Reserve, Teacher, Notice
 
 from datetime import date
 import datetime
-
-
 @login_required(login_url='common:login')
 def reserve(request, reserve_id):
     reserve = Reserve.objects.get(id=reserve_id)

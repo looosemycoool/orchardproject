@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-2 text-center list-group" style="height: 700px">
+                <div class="card border-secondary mb-3">
+                    <form method="GET" action="{% url 'manager:patrol_student_detail' %}">
+                        <div class="card-header bg-primary-subtle">일일 순찰 일지 학생 검색</div>
+                        <div class="card-body">
+                            <div class="input-group mb-4">
+                                {% csrf_token %}
+                                <span class="input-group-text" id="inputGroup-sizing-default">학생명</span>
+                                <input type="text" name="student_name" id="student_name"
+                                       class="form-control btn-outline-secondary"
+                                       placeholder="학생명" aria-label="Recipient's username"
+                                       aria-describedby="button-addon2">
+                            </div>
+                            <button class="btn btn-outline-success" type="submit" id="button-addon2">검색</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-1 text-center">
+                <div class="card" style="height: 32rem">
+                    <div class="card-header">
+                        {{ student_name }}
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {% for date in unique_dates %}
+                                <a href="?student_name={{ student_name }}&selected_date={{ date }}"
+                                   class="list-group-item">{{ date }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if selected_date %}
+                {% if filtered_data %}
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card border-secondary">
+                                    <div class="card-header bg-secondary-subtle">
+                                        <h5 class="card-title">{{ student_name }}</h5>
+                                        <p class="card-text">{{ selected_date }}</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for data in filtered_data %}
+                                            <li class="list-group-item">집중도3 - {{ data.focus_three }}</li>
+                                            <li class="list-group-item">집중도2 - {{ data.focus_two }}</li>
+                                            <li class="list-group-item">집중도1 - {{ data.focus_one }}</li>
+                                            <li class="list-group-item bg-danger text-white">수면 - {{ data.sleep }}회</li>
+                                            <li class="list-group-item">focus_index :</li>
+                                            <li class="list-group-item bg-secondary"></li>
+                                            <li class="list-group-item">질의응답 - {{ data.question }}회</li>
+                                            <li class="list-group-item">상담 - {{ data.consulting }}회</li>
+                                            <li class="list-group-item">멘토링 - {{ data.mentoring }}회</li>
+                                            <li class="list-group-item">계획정리 - {{ data.plan }}회</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                {% if filtered_data %}
+                                    {% for data in filtered_data %}
+                                        <div class="card border-secondary mb-3" style="height: 16rem">
+                                            <div class="card-header bg-warning-subtle">국어</div>
+                                            <div class="card-body">
+                                                <p>국어 자습 - {{ data.k_ss_count }}</p>
+                                                <p>국어 인강 - {{ data.k_il_count }}</p>
+                                                <p>1회당 30분 적용</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-secondary mb-3" style="height: 16rem">
+                                            <div class="card-header bg-danger-subtle">영어</div>
+                                            <div class="card-body">
+                                                <p>영어 자습 - {{ data.e_ss_count }}</p>
+                                                <p>영어 인강 - {{ data.e_il_count }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                {% if filtered_data %}
+                                    {% for data in filtered_data %}
+                                        <div class="card border-secondary mb-3" style="height: 16rem">
+                                            <div class="card-header bg-success-subtle">수학</div>
+                                            <div class="card-body">
+                                                <p>수학 자습 - {{ data.m_ss_count }}</p>
+                                                <p>수학 인강 - {{ data.m_il_count }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-secondary mb-3" style="height: 16rem">
+                                            <div class="card-header bg-primary-subtle">탐구</div>
+                                            <div class="card-body">
+                                                <p>탐구 자습 - {{ data.r_ss_count }}</p>
+                                                <p>턈구 인강 - {{ data.r_il_count }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

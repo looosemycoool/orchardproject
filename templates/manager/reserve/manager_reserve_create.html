@@ -1,0 +1,88 @@
+<!-- reserve_create.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                {% include 'manager/manager_main_menu.html' %}
+                <div class="col-md-2 text-center list-group" style="height:700px">
+                    <!-- 메뉴 항목들 -->
+                    <a href="{% url 'manager:reserve_create' %}"
+                       class="btn list-group-item-action border-secondary bg-secondary-subtle mb-1">예약 생성</a>
+                    <a href="{% url 'manager:reserve_detail' %}"
+                       class="btn list-group-item-action border-secondary mb-1">예약 조회</a>
+                </div>
+                <div class="col-md-8" style="height:700px">
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="id_subject" class="form-label">선생님(drop down 형식)</label>
+                            <select class="form-control" id="id_teacher" name="teacher_id">
+                                <option value="">선생님 선택</option>
+                                {% for teacher in teachers %}
+                                    <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="id_date" class="form-label">날짜</label>
+                            <input type="date" class="form-control" id="id_date" name="date"
+                                   value="{{ form.date.value|default_if_none:'' }}">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="id_start_time" class="form-label">시작 시간(drop down 형식)</label>
+                            <select class="form-control" id="id_start_time" name="start_time">
+                                <option value="">시작 시간 선택</option>
+                                {% for time in times %}
+                                    <option value="{{ time }}">{{ time }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="id_end_time" class="form-label">끝나는 시간(drop down 형식)</label>
+                            <select class="form-control" id="id_end_time" name="end_time">
+                                <option value="">끝나는 시간 선택</option>
+                                {% for time in times %}
+                                    <option value="{{ time }}">{{ time }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="id_student_name" class="form-label">학생 이름</label>
+                            <input type="text" class="form-control" id="id_student_name" name="student_name"
+                                   value="{{ form.student_name.value|default_if_none:'' }}">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">저장하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
+<label for="id_teacher">선생님</label>
+<select name="teacher" id="id_teacher" class="form-control">
+    <option value="">선생님 선택</option>
+    {% for teacher in teachers %}
+        <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+    {% endfor %}
+</select>
+
+<label for="id_start_time">시작 시간</label>
+<select name="start_time" id="id_start_time" class="form-control">
+    <option value="">시작 시간 선택</option>
+    {% for time in time_table %}
+        <option value="{{ time.id }}">{{ time.time }}</option>
+    {% endfor %}
+</select>
+
+<label for="id_end_time">끝나는 시간</label>
+<select name="end_time" id="id_end_time" class="form-control">
+    <option value="">끝나는 시간 선택</option>
+    {% for time in time_table %}
+        <option value="{{ time.id }}">{{ time.time }}</option>
+    {% endfor %}
+</select>

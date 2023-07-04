@@ -2,8 +2,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from reserve.models import Reserve, Teacher, Notice
 
-
-
 @user_passes_test(lambda u: u.is_staff, login_url="common:login")
 def reserve_history(request, teacher_id):
     current_teacher_id = int(teacher_id)
