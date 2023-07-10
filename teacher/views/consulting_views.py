@@ -7,8 +7,6 @@ from ..forms import ConsultingForm
 
 from django.core.paginator import Paginator
 
-
-
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def consulting_page(request):
     consulting = Consulting.objects.order_by('-id')

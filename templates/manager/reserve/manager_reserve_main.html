@@ -4,8 +4,16 @@
         <div class="row">
             {% include 'manager/manager_main_menu.html' %}
             <div class="col-md-2 text-center list-group" style="height:700px">
-                    <a href="{% url 'manager:reserve_create' %}" class="btn list-group-item-action border-secondary mb-1">예약 생성</a>
-                    <a href="{% url 'manager:reserve_detail' %}" class="btn list-group-item-action border-secondary mb-1">예약 조회</a>
+                <a href="{% url 'manager:reserve_create' %}" class="btn btn-outline-info mb-1">예약
+                    생성</a>
+                <ul class="list-group">
+                    {% for t in teacher_table %}
+                        <a href="{% url 'manager:reserve_detail' teacher_id=t.id%}"
+                           class="list-group-item list-group-item-action text-center">
+                            <strong>{{ t.subject }}</strong> {{ t.name }}선생님
+                        </a>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

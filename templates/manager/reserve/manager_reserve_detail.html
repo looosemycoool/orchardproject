@@ -4,8 +4,93 @@
         <div class="row">
             {% include 'manager/manager_main_menu.html' %}
             <div class="col-md-2 text-center list-group" style="height:700px">
-                    <a href="{% url 'manager:reserve_create' %}" class="btn list-group-item-action border-secondary mb-1">예약 생성</a>
-                    <a href="{% url 'manager:reserve_detail' %}" class="btn list-group-item-action border-secondary bg-secondary-subtle mb-1">예약 조회</a>
+                <a href="{% url 'manager:reserve_create' %}" class="btn list-group-item-action border-secondary mb-1">예약
+                    생성</a>
+                <ul class="list-group">
+                    {% for t in teacher_table %}
+                        {% if current_teacher_id == t.id %}
+                            <a href="{% url 'manager:reserve_detail' teacher_id=t.id %}"
+                               class="list-group-item list-group-item-action text-success border border-success text-center">
+                                <strong>{{ t.subject }}</strong> {{ t.name }}선생님
+                            </a>
+                        {% else %}
+                            <a href="{% url 'manager:reserve_detail' teacher_id=t.id %}"
+                               class="list-group-item list-group-item-action text-center">
+                                <strong>{{ t.subject }}</strong> {{ t.name }}선생님
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% include 'manager/reserve/manager_reserve_date_filter_table.html' %}
+            <div class="col-md-5">
+                <table class="table align-middle" style="text-align: center">
+                    <thead>
+                    <tr class="table-success">
+                        <th style="width: 15%; white-space: nowrap;">시간</th>
+                        <th style="width: 85%; white-space: nowrap;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for r in reserve_filter_teacher %}
+                        {% if r.comment_subject %}
+                            <tr>
+                                <td style="white-space: nowrap">{{ r.time }}</td>
+                                <td style="white-space: nowrap">
+                                    <form method="post" action="{% url 'manager:reserve_update' reserve_id=r.id %}">
+                                        {% csrf_token %}
+                                        <div class="d-flex justify-content-between">
+                                            <div style="flex-basis: 70%;">
+                                                {{ r.comment_subject }}
+                                            </div>
+                                            <div style="flex-basis: 15%;">
+                                                <button type="submit" name="action" value="초기화"
+                                                        class="btn btn-outline-warning">초기화
+                                                </button>
+                                            </div>
+                                            <div style="flex-basis: 15%;">
+                                                <button type="submit" name="action" value="삭제" class="btn btn-danger">삭제
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td style="white-space: nowrap">{{ r.time }}</td>
+                                <td style="white-space: nowrap">
+                                    <form method="post" action="{% url 'manager:reserve_update' reserve_id=r.id %}">
+                                        {% csrf_token %}
+                                        <div class="d-flex justify-content-between">
+                                            <div style="flex-basis: 70%;">
+                                                <input type="text" class="form-control" id="id_student_name"
+                                                       name="student_name"
+                                                       value="{{ form.student_name.value }}">
+                                            </div>
+                                            <div style="flex-basis: 15%;">
+                                                <button type="submit" name="action" value="상담"
+                                                        class="btn btn-outline-info">상담
+                                                </button>
+                                            </div>
+                                            <div style="flex-basis: 15%;">
+                                                <button type="submit" name="action" value="멘토링"
+                                                        class="btn btn-outline-primary">멘토링
+                                                </button>
+                                            </div>
+                                            <div style="flex-basis: 15%;">
+                                                <button type="submit" name="action" value="삭제" class="btn btn-danger">삭제
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

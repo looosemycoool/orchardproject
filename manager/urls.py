@@ -6,10 +6,14 @@ app_name = 'manager'
 
 urlpatterns = [
     path('', base_views.index, name='index'),
+
     # reserve
     path('reserve/', reserve_views.reserve, name='reserve'),
+    path('reserve/detail/<int:teacher_id>', reserve_views.reserve_detail, name='reserve_detail'),
+    path('reserve/detail/<int:teacher_id>/<str:date>', reserve_views.reserve_detail_teacher,
+         name='reserve_detail_teacher'),
+    path('reserve/update/<int:reserve_id>/', reserve_views.reserve_update, name='reserve_update'),
     path('reserve/create/', reserve_views.reserve_create, name='reserve_create'),
-    path('reserve/detail', reserve_views.reserve_detail, name='reserve_detail'),
 
     # consulting
     path('consulting/', consulting_views.consulting, name='consulting'),
@@ -19,7 +23,8 @@ urlpatterns = [
     # student_study
     path('student_study/', student_study_views.student_study, name='student_study'),
     path('student_study/detail', student_study_views.student_study_detail, name='student_study_detail'),
-    path('student_study/upload/success', student_study_views.student_study_upload_success, name='student_study_upload_success'),
+    path('student_study/upload/success', student_study_views.student_study_upload_success,
+         name='student_study_upload_success'),
     path('student_study/upload/fail', student_study_views.student_study_upload_fail, name='student_study_upload_fail'),
 
     # patrol
