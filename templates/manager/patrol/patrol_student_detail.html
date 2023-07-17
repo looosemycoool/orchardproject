@@ -24,7 +24,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-                <div class="card" style="height: 32rem">
+                <div class="card" style="height: 460px">
                     <div class="card-header">
                         {{ student_name }}
                     </div>
@@ -58,7 +58,7 @@
                                             <li class="list-group-item">집중도2 - {{ data.focus_two }}</li>
                                             <li class="list-group-item">집중도1 - {{ data.focus_one }}</li>
                                             <li class="list-group-item bg-danger text-white">수면 - {{ data.sleep }}회</li>
-                                            <li class="list-group-item">focus_index :</li>
+                                            <li class="list-group-item">집중도 - {{ data.focus_index }}</li>
                                             <li class="list-group-item bg-secondary"></li>
                                             <li class="list-group-item">질의응답 - {{ data.question }}회</li>
                                             <li class="list-group-item">상담 - {{ data.consulting }}회</li>
@@ -68,48 +68,122 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 {% if filtered_data %}
                                     {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-warning-subtle">국어</div>
-                                            <div class="card-body">
-                                                <p>국어 자습 - {{ data.k_ss_count }}</p>
-                                                <p>국어 인강 - {{ data.k_il_count }}</p>
-                                                <p>1회당 30분 적용</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-danger-subtle">영어</div>
-                                            <div class="card-body">
-                                                <p>영어 자습 - {{ data.e_ss_count }}</p>
-                                                <p>영어 인강 - {{ data.e_il_count }}</p>
-                                            </div>
-                                        </div>
+                                        <figure class="highcharts-figure border" style="height:190px;">
+                                            <div id="container_semicircle"></div>
+                                        </figure>
+                                        <script>
+                                            Highcharts.chart('container_semicircle', {
+                                                chart: {
+                                                    plotBackgroundColor: null,
+                                                    plotBorderWidth: 0,
+                                                    plotShadow: false
+                                                },
+                                                title: {
+                                                    text: '',
+                                                    align: 'center',
+                                                    verticalAlign: 'middle',
+                                                    y: 60
+                                                },
+                                                accessibility: {
+                                                    point: {
+                                                        valueSuffix: '%'
+                                                    }
+                                                },
+                                                plotOptions: {
+                                                    pie: {
+                                                        dataLabels: {
+                                                            enabled: true,
+                                                            distance: -50,
+                                                            style: {
+                                                                color: 'white'
+                                                            }
+                                                        },
+                                                        startAngle: -90,
+                                                        endAngle: 90,
+                                                        center: ['50%', '55%'],
+                                                        size: '110%',
+                                                        colors: ['#FFE699', '#8BE88B', '#FFA931', '#63C9E8', '#A795D7']
+                                                    }
+                                                },
+                                                series: [{
+                                                    type: 'pie',
+                                                    name: '',
+                                                    innerSize: '50%',
+                                                    data: [
+                                                        {
+                                                            name: '국어',
+                                                            y: {{ data.korean_study_count }}
+                                                        },
+                                                        {
+                                                            name: '수학',
+                                                            y: {{ data.math_study_count }}
+                                                        },
+                                                        {
+                                                            name: '영어',
+                                                            y: {{ data.english_study_count }}
+                                                        },
+                                                        {
+                                                            name: '탐구',
+                                                            y: {{ data.research_study_count }}
+                                                        }
+                                                    ]
+                                                }]
+                                            });
+                                        </script>
+                                        <figure class="highcharts-figure border">
+                                            <div id="container_stack_bar"></div>
+                                        </figure>
+                                        <script>
+                                            Highcharts.chart('container_stack_bar', {
+                                                chart: {
+                                                    type: 'bar',
+                                                    height: (9 / 16 * 100) + '%'
+                                                },
+                                                title: {
+                                                    text: ''
+                                                },
+                                                xAxis: {
+                                                    categories: ['국어', '수학', '영어', '탐구'],
+                                                    LineWidth: 0
+                                                },
+                                                yAxis: {
+                                                    min: 0,
+                                                    title: {
+                                                        text: ''
+                                                    }
+                                                },
+                                                legend: {
+                                                    reversed: true
+                                                },
+                                                plotOptions: {
+                                                    bar: {
+                                                        colorByPoint: false,
+                                                        groupPadding: 0.2, // 그룹 간격 설정
+                                                        pointWidth: 20,
+                                                        colors: ['#FFE699', '#8BE88B', '#FFA931', '#63C9E8', '#A795D7']
+                                                    },
+                                                    series: {
+                                                        stacking: 'normal',
+                                                        dataLabels: {
+                                                            enabled: true
+                                                        }
+                                                    }
+                                                },
+                                                series: [{
+                                                    name: '자습',
+                                                    data: [{{ data.k_ss_count }}, {{ data.m_ss_count }}, {{ data.e_ss_count }}, {{ data.r_ss_count }}]
+                                                }, {
+                                                    name: '인강',
+                                                    data: [{{ data.k_il_count }}, {{ data.m_il_count }}, {{ data.e_il_count }}, {{ data.r_il_count }}]
+                                                }]
+                                            });
+                                        </script>
                                     {% endfor %}
                                 {% endif %}
                             </div>
-                            <div class="col-md-4">
-                                {% if filtered_data %}
-                                    {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-success-subtle">수학</div>
-                                            <div class="card-body">
-                                                <p>수학 자습 - {{ data.m_ss_count }}</p>
-                                                <p>수학 인강 - {{ data.m_il_count }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-primary-subtle">탐구</div>
-                                            <div class="card-body">
-                                                <p>탐구 자습 - {{ data.r_ss_count }}</p>
-                                                <p>턈구 인강 - {{ data.r_il_count }}</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-
                         </div>
                     </div>
                 {% endif %}

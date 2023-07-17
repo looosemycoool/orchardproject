@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-2">
+                <ul class="list-group dropdown-center mb-3">
+                    <a href="{% url 'manager:create_week_patrol_data' %}"
+                       class="list-group-item list-group-item-action text-center border border-success"
+                       aria-current="true">
+                        1주일 순찰 일지 생성
+                    </a>
+                    <a href="{% url 'manager:create_average_patrol_data' %}"
+                       class="list-group-item list-group-item-action text-center"
+                       style="white-space: nowrap;"
+                       aria-current="true">
+                        1주일 평균 순찰 데이터 생성
+                    </a>
+                    <a href="{% url 'manager:create_total_study_data' %}"
+                       class="list-group-item list-group-item-action text-center"
+                       aria-current="true">
+                        학과습 + 1주일 순찰 일지
+                    </a>
+                </ul>
+                <form method="POST">
+                    <div class="card border-secondary mb-3">
+                        <div class="card-header bg-secondary-subtle">일일 순찰 일지 주차 묶음</div>
+                        <div class="card-body">
+                            <div class="input-group mb-4">
+                                {% csrf_token %}
+                                <span class="input-group-text" id="inputGroup-sizing-default">주차</span>
+                                <input type="text" name="week_name" id="week_name"
+                                       class="form-control btn-outline-secondary" placeholder="ex) 6월 2주차"
+                                       aria-label="Recipient's username" aria-describedby="button-addon2">
+                            </div>
+                            <div class="input-group mb-4">
+                                <select class="form-control" id="id_start_patrol_date" name="start_patrol_date">
+                                    <option value="">시작일</option>
+                                    {% for date in unique_date %}
+                                        <option value="{{ date.date }}">{{ date.date }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-4">
+                                <select class="form-control" id="id_end_patrol_date" name="end_patrol_date">
+                                    <option value="">마지막일</option>
+                                    {% for date in unique_date %}
+                                        <option value="{{ date.date}}">{{ date.date }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button class="btn btn-outline-success" type="submit" id="button-addon2">데이터 생성
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
+                순찰 일지 목록
+            </div>
+            <div class="col-md-2">
+                학과습 목록
+            </div>
+        </div>
+{% endblock %}

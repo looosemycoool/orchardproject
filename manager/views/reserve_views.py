@@ -6,7 +6,6 @@ def reserve(request):
     teacher_table = Teacher.objects.order_by('id')
     return render(request, 'manager/reserve/manager_reserve_main.html', {'teacher_table': teacher_table})
 
-
 def reserve_create(request):
     if request.method == 'POST':
         teacher_table = Teacher.objects.order_by('id')

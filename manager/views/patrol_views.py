@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 import gspread
 from gspread.exceptions import WorksheetNotFound
 from oauth2client.service_account import ServiceAccountCredentials
-from ..models import Patrol_Data
+from ..models import Patrol_Data, Student_Study_Data
 from django.conf import settings
 
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1PowGIq5w_2y7pSCeP0V4DG9oEEjAlqEVrmcQEqas098/edit#gid=733072548"
+
 
 def patrol(request):
     # 업로드 과정
@@ -61,6 +62,7 @@ def patrol(request):
                     total_focus_count=item.count('3') + item.count('2') + item.count('1')
                 )
                 result[student_name] = patrol_data
+
             for student_name, patrol_data in result.items():
                 patrol_data.save()
 
@@ -83,6 +85,7 @@ def patrol(request):
         return render(request, 'manager/patrol/patrol_main.html', context)
     return render(request, 'manager/patrol/patrol_main.html')
 
+
 def patrol_student_detail(request):
     student_name = request.GET.get('student_name')
     selected_date = request.GET.get('selected_date')
@@ -90,13 +93,32 @@ def patrol_student_detail(request):
     if student_name:
         # Query the database to get the patrol data for the specified student
         student_patrol_data = Patrol_Data.objects.filter(student_name__icontains=student_name).order_by('date')
-
         # Extract unique dates for the student
         unique_dates = student_patrol_data.values_list('date', flat=True).distinct()
 
         if selected_date:
             # Filter the data based on the selected date
             filtered_data = student_patrol_data.filter(date=selected_date)
+
+            for data in filtered_data:
+                total_focus_count = data.total_focus_count
+                if total_focus_count != 0:
+                    data.focus_three_percentage = (data.focus_three / total_focus_count) * 100
+                    data.focus_two_percentage = (data.focus_two / total_focus_count) * 100
+                    data.focus_one_percentage = (data.focus_one / total_focus_count) * 100
+                else:
+                    data.focus_three_percentage = 0
+                    data.focus_two_percentage = 0
+                    data.focus_one_percentage = 0
+
+                # Calculate overall focus score
+                focus_score = (data.focus_three_percentage * 1) + (data.focus_two_percentage * 0.5) + (data.focus_one_percentage * -1)
+                data.focus_index = round(focus_score, 2)
+
+                data.korean_study_count = data.k_ss_count + data.k_il_count
+                data.math_study_count = data.m_ss_count + data.m_il_count
+                data.english_study_count = data.e_ss_count + data.e_il_count
+                data.research_study_count = data.r_ss_count + data.r_il_count
         else:
             filtered_data = []
 
@@ -107,12 +129,12 @@ def patrol_student_detail(request):
             'filtered_data': filtered_data,
         }
         return render(request, 'manager/patrol/patrol_student_detail.html', context)
-
     return render(request, 'manager/patrol/patrol_student_detail.html')
 
 
 def patrol_upload_success(request):
     return render(request, 'manager/patrol/patrol_upload_success.html')
+
 
 def patrol_upload_fail(request):
     return render(request, 'manager/patrol/patrol_upload_fail.html')

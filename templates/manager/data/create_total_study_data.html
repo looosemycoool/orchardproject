@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-2">
+                <ul class="list-group dropdown-center mb-3">
+                    <a href="{% url 'manager:create_week_patrol_data' %}"
+                       class="list-group-item list-group-item-action text-center"
+                       aria-current="true">
+                        1주일 순찰 일지 생성
+                    </a>
+                    <a href="{% url 'manager:create_average_patrol_data' %}"
+                       class="list-group-item list-group-item-action text-center"
+                       style="white-space: nowrap;"
+                       aria-current="true">
+                        1주일 평균 순찰 데이터 생성
+                    </a>
+                    <a href="{% url 'manager:create_total_study_data' %}"
+                       class="list-group-item list-group-item-action text-center border border-success"
+                       aria-current="true">
+                        학과습 + 1주일 순찰 일지
+                    </a>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="card border-secondary mb-3">
+                        <div class="card-header bg-success-subtle">학과습 데이터</div>
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <select class="form-control" id="id_student_study_data_week_name"
+                                        name="student_study_data_week_name">
+                                    <option value="">학과습 데이터</option>
+                                    {% for ssdw_names in student_study_data_week_name %}
+                                        <option value="{{ ssdw_names.week_name }}">{{ ssdw_names.week_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-header bg-primary-subtle">순찰 일지</div>
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <select class="form-control" id="id_patrol_weekly_data_week_name"
+                                        name="patrol_weekly_data_week_name">
+                                    <option value="">순찰 일지</option>
+                                    {% for pwdw_names in patrol_weekly_data_week_name %}
+                                        <option value="{{ pwdw_names.week_name }}">{{ pwdw_names.week_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button class="btn btn-outline-success" type="submit" id="button-addon2">데이터 합치기
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

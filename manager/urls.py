@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import base_views, reserve_views, consulting_views, student_study_views, patrol_views
+from .views import base_views, reserve_views, consulting_views, student_study_views, patrol_views, report_views, \
+    data_views
 
 app_name = 'manager'
 
@@ -32,4 +33,19 @@ urlpatterns = [
     path('patrol/student_detail', patrol_views.patrol_student_detail, name='patrol_student_detail'),
     path('patrol/upload/success', patrol_views.patrol_upload_success, name='patrol_upload_success'),
     path('patrol/upload/fail/', patrol_views.patrol_upload_fail, name='patrol_upload_fail'),
+
+    # data
+    path('data/', data_views.index, name='data'),
+    path('data/create/week/patrol/data/', data_views.create_week_patrol_data, name='create_week_patrol_data'),
+    path('data/create/total/study/data/', data_views.create_total_study_data, name='create_total_study_data'),
+    path('data/create/average/patrol/data/', data_views.create_average_patrol_data, name='create_average_patrol_data'),
+    path('data/success/', data_views.patrol_weekly_data_success, name='patrol_weekly_data_success'),
+
+    # report -> study
+    path('report/', report_views.report_study_main, name='report_study_main'),
+    path('report/detail/', report_views.report_study_detail, name='report_study_detail')
+
+    # report -> grade
+
+    # report -> consulting
 ]
