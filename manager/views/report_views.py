@@ -41,8 +41,6 @@ def report_study_detail(request):
             week_data[week] = []
         week_data[week].append(data.total_study_time)
 
-    print(week_data)
-
     combined_data = []
 
     # Calculate focus_index for each filtered_data object
