@@ -17,8 +17,7 @@ def comment_create(request, reserve_id):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            reserve.comment_subject = form.cleaned_data['comment_subject']
-            reserve.comment_content = form.cleaned_data['comment_content']
+            reserve.comment = form.cleaned_data['comment']
             reserve.save()
             teacher_id = reserve.teacher_id.id
             return redirect('reserve:detail', teacher_id=teacher_id)
