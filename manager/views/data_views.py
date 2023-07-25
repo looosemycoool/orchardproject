@@ -6,9 +6,9 @@ from django.db.models.functions import Cast
 
 
 def index(request):
-    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
-    patrol_dates = Patrol_Data.objects.values('date').distinct()
-    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct().order_by('id')
+    patrol_dates = Patrol_Data.objects.values('date').distinct().order_by('id')
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct().order_by('id')
     context = {'patrol_weekly_data_week_name': patrol_weekly_data_week_name, "patrol_dates": patrol_dates,
                "total_week_name": total_week_name}
     return render(request, 'manager/data/data_main.html', context)
@@ -97,9 +97,9 @@ def create_week_patrol_data(request):
             total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
 
         return redirect("manager:patrol_weekly_data_success")
-    patrol_dates = Patrol_Data.objects.values('date').distinct()
-    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
-    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
+    patrol_dates = Patrol_Data.objects.values('date').distinct().order_by('id')
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct().order_by('id')
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct().order_by('id')
 
     context = {'unique_date': unique_date, "patrol_dates": patrol_dates, "total_week_name": total_week_name,
                "patrol_weekly_data_week_name": patrol_weekly_data_week_name}
@@ -167,9 +167,9 @@ def create_total_study_data(request):
         return render(request, 'manager/data/total_study_data_success.html')
 
     student_study_data_week_name = Student_Study_Data.objects.values('week_name').distinct()
-    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
-    patrol_dates = Patrol_Data.objects.values('date').distinct()
-    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct().order_by('id')
+    patrol_dates = Patrol_Data.objects.values('date').distinct().order_by('id')
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct().order_by('id')
 
     context = {
         'student_study_data_week_name': student_study_data_week_name,
