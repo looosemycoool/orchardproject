@@ -101,12 +101,12 @@ def create_week_patrol_data(request):
             total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
 
         return redirect("manager:patrol_weekly_data_success")
-    patrol_dates = Patrol_Data.objects.values('date').distinct()
-    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
-    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').order_by('week_name').distinct()
+    patrol_dates = Patrol_Data.objects.values('date').order_by('date').distinct()
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').order_by('week_name').distinct()
 
-    context = {'unique_date': unique_date, "patrol_dates": patrol_dates, "total_week_name": total_week_name,
-               "patrol_weekly_data_week_name": patrol_weekly_data_week_name}
+    context = {'unique_date': unique_date, "unique_patrol_dates": patrol_dates, "unique_total_week_name": total_week_name,
+               "unique_patrol_week_names": patrol_weekly_data_week_name}
     return render(request, 'manager/data/create_week_patrol_data.html', context)
 
 
@@ -171,15 +171,15 @@ def create_total_study_data(request):
         return render(request, 'manager/data/total_study_data_success.html')
 
     student_study_data_week_name = Student_Study_Data.objects.values('week_name').distinct()
-    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
-    patrol_dates = Patrol_Data.objects.values('date').distinct()
-    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').order_by('week_name').distinct()
+    patrol_dates = Patrol_Data.objects.values('date').order_by('date').distinct()
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').order_by('week_name').distinct()
 
     context = {
         'student_study_data_week_name': student_study_data_week_name,
-        'patrol_weekly_data_week_name': patrol_weekly_data_week_name,
-        "patrol_dates": patrol_dates,
-        "total_week_name": total_week_name
+        'unique_patrol_week_name': patrol_weekly_data_week_name,
+        "unique_patrol_dates": patrol_dates,
+        "unique_total_week_name": total_week_name
     }
     return render(request, 'manager/data/create_total_study_data.html', context)
 
