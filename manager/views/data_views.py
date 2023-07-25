@@ -6,17 +6,15 @@ from django.db.models.functions import Cast
 
 
 def index(request):
-    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').order_by('id')
-    unique_patrol_week_names = patrol_weekly_data_week_name.distinct()
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').order_by('week_name').distinct()
+    patrol_dates = Patrol_Data.objects.values('date').order_by('date').distinct()
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').order_by('week_name').distinct()
 
-    patrol_dates = Patrol_Data.objects.values('date').order_by('id')
-    unique_patrol_dates = patrol_dates.distinct()
-
-    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').order_by('id').distinct()
-    unique_total_week_name = total_week_name.distinct()
-
-    context = {'unique_patrol_week_names': unique_patrol_week_names, "unique_patrol_dates": unique_patrol_dates,
-               "unique_total_week_name": unique_total_week_name}
+    context = {
+        'unique_patrol_week_names': patrol_weekly_data_week_name,
+        'unique_patrol_dates': patrol_dates,
+        'unique_total_week_name': total_week_name,
+    }
     return render(request, 'manager/data/data_main.html', context)
 
 
