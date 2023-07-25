@@ -43,7 +43,7 @@
                                 <select class="form-control" id="id_patrol_weekly_data_week_name"
                                         name="patrol_weekly_data_week_name">
                                     <option value="">순찰 일지</option>
-                                    {% for pwdw_names in patrol_weekly_data_week_name %}
+                                    {% for pwdw_names in unique_patrol_week_name %}
                                         <option value="{{ pwdw_names.week_name }}">{{ pwdw_names.week_name }}</option>
                                     {% endfor %}
                                 </select>
@@ -82,7 +82,7 @@
                              data-bs-smooth-scroll="true"
                              tabindex="0">
                             {#   반복문 일일 순찰 일지 날짜 #}
-                            {% for week_names in unique_patrol_week_names %}
+                            {% for week_names in unique_patrol_week_name %}
                                 <li class="list-group-item" style="white-space: nowrap;">{{ week_names.week_name }}</li>
                             {% endfor %}
                         </div>
