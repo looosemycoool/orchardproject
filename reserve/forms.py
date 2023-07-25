@@ -4,9 +4,8 @@ from .models import Reserve
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Reserve
-        fields = ['comment_subject', 'comment_content']
+        fields = ['comment']
 
         labels = {
-            'comment_subject': '제목',
-            'comment_content': '내용',
+            'comment': '코멘트',
         }

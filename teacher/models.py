@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from reserve.models import Teacher
+from reserve.models import Teacher, Reserve
 
 class Consulting(models.Model):
     id = models.BigAutoField(primary_key=True)

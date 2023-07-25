@@ -22,8 +22,6 @@
                         학과습 + 1주일 순찰 일지
                     </a>
                 </ul>
-            </div>
-            <div class="col-md-2">
                 <form method="POST">
                     {% csrf_token %}
                     <div class="card border-secondary mb-3">
@@ -55,6 +53,58 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="card" style="height: 460px">
+                    <div class="card-header" style="white-space: nowrap;">
+                        순찰 날짜
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {% for dates in patrol_dates %}
+                                <li class="list-group-item" style="white-space: nowrap;">{{ dates.date }}</li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="card" style="height: 460px">
+                    <div class="card-header" style="white-space: nowrap;">
+                        일주일 순찰
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {#   반복문 일일 순찰 일지 날짜 #}
+                            {% for week_names in patrol_weekly_data_week_name %}
+                                <li class="list-group-item" style="white-space: nowrap;">{{ week_names.week_name }}</li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="card" style="height: 460px">
+                    <div class="card-header" style="white-space: nowrap;">
+                        학과습 + 1주일 순찰일지
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {% for total_week_names in total_week_name %}
+                                <li class="list-group-item">{{ total_week_names.week_name }}</li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

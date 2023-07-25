@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Reserve, Time_Table, Teacher, Notice
 
 class ReserveAdmin(admin.ModelAdmin):
-    list_display = ('date', 'time', 'teacher_id', 'student_name', 'comment_subject', "comment_content")
+    list_display = ('date', 'time', 'teacher_id', 'student_name', 'comment')
     search_fields = ["teacher_id__name", "student_name__username", "date"]
 
 class TeacherAdmin(admin.ModelAdmin):

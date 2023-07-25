@@ -11,13 +11,11 @@ class Teacher(models.Model):
     def __str__(self):
         return self.name
 
-
 class Time_Table(models.Model):
     time = models.CharField(max_length=10)
 
     def __str__(self):
         return self.time
-
 
 class Reserve(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -27,8 +25,7 @@ class Reserve(models.Model):
     student_name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
                                      related_name='reservations')
     # reserved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings')
-    comment_subject = models.CharField(max_length=50, null=True, blank=True)
-    comment_content = models.TextField(max_length=10000, null=True, blank=True)
+    comment = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return str(self.date) if self.date else ''

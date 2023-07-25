@@ -4,13 +4,20 @@ from django.db.models import Sum, Func
 from django.db.models import Avg, FloatField
 from django.db.models.functions import Cast
 
+
 def index(request):
-    return render(request, 'manager/data/data_main.html')
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
+    patrol_dates = Patrol_Data.objects.values('date').distinct()
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
+    context = {'patrol_weekly_data_week_name': patrol_weekly_data_week_name, "patrol_dates": patrol_dates,
+               "total_week_name": total_week_name}
+    return render(request, 'manager/data/data_main.html', context)
 
 
 def create_week_patrol_data(request):
     patrol_data = Patrol_Data.objects.all()
     unique_date = patrol_data.values('date').distinct()
+
     if request.method == 'POST':
         week_name = request.POST.get('week_name')
         start_date = request.POST.get('start_patrol_date')
@@ -86,9 +93,18 @@ def create_week_patrol_data(request):
             )
             patrol_weekly_data.save()
 
+            patrol_dates = Patrol_Data.objects.values('date').distinct()
+            total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
+
         return redirect("manager:patrol_weekly_data_success")
-    context = {'unique_date': unique_date}
+    patrol_dates = Patrol_Data.objects.values('date').distinct()
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
+    patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
+
+    context = {'unique_date': unique_date, "patrol_dates": patrol_dates, "total_week_name": total_week_name,
+               "patrol_weekly_data_week_name": patrol_weekly_data_week_name}
     return render(request, 'manager/data/create_week_patrol_data.html', context)
+
 
 def create_total_study_data(request):
     if request.method == 'POST':
@@ -152,16 +168,22 @@ def create_total_study_data(request):
 
     student_study_data_week_name = Student_Study_Data.objects.values('week_name').distinct()
     patrol_weekly_data_week_name = Patrol_Weekly_Data.objects.values('week_name').distinct()
+    patrol_dates = Patrol_Data.objects.values('date').distinct()
+    total_week_name = Total_Weekly_Study_Data.objects.values('week_name').distinct()
 
     context = {
         'student_study_data_week_name': student_study_data_week_name,
-        'patrol_weekly_data_week_name': patrol_weekly_data_week_name
+        'patrol_weekly_data_week_name': patrol_weekly_data_week_name,
+        "patrol_dates": patrol_dates,
+        "total_week_name": total_week_name
     }
     return render(request, 'manager/data/create_total_study_data.html', context)
+
 
 class Round(Func):
     function = 'ROUND'
     template = '%(function)s(%(expressions)s, 1)'
+
 
 def create_average_patrol_data(request):
     if request.method == 'POST':
@@ -169,23 +191,57 @@ def create_average_patrol_data(request):
 
         # 주차에 해당하는 학생들의 평균 카운트 계산
         patrol_weekly_data = Patrol_Weekly_Data.objects.filter(week_name=patrol_weekly_data_week_name)
-        average_k_ss_count = patrol_weekly_data.aggregate(average_k_ss_count=Round(Avg('total_k_ss_count'), output_field=FloatField()))['average_k_ss_count']
-        average_k_il_count = patrol_weekly_data.aggregate(average_k_il_count=Round(Avg('total_k_il_count'), output_field=FloatField()))['average_k_il_count']
-        average_m_ss_count = patrol_weekly_data.aggregate(average_m_ss_count=Round(Avg('total_m_ss_count'), output_field=FloatField()))['average_m_ss_count']
-        average_m_il_count = patrol_weekly_data.aggregate(average_m_il_count=Round(Avg('total_m_il_count'), output_field=FloatField()))['average_m_il_count']
-        average_e_ss_count = patrol_weekly_data.aggregate(average_e_ss_count=Round(Avg('total_e_ss_count'), output_field=FloatField()))['average_e_ss_count']
-        average_e_il_count = patrol_weekly_data.aggregate(average_e_il_count=Round(Avg('total_e_il_count'), output_field=FloatField()))['average_e_il_count']
-        average_r_ss_count = patrol_weekly_data.aggregate(average_r_ss_count=Round(Avg('total_r_ss_count'), output_field=FloatField()))['average_r_ss_count']
-        average_r_il_count = patrol_weekly_data.aggregate(average_r_il_count=Round(Avg('total_r_il_count'), output_field=FloatField()))['average_r_il_count']
-        average_plan = patrol_weekly_data.aggregate(average_plan=Round(Avg('total_plan'), output_field=FloatField()))['average_plan']
-        average_mentoring = patrol_weekly_data.aggregate(average_mentoring=Round(Avg('total_mentoring'), output_field=FloatField()))['average_mentoring']
-        average_question = patrol_weekly_data.aggregate(average_question=Round(Avg('total_question'), output_field=FloatField()))['average_question']
-        average_consulting = patrol_weekly_data.aggregate(average_consulting=Round(Avg('total_consulting'), output_field=FloatField()))['average_consulting']
-        average_sleep = patrol_weekly_data.aggregate(average_sleep=Round(Avg('total_sleep'), output_field=FloatField()))['average_sleep']
-        average_focus_three = patrol_weekly_data.aggregate(average_focus_three=Round(Avg('total_focus_three'), output_field=FloatField()))['average_focus_three']
-        average_focus_two = patrol_weekly_data.aggregate(average_focus_two=Round(Avg('total_focus_two'), output_field=FloatField()))['average_focus_two']
-        average_focus_one = patrol_weekly_data.aggregate(average_focus_one=Round(Avg('total_focus_one'), output_field=FloatField()))['average_focus_one']
-        average_total_focus_count = patrol_weekly_data.aggregate(average_total_focus_count=Round(Avg('total_focus_count'), output_field=FloatField()))['average_total_focus_count']
+        average_k_ss_count = \
+            patrol_weekly_data.aggregate(average_k_ss_count=Round(Avg('total_k_ss_count'), output_field=FloatField()))[
+                'average_k_ss_count']
+        average_k_il_count = \
+            patrol_weekly_data.aggregate(average_k_il_count=Round(Avg('total_k_il_count'), output_field=FloatField()))[
+                'average_k_il_count']
+        average_m_ss_count = \
+            patrol_weekly_data.aggregate(average_m_ss_count=Round(Avg('total_m_ss_count'), output_field=FloatField()))[
+                'average_m_ss_count']
+        average_m_il_count = \
+            patrol_weekly_data.aggregate(average_m_il_count=Round(Avg('total_m_il_count'), output_field=FloatField()))[
+                'average_m_il_count']
+        average_e_ss_count = \
+            patrol_weekly_data.aggregate(average_e_ss_count=Round(Avg('total_e_ss_count'), output_field=FloatField()))[
+                'average_e_ss_count']
+        average_e_il_count = \
+            patrol_weekly_data.aggregate(average_e_il_count=Round(Avg('total_e_il_count'), output_field=FloatField()))[
+                'average_e_il_count']
+        average_r_ss_count = \
+            patrol_weekly_data.aggregate(average_r_ss_count=Round(Avg('total_r_ss_count'), output_field=FloatField()))[
+                'average_r_ss_count']
+        average_r_il_count = \
+            patrol_weekly_data.aggregate(average_r_il_count=Round(Avg('total_r_il_count'), output_field=FloatField()))[
+                'average_r_il_count']
+        average_plan = patrol_weekly_data.aggregate(average_plan=Round(Avg('total_plan'), output_field=FloatField()))[
+            'average_plan']
+        average_mentoring = \
+            patrol_weekly_data.aggregate(average_mentoring=Round(Avg('total_mentoring'), output_field=FloatField()))[
+                'average_mentoring']
+        average_question = \
+            patrol_weekly_data.aggregate(average_question=Round(Avg('total_question'), output_field=FloatField()))[
+                'average_question']
+        average_consulting = \
+            patrol_weekly_data.aggregate(average_consulting=Round(Avg('total_consulting'), output_field=FloatField()))[
+                'average_consulting']
+        average_sleep = \
+            patrol_weekly_data.aggregate(average_sleep=Round(Avg('total_sleep'), output_field=FloatField()))[
+                'average_sleep']
+        average_focus_three = \
+            patrol_weekly_data.aggregate(
+                average_focus_three=Round(Avg('total_focus_three'), output_field=FloatField()))[
+                'average_focus_three']
+        average_focus_two = \
+            patrol_weekly_data.aggregate(average_focus_two=Round(Avg('total_focus_two'), output_field=FloatField()))[
+                'average_focus_two']
+        average_focus_one = \
+            patrol_weekly_data.aggregate(average_focus_one=Round(Avg('total_focus_one'), output_field=FloatField()))[
+                'average_focus_one']
+        average_total_focus_count = patrol_weekly_data.aggregate(
+            average_total_focus_count=Round(Avg('total_focus_count'), output_field=FloatField()))[
+            'average_total_focus_count']
 
         # Average_Patrol_Data 모델에 데이터 저장
         average_patrol_data = Average_Patrol_Data(
@@ -218,6 +274,7 @@ def create_average_patrol_data(request):
         'patrol_weekly_data_week_name': patrol_weekly_data_week_name
     }
     return render(request, 'manager/data/create_average_patrol_data.html', context)
+
 
 def patrol_weekly_data_success(request):
     return render(request, 'manager/data/patrol_weekly_data_success.html')
