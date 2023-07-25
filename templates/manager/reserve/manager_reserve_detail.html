@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                     {% for r in reserve_filter_teacher %}
-                        {% if r.comment_subject %}
+                        {% if r.comment %}
                             <tr>
                                 <td style="white-space: nowrap">{{ r.time }}</td>
                                 <td style="white-space: nowrap">
@@ -41,7 +41,7 @@
                                         {% csrf_token %}
                                         <div class="d-flex justify-content-between">
                                             <div style="flex-basis: 70%;">
-                                                {{ r.comment_subject }}
+                                                {{ r.comment }}
                                             </div>
                                             <div style="flex-basis: 15%;">
                                                 <button type="submit" name="action" value="초기화"
