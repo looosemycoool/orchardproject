@@ -1,15 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from ..models import Reserve, Teacher, Notice
-from django.http import JsonResponse
+from ..models import Reserve
 
 from ..forms import CommentForm
-
-from django.contrib import messages
-
-from datetime import date
-import datetime
-
 
 @login_required(login_url="common:login")
 def comment_create(request, reserve_id):
