@@ -42,27 +42,26 @@
                                 </td>
                                 <td style="white-space: nowrap">
                                     {% if request.user.is_authenticated %}
-                                        {% if r.comment_subject == blank %}
+                                        {% if r.comment == blank %}
                                         {% endif %}
-                                        {% if r.comment_subject != blank %}
-                                            {{ r.comment_subject }}
+                                        {% if r.comment != blank %}
+                                            {{ r.comment }}
                                         {% endif %}
                                     {% endif %}
                                 </td>
                                 <td style="white-space:nowrap">
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_staff %}
-                                            {% if r.comment_subject == blank %}
+                                            {% if r.comment == blank %}
                                                 <a href="{% url 'reserve:comment_create' r.id %}"
                                                    class="btn btn-success">
                                                     코멘트 등록</a>
                                             {% endif %}
 
-                                            {% if r.comment_subject != blank %}
+                                            {% if r.comment != blank %}
                                                 <a href="{% url 'reserve:comment_modify' r.id %}" class="btn btn-light">
                                                     코멘트 수정</a>
                                             {% endif %}
-
                                         {% else %}
                                         {% endif %}
                                     {% endif %}
