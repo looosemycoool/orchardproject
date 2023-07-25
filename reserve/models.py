@@ -26,6 +26,9 @@ class Reserve(models.Model):
                                      related_name='reservations')
     # reserved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings')
     comment = models.CharField(max_length=1000, null=True, blank=True)
+    consulting_type = models.CharField(max_length=20, null=True, blank=True)
+    consulting_subject = models.CharField(max_length=100, null=True, blank=True)
+    consulting_content = models.TextField(max_length=2000, null=True, blank=True)
 
     def __str__(self):
         return str(self.date) if self.date else ''
