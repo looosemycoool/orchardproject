@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import base_views, reserve_views, comment_views
+from .views import base_views, reserve_views, comment_views, consult_views
 
 app_name = 'reserve'
 
@@ -15,5 +15,9 @@ urlpatterns = [
 
     # comment_views
     path('comment_create/<int:reserve_id>', comment_views.comment_create, name='comment_create'),
-    path('comment_modify/<int:reserve_id>', comment_views.comment_modify, name='comment_modify')
+    path('comment_modify/<int:reserve_id>', comment_views.comment_modify, name='comment_modify'),
+
+    # consult_views
+    path('consult_create/<int:reserve_id>', consult_views.consult_create, name='consult_create'),
+    path('consult_modify/<int:reserve_id>', consult_views.consult_modify, name='consult_modify')
 ]
