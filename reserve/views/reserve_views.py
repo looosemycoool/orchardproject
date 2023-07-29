@@ -25,5 +25,6 @@ def reserve(request, reserve_id):
 def reserve_delete(request, reserve_id):
     reserve = Reserve.objects.get(id=reserve_id)
     reserve.student_name = None
+    reserve.comment = None
     reserve.save()
     return render(request, 'reserve/reserve_delete.html', {'reserve': reserve})
