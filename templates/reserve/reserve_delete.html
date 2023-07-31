@@ -20,7 +20,6 @@
 
 <div class="reserve-complete-container">
 <img style="width:376px" src="{% static 'login_signup.png' %}" alt="image"/>
-    <h5 class="reserve-complete-message">{{ user.first_name }}님</h5>
     <h6 class="reserve-complete-message">예약이 취소되었습니다.</h6>
     <a href="{% url 'reserve:index' %}" class="btn btn-primary">확인</a>
 </div>

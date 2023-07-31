@@ -42,11 +42,11 @@ urlpatterns = [
     path('data/success/', data_views.patrol_weekly_data_success, name='patrol_weekly_data_success'),
 
     # report -> study
-    path('report/', report_views.report_study_main, name='report_study_main'),
-    path('report/detail/', report_views.report_study_detail, name='report_study_detail'),
+    path('report/study/', report_views.report_study_main, name='report_study_main'),
+    path('report/study/detail/', report_views.report_study_detail, name='report_study_detail'),
 
     # report -> consulting
-    path('report/', report_views.report_consulting_main, name='report_consulting_main'),
+    path('report/consulting/', report_views.report_consulting_main, name='report_consulting_main'),
     # path('report/detail', report_views.report_consulting_detail, name='report_consulting_detail')
 
     # report -> grade

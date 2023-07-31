@@ -121,8 +121,7 @@ def report_study_detail(request):
     return render(request, 'manager/report/study/study_detail.html', context)
 
 def report_consulting_main(request):
-    print('user')
-    return render(request, 'manager/report/consulting_data/consuling_main.html')
+    return render(request, 'manager/report/consulting/consulting_main.html')
 
 
 def report_grade_main(request):
