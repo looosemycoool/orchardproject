@@ -43,9 +43,13 @@ urlpatterns = [
 
     # report -> study
     path('report/', report_views.report_study_main, name='report_study_main'),
-    path('report/detail/', report_views.report_study_detail, name='report_study_detail')
+    path('report/detail/', report_views.report_study_detail, name='report_study_detail'),
+
+    # report -> consulting
+    path('report/', report_views.report_consulting_main, name='report_consulting_main'),
+    # path('report/detail', report_views.report_consulting_detail, name='report_consulting_detail')
 
     # report -> grade
 
-    # report -> consulting
+
 ]

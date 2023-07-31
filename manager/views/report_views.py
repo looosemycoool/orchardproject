@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from ..models import Student_Study_Data, Patrol_Data, Total_Weekly_Study_Data, Average_Study_Data, Average_Patrol_Data
 
-
 def report_study_main(request):
     total_weekly_study_data = Total_Weekly_Study_Data.objects.all()
 
@@ -121,8 +120,11 @@ def report_study_detail(request):
     }
     return render(request, 'manager/report/study/study_detail.html', context)
 
+def report_consulting_main(request):
+    print('user')
+    return render(request, 'manager/report/consulting_data/consuling_main.html')
+
+
 def report_grade_main(request):
     return render(request, 'manager/report/grade_data/grade_main.html')
 
-def report_consulting_main(request):
-    return render(request, 'manager/report/consulting_data/consuling_main.html')
