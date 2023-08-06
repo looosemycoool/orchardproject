@@ -3,7 +3,7 @@ from .models import Reserve, Time_Table, Teacher, Notice
 
 class ReserveAdmin(admin.ModelAdmin):
     list_display = ('date', 'time', 'teacher_id', 'student_name', 'comment', 'subject')
-    search_fields = ["teacher_id__name", "student_name__username", "date"]
+    search_fields = ["teacher_id__name", "student_name__first_name", "date"]
 
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ('name', 'subject', 'duty_day', 'duty_time')

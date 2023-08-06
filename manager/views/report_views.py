@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from ..models import Student_Study_Data, Patrol_Data, Total_Weekly_Study_Data, Average_Study_Data, Average_Patrol_Data
+from reserve.models import Reserve
+from django.db.models import Min
+from datetime import datetime
 
 def report_study_main(request):
     total_weekly_study_data = Total_Weekly_Study_Data.objects.all()
@@ -30,7 +33,6 @@ def report_study_detail(request):
     total_time_data = Total_Weekly_Study_Data.objects.filter(
         week_name__range=[start_week, end_week]
     )
-    print(total_time_data)
 
     week_data = {}  # 주차별 데이터를 저장할 딕셔너리
 
@@ -121,8 +123,38 @@ def report_study_detail(request):
     return render(request, 'manager/report/study/study_detail.html', context)
 
 def report_consulting_main(request):
-    return render(request, 'manager/report/consulting/consulting_main.html')
+    reserve_data = Reserve.objects.all()
+    student_names = reserve_data.values('student_name__first_name').distinct()
+    date = reserve_data.values('date').distinct()
+    context = {
+        'student_names': student_names,
+        'date': date,
+    }
+    return render(request, 'manager/report/consulting/consulting_main.html', context)
 
+def report_consulting_detail(request):
+    student_name = request.GET.get('student_name')
+    start_date_str = request.GET.get('start_date')
+    end_date_str = request.GET.get('end_date')
+
+    reserve_data = Reserve.objects.all()
+    student_names = reserve_data.values('student_name__first_name').distinct()
+    date = reserve_data.values('date').annotate(min_date=Min('date')).order_by('min_date')
+
+    start_date = datetime.strptime(start_date_str, '%Y년 %m월 %d일').date()
+    end_date = datetime.strptime(end_date_str, '%Y년 %m월 %d일').date()
+
+    filtered_data = Reserve.objects.filter(
+        student_name=3,
+        date__range=[start_date, end_date]
+    )
+
+    context = {
+        'student_names': student_names,
+        'date': date,
+        'filtered_data': filtered_data,
+    }
+    return render(request, 'manager/report/consulting/consulting_datail.html', context)
 
 def report_grade_main(request):
     return render(request, 'manager/report/grade_data/grade_main.html')
