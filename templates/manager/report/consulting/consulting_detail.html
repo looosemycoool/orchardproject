@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <div class="container-fluid">
         <div class="row">
@@ -41,7 +42,6 @@
                 </ul>
                 <div class="text-center list-group mt-3">
                     <div class="card border-secondary mb-3">
-                        상담 질문 페이지
                         <form method="GET" action="{% url 'manager:report_consulting_detail' %}">
                             <div class="card-body">
                                 <div class="input-group">
@@ -79,8 +79,109 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="container-fluid border mb-3" style="width:1180px; height:834px">
+                        <div class="row mt-3">
+                            <div class="col-md-3" style="height:550px">
+                                <div class="card mb-3" style="max-width: 18rem;">
+                                    <div class="card-header bg-success-subtle"
+                                         style="display: flex; align-items: center;">
+                                        <h4 class="card-title"
+                                            style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
+                                            {{ student.first_name }}</h4>
+                                    </div>
+                                    <div class="card-header bg-light" style="height:180px">
+                                        <h5 class="card-text">영어 단어 공간</h5>
+                                        <h5 class="card-text">학생 정보 공간</h5>
+                                    </div>
+                                    <div class="card-header bg-danger-subtle"
+                                         style="display: flex; align-items: center;">
+                                        <h4 class="card-title"
+                                            style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
+                                            영어</h4>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for data in filtered_data %}
+                                            {% if data.teacher_id.name == '' %}
+                                                <li class="list-group-item" style="font-family: 'Noto Sans KR" ,
+                                                    sans-serif;>{{ data.subject }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <div class="card-footer" style="height:180px">
+                                        질문이 없거나 적은 학생들의 각 과목 코멘트
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="max-height:550px">
+                                <div class="card mb-3" style="max-width: 18rem;">
+                                    <div class="card-header bg-info-subtle"
+                                         style="display: flex; align-items: center;">
+                                        <h4 class="card-title"
+                                            style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
+                                            수학</h4>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for data in filtered_data_math %}
+                                            {% if forloop.counter <= 7 %}
+                                                <li class="list-group-item"
+                                                    style="font-family: 'Noto Sans KR', sans-serif;">{{ data.subject }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card mb-3" style="max-width: 18rem;">
+                                    <div class="card-header bg-warning-subtle"
+                                         style="display: flex; align-items: center;">
+                                        <h4 class="card-title"
+                                            style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
+                                            국어</h4>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for data in filtered_data_korean %}
+                                            {% if forloop.counter <= 7 %}
+                                                <li class="list-group-item"
+                                                    style="font-family: 'Noto Sans KR', sans-serif;">{{ data.subject }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <div class="card-footer" style="height:180px">
+                                        질문이 없거나 적은 학생들의 각 과목 코멘트
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card" style="max-width: 18rem;">
+                                    <div class="card-header bg-primary-subtle"
+                                         style="display: flex; align-items: center;">
+                                        <h4 class="card-title"
+                                            style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
+                                            탐구</h4>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for data in filtered_data %}
+                                            {% if data.teacher_id.name == '신석철' %}
+                                                {% if forloop.counter <= 7 %}
+                                                    <li class="list-group-item" style="font-family: 'Noto Sans KR" ,
+                                                        sans-serif;>{{ data.subject }}</li>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <div class="card-footer" style="height:180px">
+                                        질문이 없거나 적은 학생들의 각 과목 코멘트
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 border bg-warning-subtle" style="height:248px; width:1150px">
+                            <h1>총 코멘트 공간</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

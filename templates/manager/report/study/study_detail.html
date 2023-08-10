@@ -48,8 +48,8 @@
                                     {% csrf_token %}
                                     <select class="form-control" id="id_student_name" name="student_name">
                                         <option value="">학생 선택</option>
-                                        {% for study_data in study_data %}
-                                            <option value="{{ study_data.id }}">{{ study_data.student_name }}</option>
+                                        {% for names in student_names %}
+                                            <option value="{{ names.student_name }}">{{ names.student_name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -60,7 +60,7 @@
                                     <select class="form-control" id="id_start_week" name="start_week">
                                         <option value="">시작 주차</option>
                                         {% for unique_week in unique_week %}
-                                            <option value="{{ unique_week.id }}">{{ unique_week.week_name }}</option>
+                                            <option value="{{ unique_week.name }}">{{ unique_week.week_name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -68,7 +68,7 @@
                                     <select class="form-control" id="id_end_week" name="end_week">
                                         <option value="">마지막 주차</option>
                                         {% for unique_week in unique_week %}
-                                            <option value="{{ unique_week.id }}">{{ unique_week.week_name }}</option>
+                                            <option value="{{ unique_week.week_name }}">{{ unique_week.week_name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>

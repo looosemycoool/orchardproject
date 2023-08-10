@@ -3,6 +3,7 @@ from ..models import Student_Study_Data, Patrol_Data, Total_Weekly_Study_Data, A
 from reserve.models import Reserve
 from django.db.models import Min
 from datetime import datetime
+from django.contrib.auth.models import User
 
 def report_study_main(request):
     total_weekly_study_data = Total_Weekly_Study_Data.objects.all()
@@ -19,6 +20,11 @@ def report_study_detail(request):
     student_name = request.GET.get('student_name')
     start_week = request.GET.get('start_week')
     end_week = request.GET.get('end_week')
+
+    total_weekly_study_data = Total_Weekly_Study_Data.objects.all()
+
+    unique_week = total_weekly_study_data.values('week_name').distinct()
+    student_names = total_weekly_study_data.values('student_name').distinct()
 
     filtered_data = Total_Weekly_Study_Data.objects.filter(
         student_name=student_name,
@@ -118,6 +124,8 @@ def report_study_detail(request):
         'week_data': week_data,
         'start_week': start_week,
         'end_week': end_week,
+        'unique_week': unique_week,
+        'student_names': student_names,
         'total_weekly_study_data': total_weekly_study_data
     }
     return render(request, 'manager/report/study/study_detail.html', context)
@@ -138,23 +146,48 @@ def report_consulting_detail(request):
     end_date_str = request.GET.get('end_date')
 
     reserve_data = Reserve.objects.all()
+    student = User.objects.get(first_name=student_name)
     student_names = reserve_data.values('student_name__first_name').distinct()
     date = reserve_data.values('date').annotate(min_date=Min('date')).order_by('min_date')
 
     start_date = datetime.strptime(start_date_str, '%Y년 %m월 %d일').date()
     end_date = datetime.strptime(end_date_str, '%Y년 %m월 %d일').date()
 
-    filtered_data = Reserve.objects.filter(
-        student_name=3,
-        date__range=[start_date, end_date]
-    )
+    if student:
+        filtered_data_korean = Reserve.objects.filter(
+            student_name_id=student.id,
+            teacher_id=1,
+            date__range=[start_date, end_date]
+        )
+        filtered_data_math = Reserve.objects.filter(
+            student_name_id=student.id,
+            teacher_id=2 or 3,
+            date__range=[start_date, end_date]
+        )
+        filtered_data_english = Reserve.objects.filter(
+            student_name_id=student.id,
+            date__range=[start_date, end_date]
+        )
+        filtered_data_research = Reserve.objects.filter(
+            student_name_id=student.id,
+            teacher_id=5 or 6 or 9,
+            date__range=[start_date, end_date]
+        )
+    else:
+        # student가 없을 경우, 빈 쿼리셋 반환
+        filtered_data = Reserve.objects.none()
 
     context = {
         'student_names': student_names,
         'date': date,
-        'filtered_data': filtered_data,
+        'student': student,
+        # 'filtered_data': filtered_data,
+        'filtered_data_math': filtered_data_math,
+        'filtered_data_korean': filtered_data_korean,
+        'filtered_data_english': filtered_data_english,
+        'filtered_data_research': filtered_data_research,
     }
-    return render(request, 'manager/report/consulting/consulting_datail.html', context)
+    return render(request, 'manager/report/consulting/consulting_detail.html', context)
 
 def report_grade_main(request):
     return render(request, 'manager/report/grade_data/grade_main.html')
