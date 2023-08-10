@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 def report_study_main(request):
     total_weekly_study_data = Total_Weekly_Study_Data.objects.all()
 
-    unique_week = total_weekly_study_data.values('week_name').distinct()
+    unique_week = total_weekly_study_data.values('week_name').order_by('-week_name').distinct()
     student_names = total_weekly_study_data.values('student_name').distinct()
 
     context = {'total_weekly_study_data': total_weekly_study_data, 'student_names': student_names,
@@ -23,7 +23,7 @@ def report_study_detail(request):
 
     total_weekly_study_data = Total_Weekly_Study_Data.objects.all()
 
-    unique_week = total_weekly_study_data.values('week_name').distinct()
+    unique_week = total_weekly_study_data.values('week_name').order_by('-week_name').distinct()
     student_names = total_weekly_study_data.values('student_name').distinct()
 
     filtered_data = Total_Weekly_Study_Data.objects.filter(
