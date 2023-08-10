@@ -133,7 +133,7 @@ def report_study_detail(request):
 def report_consulting_main(request):
     reserve_data = Reserve.objects.all()
     student_names = reserve_data.values('student_name__first_name').distinct()
-    date = reserve_data.values('date').distinct()
+    date = reserve_data.values('date').order_by('data').distinct()
     context = {
         'student_names': student_names,
         'date': date,
