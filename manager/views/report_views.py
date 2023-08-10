@@ -148,7 +148,7 @@ def report_consulting_detail(request):
     reserve_data = Reserve.objects.all()
     student = User.objects.get(first_name=student_name)
     student_names = reserve_data.values('student_name__first_name').distinct()
-    date = reserve_data.values('date').annotate(min_date=Min('date')).order_by('min_date')
+    date = reserve_data.values('date').annotate(min_date=Min('date')).order_by('date')
 
     start_date = datetime.strptime(start_date_str, '%Y년 %m월 %d일').date()
     end_date = datetime.strptime(end_date_str, '%Y년 %m월 %d일').date()
@@ -161,7 +161,7 @@ def report_consulting_detail(request):
         )
         filtered_data_math = Reserve.objects.filter(
             student_name_id=student.id,
-            teacher_id=2 or 3,
+            teacher_id__in=[2, 3],
             date__range=[start_date, end_date]
         )
         filtered_data_english = Reserve.objects.filter(
@@ -170,7 +170,7 @@ def report_consulting_detail(request):
         )
         filtered_data_research = Reserve.objects.filter(
             student_name_id=student.id,
-            teacher_id=5 or 6 or 9,
+            teacher_id__in=[5, 6, 9],
             date__range=[start_date, end_date]
         )
     else:
