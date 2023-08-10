@@ -161,7 +161,7 @@ def report_consulting_detail(request):
         ).order_by('date')
         filtered_data_math = Reserve.objects.filter(
             student_name_id=student.id,
-            teacher_id__in=[2, 3],
+            teacher_id__in=[2, 3, 4],
             date__range=[start_date, end_date]
         ).order_by('date')
         filtered_data_english = Reserve.objects.filter(
@@ -170,7 +170,7 @@ def report_consulting_detail(request):
         ).order_by('date')
         filtered_data_research = Reserve.objects.filter(
             student_name_id=student.id,
-            teacher_id__in=[5, 6, 9],
+            teacher_id__in=[4, 6, 9],
             date__range=[start_date, end_date]
         ).order_by('date')
     else:
