@@ -156,7 +156,7 @@ def report_consulting_detail(request):
     if student:
         filtered_data_korean = Reserve.objects.filter(
             student_name_id=student.id,
-            teacher_id=1,
+            teacher_id__in=[1, 5, 8],
             date__range=[start_date, end_date]
         ).exclude(subject=None).order_by('-date')
         filtered_data_math = Reserve.objects.filter(

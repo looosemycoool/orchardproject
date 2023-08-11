@@ -91,9 +91,7 @@
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
                                             {{ student.first_name }}</h4>
                                     </div>
-                                    <div class="card-header bg-light" style="height:180px">
-                                        <h5 class="card-text">영어 단어 공간</h5>
-                                        <h5 class="card-text">학생 정보 공간</h5>
+                                    <div class="card-header bg-white" style="height:180px">
                                     </div>
                                     <div class="card-header bg-danger-subtle"
                                          style="display: flex; align-items: center;">
@@ -101,14 +99,6 @@
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
                                             영어</h4>
                                     </div>
-                                    <ul class="list-group list-group-flush">
-                                        {% for data in filtered_data %}
-                                            {% if data.teacher_id.name == '' %}
-                                                <li class="list-group-item" style="font-family: 'Noto Sans KR" ,
-                                                    sans-serif;>{{ data.subject }}</li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
                                 </div>
                             </div>
                             <div class="col-md-3" style="max-height:550px">
