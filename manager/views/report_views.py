@@ -166,6 +166,7 @@ def report_consulting_detail(request):
         ).exclude(subject=None).order_by('-date')
         filtered_data_english = Reserve.objects.filter(
             student_name_id=student.id,
+            teacher_id__in=[5, 8],
             date__range=[start_date, end_date]
         ).exclude(subject=None).order_by('-date')
         filtered_data_research = Reserve.objects.filter(
