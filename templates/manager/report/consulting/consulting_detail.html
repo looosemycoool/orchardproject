@@ -102,7 +102,7 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         {% for data in filtered_data_english %}
-                                            {% if forloop.counter <= 10 %}
+                                            {% if forloop.counter <= 10 and data.content%}
                                                 <li class="list-group-item"
                                                     style="font-family: 'Noto Sans KR', sans-serif;">{{ data.content }}</li>
                                             {% endif %}
