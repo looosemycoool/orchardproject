@@ -100,6 +100,14 @@
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
                                             영어</h4>
                                     </div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for data in filtered_data_english %}
+                                            {% if forloop.counter <= 10 %}
+                                                <li class="list-group-item"
+                                                    style="font-family: 'Noto Sans KR', sans-serif;">{{ data.content }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
 {#                                        {% endif %}#}
                                 </div>
                             </div>
