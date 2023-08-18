@@ -121,6 +121,7 @@
                                                 style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
                                                 영어</h3>
                                         </div>
+                                {% endif %}
                                         <ul class="list-group list-group-flush">
                                             {% for data in filtered_data_english %}
                                                 {% if forloop.counter <= 10 and data.content %}
@@ -129,7 +130,6 @@
                                                 {% endif %}
                                             {% endfor %}
                                         </ul>
-                                    {% endif %}
                                 </div>
                             </div>
                             {% if filtered_data_math %}
