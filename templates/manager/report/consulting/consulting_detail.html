@@ -87,24 +87,24 @@
                                 <div class="card mb-3" style="max-width: 18rem;">
                                     <div class="card-header bg-success-subtle"
                                          style="display: flex; align-items: center;">
-                                        <h4 class="card-title"
+                                        <h3 class="card-title"
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
-                                            {{ student.first_name }}</h4>
+                                            {{ student.first_name }}</h3>
                                     </div>
                                     <div class="card-header bg-white" style="height:180px">
                                     </div>
                                     {#                                    {% if filtered_data_english %}#}
                                     <div class="card-header bg-danger-subtle"
                                          style="display: flex; align-items: center;">
-                                        <h4 class="card-title"
+                                        <h3 class="card-title"
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
-                                            영어</h4>
+                                            영어</h3>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         {% for data in filtered_data_english %}
                                             {% if forloop.counter <= 10 and data.content%}
                                                 <li class="list-group-item"
-                                                    style="font-family: 'Noto Sans KR', sans-serif;">{{ data.content }}</li>
+                                                    style="font-family: 'Nanum Gothic', sans-serif; font-size: 17px">{{ data.content }}</li>
                                             {% endif %}
                                         {% endfor %}
                                     </ul>
@@ -116,15 +116,15 @@
                                 <div class="card mb-3" style="max-width: 18rem;">
                                     <div class="card-header bg-info-subtle"
                                          style="display: flex; align-items: center;">
-                                        <h4 class="card-title"
+                                        <h3 class="card-title"
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
-                                            수학</h4>
+                                            수학</h3>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         {% for data in filtered_data_math %}
                                             {% if forloop.counter <= 10 %}
                                                 <li class="list-group-item"
-                                                    style="font-family: 'Noto Sans KR', sans-serif;">{{ data.subject }}</li>
+                                                    style="font-family: 'Nanum Gothic', sans-serif; font-size: 17px">{{ data.subject }}</li>
                                             {% endif %}
                                         {% endfor %}
                                     </ul>
@@ -136,15 +136,15 @@
                                 <div class="card mb-3" style="max-width: 18rem;">
                                     <div class="card-header bg-warning-subtle"
                                          style="display: flex; align-items: center;">
-                                        <h4 class="card-title"
+                                        <h3 class="card-title"
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
-                                            국어</h4>
+                                            국어</h3>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         {% for data in filtered_data_korean %}
                                             {% if forloop.counter <= 10 %}
                                                 <li class="list-group-item"
-                                                    style="font-family: 'Noto Sans KR', sans-serif;">{{ data.subject }}</li>
+                                                    style="font-family: 'Nanum Gothic', sans-serif; font-size: 17px">{{ data.subject }}</li>
                                             {% endif %}
                                         {% endfor %}
                                     </ul>
@@ -156,15 +156,15 @@
                                 <div class="card mb-3" style="max-width: 18rem;">
                                     <div class="card-header bg-primary-subtle"
                                          style="display: flex; align-items: center;">
-                                        <h4 class="card-title"
+                                        <h3 class="card-title"
                                             style="margin: 0; font-family: 'Noto Sans KR', sans-serif; font-weight: bold">
-                                            탐구</h4>
+                                            탐구</h3>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         {% for data in filtered_data_research %}
                                             {% if forloop.counter <= 10 %}
                                                 <li class="list-group-item"
-                                                    style="font-family: 'Noto Sans KR', sans-serif;">{{ data.subject }}</li>
+                                                    style="font-family: 'Nanum Gothic', sans-serif; font-size: 17px">{{ data.subject }}</li>
                                             {% endif %}
                                         {% endfor %}
                                     </ul>
