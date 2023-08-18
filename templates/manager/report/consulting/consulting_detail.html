@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <style>
+        @font-face {
+            font-family: 'PyeongChangPeace-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
@@ -82,6 +90,21 @@
             <div class="col-md-10">
                 <div class="row">
                     <div class="container-fluid border mb-3" style="width:1180px; height:834px">
+                        <div class="container-fluid mb-3" style="width:1180px; height:55px">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class="mt-2" style="max-height: 55px" src="{% static 'nav_logo.jpeg' %}"
+                                         alt="logo"/>
+                                </div>
+                                <div class="col-md-8 mt-3">
+                                    <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">
+                                        <span style="color:mediumseagreen; font-size:32px; ">The Premium 과수원 </span>
+                                        <span style="color:dodgerblue; font-size:32px; "> 써머클래스</span>
+                                        <span style="font-size:32px; ">질의 응답 코멘트</span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col-md-3" style="height:550px">
                                 <div class="card mb-3" style="max-width: 18rem;">
@@ -102,7 +125,7 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         {% for data in filtered_data_english %}
-                                            {% if forloop.counter <= 10 and data.content%}
+                                            {% if forloop.counter <= 10 and data.content %}
                                                 <li class="list-group-item"
                                                     style="font-family: 'Nanum Gothic', sans-serif; font-size: 17px">{{ data.content }}</li>
                                             {% endif %}
