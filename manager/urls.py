@@ -17,8 +17,9 @@ urlpatterns = [
     path('reserve/create/', reserve_views.reserve_create, name='reserve_create'),
 
     # teacher
-    #path('teacher/', teacher_views.teacher, name='teacher'),
-    #path('teacher/', teacher_views.teacher_check, name='teacher_check'),
+    path('teacher/', teacher_views.teacher, name='teacher'),
+    path('teacher_create/', teacher_views.teacher_create, name='teacher_create'),
+    path('teacher_modify/<int:teacher_id>', teacher_views.teacher_modify, name='teacher_modify'),
 
     # consulting
     path('consulting/', consulting_views.consulting, name='consulting'),

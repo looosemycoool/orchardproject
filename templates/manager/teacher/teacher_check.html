@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-1 text-center list-group">
+            </div>
+            <div class="col-md-7 text-center list-group" style="height:700px">
+                <table class="table align-middle" style="text-align: center">
+                    <thead>
+                    <tr class="table-success">
+                        <th style="width: 3%; white-space: nowrap;">id</th>
+                        <th style="width: 15%; white-space: nowrap;">선생님</th>
+                        <th style="width: 15%; white-space: nowrap;">과목</th>
+                        <th style="width: 15%; white-space: nowrap;">요일</th>
+                        <th style="width: 20%; white-space: nowrap;">시간</th>
+                        <th style="width: 3%; white-space: nowrap;"></th>
+                        <th style="width: 5%; white-space: nowrap;">수정버튼</th>
+                    </tr>
+                    </thead>
+                    {% for t in teacher_list %}
+                        <tr class="table">
+                            <td style="white-space: nowrap;">{{ t.id }}</td>
+                            <td style="white-space: nowrap;">{{ t.name }}</td>
+                            <td style="white-space: nowrap;">{{ t.subject }}</td>
+                            <td style="white-space: nowrap;">{{ t.duty_day }}</td>
+                            <td style="white-space: nowrap;">{{ t.duty_time }}</td>
+                            <td style="white-space: nowrap;">
+                                {% if t.retired == False %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled"
+                                               disabled>
+                                        <label class="form-check-label" for="flexCheckDisabled">
+                                        </label>
+                                    </div>
+                                {% else %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckCheckedDisabled" checked disabled>
+                                        <label class="form-check-label" for="flexCheckCheckedDisabled">
+                                        </label>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td style="white-space: nowrap;">
+                                <a href="{% url 'manager:teacher_modify' t.id %}"
+                                   class="btn btn-sm btn-outline-info">수정</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <a href="{% url 'manager:teacher_create' %}" class="btn btn-outline-primary" style="width:100px">선생님 추가</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
