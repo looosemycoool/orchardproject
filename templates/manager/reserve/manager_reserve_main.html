@@ -8,10 +8,12 @@
                     생성</a>
                 <ul class="list-group">
                     {% for t in teacher_table %}
+                        {% if not t.retired %}
                         <a href="{% url 'manager:reserve_detail' teacher_id=t.id%}"
                            class="list-group-item list-group-item-action text-center">
                             <strong>{{ t.subject }}</strong> {{ t.name }}선생님
                         </a>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
