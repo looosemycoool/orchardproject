@@ -3,7 +3,7 @@ from reserve.models import Teacher
 from ..forms import TeacherForm
 from django.shortcuts import get_object_or_404
 def teacher(request):
-    teacher_list = Teacher.objects.all()
+    teacher_list = Teacher.objects.all().order_by('id')
     context = {'teacher_list': teacher_list}
     return render(request, 'manager/teacher/teacher_check.html', context)
 
