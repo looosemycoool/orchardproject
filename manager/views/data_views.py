@@ -21,7 +21,7 @@ def index(request):
 
 
 def create_week_patrol_data(request):
-    patrol_data = Patrol_Data.objects.all()
+    patrol_data = Patrol_Data.objects.all().order_by('date')
     unique_date = patrol_data.values('date').distinct()
 
     if request.method == 'POST':
