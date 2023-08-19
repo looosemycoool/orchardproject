@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import base_views, reserve_views, consulting_views, student_study_views, patrol_views, report_views, \
-    data_views
+    data_views, teacher_views
 
 app_name = 'manager'
 
@@ -15,6 +15,10 @@ urlpatterns = [
          name='reserve_detail_teacher'),
     path('reserve/update/<int:reserve_id>/', reserve_views.reserve_update, name='reserve_update'),
     path('reserve/create/', reserve_views.reserve_create, name='reserve_create'),
+
+    # teacher
+    #path('teacher/', teacher_views.teacher, name='teacher'),
+    #path('teacher/', teacher_views.teacher_check, name='teacher_check'),
 
     # consulting
     path('consulting/', consulting_views.consulting, name='consulting'),

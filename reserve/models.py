@@ -7,7 +7,7 @@ class Teacher(models.Model):
     subject = models.CharField(max_length=10)
     duty_day = models.CharField(max_length=10, null=True, blank=True)
     duty_time = models.CharField(max_length=20, null=True, blank=True)
-    # retired = models.BooleanField(default=False)  # 추가된 필드
+    retired = models.BooleanField(default=False)  # 추가된 필드
 
     def __str__(self):
         return self.name

@@ -16,12 +16,14 @@
                     </thead>
                     {% if teacher %}
                         {% for t in teacher %}
-                            <tr class="table">
-                                <td style="white-space: nowrap;">{{ t.subject }}</td>
-                                <td style="white-space: nowrap;">{{ t.name }}</td>
-                                <td style="white-space: nowrap;">{{ t.duty_day }}</td>
-                                <td style="white-space: nowrap;">{{ t.duty_time }}</td>
-                            </tr>
+                            {% if not t.retired %}
+                                <tr class="table">
+                                    <td style="white-space: nowrap;">{{ t.subject }}</td>
+                                    <td style="white-space: nowrap;">{{ t.name }}</td>
+                                    <td style="white-space: nowrap;">{{ t.duty_day }}</td>
+                                    <td style="white-space: nowrap;">{{ t.duty_time }}</td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 </table>
