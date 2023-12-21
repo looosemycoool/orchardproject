@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 border border-primary">
+                <ul class="list-group dropdown-center">
+                    <a href="{% url 'manager:reserve' %}"
+                        class="list-group-item list-group-item-action text-center"
+                        aria-current="true">
+                        출석부
+                    </a>
+                    <a href="{% url 'manager:teacher' %}"
+                        class="list-group-item list-group-item-action text-center"
+                        aria-current="true">
+                        일일순찰
+                    </a>
+                </ul>
+                <input type="date" class="mt-3">
+                <ul class="list-group dropdown-center mt-3">
+                    <a href="{% url 'manager:reserve' %}"
+                        class="list-group-item list-group-item-action text-center"
+                        aria-current="true">
+                        P반
+                    </a>
+                    <a href="{% url 'manager:teacher' %}"
+                        class="list-group-item list-group-item-action text-center"
+                        aria-current="true">
+                        S반
+                    </a>
+                </ul>
+            </div>
+            <div class="col-md-10 text-center list-group" style="height:700px">
+                <table class="table align-middle table-bordered" style="text-align: center">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 5%; white-space: nowrap;">반-번호</th>
+                            <th style="width: 5%; white-space: nowrap;">학생이름</th>
+                            <th style="width: 5%; white-space: nowrap;">8</th>
+                            <th style="width: 5%; white-space: nowrap;">9</th>
+                            <th style="width: 5%; white-space: nowrap;">10</th>
+                            <th style="width: 5%; white-space: nowrap;">11</th>
+                            <th style="width: 5%; white-space: nowrap;">12</th>
+                            <th style="width: 5%; white-space: nowrap;">13</th>
+                            <th style="width: 5%; white-space: nowrap;">14</th>
+                            <th style="width: 5%; white-space: nowrap;">15</th>
+                            <th style="width: 5%; white-space: nowrap;">16</th>
+                            <th style="width: 5%; white-space: nowrap;">17</th>
+                            <th style="width: 5%; white-space: nowrap;">18</th>
+                            <th style="width: 5%; white-space: nowrap;">19</th>
+                            <th style="width: 5%; white-space: nowrap;">20</th>
+                            <th style="width: 5%; white-space: nowrap;">21</th>
+                            <th style="width: 5%; white-space: nowrap;">22</th>
+                            <th style="width: 5%; white-space: nowrap;">23</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>P-19</td>
+                        <td>한정윤윤</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

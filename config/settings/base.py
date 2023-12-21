@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "manager.apps.ManagerConfig",
     "teacher.apps.TeacherConfig",
     "reserve.apps.ReserveConfig",
+    "check.apps.CheckConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

@@ -8,6 +8,7 @@ urlpatterns = [
     path('common/', include('common.urls')),
     path('teacher/', include('teacher.urls')),
     path('manager/', include('manager.urls')),
+    path('check/', include('check.urls')),
 
     path('', base_views.index, name='index'),    # '/' 에 해당되는 path
 ]
