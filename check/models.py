@@ -128,25 +128,6 @@ class StudentRegister(models.Model):
 
     def __str__(self):
         return self.student
-class Break_Time_Table(models.Model):
-    time = models.CharField(max_length=10)
-
-    def __str__(self):
-        return self.time
-
-class BreakUser(models.Model):
-    DAY_CHOICES = [
-        ('MON', 'Monday'),
-        ('TUE', 'Tuesday'),
-        ('WED', 'Wednesday'),
-        ('THR', 'Thursday'),
-        ('FRI', 'Friday'),
-        ('SAT', 'Saturday'),
-        ('SUN', 'Sunday'),
-    ]
-    user = OneToOneField(User, on_delete=models.CASCADE)
-    break_date = models.CharField(max_length=10, choices=DAY_CHOICES)
-    break_time = models.ForeignKey(Break_Time_Table, null=True, on_delete=models.CASCADE)
 
 class Attendance(models.Model):
     user = models.ForeignKey(StudentRegister, on_delete=models.CASCADE)
@@ -172,13 +153,3 @@ class Attendance(models.Model):
     time20 = models.CharField(max_length=10, null=True, blank=True, default=False)
     time21 = models.CharField(max_length=10, null=True, blank=True, default=False)
     time22 = models.CharField(max_length=10, null=True, blank=True, default=False)
-
-    # def save(self, *args, **kwargs):
-    #     if self.date:
-    #         self.day_of_week = self.date.strftime('%a').upper()
-    #
-    #         weekday_prefix = self.day_of_week.lower()
-    #         for i in range(8, 23):
-    #             field_name = f'{weekday_prefix}{i}'
-    #             setattr(self, field_name, self.time8)
-    #     super(Attendance, self).save(*args, **kwargs)
