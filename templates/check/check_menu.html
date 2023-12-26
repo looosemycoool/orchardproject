@@ -1,0 +1,60 @@
+<div class="col-md-2 text-center">
+    <ul class="list-group dropdown-center">
+        <a href="{% url 'check:index' %}"
+            class="list-group-item list-group-item-action text-center"
+            aria-current="true">
+            출석부
+        </a>
+{#                    <a href="{% url 'manager:teacher' %}"#}
+{#                        class="list-group-item list-group-item-action text-center"#}
+{#                        aria-current="true">#}
+{#                        일일순찰#}
+{#                    </a>#}
+    </ul>
+{#    <form method="post" action="{% url 'check:create_book' %}">#}
+{#        {% csrf_token %}#}
+{#        <div class="card border-secondary mt-3">#}
+{#            <div class="card-header bg-primary-subtle"><input type="date" name="selected_date"></div>#}
+{#            <div class="card-body">#}
+{#                <button type="submit" class="btn btn-outline-success">#}
+{#                    검색#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
+    <ul class="list-group dropdown-center mt-3">
+        <a href="{% url 'check:attendance_p' %}"
+            class="list-group-item list-group-item-action text-center"
+            aria-current="true">
+            P반
+        </a>
+        <a href="{% url 'check:attendance_s' %}"
+            class="list-group-item list-group-item-action text-center"
+            aria-current="true">
+            S반
+        </a>
+    </ul>
+    <ul class="list-group dropdown-center mt-3">
+        <a href="{% url 'check:student_register' %}"
+            class="list-group-item list-group-item-action text-center"
+            aria-current="true">
+            재원생 등록
+        </a>
+        <a href="#"
+            class="list-group-item list-group-item-action text-center"
+            aria-current="true">
+            재원생 수정
+        </a>
+    </ul>
+    <form method="post" action="{% url 'check:create_book' %}">
+        {% csrf_token %}
+        <div class="card border-secondary mt-3">
+            <div class="card-header bg-primary-subtle"><input type="date" name="selected_date"></div>
+            <div class="card-body">
+                <button type="submit" class="btn btn-outline-success">
+                    출석부 생성
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

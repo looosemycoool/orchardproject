@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'check/check_menu.html' %}
+            <div class="col-md-10 text-center list-group" style="height:700px">
+                <table class="table align-middle table-bordered" style="text-align: center">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 5%; white-space: nowrap;">반-번호</th>
+                            <th style="width: 3%; white-space: nowrap;">조퇴</th>
+                            <th style="width: 3%; white-space: nowrap;">결석</th>
+                            <th style="width: 5%; white-space: nowrap;">학생이름</th>
+                            <th style="width: 3%; white-space: nowrap;">지각</th>
+                            <th style="width: 5%; white-space: nowrap;">8</th>
+                            <th style="width: 5%; white-space: nowrap;">9</th>
+                            <th style="width: 5%; white-space: nowrap;">10</th>
+                            <th style="width: 5%; white-space: nowrap;">11</th>
+                            <th style="width: 5%; white-space: nowrap;">12</th>
+                            <th style="width: 5%; white-space: nowrap;">13</th>
+                            <th style="width: 5%; white-space: nowrap;">14</th>
+                            <th style="width: 5%; white-space: nowrap;">15</th>
+                            <th style="width: 5%; white-space: nowrap;">16</th>
+                            <th style="width: 5%; white-space: nowrap;">17</th>
+                            <th style="width: 5%; white-space: nowrap;">18</th>
+                            <th style="width: 5%; white-space: nowrap;">19</th>
+                            <th style="width: 5%; white-space: nowrap;">20</th>
+                            <th style="width: 5%; white-space: nowrap;">21</th>
+                            <th style="width: 5%; white-space: nowrap;">22</th>
+                            <th style="width: 5%; white-space: nowrap;">저장</th>
+                        </tr>
+                    </thead>
+                {% for attendance in attendances_p %}
+                    <tbody>
+                        <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}</td>
+                        <td>
+                            {% if attendance.early_leave %}
+                                <span class="early-leave">{{ attendance.early_leave|time:"H:i" }}</span>
+                            {% else %}
+                                <input type="time" class="early-leave-input" name="early_leave_{{ attendance.id }}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <input type="checkbox" class="absent-checkbox" name="absent_{{ attendance.id }}" {% if attendance.absent %}checked{% endif %}>
+                        </td>
+                        <td>{{ attendance.user.student }}</td>
+                        <td>
+                            {% if attendance.late %}
+                                <span class="late">{{ attendance.late|time:"H:i" }}</span>
+                            {% else %}
+                                <input type="time" class="late-input" name="late_{{ attendance.id }}">
+                            {% endif %}
+                        </td>
+                        {% if attendance.time8 == False %}
+                            <td></td>
+                        {% else %}
+                            <td style="background-color: lightgray;">{{ attendance.time8 }}</td>
+                        {% endif %}
+
+                        {% if attendance.time9 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time9 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time10 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time10 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time11 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time11 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time12 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time12 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time13 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time13 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time14 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time14 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time15 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time15 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time16 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time16 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time17 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time17 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time18 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time18 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time19 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time19 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time20 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time20 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time21 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time21 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if attendance.time22 == False %}
+                            <td style="background-color: lightgray;">{{ attendance.time22 }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                        <td>버튼</td>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

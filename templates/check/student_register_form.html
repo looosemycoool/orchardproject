@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+    <div class="row">
+    {% include 'check/check_menu.html' %}
+    <div class="col-md-10">
+        <h5 class="my-3 border-bottom pb-2">재원생 등록</h5>
+        <form method="post">
+            {% csrf_token %} {% include 'form_errors.html' %}
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    <label for="id_class_name" class="form-label">반</label>
+                    <input type="text" class="form-control" id="id_class_name" name="class_name"
+                           value="{{ form.class_name.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-2">
+                    <label for="id_class_num" class="form-label">번호</label>
+                    <input type="text" class="form-control" id="id_class_num" name="class_num"
+                           value="{{ form.class_num.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="id_student" class="form-label">학생 이름</label>
+                    <input type="text" class="form-control" id="id_student" name="student"
+                           value="{{ form.student.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="id_register_date" class="form-label">등록 날짜</label>
+                    <input type="date" class="form-control" id="id_register_date" name="register_date"
+                           value="{{ form.register_date.value|default_if_none:'' }}">
+                </div>
+            </div>
+            <!-- 템플릿(Template)에서 context에 추가된 딕셔너리를 참조합니다. -->
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="id_username" class="form-label">질문 예약 ID</label>
+                    <select class="form-control" id="id_username" name="username">
+                        <option value="">학생 이름</option>
+                        {% for student in students %}
+                            <option value="{{ student.id }}">{{ student.first_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="id_teacher" class="form-label">담임 선생님</label>
+                    <select class="form-control" id="id_teacher" name="teacher">
+                        <option value="">담임 선생님</option>
+                        {% for teacher in teachers %}
+                            <option value="{{ teacher.id }}">{{ teacher.first_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="id_drop_date" class="form-label">퇴원 날짜</label>
+                    <input type="date" class="form-control" id="id_drop_date" name="drop_date"
+                           value="{{ form.drop_date.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-1">
+                    <label for="id_is_dropped" class="form-check-label">퇴원 여부</label>
+{#                    <input type="checkbox" class="form-control" id="id_is_dropped" name="is_dropped"#}
+{#                           value="{{ form.is_dropped.value|default_if_none:'' }}">#}
+                    <input class="form-check-input" type="checkbox" value="{{ form.is_dropped.value|default_if_none:'' }}" id="id_is_dropped" name="is_dropped">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="id_consulting_content" class="form-label"></label>
+                <table class="table align-middle table-bordered" style="text-align: center">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 5%; white-space: nowrap;">요일</th>
+                            <th style="width: 5%; white-space: nowrap;">8</th>
+                            <th style="width: 5%; white-space: nowrap;">9</th>
+                            <th style="width: 5%; white-space: nowrap;">10</th>
+                            <th style="width: 5%; white-space: nowrap;">11</th>
+                            <th style="width: 5%; white-space: nowrap;">12</th>
+                            <th style="width: 5%; white-space: nowrap;">13</th>
+                            <th style="width: 5%; white-space: nowrap;">14</th>
+                            <th style="width: 5%; white-space: nowrap;">15</th>
+                            <th style="width: 5%; white-space: nowrap;">16</th>
+                            <th style="width: 5%; white-space: nowrap;">17</th>
+                            <th style="width: 5%; white-space: nowrap;">18</th>
+                            <th style="width: 5%; white-space: nowrap;">19</th>
+                            <th style="width: 5%; white-space: nowrap;">20</th>
+                            <th style="width: 5%; white-space: nowrap;">21</th>
+                            <th style="width: 5%; white-space: nowrap;">22</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>월</td>
+                        <td>{{ form.mon8 }}</td>
+                        <td>{{ form.mon9 }}</td>
+                        <td>{{ form.mon10 }}</td>
+                        <td>{{ form.mon11 }}</td>
+                        <td>{{ form.mon12 }}</td>
+                        <td>{{ form.mon13 }}</td>
+                        <td>{{ form.mon14 }}</td>
+                        <td>{{ form.mon15 }}</td>
+                        <td>{{ form.mon16 }}</td>
+                        <td>{{ form.mon17 }}</td>
+                        <td>{{ form.mon18 }}</td>
+                        <td>{{ form.mon19 }}</td>
+                        <td>{{ form.mon20 }}</td>
+                        <td>{{ form.mon21 }}</td>
+                        <td>{{ form.mon22 }}</td>
+                    </tbody>
+                    <tbody>
+                        <td>화</td>
+                        <td>{{ form.tue8 }}</td>
+                        <td>{{ form.tue9 }}</td>
+                        <td>{{ form.tue10 }}</td>
+                        <td>{{ form.tue11 }}</td>
+                        <td>{{ form.tue12 }}</td>
+                        <td>{{ form.tue13 }}</td>
+                        <td>{{ form.tue14 }}</td>
+                        <td>{{ form.tue15 }}</td>
+                        <td>{{ form.tue16 }}</td>
+                        <td>{{ form.tue17 }}</td>
+                        <td>{{ form.tue18 }}</td>
+                        <td>{{ form.tue19 }}</td>
+                        <td>{{ form.tue20 }}</td>
+                        <td>{{ form.tue21 }}</td>
+                        <td>{{ form.tue22 }}</td>
+                    </tbody>
+                    <tbody>
+                        <td>수</td>
+                        <td>{{ form.wed8 }}</td>
+                        <td>{{ form.wed9 }}</td>
+                        <td>{{ form.wed10 }}</td>
+                        <td>{{ form.wed11 }}</td>
+                        <td>{{ form.wed12 }}</td>
+                        <td>{{ form.wed13 }}</td>
+                        <td>{{ form.wed14 }}</td>
+                        <td>{{ form.wed15 }}</td>
+                        <td>{{ form.wed16 }}</td>
+                        <td>{{ form.wed17 }}</td>
+                        <td>{{ form.wed18 }}</td>
+                        <td>{{ form.wed19 }}</td>
+                        <td>{{ form.wed20 }}</td>
+                        <td>{{ form.wed21 }}</td>
+                        <td>{{ form.wed22 }}</td>
+                    </tbody>
+                    <tbody>
+                        <td>목</td>
+                        <td>{{ form.thu8 }}</td>
+                        <td>{{ form.thu9 }}</td>
+                        <td>{{ form.thu10 }}</td>
+                        <td>{{ form.thu11 }}</td>
+                        <td>{{ form.thu12 }}</td>
+                        <td>{{ form.thu13 }}</td>
+                        <td>{{ form.thu14 }}</td>
+                        <td>{{ form.thu15 }}</td>
+                        <td>{{ form.thu16 }}</td>
+                        <td>{{ form.thu17 }}</td>
+                        <td>{{ form.thu18 }}</td>
+                        <td>{{ form.thu19 }}</td>
+                        <td>{{ form.thu20 }}</td>
+                        <td>{{ form.thu21 }}</td>
+                        <td>{{ form.thu22 }}</td>
+                    </tbody>
+                    <tbody>
+                        <td>금</td>
+                        <td>{{ form.fri8 }}</td>
+                        <td>{{ form.fri9 }}</td>
+                        <td>{{ form.fri10 }}</td>
+                        <td>{{ form.fri11 }}</td>
+                        <td>{{ form.fri12 }}</td>
+                        <td>{{ form.fri13 }}</td>
+                        <td>{{ form.fri14 }}</td>
+                        <td>{{ form.fri15 }}</td>
+                        <td>{{ form.fri16 }}</td>
+                        <td>{{ form.fri17 }}</td>
+                        <td>{{ form.fri18 }}</td>
+                        <td>{{ form.fri19 }}</td>
+                        <td>{{ form.fri20 }}</td>
+                        <td>{{ form.fri21 }}</td>
+                        <td>{{ form.fri22 }}</td>
+                    </tbody>
+                    <tbody>
+                        <td>토</td>
+                        <td>{{ form.sat8 }}</td>
+                        <td>{{ form.sat9 }}</td>
+                        <td>{{ form.sat10 }}</td>
+                        <td>{{ form.sat11 }}</td>
+                        <td>{{ form.sat12 }}</td>
+                        <td>{{ form.sat13 }}</td>
+                        <td>{{ form.sat14 }}</td>
+                        <td>{{ form.sat15 }}</td>
+                        <td>{{ form.sat16 }}</td>
+                        <td>{{ form.sat17 }}</td>
+                        <td>{{ form.sat18 }}</td>
+                        <td>{{ form.sat19 }}</td>
+                        <td>{{ form.sat20 }}</td>
+                        <td>{{ form.sat21 }}</td>
+                        <td>{{ form.sat22 }}</td>
+                    </tbody>
+                    <tbody>
+                        <td>일</td>
+                        <td>{{ form.sun8 }}</td>
+                        <td>{{ form.sun9 }}</td>
+                        <td>{{ form.sun10 }}</td>
+                        <td>{{ form.sun11 }}</td>
+                        <td>{{ form.sun12 }}</td>
+                        <td>{{ form.sun13 }}</td>
+                        <td>{{ form.sun14 }}</td>
+                        <td>{{ form.sun15 }}</td>
+                        <td>{{ form.sun16 }}</td>
+                        <td>{{ form.sun17 }}</td>
+                        <td>{{ form.sun18 }}</td>
+                        <td>{{ form.sun19 }}</td>
+                        <td>{{ form.sun20 }}</td>
+                        <td>{{ form.sun21 }}</td>
+                        <td>{{ form.sun22 }}</td>
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="btn btn-primary">저장하기</button>
+        </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}
