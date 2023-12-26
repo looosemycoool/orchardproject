@@ -1,10 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import datetime
 from ..models import Attendance, StudentRegister
+from ..forms import AttendanceForm
 
 def attendance_p(request):
     current_date = datetime.now().date()
     attendances_p = Attendance.objects.filter(user__class_name='P', date=current_date).order_by('user__class_num')
+
+    if request.method == 'POST':
+        for attendance in attendances_p:
+            form = AttendanceForm(request.POST, instance=attendance)
+            if form.is_valid():
+                form.save()
+                return redirect('check:attendance_p')
 
     translation_dict = {
         'False': '',

@@ -139,4 +139,4 @@ class StudentRegisterForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
-        fields = ['user', 'date', 'early_leave', 'late', 'absent']
+        fields = ['late', 'early_leave', 'absent']

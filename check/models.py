@@ -153,9 +153,9 @@ class Attendance(models.Model):
     date = models.DateField(blank=False, null=True)
     day_of_week = models.CharField(max_length=3, blank=True, null=True)
 
-    early_leave = models.TimeField(null=True)
-    late = models.TimeField(null=True)
-    absent = models.BooleanField(null=True)
+    early_leave = models.TimeField(null=True, blank=True)
+    late = models.TimeField(null=True, blank=True)
+    absent = models.BooleanField(null=True, blank=True)
 
     time8 = models.CharField(max_length=10, null=True, blank=True, default=False)
     time9 = models.CharField(max_length=10, null=True, blank=True, default=False)
