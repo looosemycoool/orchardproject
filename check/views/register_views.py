@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
-from ..models import Attendance, BreakUser, StudentRegister
+from ..models import Attendance, StudentRegister
 from ..forms import StudentRegisterForm
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
