@@ -140,3 +140,12 @@ class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
         fields = ['late', 'early_leave', 'absent']
+        widgets = {
+            'late': forms.TimeInput(attrs={'type': 'time'}),
+            'early_leave': forms.TimeInput(attrs={'type': 'time'}),
+            'absent': forms.CheckboxInput(),
+        }
+    def __init__(self, *args, **kwargs):
+        super(AttendanceForm, self).__init__(*args, **kwargs)
+        for field_name in self.fields.keys():
+            self.fields[field_name].required = False

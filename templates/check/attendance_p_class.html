@@ -27,174 +27,91 @@
                             <th style="width: 5%; white-space: nowrap;">22</th>
                         </tr>
                     </thead>
-                {% for attendance in attendances_p %}
+                    {% for attendance in attendances_p %}
                     <tbody>
                         <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}</td>
                         <td>{{ attendance.user.student }}</td>
-
                         <td>
                             {% if attendance.late or attendance.early_leave or attendance.absent %}
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">수정</button>
+                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">수정</button>
                             {% else %}
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">출결</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">출결</button>
                             {% endif %}
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">출결 정보 입력</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post" action="{% url 'check:attendance_p' %}">
-                                                {% csrf_token %}
-                                                <div class="mb-3">
-                                                    <label for="early-leave-input" class="col-form-label">조퇴 시간</label>
-                                                    {% if attendance.early_leave %}
-                                                        <input type="time" class="form-control" name="early_leave" id="early-leave-input" value="{{ attendance.early_leave|date:'H:i' }}">
-                                                    {% else %}
-                                                        <input type="time" class="form-control" name="early_leave" id="early-leave-input">
-                                                    {% endif %}
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="late-input" class="col-form-label">지각 시간</label>
-                                                    {% if attendance.late %}
-                                                        <input type="time" class="form-control" name="late" id="late-input" value="{{ attendance.late|date:'H:i' }}">
-                                                    {% else %}
-                                                        <input type="time" class="form-control" name="late" id="late-input">
-                                                    {% endif %}
-                                                </div>
-                                                <div class="form-check mb-3">
-                                                    <input type="checkbox" class="form-check-input" id="absent-checkbox" name="absent" {% if attendance.absent %}checked{% endif %}>
-                                                    <label class="form-check-label" for="absent-checkbox">결석 여부</label>
-                                                </div>
-                                                <div class="d-grid gap-2">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">저장</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
-{#                        모달 끝 #}
-
-                        {% if attendance.time8 == False %}
-                            <td></td>
-                        {% else %}
-                            <td style="background-color: lightgray;">{{ attendance.time8 }}</td>
-                        {% endif %}
-
-                        {% if attendance.time9 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time9 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time10 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time10 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time11 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time11 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time12 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time12 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time13 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time13 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time14 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time14 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time15 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time15 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time16 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time16 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time17 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time17 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time18 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time18 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time19 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time19 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time20 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time20 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time21 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time21 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-
-                        {% if attendance.time22 == False %}
-                            <td style="background-color: lightgray;">{{ attendance.time22 }}</td>
-                        {% else %}
-                            <td></td>
-                        {% endif %}
+                        <td>{{ attendance.time8 }}</td>
+                        <td>{{ attendance.time9 }}</td>
+                        <td>{{ attendance.time10 }}</td>
+                        <td>{{ attendance.time11 }}</td>
+                        <td>{{ attendance.time12 }}</td>
+                        <td>{{ attendance.time13 }}</td>
+                        <td>{{ attendance.time14 }}</td>
+                        <td>{{ attendance.time15 }}</td>
+                        <td>{{ attendance.time16 }}</td>
+                        <td>{{ attendance.time17 }}</td>
+                        <td>{{ attendance.time18 }}</td>
+                        <td>{{ attendance.time19 }}</td>
+                        <td>{{ attendance.time20 }}</td>
+                        <td>{{ attendance.time21 }}</td>
+                        <td>{{ attendance.time22 }}</td>
                     </tbody>
                     {% endfor %}
                 </table>
             </div>
         </div>
     </div>
-    <script>
-    const exampleModal = document.getElementById('exampleModal');
-    if (exampleModal) {
-        exampleModal.addEventListener('show.bs.modal', event => {
-            const button = event.relatedTarget;
-            const recipient = button.getAttribute('data-bs-whatever');
-            const modalTitle = exampleModal.querySelector('.modal-title');
+{% for attendance in attendances_p %}
+        <div class="modal fade" id="exampleModal{{ attendance.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ attendance.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel{{ attendance.id }}">출결 정보 입력 - {{ attendance.user.student }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{% url 'check:attendance_p' attendance.id %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="early-leave-input" class="col-form-label">조퇴 시간</label>
+                                <input type="time" class="form-control" name="early_leave" id="early-leave-input{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="late-input" class="col-form-label">지각 시간</label>
+                                <input type="time" class="form-control" name="late" id="late-input{{ attendance.id }}" value="{{ attendance.late|default:''|date:'H:i' }}">
+                            </div>
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="absent-checkbox{{ attendance.id }}" name="absent" {% if attendance.absent %}checked{% endif %}>
+                                <label class="form-check-label" for="absent-checkbox{{ attendance.id }}">결석 여부</label>
+                                <input type="hidden" name="attendance_id" value="{{ attendance.absent }}">  <!-- 출결 항목의 ID를 추가 -->
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">저장</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const exampleModal{{ attendance.id }} = new bootstrap.Modal(document.getElementById('exampleModal{{ attendance.id }}'));
+            if (exampleModal{{ attendance.id }}) {
+                exampleModal{{ attendance.id }}.addEventListener('show.bs.modal', event => {
+                    const button = event.relatedTarget;
+                    const recipient = button.getAttribute('data-bs-whatever');
+                    const modalTitle = exampleModal{{ attendance.id }}.querySelector('.modal-title');
 
-            modalTitle.textContent = `출결 정보 입력 - ${recipient}`;
-        });
+                    modalTitle.textContent = `출결 정보 입력 - ${recipient}`;
+                });
 
-        exampleModal.addEventListener('shown.bs.modal', () => {
-            const earlyLeaveInput = exampleModal.querySelector('#early-leave-input');
-            const lateInput = exampleModal.querySelector('#late-input');
-            const absentCheckbox = exampleModal.querySelector('#absent-checkbox');
+                exampleModal{{ attendance.id }}.addEventListener('shown.bs.modal', () => {
+                    const earlyLeaveInput = exampleModal{{ attendance.id }}.querySelector('#early-leave-input{{ attendance.id }}');
+                    const lateInput = exampleModal{{ attendance.id }}.querySelector('#late-input{{ attendance.id }}');
+                    const absentCheckbox = exampleModal{{ attendance.id }}.querySelector('#absent-checkbox{{ attendance.id }}');
 
-            // 여기에서 필요한 조건에 따라 초기값 설정 또는 기존 데이터 불러오기 등을 수행
-            // 예를 들어, 서버에서 해당 학생의 출결 정보를 가져와서 각 input 요소에 설정할 수 있습니다.
-        });
-    }
-</script>
-
+                    // 필요한 조건에 따라 초기값 설정 또는 기존 데이터 불러오기 등을 수행
+                    // 예를 들어, 서버에서 해당 학생의 출결 정보를 가져와서 각 input 요소에 설정할 수 있습니다.
+                });
+            }
+        </script>
+    {% endfor %}
 {% endblock %}

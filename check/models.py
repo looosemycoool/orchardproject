@@ -136,7 +136,7 @@ class Attendance(models.Model):
 
     early_leave = models.TimeField(null=True, blank=True)
     late = models.TimeField(null=True, blank=True)
-    absent = models.BooleanField(null=True, blank=True)
+    absent = models.BooleanField(null=True, blank=True, default=False)
 
     time8 = models.CharField(max_length=10, null=True, blank=True, default=False)
     time9 = models.CharField(max_length=10, null=True, blank=True, default=False)
