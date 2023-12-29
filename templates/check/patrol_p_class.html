@@ -1,0 +1,683 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'check/patrol_menu.html' %}
+            <div class="col-md-10 text-center" style="height: 70px;">
+                <div class="row">
+                    {#          6 x 10     첫번째 칸 #}
+                    <div class="col-md-2 text-center">
+                        {% for patrol in patrol_p %}
+                            {% for num in line1 %}
+                                {% if patrol.user.class_num == num %}
+                                <div class="card mb-2" style="max-width: 12rem;">
+                                    <button type="button" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+
+                    {#          6 x 10     두번째 칸 #}
+                    <div class="col-md-2 text-center">
+                        {% for patrol in patrol_p %}
+                            {% for num in line2 %}
+                                {% if patrol.user.class_num == num %}
+                                <div class="card mb-2" style="max-width: 12rem;">
+                                    <button type="button" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {#          6 x 10     세번째 칸 #}
+                    <div class="col-md-2 text-center">
+                        {% for patrol in patrol_p %}
+                            {% for num in line3 %}
+                                {% if patrol.user.class_num == num %}
+                                <div class="card mb-2" style="max-width: 12rem;">
+                                    <button type="button" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {#          6 x 10     네번째 칸 #}
+                    <div class="col-md-2 text-center">
+                        {% for patrol in patrol_p %}
+                            {% for num in line4 %}
+                                {% if patrol.user.class_num == num %}
+                                <div class="card mb-2" style="max-width: 12rem;">
+                                    <button type="button" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {#          6 x 10     다섯번째 칸 #}
+                    <div class="col-md-2 text-center">
+                        {% for patrol in patrol_p %}
+                            {% for num in line5 %}
+                                {% if patrol.user.class_num == num %}
+                                <div class="card mb-2" style="max-width: 12rem;">
+                                    <button type="button" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {#          6 x 10     여섯번째 칸 #}
+                    <div class="col-md-2 text-center">
+                        {% for patrol in patrol_p %}
+                            {% for num in line6 %}
+                                {% if patrol.user.class_num == num %}
+                                <div class="card mb-2" style="max-width: 12rem;">
+                                    <button type="button" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for patrol in patrol_p %}
+    <!-- 모달 템플릿 -->
+    <div class="modal fade" id="exampleModal{{ patrol.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ patrol.id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel{{ patrol.id }}">일일순찰 - {{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'check:patrol_check_p' patrol.id %}">
+                        {% csrf_token %}
+                        {#                    08:20 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time1_study{{ patrol.id }}">08:20 - 학습과목</label>
+                                <select class="form-control" name="time1_study{{ patrol.id }}" id="time1_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time1_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time1_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time1_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time1_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time1_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time1_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time1_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time1_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time1_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time1_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time1_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time1_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time1_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time1_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time1_focus{{ patrol.id }}" id="time1_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time1_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time1_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time1_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    08:50 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time2_study{{ patrol.id }}">08:50 - 학습과목</label>
+                                <select class="form-control" name="time2_study{{ patrol.id }}" id="time2_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time2_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time2_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time2_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time2_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time2_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time2_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time2_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time2_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time2_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time2_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time2_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time2_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time2_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time2_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time2_focus{{ patrol.id }}" id="time2_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time2_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time2_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time2_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    09:40 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time3_study{{ patrol.id }}">09:40 - 학습과목</label>
+                                <select class="form-control" name="time3_study{{ patrol.id }}" id="time3_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time3_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time3_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time3_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time3_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time3_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time3_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time3_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time3_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time3_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time3_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time3_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time3_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time3_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time3_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time3_focus{{ patrol.id }}" id="time3_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time3_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time3_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time3_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    10:10 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time4_study{{ patrol.id }}">10:10 - 학습과목</label>
+                                <select class="form-control" name="time4_study{{ patrol.id }}" id="time4_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time4_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time4_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time4_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time4_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time4_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time4_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time4_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time4_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time4_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time4_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time4_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time4_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time4_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time4_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time4_focus{{ patrol.id }}" id="time4_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time4_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time4_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time4_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    11:20 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time5_study{{ patrol.id }}">11:20 - 학습과목</label>
+                                <select class="form-control" name="time5_study{{ patrol.id }}" id="time5_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time5_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time5_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time5_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time5_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time5_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time5_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time5_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time5_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time5_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time5_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time5_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time5_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time5_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time5_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time5_focus{{ patrol.id }}" id="time5_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time5_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time5_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time5_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    11:50 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time6_study{{ patrol.id }}">11:50 - 학습과목</label>
+                                <select class="form-control" name="time6_study{{ patrol.id }}" id="time6_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time6_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time6_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time6_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time6_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time6_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time6_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time6_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time6_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time6_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time6_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time6_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time6_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time6_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time6_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time6_focus{{ patrol.id }}" id="time6_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time6_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time6_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time6_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    13:40 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time7_study{{ patrol.id }}">13:40 - 학습과목</label>
+                                <select class="form-control" name="time7_study{{ patrol.id }}" id="time7_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time7_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time7_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time7_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time7_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time7_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time7_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time7_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time7_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time7_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time7_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time7_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time7_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time7_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time7_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time7_focus{{ patrol.id }}" id="time7_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time7_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time7_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time7_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    14:10 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time8_study{{ patrol.id }}">14:10 - 학습과목</label>
+                                <select class="form-control" name="time8_study{{ patrol.id }}" id="time8_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time8_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time8_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time8_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time8_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time8_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time8_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time8_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time8_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time8_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time8_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time8_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time8_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time8_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time8_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time8_focus{{ patrol.id }}" id="time8_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time8_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time8_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time8_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    15:00 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time9_study{{ patrol.id }}">15:00 - 학습과목</label>
+                                <select class="form-control" name="time9_study{{ patrol.id }}" id="time9_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time9_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time9_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time9_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time9_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time9_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time9_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time9_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time9_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time9_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time9_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time9_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time9_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time9_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time9_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time9_focus{{ patrol.id }}" id="time9_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time9_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time9_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time9_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    15:30 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time10_study{{ patrol.id }}">15:30 - 학습과목</label>
+                                <select class="form-control" name="time10_study{{ patrol.id }}" id="time10_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time10_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time10_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time10_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time10_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time10_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time10_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time10_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time10_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time10_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time10_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time10_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time10_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time10_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time10_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time10_focus{{ patrol.id }}" id="time10_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time10_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time10_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time10_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    16:30 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time11_study{{ patrol.id }}">16:30 - 학습과목</label>
+                                <select class="form-control" name="time11_study{{ patrol.id }}" id="time11_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time11_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time11_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time11_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time11_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time11_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time11_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time11_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time11_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time11_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time11_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time11_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time11_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time11_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time11_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time11_focus{{ patrol.id }}" id="time11_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time11_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time11_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time11_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    17:00 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time12_study{{ patrol.id }}">17:00 - 학습과목</label>
+                                <select class="form-control" name="time12_study{{ patrol.id }}" id="time12_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time12_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time12_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time12_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time12_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time12_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time12_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time12_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time12_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time12_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time12_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time12_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time12_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time12_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time12_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time12_focus{{ patrol.id }}" id="time12_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time12_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time12_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time12_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    19:30 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time13_study{{ patrol.id }}">19:30 - 학습과목</label>
+                                <select class="form-control" name="time13_study{{ patrol.id }}" id="time13_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time13_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time13_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time13_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time13_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time13_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time13_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time13_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time13_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time13_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time13_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time13_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time13_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time13_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time13_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time13_focus{{ patrol.id }}" id="time13_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time13_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time13_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time13_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    20:00 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time14_study{{ patrol.id }}">20:00 - 학습과목</label>
+                                <select class="form-control" name="time14_study{{ patrol.id }}" id="time14_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time14_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time14_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time14_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time14_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time14_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time14_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time14_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time14_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time14_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time14_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time14_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time14_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time14_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time14_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time14_focus{{ patrol.id }}" id="time14_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time14_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time14_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time14_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    21:00 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time1_study{{ patrol.id }}">21:00 - 학습과목</label>
+                                <select class="form-control" name="time15_study{{ patrol.id }}" id="time15_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time15_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time15_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time15_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time15_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time15_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time15_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time15_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time15_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time15_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time15_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time15_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time15_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time15_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time15_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time15_focus{{ patrol.id }}" id="time15_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time15_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time15_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time15_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    21:30 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time16_study{{ patrol.id }}">21:30 - 학습과목</label>
+                                <select class="form-control" name="time16_study{{ patrol.id }}" id="time16_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time16_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time16_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time16_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time16_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time16_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time16_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time16_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time16_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time16_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time16_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time16_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time16_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time16_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time16_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time16_focus{{ patrol.id }}" id="time16_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time16_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time16_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time16_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    22:25 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time17_study{{ patrol.id }}">22:25 - 학습과목</label>
+                                <select class="form-control" name="time17_study{{ patrol.id }}" id="time17_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time17_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time17_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time17_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time17_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time17_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time17_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time17_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time17_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time17_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time17_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time17_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time17_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time17_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time17_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time17_focus{{ patrol.id }}" id="time17_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time17_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time17_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time17_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    {#                    23:25 #}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="time18_study{{ patrol.id }}">23:25 - 학습과목</label>
+                                <select class="form-control" name="time18_study{{ patrol.id }}" id="time18_study{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="k_ss" {% if patrol.time18_study == "k_ss" %}selected{% endif %}>국어자습</option>
+                                    <option value="k_il" {% if patrol.time18_study == "k_il" %}selected{% endif %}>국어인강</option>
+                                    <option value="m_ss" {% if patrol.time18_study == "m_ss" %}selected{% endif %}>수학자습</option>
+                                    <option value="m_il" {% if patrol.time18_study == "m_il" %}selected{% endif %}>수학인강</option>
+                                    <option value="e_ss" {% if patrol.time18_study == "e_ss" %}selected{% endif %}>영어자습</option>
+                                    <option value="e_il" {% if patrol.time18_study == "e_il" %}selected{% endif %}>영어인강</option>
+                                    <option value="r_ss" {% if patrol.time18_study == "r_ss" %}selected{% endif %}>탐구자습</option>
+                                    <option value="r_il" {% if patrol.time18_study == "r_il" %}selected{% endif %}>탐구인강</option>
+                                    <option value="question" {% if patrol.time18_study == "question" %}selected{% endif %}>질의응답</option>
+                                    <option value="mentoring" {% if patrol.time18_study == "mentoring" %}selected{% endif %}>멘토링</option>
+                                    <option value="plan" {% if patrol.time18_study == "plan" %}selected{% endif %}>계획정리</option>
+                                    <option value="consulting" {% if patrol.time18_study == "consulting" %}selected{% endif %}>상담</option>
+                                    <option value="sleep" {% if patrol.time18_study == "sleep" %}selected{% endif %}>수면</option>
+                                    <!-- 나머지 옵션들 -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="time18_focus{{ patrol.id }}">집중도</label>
+                                <select class="form-control" name="time18_focus{{ patrol.id }}" id="time18_focus{{ patrol.id }}">
+                                    <option value="">-- 선택 --</option>
+                                    <option value="3" {% if patrol.time18_focus == "3" %}selected{% endif %}>3</option>
+                                    <option value="2" {% if patrol.time18_focus == "2" %}selected{% endif %}>2</option>
+                                    <option value="1" {% if patrol.time18_focus == "1" %}selected{% endif %}>1</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">저장하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

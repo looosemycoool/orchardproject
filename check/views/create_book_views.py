@@ -17,7 +17,7 @@ def create_book(request):
         time_fields = [f"{day_of_week.lower()}{hour}" for hour in range(8, 23)]
         filter_params = {f"{field}__isnull": False for field in time_fields}
 
-        students = StudentRegister.objects.filter(**filter_params)
+        students = StudentRegister.objects.filter(**filter_params, is_dropped=False)
 
         for student in students:
             if not Attendance.objects.filter(user=student, date=selected_date).exists():

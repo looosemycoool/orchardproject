@@ -92,26 +92,26 @@
                 </div>
             </div>
         </div>
-        <script>
-            const exampleModal{{ attendance.id }} = new bootstrap.Modal(document.getElementById('exampleModal{{ attendance.id }}'));
-            if (exampleModal{{ attendance.id }}) {
-                exampleModal{{ attendance.id }}.addEventListener('show.bs.modal', event => {
-                    const button = event.relatedTarget;
-                    const recipient = button.getAttribute('data-bs-whatever');
-                    const modalTitle = exampleModal{{ attendance.id }}.querySelector('.modal-title');
-
-                    modalTitle.textContent = `출결 정보 입력 - ${recipient}`;
-                });
-
-                exampleModal{{ attendance.id }}.addEventListener('shown.bs.modal', () => {
-                    const earlyLeaveInput = exampleModal{{ attendance.id }}.querySelector('#early-leave-input{{ attendance.id }}');
-                    const lateInput = exampleModal{{ attendance.id }}.querySelector('#late-input{{ attendance.id }}');
-                    const absentCheckbox = exampleModal{{ attendance.id }}.querySelector('#absent-checkbox{{ attendance.id }}');
-
-                    // 필요한 조건에 따라 초기값 설정 또는 기존 데이터 불러오기 등을 수행
-                    // 예를 들어, 서버에서 해당 학생의 출결 정보를 가져와서 각 input 요소에 설정할 수 있습니다.
-                });
-            }
-        </script>
+{#        <script>#}
+{#            const exampleModal{{ attendance.id }} = new bootstrap.Modal(document.getElementById('exampleModal{{ attendance.id }}'));#}
+{#            if (exampleModal{{ attendance.id }}) {#}
+{#                exampleModal{{ attendance.id }}.addEventListener('show.bs.modal', event => {#}
+{#                    const button = event.relatedTarget;#}
+{#                    const recipient = button.getAttribute('data-bs-whatever');#}
+{#                    const modalTitle = exampleModal{{ attendance.id }}.querySelector('.modal-title');#}
+{##}
+{#                    modalTitle.textContent = `출결 정보 입력 - ${recipient}`;#}
+{#                });#}
+{##}
+{#                exampleModal{{ attendance.id }}.addEventListener('shown.bs.modal', () => {#}
+{#                    const earlyLeaveInput = exampleModal{{ attendance.id }}.querySelector('#early-leave-input{{ attendance.id }}');#}
+{#                    const lateInput = exampleModal{{ attendance.id }}.querySelector('#late-input{{ attendance.id }}');#}
+{#                    const absentCheckbox = exampleModal{{ attendance.id }}.querySelector('#absent-checkbox{{ attendance.id }}');#}
+{##}
+{#                    // 필요한 조건에 따라 초기값 설정 또는 기존 데이터 불러오기 등을 수행#}
+{#                    // 예를 들어, 서버에서 해당 학생의 출결 정보를 가져와서 각 input 요소에 설정할 수 있습니다.#}
+{#                });#}
+{#            }#}
+{#        </script>#}
     {% endfor %}
 {% endblock %}
