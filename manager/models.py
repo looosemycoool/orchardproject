@@ -135,26 +135,3 @@ class Average_Study_Data(models.Model):
     total_self_study_average = models.IntegerField(null=True, blank=True)
 
     total_study_average = models.IntegerField(null=True, blank=True)
-
-
-class Average_Patrol_Data(models.Model):
-    week_name = models.CharField(max_length=255, null=True, blank=False)
-    average_k_ss_count = models.FloatField(null=True, blank=True)
-    average_k_il_count = models.FloatField(null=True, blank=True)
-    average_m_ss_count = models.FloatField(null=True, blank=True)
-    average_m_il_count = models.FloatField(null=True, blank=True)
-    average_e_ss_count = models.FloatField(null=True, blank=True)
-    average_e_il_count = models.FloatField(null=True, blank=True)
-    average_r_ss_count = models.FloatField(null=True, blank=True)
-    average_r_il_count = models.FloatField(null=True, blank=True)
-    average_plan = models.FloatField(null=True, blank=True)
-    average_mentoring = models.FloatField(null=True, blank=True)
-    average_question = models.FloatField(null=True, blank=True)
-    average_consulting = models.FloatField(null=True, blank=True)
-    average_sleep = models.FloatField(null=True, blank=True)
-    average_focus_three = models.FloatField(null=True, blank=True)
-    average_focus_two = models.FloatField(null=True, blank=True)
-    average_focus_one = models.FloatField(null=True, blank=True)
-    average_total_focus_count = models.FloatField(null=True, blank=True)
-
-

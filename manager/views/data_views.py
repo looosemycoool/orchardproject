@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from ..models import Patrol_Data, Student_Study_Data, Patrol_Weekly_Data, Total_Weekly_Study_Data, Average_Patrol_Data
+from ..models import Patrol_Data, Student_Study_Data, Patrol_Weekly_Data, Total_Weekly_Study_Data
 from django.db.models import Sum, Func
 from django.db.models import Avg, FloatField
 from django.db.models.functions import Cast

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from ..models import Student_Study_Data, Patrol_Data, Total_Weekly_Study_Data, Average_Study_Data, Average_Patrol_Data
+from ..models import Student_Study_Data, Patrol_Data, Total_Weekly_Study_Data, Average_Study_Data
 from reserve.models import Reserve
 from django.db.models import Min
 from datetime import datetime
