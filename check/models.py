@@ -153,63 +153,63 @@ class Attendance(models.Model):
     time20 = models.CharField(max_length=10, null=True, blank=True, default=False)
     time21 = models.CharField(max_length=10, null=True, blank=True, default=False)
     time22 = models.CharField(max_length=10, null=True, blank=True, default=False)
-
-class PatrolCheck(models.Model):
-    # student
-    user = models.ForeignKey(StudentRegister, on_delete=models.CASCADE)
-    date = models.DateField(blank=False, null=True)
-    day_of_week = models.CharField(max_length=3, blank=True, null=True)
-    # 08:20
-    time1_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time1_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 08:50
-    time2_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time2_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 09:40
-    time3_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time3_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 10:10
-    time4_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time4_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 11:20
-    time5_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time5_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 11:50
-    time6_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time6_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 13:40
-    time7_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time7_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 14:10
-    time8_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time8_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 15:00
-    time9_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time9_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 15:30
-    time10_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time10_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 16:30
-    time11_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time11_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 17:00
-    time12_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time12_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 19:30
-    time13_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time13_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 20:00
-    time14_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time14_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 21:00
-    time15_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time15_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 21:30
-    time16_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time16_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 22:25
-    time17_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time17_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
-    # 23:25
-    time18_study = models.CharField(max_length=10, null=True, blank=True, default=False)
-    time18_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#
+# class PatrolCheck(models.Model):
+#     # student
+#     user = models.ForeignKey(StudentRegister, on_delete=models.CASCADE)
+#     date = models.DateField(blank=False, null=True)
+#     day_of_week = models.CharField(max_length=3, blank=True, null=True)
+#     # 08:20
+#     time1_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time1_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 08:50
+#     time2_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time2_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 09:40
+#     time3_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time3_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 10:10
+#     time4_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time4_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 11:20
+#     time5_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time5_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 11:50
+#     time6_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time6_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 13:40
+#     time7_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time7_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 14:10
+#     time8_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time8_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 15:00
+#     time9_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time9_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 15:30
+#     time10_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time10_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 16:30
+#     time11_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time11_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 17:00
+#     time12_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time12_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 19:30
+#     time13_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time13_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 20:00
+#     time14_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time14_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 21:00
+#     time15_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time15_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 21:30
+#     time16_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time16_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 22:25
+#     time17_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time17_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     # 23:25
+#     time18_study = models.CharField(max_length=10, null=True, blank=True, default=False)
+#     time18_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
