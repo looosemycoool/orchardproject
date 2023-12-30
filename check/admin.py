@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Attendance, StudentRegister
+from .models import Attendance, StudentRegister, PatrolCheck
 class StudentRegisterAdmin(admin.ModelAdmin):
     list_display = ('student', 'class_name', 'username', 'teacher')
 
@@ -11,4 +11,4 @@ class PatrolCheckAdmin(admin.ModelAdmin):
 
 admin.site.register(StudentRegister, StudentRegisterAdmin)
 admin.site.register(Attendance, AttendanceAdmin)
-# admin.site.register(PatrolCheck, PatrolCheckAdmin)
+admin.site.register(PatrolCheck, PatrolCheckAdmin)
