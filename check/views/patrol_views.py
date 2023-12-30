@@ -50,7 +50,7 @@ def patrol_p_class(request):
     line1 = ['24', '25', '26', '27', '28', '29', '30']
     line2 = ['16', '17', '18', '19', '20', '21', '22', '23']
     line3 = ['9', '10', '11', '12', '13', '14', '15']
-    line4 = ['1', '2', '3', '4', '5', '6', '7', '8']
+    line4 = ['01', '02', '03', '04', '05', '06', '07', '08']
     # line5 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
     context = {'patrol_p': patrol_p, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4}
@@ -129,9 +129,9 @@ def patrol_s_class(request):
     line3 = ['31', '32', '33', '34', '35', '36', '37', '38', '39', '40']
     line4 = ['21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
     line5 = ['12', '13', '14', '15', '16', '17', '18', '19', '20']
-    line6 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
+    line6 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11']
 
-    context = {'patrol_s': patrol_s, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5':line5, 'line6': line6}
+    context = {'patrol_s': patrol_s, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5': line5, 'line6': line6}
     return render(request, 'check/patrol_s_class.html', context)
 
 def patrol_check_s(request, patrol_id):
