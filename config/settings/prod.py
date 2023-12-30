@@ -5,7 +5,7 @@ from .base import *
 ALLOWED_HOSTS = ['43.200.128.160', 'gwasuwon.kr']
 STATIC_ROOT = BASE_DIR / 'orchard/static/'
 STATICFILES_DIRS = []
-DEBUG = True
+DEBUG = False
 
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
