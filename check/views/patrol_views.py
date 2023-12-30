@@ -47,14 +47,13 @@ def patrol_p_class(request):
     current_date = datetime.now().date()
     patrol_p = PatrolCheck.objects.filter(user__class_name='P', date=current_date, user__is_dropped=False).order_by('user__class_num')
 
-    line1 = ['50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
-    line2 = ['41', '42', '43', '44', '45', '46', '47', '48', '49']
-    line3 = ['31', '32', '33', '34', '35', '36', '37', '38', '39', '40']
-    line4 = ['21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
-    line5 = ['12', '13', '14', '15', '16', '17', '18', '19', '20']
-    line6 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
+    line1 = ['24', '25', '26', '27', '28', '29', '30']
+    line2 = ['16', '17', '18', '19', '20', '21', '22', '23']
+    line3 = ['9', '10', '11', '12', '13', '14', '15']
+    line4 = ['1', '2', '3', '4', '5', '6', '7', '8']
+    line5 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
-    context = {'patrol_p': patrol_p, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5':line5, 'line6':line6}
+    context = {'patrol_p': patrol_p, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5':line5}
     return render(request, 'check/patrol_p_class.html', context)
 
 def patrol_check_p(request, patrol_id):
@@ -125,13 +124,14 @@ def patrol_s_class(request):
     patrol_s = PatrolCheck.objects.filter(user__class_name='S', date=current_date, user__is_dropped=False).order_by('user__class_num')
     patrol_m = PatrolCheck.objects.filter(user__class_name='M', date=current_date, user__is_dropped=False).order_by('user__class_num')
 
-    line1 = ['24', '25', '26', '27', '28', '29', '30']
-    line2 = ['16', '17', '18', '19', '20', '21', '22', '23']
-    line3 = ['9', '10', '11', '12', '13', '14', '15']
-    line4 = ['1', '2', '3', '4', '5', '6', '7', '8']
-    line5 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    line1 = ['50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
+    line2 = ['41', '42', '43', '44', '45', '46', '47', '48', '49']
+    line3 = ['31', '32', '33', '34', '35', '36', '37', '38', '39', '40']
+    line4 = ['21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
+    line5 = ['12', '13', '14', '15', '16', '17', '18', '19', '20']
+    line6 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
 
-    context = {'patrol_s': patrol_s, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4}
+    context = {'patrol_s': patrol_s, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5':line5, 'line6': line6}
     return render(request, 'check/patrol_s_class.html', context)
 
 def patrol_check_s(request, patrol_id):
