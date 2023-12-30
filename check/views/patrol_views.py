@@ -51,7 +51,7 @@ def patrol_p_class(request):
     line2 = ['16', '17', '18', '19', '20', '21', '22', '23']
     line3 = ['9', '10', '11', '12', '13', '14', '15']
     line4 = ['1', '2', '3', '4', '5', '6', '7', '8']
-    #line5 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    # line5 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
     context = {'patrol_p': patrol_p, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4}
     return render(request, 'check/patrol_p_class.html', context)
