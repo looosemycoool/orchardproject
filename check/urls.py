@@ -5,6 +5,8 @@ app_name = 'check'
 
 urlpatterns = [
     path('', base_views.index, name='index'),
+    path('update/<int:attendance_id>', base_views.update_attendance, name='update_attendance'),
+
     path('register/', register_views.student_register, name='student_register'),
     path('create_book/', create_book_views.create_book, name='create_book'),
     # attendance
@@ -22,5 +24,4 @@ urlpatterns = [
 
     path('patrol/s_class', patrol_views.patrol_s_class, name='patrol_s_class'),
     path('patrol/s_class/<int:patrol_id>', patrol_views.patrol_check_s, name='patrol_check_s'),
-
 ]

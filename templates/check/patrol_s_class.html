@@ -94,7 +94,7 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-md-7">
-                            <form method="post" action="{% url 'check:patrol_check_p' patrol.id %}">
+                            <form method="post" action="{% url 'check:patrol_check_s' patrol.id %}">
                                 {% csrf_token %}
                                 {#                    08:20 #}
                                 <div class="row mb-2">
@@ -306,6 +306,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="d-grid gap-2 mb-3">
+                                    <button type="submit" class="btn btn-primary">저장하기</button>
+                                </div>
                             {#                    13:40 #}
                                 <div class="row mb-3">
                                     <div class="col-md-2 d-flex align-items-center justify-content-center">
@@ -515,6 +518,9 @@
                                             <option value="1" {% if patrol.time12_focus == "1" %}selected{% endif %}>1</option>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="d-grid gap-2 mb-3">
+                                    <button type="submit" class="btn btn-primary">저장하기</button>
                                 </div>
                             {#                    19:30 #}
                                 <div class="row mb-3">
@@ -853,6 +859,7 @@
                                     <div class="card-body">
                                     {% if reserve %}
                                         <p class="card-text">{{ reserve.time }} - {{ reserve.teacher_id }}</p>
+                                    {% else %}
                                     {% endif %}
                                     </div>
                                 </div>

@@ -55,7 +55,13 @@ def patrol_p_class(request):
     for patrol in list(patrol_p) + list(patrol_m):
         attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first()
         attendance_data[patrol.id] = attendance
-        reserve = Reserve.objects.filter(student_name__username=patrol.user.username.username, date=current_date).first()
+
+        if patrol.user.username:
+            reserve = Reserve.objects.filter(student_name__username=patrol.user.username.username,
+                                             date=current_date).first()
+        else:
+            reserve = None
+
         reserve_data[patrol.id] = reserve
 
     # 번역 딕셔너리
@@ -160,8 +166,13 @@ def patrol_s_class(request):
     for patrol in patrol_s:
         attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first()
         attendance_data[patrol.id] = attendance
-        reserve = Reserve.objects.filter(student_name__username=patrol.user.username.username,
-                                         date=current_date).first()
+
+        if patrol.user.username:
+            reserve = Reserve.objects.filter(student_name__username=patrol.user.username.username,
+                                             date=current_date).first()
+        else:
+            reserve = None
+
         reserve_data[patrol.id] = reserve
 
     # 번역 딕셔너리

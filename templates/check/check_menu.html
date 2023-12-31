@@ -59,6 +59,18 @@
             </div>
         </div>
     </form>
+    <form method="post" action="{% url 'check:index' %}">
+        {% csrf_token %}
+        <div class="card border-secondary mt-3">
+            <div class="card-header bg-warning-subtle">
+                <input type="date" name="selected_date" id="selected_date">
+            </div>
+            <div class="card-body">
+                <button type="submit" class="btn btn-outline-primary" name="class_button" value="P">P반 검색</button>
+                <button type="submit" class="btn btn-outline-info" name="class_button" value="S">S반 검색</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script>
