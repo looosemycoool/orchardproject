@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import user_passes_test
-from ..models import StudentRegister, PatrolCheck
+from ..models import StudentRegister, PatrolCheck, Attendance
+from reserve.models import Reserve
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def index(request):
@@ -45,14 +46,44 @@ def create_patrol(request, student_register_id, selected_date):
 def patrol_p_class(request):
     current_date = datetime.now().date()
     patrol_p = PatrolCheck.objects.filter(user__class_name='P', date=current_date, user__is_dropped=False).order_by('user__class_num')
+    patrol_m = PatrolCheck.objects.filter(user__class_name='M', date=current_date, user__is_dropped=False).order_by('user__class_num')
+
+    reserve_data = {}
+    attendance_data = {}
+
+    # Patrol P와 M의 Attendance 데이터 수집
+    for patrol in list(patrol_p) + list(patrol_m):
+        attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first()
+        attendance_data[patrol.id] = attendance
+        reserve = Reserve.objects.filter(student_name__username=patrol.user.username.username, date=current_date).first()
+        reserve_data[patrol.id] = reserve
+
+    # 번역 딕셔너리
+    translation_dict = {
+        'False': ' ',
+        'korean': '국어',
+        'math': '수학',
+        'english': '영어',
+        'research': '탐구',
+        'guitar': '기타',
+    }
+
+    # Attendance 데이터의 특정 필드 값을 번역
+    for attendance in attendance_data.values():
+        if attendance:
+            for field in ['time8', 'time9', 'time10', 'time11', 'time12', 'time13', 'time14', 'time15', 'time16', 'time17', 'time18', 'time19', 'time20', 'time21', 'time22']:
+                original_value = getattr(attendance, field, None)
+                if original_value is not None:
+                    translated_value = translation_dict.get(original_value, original_value)
+                    setattr(attendance, field, translated_value)
 
     line1 = ['24', '25', '26', '27', '28', '29', '30']
     line2 = ['16', '17', '18', '19', '20', '21', '22', '23']
     line3 = ['9', '10', '11', '12', '13', '14', '15']
     line4 = ['01', '02', '03', '04', '05', '06', '07', '08']
-    # line5 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    line5 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
 
-    context = {'patrol_p': patrol_p, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4}
+    context = {'patrol_p': patrol_p, 'patrol_m': patrol_m, 'attendance_data': attendance_data, 'reserve_data': reserve_data, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5': line5}
     return render(request, 'check/patrol_p_class.html', context)
 
 def patrol_check_p(request, patrol_id):
@@ -121,7 +152,37 @@ def patrol_check_p(request, patrol_id):
 def patrol_s_class(request):
     current_date = datetime.now().date()
     patrol_s = PatrolCheck.objects.filter(user__class_name='S', date=current_date, user__is_dropped=False).order_by('user__class_num')
-    patrol_m = PatrolCheck.objects.filter(user__class_name='M', date=current_date, user__is_dropped=False).order_by('user__class_num')
+
+    reserve_data = {}
+    attendance_data = {}
+
+    # Patrol P와 M의 Attendance 데이터 수집
+    for patrol in patrol_s:
+        attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first()
+        attendance_data[patrol.id] = attendance
+        reserve = Reserve.objects.filter(student_name__username=patrol.user.username.username,
+                                         date=current_date).first()
+        reserve_data[patrol.id] = reserve
+
+    # 번역 딕셔너리
+    translation_dict = {
+        'False': ' ',
+        'korean': '국어',
+        'math': '수학',
+        'english': '영어',
+        'research': '탐구',
+        'guitar': '기타',
+    }
+
+    # Attendance 데이터의 특정 필드 값을 번역
+    for attendance in attendance_data.values():
+        if attendance:
+            for field in ['time8', 'time9', 'time10', 'time11', 'time12', 'time13', 'time14', 'time15', 'time16',
+                          'time17', 'time18', 'time19', 'time20', 'time21', 'time22']:
+                original_value = getattr(attendance, field, None)
+                if original_value is not None:
+                    translated_value = translation_dict.get(original_value, original_value)
+                    setattr(attendance, field, translated_value)
 
     line1 = ['50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
     line2 = ['41', '42', '43', '44', '45', '46', '47', '48', '49']
@@ -130,7 +191,7 @@ def patrol_s_class(request):
     line5 = ['12', '13', '14', '15', '16', '17', '18', '19', '20']
     line6 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11']
 
-    context = {'patrol_s': patrol_s, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5': line5, 'line6': line6}
+    context = {'patrol_s': patrol_s, 'attendance_data': attendance_data, 'reserve_data': reserve_data, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5': line5, 'line6': line6}
     return render(request, 'check/patrol_s_class.html', context)
 
 def patrol_check_s(request, patrol_id):

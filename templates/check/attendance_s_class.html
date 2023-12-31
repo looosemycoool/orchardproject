@@ -38,21 +38,39 @@
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">출결</button>
                             {% endif %}
                         </td>
-                        <td>{{ attendance.time8 }}</td>
-                        <td>{{ attendance.time9 }}</td>
-                        <td>{{ attendance.time10 }}</td>
-                        <td>{{ attendance.time11 }}</td>
-                        <td>{{ attendance.time12 }}</td>
-                        <td>{{ attendance.time13 }}</td>
-                        <td>{{ attendance.time14 }}</td>
-                        <td>{{ attendance.time15 }}</td>
-                        <td>{{ attendance.time16 }}</td>
-                        <td>{{ attendance.time17 }}</td>
-                        <td>{{ attendance.time18 }}</td>
-                        <td>{{ attendance.time19 }}</td>
-                        <td>{{ attendance.time20 }}</td>
-                        <td>{{ attendance.time21 }}</td>
-                        <td>{{ attendance.time22 }}</td>
+                        {% if attendance.absent %}
+                            <td class="bg-secondary">{{ attendance.time8 }}</td>
+                            <td class="bg-secondary">{{ attendance.time9 }}</td>
+                            <td class="bg-secondary">{{ attendance.time10 }}</td>
+                            <td class="bg-secondary">{{ attendance.time11 }}</td>
+                            <td class="bg-secondary">{{ attendance.time12 }}</td>
+                            <td class="bg-secondary">{{ attendance.time13 }}</td>
+                            <td class="bg-secondary">{{ attendance.time14 }}</td>
+                            <td class="bg-secondary">{{ attendance.time15 }}</td>
+                            <td class="bg-secondary">{{ attendance.time16 }}</td>
+                            <td class="bg-secondary">{{ attendance.time17 }}</td>
+                            <td class="bg-secondary">{{ attendance.time18 }}</td>
+                            <td class="bg-secondary">{{ attendance.time19 }}</td>
+                            <td class="bg-secondary">{{ attendance.time20 }}</td>
+                            <td class="bg-secondary">{{ attendance.time21 }}</td>
+                            <td class="bg-secondary">{{ attendance.time22 }}</td>
+                        {% else %}
+                            <td>{{ attendance.time8 }}</td>
+                            <td>{{ attendance.time9 }}</td>
+                            <td>{{ attendance.time10 }}</td>
+                            <td>{{ attendance.time11 }}</td>
+                            <td>{{ attendance.time12 }}</td>
+                            <td>{{ attendance.time13 }}</td>
+                            <td>{{ attendance.time14 }}</td>
+                            <td>{{ attendance.time15 }}</td>
+                            <td>{{ attendance.time16 }}</td>
+                            <td>{{ attendance.time17 }}</td>
+                            <td>{{ attendance.time18 }}</td>
+                            <td>{{ attendance.time19 }}</td>
+                            <td>{{ attendance.time20 }}</td>
+                            <td>{{ attendance.time21 }}</td>
+                            <td>{{ attendance.time22 }}</td>
+                        {% endif %}
                     </tbody>
                     {% endfor %}
                 </table>
