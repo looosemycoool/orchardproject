@@ -46,10 +46,12 @@
             재원생 수정
         </a>
     </ul>
-    <form method="post" action="{% url 'check:create_book' %}">
+    <form method="post" action="{% url 'check:create_book' %}" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="card border-secondary mt-3">
-            <div class="card-header bg-primary-subtle"><input type="date" name="selected_date"></div>
+            <div class="card-header bg-primary-subtle">
+                <input type="date" name="selected_date" id="selected_date">
+            </div>
             <div class="card-body">
                 <button type="submit" class="btn btn-outline-success">
                     출석부 생성
@@ -58,3 +60,14 @@
         </div>
     </form>
 </div>
+
+<script>
+    function validateForm() {
+        var selectedDate = document.getElementById("selected_date").value;
+        if (!selectedDate) {
+            alert("날짜를 지정해야 합니다.");
+            return false;
+        }
+        return true;
+    }
+</script>

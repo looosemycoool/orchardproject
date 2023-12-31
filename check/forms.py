@@ -138,11 +138,12 @@ class StudentRegisterForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
-        fields = ['late', 'early_leave', 'absent']
+        fields = ['late', 'early_leave', 'absent', 'memo']
         widgets = {
             'late': forms.TimeInput(attrs={'type': 'time'}),
             'early_leave': forms.TimeInput(attrs={'type': 'time'}),
             'absent': forms.CheckboxInput(),
+            'memo': forms.Textarea()
         }
     def __init__(self, *args, **kwargs):
         super(AttendanceForm, self).__init__(*args, **kwargs)

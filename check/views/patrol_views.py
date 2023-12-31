@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import user_passes_test
 from ..models import StudentRegister, PatrolCheck
 
@@ -38,7 +38,6 @@ def create_patrol(request, student_register_id, selected_date):
     day_of_week = datetime.strptime(selected_date, '%Y-%m-%d').strftime('%a').lower()
 
     patrol_check_instance = PatrolCheck(user=student_register, date=selected_date, day_of_week=day_of_week)
-
     patrol_check_instance.save()
 
     return render(request, 'check/patrol_main.html')

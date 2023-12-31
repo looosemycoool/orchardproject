@@ -83,6 +83,10 @@
                                 <label class="form-check-label" for="absent-checkbox{{ attendance.id }}">결석 여부</label>
                                 <input type="hidden" name="attendance_id" value="{{ attendance.absent }}">  <!-- 출결 항목의 ID를 추가 -->
                             </div>
+                            <div class="mb-3">
+                                <label for="late-input" class="col-form-label">특이사항</label>
+                                <input type="text" class="form-control" name="memo" id="memo-input{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
+                            </div>
                             <div class="d-grid gap-2">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">저장</button>
