@@ -16,7 +16,7 @@ def index(request):
         selected_class = request.POST.get('class_button')  # 'P' 또는 'S'
 
         if selected_date and selected_class:
-            attendances = Attendance.objects.filter(date=selected_date, user__class_name=selected_class)
+            attendances = Attendance.objects.filter(date=selected_date, user__class_name=selected_class).order_by('user__class_num')
 
             # 드롭다운 메뉴에서 선택된 값들을 처리
             for attendance in attendances:

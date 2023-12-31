@@ -53,7 +53,7 @@ def patrol_p_class(request):
 
     # Patrol P와 M의 Attendance 데이터 수집
     for patrol in list(patrol_p) + list(patrol_m):
-        attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first().order_by('user__class_num')
+        attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first()
         attendance_data[patrol.id] = attendance
 
         if patrol.user.username:
@@ -164,7 +164,7 @@ def patrol_s_class(request):
 
     # Patrol P와 M의 Attendance 데이터 수집
     for patrol in patrol_s:
-        attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first().order_by('user__class_num')
+        attendance = Attendance.objects.filter(user=patrol.user, date=current_date).first()
         attendance_data[patrol.id] = attendance
 
         if patrol.user.username:
