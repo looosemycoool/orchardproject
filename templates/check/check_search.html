@@ -109,7 +109,6 @@
                                 <td class="bg-secondary"></td>
                                 <td class="bg-secondary"></td>
                                 <td class="bg-secondary"></td>
-                                <td class="bg-secondary"></td>
                             {% else %}
                                 <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}</td>
                                 <td>{{ attendance.user.student }}</td>
@@ -120,156 +119,21 @@
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">출결</button>
                                     {% endif %}
                                 </td>
-                                <td>
-                                    <select class="form-control" name="time8_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time8 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time8 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time8 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time8 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time8 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time9_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time9 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time9 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time9 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time9 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time9 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time10_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time10 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time10 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time10 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time10 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time10 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time11_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time11 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time11 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time11 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time11 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time11 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time12_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time12 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time12 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time12 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time12 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time12 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time13_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time13 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time13 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time13 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time13 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time13 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time14_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time14 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time14 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time14 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time14 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time14 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time15_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time15 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time15 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time15 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time15 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time15 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time16_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time16 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time16 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time16 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time16 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time16 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time17_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time17 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time17 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time17 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time17 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time17 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time18_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time18 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time18 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time18 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time18 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time18 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time19_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time19 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time19 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time19 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time19 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time19 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time20_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time20 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time20 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time20 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time20 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time20 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time21_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time21 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time21 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time21 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time21 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time21 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="time22_{{ attendance.id }}">
-                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
-                                        <option value="korean" {% if attendance.time22 == "korean" %}selected{% endif %}>국어</option>
-                                        <option value="math" {% if attendance.time22 == "math" %}selected{% endif %}>수학</option>
-                                        <option value="english" {% if attendance.time22 == "english" %}selected{% endif %}>영어</option>
-                                        <option value="research" {% if attendance.time22 == "research" %}selected{% endif %}>탐구</option>
-                                        <option value="guitar" {% if attendance.time22 == "guitar" %}selected{% endif %}>기타</option>
-                                    </select>
-                                </td>
+                                <td>{{ attendance.time8 }}</td>
+                                <td>{{ attendance.time9 }}</td>
+                                <td>{{ attendance.time10 }}</td>
+                                <td>{{ attendance.time11 }}</td>
+                                <td>{{ attendance.time12 }}</td>
+                                <td>{{ attendance.time13 }}</td>
+                                <td>{{ attendance.time14 }}</td>
+                                <td>{{ attendance.time15 }}</td>
+                                <td>{{ attendance.time16 }}</td>
+                                <td>{{ attendance.time17 }}</td>
+                                <td>{{ attendance.time18 }}</td>
+                                <td>{{ attendance.time19 }}</td>
+                                <td>{{ attendance.time20 }}</td>
+                                <td>{{ attendance.time21 }}</td>
+                                <td>{{ attendance.time22 }}</td>
                             {% endif %}
                         </form>
                     </tbody>

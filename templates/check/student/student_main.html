@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 text-center">
+                {% include 'check/student/student_menu.html' %}
+                <form method="get" action="{% url 'check:index' %}">
+                    {% csrf_token %}
+                    <div class="card border-secondary mt-3">
+                        <div class="card-header bg-primary-subtle">
+                            <select class="form-control" id="id_student_name" name="student_name">
+                                <option value="">학생 선택</option>
+                                {% for student in students %}
+                                    <option value="{{ student.student.id }}">{{ student.student }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <!-- for 루프 안으로 이동 -->
+                            {% for student in students %}
+                                <a href="{% url 'check:modify' student.id %}">수정하기</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

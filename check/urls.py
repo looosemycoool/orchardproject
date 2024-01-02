@@ -26,6 +26,7 @@ urlpatterns = [
     path('patrol/s_class/<int:patrol_id>', patrol_views.patrol_check_s, name='patrol_check_s'),
 
     # student
-    # path('student', student_views.student_register, name='student_register'),
+    path('student/', student_views.index, name='student'),
     path('student/register/', student_views.register, name='register'),
+    path('student/modify/<int:student_id>', student_views.modify, name='modify')
 ]

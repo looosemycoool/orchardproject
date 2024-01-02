@@ -1,66 +1,41 @@
-<ul class="list-group dropdown-center">
-    <a href="{% url 'check:index' %}"
-        class="list-group-item list-group-item-action text-center"
-        aria-current="true">
-        출석부
-    </a>
-    <a href="{% url 'check:patrol' %}"
-        class="list-group-item list-group-item-action text-center"
-        aria-current="true">
-        일일순찰
-    </a>
-    <a href="#"
-        class="list-group-item list-group-item-action text-center"
-        aria-current="true">
-        재원생 목록
-    </a>
-</ul>
+{% include 'check/check_menu.html' %}
 <ul class="list-group dropdown-center mt-3">
     <a href="{% url 'check:register' %}"
         class="list-group-item list-group-item-action text-center"
         aria-current="true">
         재원생 등록
     </a>
-    <a href="#"
-        class="list-group-item list-group-item-action text-center"
-        aria-current="true">
-        재원생 수정
-    </a>
 </ul>
-<form method="post" action="" onsubmit="return validateForm()">
-    {% csrf_token %}
-    <div class="card border-secondary mt-3">
-        <div class="card-header bg-primary-subtle">
-            <input type="date" name="selected_date" id="selected_date">
-        </div>
-        <div class="card-body">
-            <button type="submit" class="btn btn-outline-success">
-                재원생 검색
-            </button>
-            수정하기
-        </div>
-    </div>
-</form>
-<form method="post" action="#">
-    {% csrf_token %}
-    <div class="card border-secondary mt-3">
-        <div class="card-header bg-warning-subtle">
-            <input type="date" name="selected_date" id="selected_date">
-        </div>
-        <div class="card-body">
-            <button type="submit" class="btn btn-outline-primary" name="class_button" value="P">P반 검색</button>
-            <button type="submit" class="btn btn-outline-info" name="class_button" value="S">S반 검색</button>
-        </div>
-    </div>
-</form>
-
-<script>
-    function validateForm() {
-        var selectedDate = document.getElementById("selected_date").value;
-        if (!selectedDate) {
-            alert("날짜를 지정해야 합니다.");
-            return false;
-        }
-        return true;
-    }
-</script>
+{#<form method="get" action="{% url 'check:modify' student_id %}">#}
+{#    {% csrf_token %}#}
+{#    <div class="card border-secondary mt-3">#}
+{#        <div class="card-header bg-primary-subtle">#}
+{#            <input type="date" name="selected_date" id="selected_date">#}
+{#            <select class="form-control" id="id_student_name" name="student_name">#}
+{#                <option value="">학생 선택</option>#}
+{#                {% for student in students %}#}
+{#                    <option value="{{ student.student.id }}">{{ student.student }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#        <div class="card-body">#}
+{#            <button type="submit" class="btn btn-outline-success">#}
+{#                재원생 수정#}
+{#            </button>#}
+{#        </div>#}
+{#    </div>#}
+{#</form>#}
+{##}
+{#<form method="GET" action="{% url 'manager:report_study_detail' %}">#}
+{#    <div class="card-body">#}
+{#        <div class="input-group">#}
+{#            {% csrf_token %}#}
+{#            <select class="form-control" id="id_student_name" name="student_name">#}
+{#                <option value="">학생 선택</option>#}
+{#                {% for names in student_names %}#}
+{#                    <option value="{{ names.student_name }}">{{ names.student_name }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#    </div>#}
+{#</form>#}

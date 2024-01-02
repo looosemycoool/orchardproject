@@ -31,6 +31,21 @@ def search(request):
                         setattr(attendance, time_field, selected_value)
                 attendance.save()
 
+            translation_dict = {
+                'False': ' ',
+                'korean': '국어',
+                'math': '수학',
+                'english': '영어',
+                'research': '탐구',
+                'guitar': '기타',
+            }
+
+            # attendances_s의 값 변환
+            for attendance in attendances:
+                for field in ['time8', 'time9', 'time10', 'time11', 'time12', 'time13', 'time14', 'time15', 'time16', 'time17',
+                              'time18', 'time19', 'time20', 'time21', 'time22']:
+                    setattr(attendance, field, translation_dict.get(getattr(attendance, field), getattr(attendance, field)))
+
     context = {
         'attendances': attendances,
         'selected_date': selected_date,
