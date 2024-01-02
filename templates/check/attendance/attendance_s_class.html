@@ -39,10 +39,15 @@
                         <input type="hidden" name="attendance_id" value="{{ attendance.id }}">
                         <tbody>
                             <tr>
+                                {% if attendance.absent %}
+                                <td class="bg-secondary">{{ attendance.user.class_name }}-{{ attendance.user.class_num }}
+                                    <br>
+                                    {{ attendance.user.student }}</td>
+                                {% else %}
                                 <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}
                                     <br>
                                     {{ attendance.user.student }}</td>
-                                <!-- 체크박스 필드 -->
+                                {% endif %}
                                 <td><input type="checkbox" name="absent_{{ attendance.id }}" {% if attendance.absent %}checked{% endif %}></td>
                             {% if attendance.time8 != "False" %}
                                 <td class="bg-secondary">
