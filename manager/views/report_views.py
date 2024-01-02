@@ -33,9 +33,9 @@ def report_study_detail(request):
     average_data = Average_Study_Data.objects.filter(
         week_name__range=[start_week, end_week]
     )
-    average_patrol_data = Average_Patrol_Data.objects.filter(
-        week_name__range=[start_week, end_week]
-    )
+    # average_patrol_data = Average_Patrol_Data.objects.filter(
+    #     week_name__range=[start_week, end_week]
+    # )
     total_time_data = Total_Weekly_Study_Data.objects.filter(
         week_name__range=[start_week, end_week]
     )

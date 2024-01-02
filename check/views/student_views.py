@@ -6,8 +6,14 @@ from ..forms import StudentRegisterForm
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def index(request):
-    students = StudentRegister.objects.all()
-    context = {'students': students}
+    students_p = StudentRegister.objects.filter(class_name='P').order_by('class_name')
+    students_s = StudentRegister.objects.filter(class_name='S').order_by('class_name')
+    students_m = StudentRegister.objects.filter(class_name='M').order_by('class_name')
+
+    s_line1 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
+    s_line2 = ['16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
+
+    context = {'students_p': students_p, 'students_s': students_s, 'students_m': students_m, 's_line1': s_line1, 's_line2': s_line2}
     return render(request, 'check/student/student_main.html', context)
 
 def register(request):
@@ -131,7 +137,7 @@ def register(request):
             student_register_instance.sun22 = form.cleaned_data['sun22']
 
             form.save()
-            return redirect('check:index')
+            return redirect('check:student')
     else:
         form = StudentRegisterForm()
     context = {'teachers': teachers, 'students': students, 'form': form}
@@ -139,14 +145,13 @@ def register(request):
     return render(request, 'check/student/student_register_form.html', context)
 
 def modify(request, student_id):
-    # 특정 학생 객체를 가져옵니다.
     students = User.objects.filter(is_staff=False)
     teachers = User.objects.filter(is_staff=True)
 
     student = get_object_or_404(StudentRegister, id=student_id)
 
     if request.method == 'POST':
-        form = StudentRegisterForm(request.POST)
+        form = StudentRegisterForm(request.POST, instance=student)
         if form.is_valid():
             student_register_instance = form.save(commit=False)
             # 월요일
@@ -262,10 +267,10 @@ def modify(request, student_id):
             student_register_instance.sun21 = form.cleaned_data['sun21']
             student_register_instance.sun22 = form.cleaned_data['sun22']
 
-            form.save()
-            return redirect('check:index')
+            student_register_instance.save()
+            return redirect('check:student')
     else:
-        form = StudentRegisterForm()
+        form = StudentRegisterForm(instance=student)
 
-    context = {'form': form, 'student': student, 'teachers': teachers, 'students': students}
-    return render(request, 'check/student/student_modify_form.html', context)
+    context = {'form': form, 'students': students, 'student': student, 'teachers': teachers}
+    return render(request, 'check/student/student_register_form.html', context)

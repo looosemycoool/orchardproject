@@ -125,15 +125,18 @@ class StudentRegisterForm(forms.ModelForm):
 
     class Meta:
         model = StudentRegister
-        fields = ['student', 'teacher', 'username', 'class_name', 'class_num', 'register_date', 'drop_date', 'is_dropped']
+        fields = ['student', 'teacher', 'username', 'class_name', 'class_num', 'register_date', 'drop_date', 'is_dropped',
+                  'mon8', 'mon9', 'mon10', 'mon11', 'mon12', 'mon13', 'mon14', 'mon15', 'mon16', 'mon17', 'mon18', 'mon19', 'mon20', 'mon21', 'mon22',
+                  'tue8', 'tue9', 'tue10', 'tue11', 'tue12', 'tue13', 'tue14', 'tue15', 'tue16', 'tue17', 'tue18', 'tue19', 'tue20', 'tue21', 'tue22',
+                  'wed8', 'wed9', 'wed10', 'wed11', 'wed12', 'wed13', 'wed14', 'wed15', 'wed16', 'wed17', 'wed18', 'wed19', 'wed20', 'wed21', 'wed22',
+                  'thu8', 'thu9', 'thu10', 'thu11', 'thu12', 'thu13', 'thu14', 'thu15', 'thu16', 'thu17', 'thu18', 'thu19', 'thu20', 'thu21', 'thu22',
+                  'fri8', 'fri9', 'fri10', 'fri11', 'fri12', 'fri13', 'fri14', 'fri15', 'fri16', 'fri17', 'fri18', 'fri19', 'fri20', 'fri21', 'fri22',
+                  'sat8', 'sat9', 'sat10', 'sat11', 'sat12', 'sat13', 'sat14', 'sat15', 'sat16', 'sat17', 'sat18', 'sat19', 'sat20', 'sat21', 'sat22',
+                  'sun8', 'sun9', 'sun10', 'sun11', 'sun12', 'sun13', 'sun14', 'sun15', 'sun16', 'sun17', 'sun18', 'sun19', 'sun20', 'sun21', 'sun22']
     def __init__(self, *args, **kwargs):
         super(StudentRegisterForm, self).__init__(*args, **kwargs)
-
-        # 필수 항목이 아닌 필드에 대해 required 속성을 False로 설정
-        self.fields['student'].required = False
-        self.fields['teacher'].required = False
-        self.fields['username'].required = False
-        self.fields['drop_date'].required = False
+        for field_name in self.fields.keys():
+            self.fields[field_name].required = False
 
 class AttendanceForm(forms.ModelForm):
     class Meta:

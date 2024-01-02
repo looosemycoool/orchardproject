@@ -84,18 +84,4 @@
         return true;
     }
     </script>
-    <script>
-function validateForm() {
-    var selectedDate = document.getElementById("selected_date").value;
-    var selectedClass = document.querySelector('input[name="class_button"]:checked').value;
-    if (!selectedDate) {
-        alert("날짜를 지정해야 합니다.");
-        return false;
-    }
-    // 폼의 액션을 동적으로 변경
-    var formAction = "{% url 'check:search' %}" + "?selected_date=" + selectedDate + "&selected_class=" + selectedClass;
-    document.getElementById("searchForm").action = formAction;
-    return true;
-}
-</script>
 {% endblock %}
