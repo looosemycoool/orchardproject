@@ -1,12 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponseRedirect
 
 from ..forms import AttendanceForm
 from ..models import Attendance
 
-
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def index(request):
+    return render(request, 'check/check_main.html')
+
+@user_passes_test(lambda u: u.is_staff, login_url='common:login')
+def search(request):
     attendances = None
     selected_date = None
     selected_class = None
@@ -32,7 +36,7 @@ def index(request):
         'selected_date': selected_date,
         'selected_class': selected_class
     }
-    return render(request, 'check/check_main.html', context)
+    return render(request, 'check/check_search.html', context)
 
 def update_attendance(request, attendance_id):
     attendance = Attendance.objects.get(id=attendance_id)
@@ -41,5 +45,3 @@ def update_attendance(request, attendance_id):
         if form.is_valid():
             form.save()
             return redirect('check:index')
-
-# def update_

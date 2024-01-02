@@ -7,12 +7,12 @@ from reserve.models import Reserve
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def index(request):
-    return render(request, 'check/patrol_main.html')
+    return render(request, 'check/patrol/patrol_main.html')
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def patrol(request):
     # patrol 페이지 목록 보여주기
-    return render(request, 'check/patrol_main.html')
+    return render(request, 'check/patrol/patrol_main.html')
 
 def get_day_of_week(selected_date):
     date_object = datetime.strptime(selected_date, "%Y-%m-%d").date()
@@ -32,7 +32,7 @@ def create_patrol_book(request):
         for student in students:
             if not PatrolCheck.objects.filter(user=student, date=selected_date).exists():
                 create_patrol(request, student.id, selected_date)
-    return render(request, 'check/patrol_main.html')
+    return render(request, 'check/patrol/patrol_main.html')
 
 def create_patrol(request, student_register_id, selected_date):
     student_register = StudentRegister.objects.get(pk=student_register_id)
@@ -41,7 +41,7 @@ def create_patrol(request, student_register_id, selected_date):
     patrol_check_instance = PatrolCheck(user=student_register, date=selected_date, day_of_week=day_of_week)
     patrol_check_instance.save()
 
-    return render(request, 'check/patrol_main.html')
+    return render(request, 'check/patrol/patrol_main.html')
 
 def patrol_p_class(request):
     current_date = datetime.now().date()
@@ -89,8 +89,10 @@ def patrol_p_class(request):
     line4 = ['01', '02', '03', '04', '05', '06', '07', '08']
     line5 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
 
-    context = {'patrol_p': patrol_p, 'patrol_m': patrol_m, 'attendance_data': attendance_data, 'reserve_data': reserve_data, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5': line5}
-    return render(request, 'check/patrol_p_class.html', context)
+    lines = [line1, line2, line3, line4, line5]
+
+    context = {'patrol_p': patrol_p, 'patrol_m': patrol_m, 'attendance_data': attendance_data, 'reserve_data': reserve_data, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5': line5, 'lines':lines}
+    return render(request, 'check/patrol/patrol_p_class.html', context)
 
 def patrol_check_p(request, patrol_id):
     patrol = PatrolCheck.objects.get(id=patrol_id)
@@ -203,7 +205,7 @@ def patrol_s_class(request):
     line6 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11']
 
     context = {'patrol_s': patrol_s, 'attendance_data': attendance_data, 'reserve_data': reserve_data, 'line1': line1, 'line2': line2, 'line3': line3, 'line4': line4, 'line5': line5, 'line6': line6}
-    return render(request, 'check/patrol_s_class.html', context)
+    return render(request, 'check/patrol/patrol_s_class.html', context)
 
 def patrol_check_s(request, patrol_id):
     patrol = PatrolCheck.objects.get(id=patrol_id)

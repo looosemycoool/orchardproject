@@ -1,0 +1,26 @@
+<div class="col-md-2 text-center">
+    {% include 'check/check_menu.html' %}
+    <ul class="list-group dropdown-center mt-3">
+        <a href="{% url 'check:patrol_p_class' %}"
+            class="list-group-item list-group-item-action text-center"
+            aria-current="true">
+            P반 & M반
+        </a>
+        <a href="{% url 'check:patrol_s_class' %}"
+            class="list-group-item list-group-item-action text-center"
+            aria-current="true">
+            S반
+        </a>
+    </ul>
+</div>
+
+<script>
+    function validateForm() {
+        var selectedDate = document.getElementById("selected_date").value;
+        if (!selectedDate) {
+            alert("날짜를 지정해야 합니다.");
+            return false;
+        }
+        return true;
+    }
+</script>

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% load your_custom_filters %}
     <div class="container-fluid">
         <div class="row">
-            {% include 'check/patrol_menu.html' %}
+            {% include 'check/patrol/patrol_menu.html' %}
             <div class="col-md-10 text-center" style="height: 70px;">
                 <div class="row">
                     {#          6 x 10     첫번째 칸 #}
@@ -10,9 +11,17 @@
                         {% for patrol in patrol_s %}
                             {% for num in line1 %}
                                 {% if patrol.user.class_num == num %}
-                                <div class="card mb-2" style="max-width: 12rem;">
-                                    <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
-                                </div>
+                                {% with attendance=attendance_data|get_item:patrol.id %}
+                                    {% if attendance.absent %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                        {% else %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                    {% endif %}
+                                    {% endwith %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
@@ -23,9 +32,17 @@
                         {% for patrol in patrol_s %}
                             {% for num in line2 %}
                                 {% if patrol.user.class_num == num %}
-                                <div class="card mb-2" style="max-width: 12rem;">
-                                    <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
-                                </div>
+                                {% with attendance=attendance_data|get_item:patrol.id %}
+                                    {% if attendance.absent %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                        {% else %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                    {% endif %}
+                                    {% endwith %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
@@ -35,9 +52,17 @@
                         {% for patrol in patrol_s %}
                             {% for num in line3 %}
                                 {% if patrol.user.class_num == num %}
-                                <div class="card mb-2" style="max-width: 12rem;">
-                                    <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
-                                </div>
+                                {% with attendance=attendance_data|get_item:patrol.id %}
+                                    {% if attendance.absent %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                        {% else %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                    {% endif %}
+                                    {% endwith %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
@@ -47,9 +72,17 @@
                         {% for patrol in patrol_s %}
                             {% for num in line4 %}
                                 {% if patrol.user.class_num == num %}
-                                <div class="card mb-2" style="max-width: 12rem;">
-                                    <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
-                                </div>
+                                {% with attendance=attendance_data|get_item:patrol.id %}
+                                    {% if attendance.absent %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                        {% else %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                    {% endif %}
+                                    {% endwith %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
@@ -59,9 +92,17 @@
                         {% for patrol in patrol_s %}
                             {% for num in line5 %}
                                 {% if patrol.user.class_num == num %}
-                                <div class="card mb-2" style="max-width: 12rem;">
-                                    <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
-                                </div>
+                                {% with attendance=attendance_data|get_item:patrol.id %}
+                                    {% if attendance.absent %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                        {% else %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                    {% endif %}
+                                    {% endwith %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
@@ -71,9 +112,17 @@
                         {% for patrol in patrol_s %}
                             {% for num in line6 %}
                                 {% if patrol.user.class_num == num %}
-                                <div class="card mb-2" style="max-width: 12rem;">
-                                    <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
-                                </div>
+                                {% with attendance=attendance_data|get_item:patrol.id %}
+                                    {% if attendance.absent %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                        {% else %}
+                                        <div class="card mb-2" style="max-width: 12rem;">
+                                            <button type="button" style="font-size:16px" class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ patrol.id }}" data-bs-whatever="{{ patrol.user.student }}">{{ patrol.user.class_name }}-{{ patrol.user.class_num }} {{ patrol.user.student }}</button>
+                                        </div>
+                                    {% endif %}
+                                    {% endwith %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}

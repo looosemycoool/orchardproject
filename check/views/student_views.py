@@ -10,7 +10,7 @@ def index(request):
     #context = {'student': student}
     return render(request, 'check/check_main.html')
 
-def student_register(request):
+def register(request):
     students = User.objects.filter(is_staff=False)
     teachers = User.objects.filter(is_staff=True)
     if request.method == 'POST':
@@ -136,4 +136,4 @@ def student_register(request):
         form = StudentRegisterForm()
     context = {'teachers': teachers, 'students': students, 'form': form}
 
-    return render(request, 'check/student_register_form.html', context)
+    return render(request, 'check/student/student_register_form.html', context)

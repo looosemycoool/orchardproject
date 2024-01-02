@@ -2,7 +2,9 @@
 {% block content %}
     <div class="container-fluid">
     <div class="row">
-    {% include 'check/check_menu.html' %}
+    <div class="col-md-2 text-center">
+        {% include 'check/student/student_menu.html' %}
+    </div>
     <div class="col-md-10">
         <h5 class="my-3 border-bottom pb-2">재원생 등록</h5>
         <form method="post">

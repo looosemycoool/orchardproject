@@ -1,0 +1,104 @@
+<!-- check_main.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        @font-face {
+            font-family: 'PyeongChangPeace-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 text-center">
+                {% include 'check/attendance/attendance_menu.html' %}
+            </div>
+            <div class="col-md-10">
+                <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">
+                    <span style="color:mediumseagreen; font-size:24px; "> {{ current_date }} </span>
+                    <span style="color:dodgerblue; font-size:24px; "> M반 </span>
+                    <span style="font-size:24px; "> 출석부 </span>
+                </h3>
+                <table class="table align-middle table-bordered" style="text-align: center">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 10%; white-space: nowrap;"></th>
+                            <th style="width: 10%; white-space: nowrap;">결석</th>
+                            <th style="width: 5%; white-space: nowrap;">오전</th>
+                            <th style="width: 5%; white-space: nowrap;">점심</th>
+                            <th style="width: 5%; white-space: nowrap;">오후</th>
+                            <th style="width: 5%; white-space: nowrap;">조퇴</th>
+                            <th style="width: 80%; white-space: nowrap;">특이사항</th>
+                            <th style="width: 80%; white-space: nowrap;"></th>
+                        </tr>
+                    </thead>
+                <form method="post" action="{% url 'check:attendance_index_m' %}">
+                    {% csrf_token %}
+                    {% for attendance in attendances_m %}
+                        <input type="hidden" name="attendance_id" value="{{ attendance.id }}">
+                        <tbody>
+                            <tr>
+                                <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}
+                                    <br>
+                                    {{ attendance.user.student }}</td>
+                                <!-- 체크박스 필드 -->
+                                <td><input type="checkbox" name="absent_{{ attendance.id }}" {% if attendance.absent %}checked{% endif %}></td>
+                            {% if attendance.time8 != "False" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="morning_check_{{ attendance.id }}" {% if attendance.morning_check %}checked{% endif %}>
+                                    <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="morning_check_{{ attendance.id }}" {% if attendance.morning_check %}checked{% endif %}>
+                                    <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
+                                </td>
+                            {% endif %}
+                            {% if attendance.time13 != "False" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="lunch_check_{{ attendance.id }}" {% if attendance.lunch_check %}checked{% endif %}>
+                                    <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="lunch_check_{{ attendance.id }}" {% if attendance.lunch_check %}checked{% endif %}>
+                                    <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time18 != "False" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="night_check_{{ attendance.id }}" {% if attendance.night_check %}checked{% endif %}>
+                                    <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="night_check_{{ attendance.id }}" {% if attendance.night_check %}checked{% endif %}>
+                                    <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
+                                </td>
+                            {% endif %}
+                                <td><input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}"></td><!-- 특이사항 입력란 -->
+                                <td>
+                                    <input type="text" class="form-control" name="memo_{{ attendance.id }}" id="memo_{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
+                                </td>
+                                <!-- 저장 버튼 -->
+                                <td>
+                                    <button type="submit" class="btn btn-primary btn-sm">저장</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </form>
+                </table>
+            </div>
+{#            <div class="col-md-5">#}
+{#                <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">#}
+{#                    <span style="color:mediumseagreen; font-size:24px; "> {{ selected_date }} </span>#}
+{#                    <span style="color:dodgerblue; font-size:24px; "> S반 </span>#}
+{#                    <span style="font-size:24px; "> 출석부 </span>#}
+{#                </h3>#}
+{#            </div>#}
+        </div>
+    </div>
+{% endblock %}

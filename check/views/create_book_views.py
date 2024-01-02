@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import user_passes_test
-from ..models import Attendance, StudentRegister
+from ..models import Attendance, StudentRegister, PatrolCheck
 
 def get_day_of_week(selected_date):
     date_object = datetime.strptime(selected_date, "%Y-%m-%d").date()
@@ -57,3 +57,29 @@ def create_attendance(request, student_register_id, selected_date):
 
     # 이후 필요한 작업 수행 (예: 리다이렉트 등)
     return render(request, 'check/check_main.html')
+
+def create_patrol_book(request):
+    if request.method == 'POST':
+        selected_date = request.POST.get('selected_date', None)
+        day_of_week = get_day_of_week(selected_date)
+
+        # 8부터 22까지의 시간대에 해당하는 필드가 비어 있지 않은 경우를 확인
+        time_fields = [f"{day_of_week.lower()}{hour}" for hour in range(8, 23)]
+        filter_params = {f"{field}__isnull": False for field in time_fields}
+
+        students = StudentRegister.objects.filter(**filter_params, is_dropped=False)
+
+        for student in students:
+            if not PatrolCheck.objects.filter(user=student, date=selected_date).exists():
+                create_patrol(request, student.id, selected_date)
+    return render(request, 'check/check_main.html')
+
+def create_patrol(request, student_register_id, selected_date):
+    student_register = StudentRegister.objects.get(pk=student_register_id)
+    day_of_week = datetime.strptime(selected_date, '%Y-%m-%d').strftime('%a').lower()
+
+    patrol_check_instance = PatrolCheck(user=student_register, date=selected_date, day_of_week=day_of_week)
+    patrol_check_instance.save()
+
+    return render(request, 'check/check_main.html')
+

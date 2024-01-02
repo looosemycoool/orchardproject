@@ -1,0 +1,330 @@
+<!-- check_main.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        @font-face {
+            font-family: 'PyeongChangPeace-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-2 text-center">
+            {% include 'check/check_menu.html' %}
+            <ul class="list-group dropdown-center mt-3">
+                <a href="{% url 'check:attendance_index_p' %}"
+                    class="list-group-item list-group-item-action text-center"
+                    aria-current="true">
+                    P반
+                </a>
+                <a href="{% url 'check:attendance_index_s' %}"
+                    class="list-group-item list-group-item-action text-center"
+                    aria-current="true">
+                    S반
+                </a>
+                <a href="{% url 'check:attendance_index_m' %}"
+                    class="list-group-item list-group-item-action text-center"
+                    aria-current="true">
+                    M반
+                </a>
+            </ul>
+            <form method="post" action="{% url 'check:search' %}" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="card border-secondary mt-3">
+                    <div class="card-header bg-warning-subtle">
+                        <input type="date" name="selected_date" id="selected_date">
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-outline-primary" name="class_button" value="P">P반</button>
+                        <button type="submit" class="btn btn-outline-info" name="class_button" value="S">S반</button>
+                        <button type="submit" class="btn btn-outline-warning" name="class_button" value="M">M반</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+            <div class="col-md-10">
+                <!-- 날짜와 반 정보 표시 -->
+                {% if selected_date and selected_class %}
+                    <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">
+                    <span style="color:mediumseagreen; font-size:24px; "> {{ selected_date }} </span>
+                    <span style="color:dodgerblue; font-size:24px; "> {{ selected_class }}반 </span>
+                    <span style="font-size:24px; "> 출석부 </span>
+                </h3>
+                {% endif %}
+                <!-- 출석부 데이터 표시 -->
+                {% for attendance in attendances %}
+                    <!-- 출석 데이터 출력 -->
+                {% endfor %}
+                <table class="table align-middle table-bordered" style="text-align: center">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 5%; white-space: nowrap;">반-번호</th>
+                            <th style="width: 5%; white-space: nowrap;">학생이름</th>
+                            <th style="width: 5%; white-space: nowrap;">출결</th>
+                            <th style="width: 5%; white-space: nowrap;">8</th>
+                            <th style="width: 5%; white-space: nowrap;">9</th>
+                            <th style="width: 5%; white-space: nowrap;">10</th>
+                            <th style="width: 5%; white-space: nowrap;">11</th>
+                            <th style="width: 5%; white-space: nowrap;">12</th>
+                            <th style="width: 5%; white-space: nowrap;">13</th>
+                            <th style="width: 5%; white-space: nowrap;">14</th>
+                            <th style="width: 5%; white-space: nowrap;">15</th>
+                            <th style="width: 5%; white-space: nowrap;">16</th>
+                            <th style="width: 5%; white-space: nowrap;">17</th>
+                            <th style="width: 5%; white-space: nowrap;">18</th>
+                            <th style="width: 5%; white-space: nowrap;">19</th>
+                            <th style="width: 5%; white-space: nowrap;">20</th>
+                            <th style="width: 5%; white-space: nowrap;">21</th>
+                            <th style="width: 5%; white-space: nowrap;">22</th>
+                        </tr>
+                    </thead>
+                    {% for attendance in attendances %}
+                    <tbody>
+                        <form method="post" action="{% url 'check:update_attendance' attendance.id %}">
+                            {% csrf_token %}
+                            {% if attendance.absent %}
+                                <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}</td>
+                                <td>{{ attendance.user.student }}</td>
+                                <td>
+                                    {% if attendance.late or attendance.early_leave or attendance.absent %}
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">수정</button>
+                                    {% else %}
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">출결</button>
+                                    {% endif %}
+                                </td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                                <td class="bg-secondary"></td>
+                            {% else %}
+                                <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}</td>
+                                <td>{{ attendance.user.student }}</td>
+                                <td>
+                                    {% if attendance.absent or attendance.memo %}
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">수정</button>
+                                    {% else %}
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ attendance.id }}" data-bs-whatever="{{ attendance.user.student }}">출결</button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time8_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time8 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time8 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time8 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time8 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time8 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time9_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time9 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time9 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time9 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time9 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time9 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time10_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time10 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time10 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time10 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time10 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time10 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time11_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time11 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time11 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time11 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time11 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time11 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time12_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time12 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time12 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time12 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time12 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time12 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time13_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time13 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time13 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time13 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time13 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time13 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time14_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time14 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time14 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time14 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time14 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time14 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time15_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time15 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time15 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time15 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time15 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time15 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time16_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time16 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time16 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time16 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time16 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time16 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time17_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time17 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time17 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time17 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time17 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time17 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time18_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time18 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time18 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time18 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time18 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time18 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time19_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time19 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time19 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time19 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time19 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time19 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time20_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time20 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time20 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time20 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time20 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time20 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time21_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time21 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time21 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time21 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time21 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time21 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="time22_{{ attendance.id }}">
+                                        <option value="" {% if attendance.time8 == "" %}selected{% endif %}></option>
+                                        <option value="korean" {% if attendance.time22 == "korean" %}selected{% endif %}>국어</option>
+                                        <option value="math" {% if attendance.time22 == "math" %}selected{% endif %}>수학</option>
+                                        <option value="english" {% if attendance.time22 == "english" %}selected{% endif %}>영어</option>
+                                        <option value="research" {% if attendance.time22 == "research" %}selected{% endif %}>탐구</option>
+                                        <option value="guitar" {% if attendance.time22 == "guitar" %}selected{% endif %}>기타</option>
+                                    </select>
+                                </td>
+                            {% endif %}
+                        </form>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% for attendance in attendances %}
+        <div class="modal fade" id="exampleModal{{ attendance.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ attendance.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel{{ attendance.id }}">출결 정보 입력 - {{ attendance.user.student }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    {% if attendance.late %}
+                        <p>지각 : {{ attendance.late }}</p>
+                    {% else %}
+                    {% endif %}
+                    {% if attendance.early_leave %}
+                        <p>조퇴 : {{ attendance.early_leave }}</p>
+                    {% else %}
+                    {% endif %}
+                        <form method="post" action="{% url 'check:update_attendance' attendance.id %}">
+                            {% csrf_token %}
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="absent-checkbox{{ attendance.id }}" name="absent" {% if attendance.absent %}checked{% endif %}>
+                                <label class="form-check-label" for="absent-checkbox{{ attendance.id }}">결석 여부</label>
+                                <input type="hidden" name="attendance_id" value="{{ attendance.absent }}">  <!-- 출결 항목의 ID를 추가 -->
+                            </div>
+                            <div class="mb-3">
+                                <label for="late-input" class="col-form-label">특이사항</label>
+                                <input type="text" class="form-control" name="memo" id="memo-input{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">저장</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+<script>
+    function validateForm() {
+        var selectedDate = document.getElementById("selected_date").value;
+        if (!selectedDate) {
+            alert("날짜를 지정해야 합니다.");
+            return false;
+        }
+        return true;
+    }
+</script>
+    {% endfor %}
+{% endblock %}
