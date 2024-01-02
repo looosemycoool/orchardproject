@@ -23,14 +23,14 @@
                 <table class="table align-middle table-bordered" style="text-align: center">
                     <thead style="position: sticky; top: 0px;">
                         <tr class="table-success">
-                            <th style="width: 10%; white-space: nowrap;"></th>
-                            <th style="width: 10%; white-space: nowrap;">결석</th>
+                            <th style="width: 20%; white-space: nowrap;"></th>
+                            <th style="width: 5%; white-space: nowrap;">결석</th>
                             <th style="width: 5%; white-space: nowrap;">오전</th>
                             <th style="width: 5%; white-space: nowrap;">점심</th>
                             <th style="width: 5%; white-space: nowrap;">오후</th>
                             <th style="width: 5%; white-space: nowrap;">조퇴</th>
-                            <th style="width: 80%; white-space: nowrap;">특이사항</th>
-                            <th style="width: 80%; white-space: nowrap;"></th>
+                            <th style="width: 50%; white-space: nowrap;">특이사항</th>
+                            <th style="width: 5%; white-space: nowrap;"></th>
                         </tr>
                     </thead>
                 <form method="post" action="{% url 'check:attendance_index_p' %}">
@@ -97,13 +97,6 @@
                 </form>
                 </table>
             </div>
-{#            <div class="col-md-5">#}
-{#                <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">#}
-{#                    <span style="color:mediumseagreen; font-size:24px; "> {{ selected_date }} </span>#}
-{#                    <span style="color:dodgerblue; font-size:24px; "> S반 </span>#}
-{#                    <span style="font-size:24px; "> 출석부 </span>#}
-{#                </h3>#}
-{#            </div>#}
         </div>
     </div>
 {% endblock %}
