@@ -30,7 +30,7 @@
                         M반
                     </a>
                 </ul>
-                <form method="post" action="{% url 'check:search' %}" onsubmit="return validateForm()">
+                <form method="post" action="{% url 'check:search' %}">
                     {% csrf_token %}
                     <div class="card border-secondary mt-3">
                         <div class="card-header bg-warning-subtle">
@@ -45,7 +45,7 @@
                 </form>
             </div>
             <div class="col-md-2 text-center">
-                <form method="post" action="{% url 'check:create_book' %}" onsubmit="return validateForm()">
+                <form method="post" action="{% url 'check:create_book' %}" onsubmit="return validateForm1()">
                     {% csrf_token %}
                     <div class="card border-secondary">
                         <div class="card-header bg-success-subtle">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </form>
-                <form method="post" action="{% url 'check:create_patrol' %}" onsubmit="return validateForm()">
+                <form method="post" action="{% url 'check:create_patrol' %}" onsubmit="return validateForm2()">
                     {% csrf_token %}
                     <div class="card border-secondary mt-3">
                         <div class="card-header bg-primary-subtle">
@@ -74,14 +74,23 @@
             </div>
         </div>
     </div>
-{#    <script>#}
-{#    function validateForm() {#}
-{#        var selectedDate = document.getElementById("selected_date").value;#}
-{#        if (!selectedDate) {#}
-{#            alert("날짜를 지정해야 합니다.");#}
-{#            return false;#}
-{#        }#}
-{#        return true;#}
-{#    }#}
-{#    </script>#}
+    <script>
+    function validateForm1() {
+    var selectedDate = document.getElementById("selected_date1").value;
+    if (!selectedDate) {
+        alert("날짜를 지정해야 합니다.");
+        return false;
+    }
+    return true;
+    }
+
+    function validateForm2() {
+        var selectedDate = document.getElementById("selected_date2").value;
+        if (!selectedDate) {
+            alert("날짜를 지정해야 합니다.");
+            return false;
+        }
+        return true;
+    }
+    </script>
 {% endblock %}
