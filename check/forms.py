@@ -125,7 +125,8 @@ class StudentRegisterForm(forms.ModelForm):
 
     class Meta:
         model = StudentRegister
-        fields = ['student', 'teacher', 'username', 'class_name', 'class_num', 'register_date', 'drop_date', 'is_dropped',
+        fields = ['student', 'teacher', 'username', 'class_name', 'class_num', 'student_phone',
+                  'parent_phone1', 'parent_phone2', 'register_date', 'drop_date', 'is_dropped',
                   'mon8', 'mon9', 'mon10', 'mon11', 'mon12', 'mon13', 'mon14', 'mon15', 'mon16', 'mon17', 'mon18', 'mon19', 'mon20', 'mon21', 'mon22',
                   'tue8', 'tue9', 'tue10', 'tue11', 'tue12', 'tue13', 'tue14', 'tue15', 'tue16', 'tue17', 'tue18', 'tue19', 'tue20', 'tue21', 'tue22',
                   'wed8', 'wed9', 'wed10', 'wed11', 'wed12', 'wed13', 'wed14', 'wed15', 'wed16', 'wed17', 'wed18', 'wed19', 'wed20', 'wed21', 'wed22',

@@ -7,7 +7,11 @@ class StudentRegister(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='username_student_registers', null=True, blank=True)
     class_name = models.CharField(max_length=10, null=True, blank=True)
     class_num = models.CharField(max_length=10, null=True, blank=True)
-    # phone = models.CharField(max_length=10, null=True)
+
+    student_phone = models.CharField(max_length=15, null=True)
+    parent_phone1 = models.CharField(max_length=15, null=True)
+    parent_phone2 = models.CharField(max_length=15, null=True)
+
     register_date = models.DateField(null=True, blank=True)
     drop_date = models.DateField(null=True, blank=True)
     is_dropped = models.BooleanField(default=False)
