@@ -10,10 +10,13 @@ def index(request):
     students_s = StudentRegister.objects.filter(class_name='S').order_by('class_num')
     students_m = StudentRegister.objects.filter(class_name='M').order_by('class_num')
 
-    s_line1 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
-    s_line2 = ['16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
+    p_line1 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
+    p_line2 = ['16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
+    s_line1 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+    s_line2 = ['21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40']
+    s_line3 = ['41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60']
 
-    context = {'students_p': students_p, 'students_s': students_s, 'students_m': students_m, 's_line1': s_line1, 's_line2': s_line2}
+    context = {'students_p': students_p, 'students_s': students_s, 'students_m': students_m, 'p_line1': p_line1, 'p_line2': p_line2, 's_line1': s_line1, 's_line2': s_line2, 's_line3': s_line3}
     return render(request, 'check/student/student_main.html', context)
 
 def register(request):
