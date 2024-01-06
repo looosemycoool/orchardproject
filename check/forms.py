@@ -138,6 +138,7 @@ class StudentRegisterForm(forms.ModelForm):
         super(StudentRegisterForm, self).__init__(*args, **kwargs)
         for field_name in self.fields.keys():
             self.fields[field_name].required = False
+        self.fields['student'].required = True
 
 class AttendanceForm(forms.ModelForm):
     class Meta:
