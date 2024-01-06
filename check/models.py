@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class StudentRegister(models.Model):
-    student = models.CharField(max_length=10, null=True)
+    student = models.CharField(max_length=10)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='teacher_student_registers', null=True, blank=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='username_student_registers', null=True, blank=True)
     class_name = models.CharField(max_length=10, null=True, blank=True)
