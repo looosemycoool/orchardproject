@@ -8,9 +8,9 @@ class StudentRegister(models.Model):
     class_name = models.CharField(max_length=10, null=True, blank=True)
     class_num = models.CharField(max_length=10, null=True, blank=True)
 
-    student_phone = models.CharField(max_length=15, null=True)
-    parent_phone1 = models.CharField(max_length=15, null=True)
-    parent_phone2 = models.CharField(max_length=15, null=True)
+    student_phone = models.CharField(max_length=15, null=True, blank=True)
+    parent_phone1 = models.CharField(max_length=15, null=True, blank=True)
+    parent_phone2 = models.CharField(max_length=15, null=True, blank=True)
 
     register_date = models.DateField(null=True, blank=True)
     drop_date = models.DateField(null=True, blank=True)
