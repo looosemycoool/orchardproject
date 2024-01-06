@@ -3,11 +3,12 @@ from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 
 from ..forms import AttendanceForm
-from ..models import Attendance
+from ..models import Attendance, Specify
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def index(request):
-    return render(request, 'check/check_main.html')
+    content_instance, created = Specify.objects.get_or_create(pk=1)
+    return render(request, 'check/check_main.html', {'content': content_instance.content})
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def search(request):
@@ -60,3 +61,16 @@ def update_attendance(request, attendance_id):
         if form.is_valid():
             form.save()
             return redirect('check:index')
+
+def specify(request):
+    # 데이터베이스에서 Specify 인스턴스를 가져오거나, 없으면 생성합니다.
+    content_instance, created = Specify.objects.get_or_create(pk=1)
+
+    if request.method == 'POST':
+        # POST 요청으로 데이터를 업데이트합니다.
+        content_instance.content = request.POST.get('content', '')
+        content_instance.save()
+        return redirect('check:index')
+
+    # GET 요청 시, 현재 데이터를 템플릿에 전달합니다.
+    return render(request, 'check/check_main.html', {'content': content_instance.content})

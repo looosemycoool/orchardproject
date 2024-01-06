@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from .models import StudentRegister, Attendance
 
 class StudentRegisterForm(forms.ModelForm):
@@ -139,6 +141,16 @@ class StudentRegisterForm(forms.ModelForm):
         for field_name in self.fields.keys():
             self.fields[field_name].required = False
         self.fields['student'].required = True
+
+    def clean(self):
+        cleaned_data = super().clean()
+        student = cleaned_data.get("student")
+
+        # 'student' 필드에 대한 중복 확인
+        if student and StudentRegister.objects.filter(student=student).exists():
+            self.add_error('student', ValidationError(_("이미 등록된 학생입니다.")))
+
+        return cleaned_data
 
 class AttendanceForm(forms.ModelForm):
     class Meta:
