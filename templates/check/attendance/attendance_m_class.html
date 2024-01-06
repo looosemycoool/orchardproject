@@ -39,12 +39,23 @@
                         <input type="hidden" name="attendance_id" value="{{ attendance.id }}">
                         <tbody>
                             <tr>
-                                <td>{{ attendance.user.class_name }}-{{ attendance.user.class_num }}
+                                {% if attendance.absent %}
+                                <td class="bg-secondary">{{ attendance.user.class_name }}-{{ attendance.user.class_num }}
                                     <br>
                                     {{ attendance.user.student }}</td>
+                                {% else %}
+                                    <td>
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ attendance.id }}">
+                                          {{ attendance.user.class_name }}-{{ attendance.user.class_num }}
+                                            <br>{{ attendance.user.student }}
+                                        </button>
+                                    </td>
+                                {% endif %}
+
+
                                 <!-- 체크박스 필드 -->
                                 <td><input type="checkbox" name="absent_{{ attendance.id }}" {% if attendance.absent %}checked{% endif %}></td>
-                            {% if attendance.time8 != "False" %}
+                            {% if attendance.time8 != "" %}
                                 <td class="bg-secondary">
                                     <input type="checkbox" name="morning_check_{{ attendance.id }}" {% if attendance.morning_check %}checked{% endif %}>
                                     <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
@@ -55,7 +66,7 @@
                                     <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
                                 </td>
                             {% endif %}
-                            {% if attendance.time13 != "False" %}
+                            {% if attendance.time13 != "" %}
                                 <td class="bg-secondary">
                                     <input type="checkbox" name="lunch_check_{{ attendance.id }}" {% if attendance.lunch_check %}checked{% endif %}>
                                     <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
@@ -67,7 +78,7 @@
                                 </td>
                             {% endif %}
 
-                            {% if attendance.time18 != "False" %}
+                            {% if attendance.time18 != "" %}
                                 <td class="bg-secondary">
                                     <input type="checkbox" name="night_check_{{ attendance.id }}" {% if attendance.night_check %}checked{% endif %}>
                                     <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
@@ -101,4 +112,102 @@
 {#            </div>#}
         </div>
     </div>
+    <!-- Modal -->
+    {% for attendance in attendances_m %}
+        <div class="modal fade" id="staticBackdrop{{ attendance.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{ attendance.id }}" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h5>상세사항</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <p>학생 번호 : {{ attendance.user.student_phone|default_if_none:'' }}</p>
+                  <p>학부모 번호 : {{ attendance.user.parent_phone1|default_if_none:'' }}</p>
+                  <table class="table align-middle table-bordered" style="text-align: center; max-width: 18rem">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 3%; white-space: nowrap;">08</th>
+                            <th style="width: 3%; white-space: nowrap;">09</th>
+                            <th style="width: 3%; white-space: nowrap;">10</th>
+                            <th style="width: 3%; white-space: nowrap;">11</th>
+                            <th style="width: 3%; white-space: nowrap;">12</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if attendance.absent %}
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                        {% else %}
+                            <td>{{ attendance.time8 }}</td>
+                            <td>{{ attendance.time9 }}</td>
+                            <td>{{ attendance.time10 }}</td>
+                            <td>{{ attendance.time11 }}</td>
+                            <td>{{ attendance.time12 }}</td>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <table class="table align-middle table-bordered" style="text-align: center; max-width: 18rem">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 3%; white-space: nowrap;">13</th>
+                            <th style="width: 3%; white-space: nowrap;">14</th>
+                            <th style="width: 3%; white-space: nowrap;">15</th>
+                            <th style="width: 3%; white-space: nowrap;">16</th>
+                            <th style="width: 3%; white-space: nowrap;">17</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if attendance.absent %}
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                        {% else %}
+                            <td>{{ attendance.time13 }}</td>
+                            <td>{{ attendance.time14 }}</td>
+                            <td>{{ attendance.time15 }}</td>
+                            <td>{{ attendance.time16 }}</td>
+                            <td>{{ attendance.time17 }}</td>
+                        {% endif %}
+                    </tbody>
+                </table>
+            <table class="table align-middle table-bordered" style="text-align: center; max-width: 18rem">
+                    <thead style="position: sticky; top: 0px;">
+                        <tr class="table-success">
+                            <th style="width: 3%; white-space: nowrap;">18</th>
+                            <th style="width: 3%; white-space: nowrap;">19</th>
+                            <th style="width: 3%; white-space: nowrap;">20</th>
+                            <th style="width: 3%; white-space: nowrap;">21</th>
+                            <th style="width: 3%; white-space: nowrap;">22</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if attendance.absent %}
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                            <td class="bg-secondary"></td>
+                        {% else %}
+                            <td>{{ attendance.time18 }}</td>
+                            <td>{{ attendance.time19 }}</td>
+                            <td>{{ attendance.time20 }}</td>
+                            <td>{{ attendance.time21 }}</td>
+                            <td>{{ attendance.time22 }}</td>
+                        {% endif %}
+                    </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
 {% endblock %}

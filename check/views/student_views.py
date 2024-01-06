@@ -20,7 +20,7 @@ def index(request):
     return render(request, 'check/student/student_main.html', context)
 
 def register(request):
-    students = User.objects.filter(is_staff=False)
+    students = User.objects.filter(is_staff=False).order_by('first_name')
     teachers = User.objects.filter(is_staff=True)
     if request.method == 'POST':
         form = StudentRegisterForm(request.POST)

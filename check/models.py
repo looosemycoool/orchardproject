@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class StudentRegister(models.Model):
-    student = models.CharField(max_length=10)
+    student = models.CharField(max_length=10, null=True)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='teacher_student_registers', null=True, blank=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='username_student_registers', null=True, blank=True)
     class_name = models.CharField(max_length=10, null=True, blank=True)
@@ -225,3 +225,6 @@ class PatrolCheck(models.Model):
     # 23:25
     time18_study = models.CharField(max_length=10, null=True, blank=True, default=False)
     time18_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
+
+class Specify(models.Model):
+    content = models.CharField(max_length=2000, null=True, blank=True)

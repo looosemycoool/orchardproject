@@ -6,6 +6,7 @@ app_name = 'check'
 urlpatterns = [
     path('', base_views.index, name='index'),
     path('update/<int:attendance_id>',base_views.update_attendance, name='update_attendance'),
+    path('specify/', base_views.specify, name='specify'),
     path('search/', base_views.search, name='search'),
 
     path('create_book/', create_book_views.create_book, name='create_book'),

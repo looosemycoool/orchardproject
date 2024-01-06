@@ -4,10 +4,28 @@ from datetime import datetime
 from ..models import Attendance
 from ..forms import AttendanceForm
 
+# CHOICES 정의
+CHOICES = {
+    'False': '',
+    'korean': '국어',
+    'math': '수학',
+    'english': '영어',
+    'research': '탐구',
+    'guitar': '기타',
+}
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def attendance_index_p(request):
     current_date = datetime.now().date()
     attendances_p = Attendance.objects.filter(user__class_name='P', date=current_date, user__is_dropped=False).order_by('user__class_num')
+
+    # 각 attendance의 timeXX 필드를 한글로 변환
+    for attendance in attendances_p:
+        for hour in range(8, 23):  # 8시부터 22시까지
+            field_name = f"time{hour}"
+            time_value = getattr(attendance, field_name, None)
+            if time_value is not None:
+                translated_value = CHOICES.get(time_value, time_value)
+                setattr(attendance, field_name, translated_value)
 
     if request.method == 'POST':
         for attendance in attendances_p:
@@ -22,6 +40,15 @@ def attendance_index_s(request):
     current_date = datetime.now().date()
     attendances_s = Attendance.objects.filter(user__class_name='S', date=current_date, user__is_dropped=False).order_by('user__class_num')
 
+    # 각 attendance의 timeXX 필드를 한글로 변환
+    for attendance in attendances_s:
+        for hour in range(8, 23):  # 8시부터 22시까지
+            field_name = f"time{hour}"
+            time_value = getattr(attendance, field_name, None)
+            if time_value is not None:
+                translated_value = CHOICES.get(time_value, time_value)
+                setattr(attendance, field_name, translated_value)
+
     if request.method == 'POST':
         for attendance in attendances_s:
             update_attendance(request, attendance.id)
@@ -34,6 +61,15 @@ def attendance_index_s(request):
 def attendance_index_m(request):
     current_date = datetime.now().date()
     attendances_m = Attendance.objects.filter(user__class_name='M', date=current_date, user__is_dropped=False).order_by('user__class_num')
+
+    # 각 attendance의 timeXX 필드를 한글로 변환
+    for attendance in attendances_m:
+        for hour in range(8, 23):  # 8시부터 22시까지
+            field_name = f"time{hour}"
+            time_value = getattr(attendance, field_name, None)
+            if time_value is not None:
+                translated_value = CHOICES.get(time_value, time_value)
+                setattr(attendance, field_name, translated_value)
 
     if request.method == 'POST':
         for attendance in attendances_m:
