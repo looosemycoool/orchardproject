@@ -146,8 +146,11 @@ class StudentRegisterForm(forms.ModelForm):
         cleaned_data = super().clean()
         student = cleaned_data.get("student")
 
-        # 'student' 필드에 대한 중복 확인
-        if student and StudentRegister.objects.filter(student=student).exists():
+        # 현재 인스턴스의 ID 가져오기 (수정하는 경우에만 존재함)
+        current_id = self.instance.id if self.instance else None
+
+        # 'student' 필드에 대한 중복 확인 (현재 인스턴스 제외)
+        if student and StudentRegister.objects.filter(student=student).exclude(id=current_id).exists():
             self.add_error('student', ValidationError(_("이미 등록된 학생입니다.")))
 
         return cleaned_data

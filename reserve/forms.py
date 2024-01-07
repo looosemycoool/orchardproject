@@ -20,13 +20,28 @@ class ConsultForm(forms.ModelForm):
     )
     type = forms.ChoiceField(choices=CHOICES,
                              widget=forms.Select(attrs={'class': 'form-select'}), label='상담 유형')
+
+    SUBJECT_CHOICES = (
+        ('korean', '국어'),
+        ('math', '수학'),
+        ('english', '영어'),
+        ('chemistry', '화학'),
+        ('biology', '생명과학'),
+        ('physics', '물리'),
+        ('earth', '지구과학'),
+        ('social', '사회탐구'),
+    )
+    subject = forms.ChoiceField(choices=SUBJECT_CHOICES,
+                             widget=forms.Select(attrs={'class': 'form-select'}), label='과목')
+
     class Meta:
         model = Reserve
-        fields = ['type', 'subject', 'content']
+        fields = ['subject', 'type', 'title', 'content']
 
         labels = {
+            'subject': '과목',
             'type': '상담 유형',
-            'subject': '제목',
+            'title': '제목',
             'content': '내용',
         }
 

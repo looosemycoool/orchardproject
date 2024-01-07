@@ -3,10 +3,19 @@ from django.contrib.auth.models import User
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from ..models import Student_Study_Data, Average_Study_Data
+from check.models import StudentRegister
 from django.conf import settings
 from collections import defaultdict
 
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1eWqyXWJSRPaEyEjOHn-pvZarSuQep2T93Rs96TU4z7U/edit#gid=1019871936"
+
+def new_student_study(request):
+    students = StudentRegister.objects.all()# .order_by('student_name')
+    # if request.method == 'POST':
+    #
+    context = {'students': students}
+    return render(request, 'manager/student_study/student_study_main.html', context)
+
 
 # student_tod
 def student_study(request):
