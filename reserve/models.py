@@ -38,6 +38,6 @@ class Notice(models.Model):
     id = models.BigAutoField(primary_key=True)
     notice_header = models.CharField(max_length=50, null=True, blank=True)
     notice_body = models.TextField(max_length=10000, null=True, blank=True)
-
-    def __str__(self):
-        return self.notice_header
+    #
+    # def __str__(self):
+    #     return self.notice_header

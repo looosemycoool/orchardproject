@@ -1,5 +1,5 @@
 from django import forms
-from .models import Reserve
+from .models import Reserve, Notice
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -28,4 +28,14 @@ class ConsultForm(forms.ModelForm):
             'type': '상담 유형',
             'subject': '제목',
             'content': '내용',
+        }
+
+class NoticeForm(forms.ModelForm):
+    class Meta:
+        model = Notice
+        fields = ['notice_header', 'notice_body']
+
+        labels = {
+            'notice_header': '제목',
+            'notice_body': '내용'
         }
