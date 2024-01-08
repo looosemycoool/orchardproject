@@ -26,7 +26,7 @@ class Reserve(models.Model):
     student_name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
                                      related_name='reservations')
     # reserved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings')
-    subject = models.CharField(max_length=50, null=True, blank=True)
+    subject = models.CharField(max_length=100, null=True, blank=True)
     comment = models.CharField(max_length=1000, null=True, blank=True)
     type = models.CharField(max_length=50, null=True, blank=True)
     title = models.CharField(max_length=100, null=True, blank=True)

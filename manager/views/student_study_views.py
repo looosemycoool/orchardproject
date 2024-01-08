@@ -29,10 +29,10 @@ def new_student_study(request):
 
 def new_student_study_detail(request, student_id):
     data = Student_Study_Data.objects.filter(user__id=student_id)
-
+    student = StudentRegister.objects.filter(id=student_id)
     # if request.method = "POST":
     #
-    context = {'data': data}
+    context = {'data': data, 'student': student}
     return render(request, 'manager/student_study/student_study_detail.html', context)
 # student_tod
 def student_study(request):
