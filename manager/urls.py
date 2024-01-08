@@ -27,8 +27,8 @@ urlpatterns = [
     path('consulting/detail', consulting_views.consulting, name='consulting_detail'),
 
     # student_study
-    path('student_study/', student_study_views.student_study, name='student_study'),
-    path('student_study/detail', student_study_views.student_study_detail, name='student_study_detail'),
+    path('student_study/', student_study_views.new_student_study, name='student_study'),
+    path('student_study/detail/<int:student_id>', student_study_views.new_student_study_detail, name='student_study_detail'),
     path('student_study/upload/success', student_study_views.student_study_upload_success,
          name='student_study_upload_success'),
     path('student_study/upload/fail', student_study_views.student_study_upload_fail, name='student_study_upload_fail'),
