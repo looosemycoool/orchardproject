@@ -3,33 +3,43 @@
         <a href="{% url 'manager:reserve' %}"
            class="list-group-item list-group-item-action text-center"
            aria-current="true">
-            질문예약
+            질문 예약 생성
+        </a>
+        <a href="{% url 'teacher:index' %}"
+           class="list-group-item list-group-item-action text-center"
+           aria-current="true">
+            질문 내역
+        </a>
+        <a href="{% url 'teacher:consulting_page' %}"
+           class="list-group-item list-group-item-action text-center disabled"
+           aria-current="true">
+            상담 내역
         </a>
         <a href="{% url 'manager:teacher' %}"
            class="list-group-item list-group-item-action text-center"
            aria-current="true">
             선생님 관리
         </a>
-        <a href="{% url 'manager:consulting' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            상담 조회 페이지
-        </a>
+{#        <a href="{% url 'manager:consulting' %}"#}
+{#           class="list-group-item list-group-item-action text-center"#}
+{#           aria-current="true">#}
+{#            상담 조회 페이지#}
+{#        </a>#}
         <a href="{% url 'manager:student_study' %}"
-           class="list-group-item list-group-item-action text-center disabled"
-           aria-current="true">
-            학생 학습 데이터
-        </a>
-        <a href="{% url 'manager:patrol' %}"
            class="list-group-item list-group-item-action text-center"
            aria-current="true">
-            일일 순찰 데이터
+            학생 플래너
         </a>
-        <a href="{% url 'manager:data' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            데이터 가공
-        </a>
+{#        <a href="{% url 'manager:patrol' %}"#}
+{#           class="list-group-item list-group-item-action text-center"#}
+{#           aria-current="true">#}
+{#            일일 순찰 데이터#}
+{#        </a>#}
+{#        <a href="{% url 'manager:data' %}"#}
+{#           class="list-group-item list-group-item-action text-center"#}
+{#           aria-current="true">#}
+{#            데이터 가공#}
+{#        </a>#}
         <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
             Report

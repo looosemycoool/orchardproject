@@ -36,8 +36,41 @@
                         <p class="card-text">{{ notice.notice_body }}</p>
                     </div>
                 </div>
-
-                </divclass>
+                {% if request.user.is_staff %}
+                    <button type="button" name="action" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            class="btn btn-success">공지사항 등록
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{#    Modal #}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel">공지사항</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <form method="post" action="{% url 'reserve:register' %}">
+                            {% csrf_token %}
+                              <div class="mb-3">
+                                <label for="notice_header" class="col-form-label">제목 : </label>
+                                <input type="text" class="form-control" id="notice_header" name="notice_header">
+                              </div>
+                              <div class="mb-3">
+                                <label for="notice_body" class="col-form-label">내용 :</label>
+                                <textarea class="form-control" id="notice_body" name="notice_body"></textarea>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">등록하기</button>
+                              </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

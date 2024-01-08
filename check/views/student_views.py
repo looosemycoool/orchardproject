@@ -148,7 +148,7 @@ def register(request):
     return render(request, 'check/student/student_register_form.html', context)
 
 def modify(request, student_id):
-    students = User.objects.filter(is_staff=False)
+    students = User.objects.filter(is_staff=False).order_by('first_name')
     teachers = User.objects.filter(is_staff=True)
 
     student = get_object_or_404(StudentRegister, id=student_id)

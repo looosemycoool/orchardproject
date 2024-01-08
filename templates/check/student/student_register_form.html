@@ -6,39 +6,26 @@
         {% include 'check/student/student_menu.html' %}
     </div>
     <div class="col-md-10">
-        <h5 class="my-3 border-bottom pb-2">재원생 등록</h5>
+        <h5 class="border-bottom pb-2">재원생 등록</h5>
         <form method="post">
             {% csrf_token %} {% include 'form_errors.html' %}
             <div class="row mb-3">
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <label for="id_class_name" class="form-label">반</label>
                     <input type="text" class="form-control" id="id_class_name" name="class_name"
                            value="{{ form.class_name.value|default_if_none:'' }}">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <label for="id_class_num" class="form-label">번호</label>
                     <input type="text" class="form-control" id="id_class_num" name="class_num"
                            value="{{ form.class_num.value|default_if_none:'' }}">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label for="id_student" class="form-label">학생 이름</label>
                     <input type="text" class="form-control" id="id_student" name="student"
                            value="{{ form.student.value|default_if_none:'' }}">
                 </div>
-                <div class="col-md-4">
-                    <label for="id_register_date" class="form-label">등록 날짜</label>
-                    {% if student.register_date %}
-                        <br>
-                        {{ student.register_date }}
-                    {% else %}
-                    <input type="date" class="form-control" id="id_register_date" name="register_date"
-                           value="{{ form.register_date.value|default_if_none:'' }}">
-                    {% endif %}
-                </div>
-            </div>
-            <!-- 템플릿(Template)에서 context에 추가된 딕셔너리를 참조합니다. -->
-            <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label for="id_username" class="form-label">질문 예약 ID</label>
                     <select class="form-control" id="id_username" name="username">
                         <option value="">학생 이름</option>
@@ -49,18 +36,17 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-md-4">
-                    <label for="id_teacher" class="form-label">담임 선생님</label>
-                    <select class="form-control" id="id_teacher" name="teacher">
-                        <option value="">담임 선생님</option>
-                        {% for teacher in teachers %}
-                            <option value="{{ teacher.id }}" {% if form.teacher.value == teacher.id %}selected{% endif %}>
-                                {{ teacher.first_name }}
-                            </option>
-                        {% endfor %}
-                    </select>
+                <div class="col-md-2">
+                    <label for="id_register_date" class="form-label">등록 날짜</label>
+                    {% if student.register_date %}
+                        <br>
+                        {{ student.register_date }}
+                    {% else %}
+                    <input type="date" class="form-control" id="id_register_date" name="register_date"
+                           value="{{ form.register_date.value|default_if_none:'' }}">
+                    {% endif %}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label for="id_drop_date" class="form-label">퇴원 날짜</label>
                     <input type="date" class="form-control" id="id_drop_date" name="drop_date"
                            value="{{ form.drop_date.value|default_if_none:'' }}">
@@ -70,23 +56,56 @@
                     <input class="form-check-input" type="checkbox" value="{{ form.is_dropped.value|default_if_none:'' }}" id="id_is_dropped" name="is_dropped">
                 </div>
             </div>
+            <!-- 템플릿(Template)에서 context에 추가된 딕셔너리를 참조합니다. -->
             <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label for="id_student_phone" class="form-label">학생 번호</label>
                     <input type="text" class="form-control" id="id_student_phone" name="student_phone"
                            value="{{ form.student_phone.value|default_if_none:'' }}">
                 </div>
-                <div class="col-md-4">
-                    <label for="id_parent_phone1" class="form-label">부모님 번호1</label>
+                <div class="col-md-2">
+                    <label for="id_parent_phone1" class="form-label">부모님 번호</label>
                     <input type="text" class="form-control" id="id_parent_phone1" name="parent_phone1"
                            value="{{ form.parent_phone1.value|default_if_none:'' }}">
                 </div>
-                <div class="col-md-4">
-                    <label for="id_parent_phone2" class="form-label">부모님 번호2</label>
-                    <input type="text" class="form-control" id="id_parent_phone2" name="parent_phone2"
-                           value="{{ form.parent_phone2.value|default_if_none:'' }}">
+                <div class="col-md-2">
+                    <label for="id_parent_phone1" class="form-label">국어 선택과목</label>
+{#                    <input type="text" class="form-control" id="id_parent_phone1" name="parent_phone1"#}
+{#                           value="{{ form.parent_phone1.value|default_if_none:'' }}">#}
+                </div>
+                <div class="col-md-2">
+                    <label for="id_parent_phone1" class="form-label">수학 선택과목</label>
+{#                    <input type="text" class="form-control" id="id_parent_phone1" name="parent_phone1"#}
+{#                           value="{{ form.parent_phone1.value|default_if_none:'' }}">#}
+                </div>
+                <div class="col-md-2">
+                    <label for="id_parent_phone1" class="form-label">탐구1 선택과목</label>
+{#                    <input type="text" class="form-control" id="id_parent_phone1" name="parent_phone1"#}
+{#                           value="{{ form.parent_phone1.value|default_if_none:'' }}">#}
+                </div>
+                <div class="col-md-2">
+                    <label for="id_parent_phone1" class="form-label">탐구2 선택과목</label>
+{#                    <input type="text" class="form-control" id="id_parent_phone1" name="parent_phone1"#}
+{#                           value="{{ form.parent_phone1.value|default_if_none:'' }}">#}
                 </div>
             </div>
+{#            <div class="row mb-3">#}
+{#                <div class="col-md-4">#}
+{#                    <label for="id_student_phone" class="form-label">학생 번호</label>#}
+{#                    <input type="text" class="form-control" id="id_student_phone" name="student_phone"#}
+{#                           value="{{ form.student_phone.value|default_if_none:'' }}">#}
+{#                </div>#}
+{#                <div class="col-md-4">#}
+{#                    <label for="id_parent_phone1" class="form-label">부모님 번호1</label>#}
+{#                    <input type="text" class="form-control" id="id_parent_phone1" name="parent_phone1"#}
+{#                           value="{{ form.parent_phone1.value|default_if_none:'' }}">#}
+{#                </div>#}
+{#                <div class="col-md-4">#}
+{#                    <label for="id_parent_phone2" class="form-label">부모님 번호2</label>#}
+{#                    <input type="text" class="form-control" id="id_parent_phone2" name="parent_phone2"#}
+{#                           value="{{ form.parent_phone2.value|default_if_none:'' }}">#}
+{#                </div>#}
+{#            </div>#}
             <div class="mb-3">
                 <label for="id_consulting_content" class="form-label"></label>
                 <table class="table align-middle table-bordered" style="text-align: center">

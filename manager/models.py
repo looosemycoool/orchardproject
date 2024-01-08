@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from check.models import StudentRegister
 
 class Student_Study_Data(models.Model):
     id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(StudentRegister, on_delete=models.CASCADE, null=True, blank=True)
     week_name = models.CharField(max_length=255, null=True, blank=False)
-    student_name = models.CharField(max_length=255)
+    student_name = models.CharField(max_length=255, null=True, blank=True)
 
     research1 = models.CharField(max_length=10, null=True, blank=True)
     research2 = models.CharField(max_length=10, null=True, blank=True)

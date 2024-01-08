@@ -3,39 +3,71 @@
     <div class="container-fluid">
         <div class="row">
             {% include 'manager/manager_main_menu.html' %}
-            <div class="col-md-2 text-center list-group" style="height:700px">
-                <div class="card border-secondary mb-3">
-                    <form method="GET" action="{% url 'manager:student_study_detail' %}">
-                        <div class="card-header bg-primary-subtle">학과습 학생 검색</div>
-                        <div class="card-body">
-                            <div class="input-group mb-4">
-                                {% csrf_token %}
-                                <span class="input-group-text" id="inputGroup-sizing-default">학생명</span>
-                                <input type="text" name="student_name" id="student_name"
-                                       class="form-control btn-outline-secondary" placeholder="학생명"
-                                       aria-label="Recipient's username" aria-describedby="button-addon2">
-                            </div>
-                            <button class="btn btn-outline-success" type="submit" id="button-addon2">검색
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <form method="POST">
-                    <div class="card border-secondary mb-3" style="height:12rem;">
-                        <div class="card-header bg-warning-subtle">학과습 시트 업로드</div>
-                        <div class="card-body">
-                            <div class="input-group mb-4">
-                                {% csrf_token %}
-                                <span class="input-group-text" id="inputGroup-sizing-default">시트명</span>
-                                <input type="text" name="sheet_name" id="sheet_name"
-                                       class="form-control btn-outline-secondary" placeholder="ex) 6월1주차"
-                                       aria-label="Recipient's username" aria-describedby="button-addon2">
-                            </div>
-                            <button class="btn btn-outline-success" type="submit" id="button-addon2">업로드
-                            </button>
-                        </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        {% for student in students_p %}
+                            {% for num in p_line1 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:student_study_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
                     </div>
-                </form>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_p %}
+                            {% for num in p_line2 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_s %}
+                            {% for num in s_line1 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_s %}
+                            {% for num in s_line2 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_s %}
+                            {% for num in s_line3 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_m %}
+                            <div class="card mb-2" style="max-width: 12rem;">
+                                <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

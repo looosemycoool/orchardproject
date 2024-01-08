@@ -29,7 +29,7 @@
                                 <td style="white-space: nowrap">{{ r.time }}</td>
                                 <td style="white-space: nowrap">{{ r.student_name.first_name }}</td>
                                 <td style="white-space: nowrap">
-                                    {% if r.subject %}
+                                    {% if r.title %}
                                         <button type="button" class="btn btn-secondary" disabled>예약</button>
                                     {% else %}
                                         {% if r.student_name == blank %}
@@ -47,9 +47,9 @@
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_staff %}
                                             {% if r.comment == blank %}
-                                                {% if r.subject == blank %}
+                                                {% if r.title == blank %}
                                                 {% else %}
-                                                    {{ r.subject }}
+                                                    {{ r.title }}
                                                 {% endif %}
                                             {% else %}
                                                 질문내용 : {{ r.comment }}
@@ -86,9 +86,9 @@
                                                     </div>
                                                 {% endif %}
                                             {% else %}
-                                                {% if r.subject == blank %}
+                                                {% if r.title == blank %}
                                                 {% else %}
-                                                    {{ r.subject }}
+                                                    {{ r.title }}
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}
@@ -97,7 +97,7 @@
                                 <td style="white-space:nowrap">
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_staff %}
-                                            {% if r.subject == blank %}
+                                            {% if r.title == blank %}
                                                 <a href="{% url 'reserve:consult_create' reserve_id=r.id %}"
                                                    class="btn btn-outline-info"> 등록 </a>
                                             {% else %}

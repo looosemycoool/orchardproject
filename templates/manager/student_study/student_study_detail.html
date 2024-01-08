@@ -3,40 +3,38 @@
     <div class="container-fluid">
         <div class="row">
             {% include 'manager/manager_main_menu.html' %}
-            <div class="col-md-2 text-center list-group" style="height: 700px">
-                <div class="card border-secondary mb-3">
-                    <form method="GET" action="{% url 'manager:student_study_detail' %}">
-                        <div class="card-header bg-primary-subtle">학과습 학생 검색</div>
-                        <div class="card-body">
-                            <div class="input-group mb-4">
-                                {% csrf_token %}
-                                <span class="input-group-text" id="inputGroup-sizing-default">학생명</span>
-                                <input type="text" name="student_name" id="student_name"
-                                       class="form-control btn-outline-secondary"
-                                       placeholder="학생명" aria-label="Recipient's username"
-                                       aria-describedby="button-addon2">
-                            </div>
-                            <button class="btn btn-outline-success" type="submit" id="button-addon2">검색</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+{#            <div class="col-md-2 text-center list-group" style="height: 700px">#}
+{#                <div class="card border-secondary mb-3">#}
+{#                    <form method="GET" action="{% url 'manager:student_study_detail' %}">#}
+{#                        <div class="card-header bg-primary-subtle">학과습 학생 검색</div>#}
+{#                        <div class="card-body">#}
+{#                            <div class="input-group mb-4">#}
+{#                                {% csrf_token %}#}
+{#                                <span class="input-group-text" id="inputGroup-sizing-default">학생명</span>#}
+{#                                <input type="text" name="student_name" id="student_name"#}
+{#                                       class="form-control btn-outline-secondary"#}
+{#                                       placeholder="학생명" aria-label="Recipient's username"#}
+{#                                       aria-describedby="button-addon2">#}
+{#                            </div>#}
+{#                            <button class="btn btn-outline-success" type="submit" id="button-addon2">검색</button>#}
+{#                        </div>#}
+{#                    </form>#}
+{#                </div>#}
+{#            </div>#}
 
-            <div class="col-md-1 text-center">
+            <div class="col-md-2 text-center">
                 <div class="card" style="height: 32rem">
                     <div class="card-header">
-                        {{ student_name }}
                     </div>
                     <div class="scroll-container overflow-auto" data-bs-spy="scroll"
                          data-bs-smooth-scroll="true">
-                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
-                             data-bs-smooth-scroll="true"
-                             tabindex="0">
-                            {% for week in unique_week %}
-                                <a href="?student_name={{ student_name }}&selected_week={{ week }}"
-                                   class="list-group-item" style="white-space:nowrap;">{{ week }}</a>
-                            {% endfor %}
-                        </div>
+                        {% for data in data %}
+                            <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                                 data-bs-smooth-scroll="true"
+                                 tabindex="0">
+                                {{ data.week_name }}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ urlpatterns = [
     # base_views
     path('', base_views.index, name='index'),
     path('detail/<int:teacher_id>/', base_views.detail, name='detail'),
+    path('register/', base_views.notice_register, name='register'),
 
     # reserve_views
     path('complete/<int:reserve_id>/', reserve_views.reserve, name='complete'),
