@@ -23,7 +23,7 @@ def detail(request, teacher_id):
     current_teacher_id = int(teacher_id)
     teacher_table = Teacher.objects.order_by('id')
     teacher = Teacher.objects.get(id=teacher_id)
-    reserve = Reserve.objects.order_by('id')
+    reserve = Reserve.objects.order_by('time_id')
     context = {'teacher': teacher, 'teacher_table': teacher_table, 'reserve': reserve, 'today': today, 'current_teacher_id': current_teacher_id}
     return render(request, 'reserve/reserve_detail.html', context)
 
