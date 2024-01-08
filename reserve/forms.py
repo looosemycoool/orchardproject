@@ -36,12 +36,12 @@ class ConsultForm(forms.ModelForm):
 
     class Meta:
         model = Reserve
-        fields = ['subject', 'type', 'title', 'content']
+        fields = ['subject', 'type', 'content']
 
         labels = {
             'subject': '과목',
             'type': '상담 유형',
-            'title': '제목',
+            #'title': '제목',
             'content': '내용',
         }
 
