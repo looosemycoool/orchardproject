@@ -13,105 +13,63 @@
                             <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
                                  data-bs-smooth-scroll="true"
                                  tabindex="0">
-                                {{ data.week_name }}
+                                {{ form.week_name }}
                             </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="card border-secondary mb-3" style="height: 16rem">
+            {# 주차 선택하면 나올 수 있도록 #}
+            <div class="col-md-2">
+                <div class="card border-secondary mb-3" style="height: 12rem">
                     <div class="card-header bg-secondary-subtle">
-                        <h5 class="card-title">{{ student_name }}</h5>
-                        <p class="card-text">{{ selected_week }}</p>
+                        <h5 class="card-title">{{ selected_week }}</h5>
                     </div>
                     <div class="card-body">
-                        <p>자습 시간 - ??분</p>
-                        <p>인강 시간 - ??분</p>
+                        <p>총 자습 시간 - ??분</p>
+                        <p>총 인강 시간 - ??분</p>
                     </div>
                 </div>
-                <div class="card border-secondary mb-3" style="height: 16rem">
+                <div class="card border-secondary mb-3" style="height: 12rem">
                     <div class="card-header bg-danger-subtle">영어</div>
                     <div class="card-body">
-                        <p>영어 자습 - {{ data.english_self_study }}분</p>
+                        <p>자습 - {{ data.english_self_study }}분</p>
                         <p>영어 인강 - {{ data.english_lecture_study }}분</p>
                     </div>
                 </div>
             </div>
-
-            {% if selected_week %}
-                {% if filtered_data %}
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                {% if filtered_data %}
-                                    {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-secondary-subtle">
-                                                <h5 class="card-title">{{ student_name }}</h5>
-                                                <p class="card-text">{{ selected_week }}</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p>자습 시간 - ??분</p>
-                                                <p>인강 시간 - ??분</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-danger-subtle">영어</div>
-                                            <div class="card-body">
-                                                <p>영어 자습 - {{ data.english_self_study }}분</p>
-                                                <p>영어 인강 - {{ data.english_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-md-4">
-                                {% if filtered_data %}
-                                    {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-warning-subtle">국어</div>
-                                            <div class="card-body">
-                                                <p>국어 자습 - {{ data.korean_self_study }}분</p>
-                                                <p>국어 인강 - {{ data.korean_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-info-subtle">{{ data.research1 }}</div>
-                                            <div class="card-body">
-                                                <p>{{ data.research1 }} 자습 - {{ data.research1_self_study }}분</p>
-                                                <p>{{ data.research1 }} 인강 - {{ data.research1_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-md-4">
-                                {% if filtered_data %}
-                                    {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-success-subtle">수학</div>
-                                            <div class="card-body">
-                                                <p>수학 자습 - {{ data.math_self_study }}분</p>
-                                                <p>수학 인강 - {{ data.math_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-primary-subtle">{{ data.research2 }}</div>
-                                            <div class="card-body">
-                                                <p>{{ data.research2 }} 자습 - {{ data.research2_self_study }}분</p>
-                                                <p>{{ data.research2 }} 인강 - {{ data.research2_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-
-                        </div>
+            <div class="col-md-2">
+                <div class="card border-secondary mb-3" style="height: 12rem">
+                    <div class="card-header bg-warning-subtle">국어</div>
+                    <div class="card-body">
+                        <p>국어 자습 - {{ data.korean_self_study }}분</p>
+                        <p>국어 인강 - {{ data.korean_lecture_study }}분</p>
                     </div>
-                {% endif %}
-            {% endif %}
+                </div>
+                <div class="card border-secondary mb-3" style="height: 12rem">
+                    <div class="card-header bg-info-subtle">{{ data.research1 }}</div>
+                    <div class="card-body">
+                        <p>{{ data.research1 }} 자습 - {{ data.research1_self_study }}분</p>
+                        <p>{{ data.research1 }} 인강 - {{ data.research1_lecture_study }}분</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card border-secondary mb-3" style="height: 12rem">
+                    <div class="card-header bg-success-subtle">수학</div>
+                    <div class="card-body">
+                        <p>수학 자습 - {{ data.math_self_study }}분</p>
+                        <p>수학 인강 - {{ data.math_lecture_study }}분</p>
+                    </div>
+                </div>
+                <div class="card border-secondary mb-3" style="height: 12rem">
+                    <div class="card-header bg-primary-subtle">{{ data.research2 }}</div>
+                    <div class="card-body">
+                        <p>{{ data.research2 }} 자습 - {{ data.research2_self_study }}분</p>
+                        <p>{{ data.research2 }} 인강 - {{ data.research2_lecture_study }}분</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

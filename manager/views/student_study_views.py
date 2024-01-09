@@ -4,6 +4,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from ..models import Student_Study_Data, Average_Study_Data
 from check.models import StudentRegister
+from ..forms import Student_Study_DataForm
 from django.conf import settings
 from collections import defaultdict
 
@@ -28,12 +29,32 @@ def new_student_study(request):
     return render(request, 'manager/student_study/student_study_main.html', context)
 
 def new_student_study_detail(request, student_id):
-    data = Student_Study_Data.objects.filter(user__id=student_id)
+    data = Student_Study_Data.objects.filter(user__id=student_id).order_by('-id')
     student = StudentRegister.objects.filter(id=student_id)
-    # if request.method = "POST":
-    #
-    context = {'data': data, 'student': student}
+
+    selected_week = request.GET.get('selected_week')
+
+    if selected_week:
+        filtered_data = Student_Study_Data.objects.filter(week_name=selected_week)
+    else:
+        filtered_data = []
+
+    context = {'data': data, 'student': student, 'selected_week': selected_week, 'filtered_data': filtered_data}
     return render(request, 'manager/student_study/student_study_detail.html', context)
+
+def planner_create(request):
+    if request.method == 'POST':
+        form = Student_Study_DataForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.student = request.user
+            consulting_type = form.cleaned_data.get('consulting_type')
+            return redirect('manager:index')
+    else:
+        form = Student_Study_DataForm()
+    context = {'form': form}
+    return render(request, 'manager/student_study/student_study_form.html', context)
+
 # student_tod
 def student_study(request):
     if request.method == 'POST':

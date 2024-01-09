@@ -95,16 +95,16 @@ def reserve_update(request, reserve_id):
 
         if action == '상담':
             student_name = request.POST.get('student_name')
-            reserve.subject = f'상담: {student_name}'
+            reserve.title = f'상담: {student_name}'
             reserve.save()
 
         elif action == '멘토링':
             student_name = request.POST.get('student_name')
-            reserve.subject = f'멘토링: {student_name}'
+            reserve.title = f'멘토링: {student_name}'
             reserve.save()
 
         elif action == '초기화':
-            reserve.subject = ''
+            reserve.title = ''
             reserve.save()
             # 예약 상태 변경 후 리다이렉트 등의 동작 수행
         elif action == '삭제':
