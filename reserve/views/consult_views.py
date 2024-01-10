@@ -1,4 +1,3 @@
-# views.py
 from django.shortcuts import render, redirect
 from ..models import Reserve
 from ..forms import ConsultForm

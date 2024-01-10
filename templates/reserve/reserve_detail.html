@@ -97,7 +97,7 @@
                                 <td style="white-space:nowrap">
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_staff %}
-                                            {% if r.title == blank %}
+                                            {% if r.title == blank and r.content == blank %}
                                                 <a href="{% url 'reserve:consult_create' reserve_id=r.id %}"
                                                    class="btn btn-outline-info"> 등록 </a>
                                             {% else %}
