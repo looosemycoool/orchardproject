@@ -8,6 +8,9 @@ class Student_Study_Data(models.Model):
     week_name = models.CharField(max_length=255, null=True, blank=False)
     student_name = models.CharField(max_length=255, null=True, blank=True)
 
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
+
     research1 = models.CharField(max_length=10, null=True, blank=True)
     research2 = models.CharField(max_length=10, null=True, blank=True)
 

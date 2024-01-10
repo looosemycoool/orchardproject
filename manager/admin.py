@@ -3,8 +3,8 @@ from django.contrib import admin
 from .models import Student_Study_Data, Patrol_Data, Patrol_Weekly_Data, Total_Weekly_Study_Data, Average_Study_Data
 
 class Student_Study_DataAdmin(admin.ModelAdmin):
-    list_display = ('user', 'student_name', 'week_name')
-    search_fields = ['user', 'student_name', 'week_name']
+    list_display = ('user', 'week_name', 'start_date', 'end_date')
+    search_fields = ['user', 'week_name']
 
 class Patrol_DataAdmin(admin.ModelAdmin):
     list_display = ('student_name', 'date')

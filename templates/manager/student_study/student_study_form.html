@@ -28,12 +28,8 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="card border-secondary mb-3" style="height: 16em">
+                                <div class="card border-secondary mb-3" style="height: 33em">
                                     <div class="card-header bg-secondary-subtle">
-                                        <input type="text" class="form-control" id="id_student_name" name="student_name"
-                                               value="{{ form.student_name.value|default_if_none:'' }}" readonly>
-                                        <input type="text" class="form-control" id="id_user" name="user"
-                                               value="{{ form.user.value|default_if_none:'' }}" readonly>
                                         <h5 class="card-title">{{ selected_week }}</h5>
                                     </div>
                                     <div class="card-body">
@@ -41,21 +37,15 @@
                                         <input type="text" class="form-control" id="id_week_name" name="week_name"
                                                placeholder="1월 1주차"
                                                value="{{ form.week_name.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-                                <div class="card border-secondary mb-3" style="height: 16rem">
-                                    <div class="card-header bg-danger-subtle">영어</div>
-                                    <div class="card-body">
-                                        <label for="id_english_self_study" class="form-label">자습</label>
-                                        <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"
-                                               placeholder="분"
-                                               value="{{ form.english_self_study.value|default_if_none:'' }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <label for="id_english_lecture_study" class="form-label">인강</label>
-                                        <input type="text" class="form-control" id="id_english_lecture_study" name="english_lecture_study"
-                                               placeholder="분"
-                                               value="{{ form.english_lecture_study.value|default_if_none:'' }}">
+
+                                        <label for="id_start_date" class="form-label mt-3">시작일</label>
+                                        <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                               value="{{ form.start_date.value|default_if_none:'' }}">
+
+                                        <label for="id_end_date" class="form-label mt-3">마지막일</label>
+                                        <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                               value="{{ form.end_date.value|default_if_none:'' }}">
+                                        {% include 'form_errors.html' %}
                                     </div>
                                 </div>
                             </div>
@@ -120,6 +110,23 @@
                                         <input type="text" class="form-control" id="id_research2_lecture_study" name="research2_lecture_study"
                                                placeholder="분"
                                                value="{{ form.research2_lecture_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-danger-subtle">영어</div>
+                                    <div class="card-body">
+                                        <label for="id_english_self_study" class="form-label">자습</label>
+                                        <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"
+                                               placeholder="분"
+                                               value="{{ form.english_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_english_lecture_study" class="form-label">인강</label>
+                                        <input type="text" class="form-control" id="id_english_lecture_study" name="english_lecture_study"
+                                               placeholder="분"
+                                               value="{{ form.english_lecture_study.value|default_if_none:'' }}">
                                     </div>
                                 </div>
                             </div>

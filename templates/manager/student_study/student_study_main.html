@@ -21,7 +21,7 @@
                             {% for num in p_line2 %}
                                 {% if student.class_num == num %}
                                     <div class="card mb-2" style="max-width: 12rem;">
-                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:student_study_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -32,7 +32,7 @@
                             {% for num in s_line1 %}
                                 {% if student.class_num == num %}
                                     <div class="card mb-2" style="max-width: 12rem;">
-                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:student_study_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -43,7 +43,7 @@
                             {% for num in s_line2 %}
                                 {% if student.class_num == num %}
                                     <div class="card mb-2" style="max-width: 12rem;">
-                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:student_study_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -54,7 +54,7 @@
                             {% for num in s_line3 %}
                                 {% if student.class_num == num %}
                                     <div class="card mb-2" style="max-width: 12rem;">
-                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:student_study_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -63,7 +63,7 @@
                     <div class="col-md-2 text-center">
                         {% for student in students_m %}
                             <div class="card mb-2" style="max-width: 12rem;">
-                                <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'check:modify' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:student_study_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
                             </div>
                         {% endfor %}
                     </div>
