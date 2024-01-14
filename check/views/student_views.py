@@ -6,9 +6,9 @@ from ..forms import StudentRegisterForm
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def index(request):
-    students_p = StudentRegister.objects.filter(class_name='P').order_by('class_num')
-    students_s = StudentRegister.objects.filter(class_name='S').order_by('class_num')
-    students_m = StudentRegister.objects.filter(class_name='M').order_by('class_num')
+    students_p = StudentRegister.objects.filter(class_name='P', is_dropped=False).order_by('class_num')
+    students_s = StudentRegister.objects.filter(class_name='S', is_dropped=False).order_by('class_num')
+    students_m = StudentRegister.objects.filter(class_name='M', is_dropped=False).order_by('class_num')
 
     p_line1 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
     p_line2 = ['16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']

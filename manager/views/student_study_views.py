@@ -68,22 +68,19 @@ def planner_create(request, student_id):
             study_data.week_name = form.cleaned_data['week_name']
             # study_data.student_name = student
             study_data.user = student
-            study_data.korean_lecture_study = form.cleaned_data['korean_lecture_study']
+            study_data.korean_study = form.cleaned_data['korean_study']
             study_data.korean_self_study = form.cleaned_data['korean_self_study']
 
-            study_data.korean_lecture_study = form.cleaned_data['korean_lecture_study']
-            study_data.korean_self_study = form.cleaned_data['korean_self_study']
-
-            study_data.math_lecture_study = form.cleaned_data['math_lecture_study']
+            study_data.math_study = form.cleaned_data['math_study']
             study_data.math_self_study = form.cleaned_data['math_self_study']
 
-            study_data.english_lecture_study = form.cleaned_data['english_lecture_study']
+            study_data.english_study = form.cleaned_data['english_study']
             study_data.english_self_study = form.cleaned_data['english_self_study']
 
-            study_data.research1_lecture_study = form.cleaned_data['research1_lecture_study']
+            study_data.research1_study = form.cleaned_data['research1_study']
             study_data.research1_self_study = form.cleaned_data['research1_self_study']
 
-            study_data.research2_lecture_study = form.cleaned_data['research2_lecture_study']
+            study_data.research2_study = form.cleaned_data['research2_study']
             study_data.research2_self_study = form.cleaned_data['research2_self_study']
             study_data.save()  # 데이터 저장
             student_id = student.id

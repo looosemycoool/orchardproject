@@ -51,8 +51,8 @@
                                     <div class="card border-secondary mb-3" style="height: 12rem">
                                         <div class="card-header bg-danger-subtle">영어</div>
                                         <div class="card-body">
-                                            <p>영어 자습 - {{ data.english_self_study|default_if_none:'' }}분</p>
-                                            <p>영어 인강 - {{ data.english_lecture_study|default_if_none:'' }}분</p>
+                                            <p>영어 총 시간 - {{ data.english_study|default_if_none:'' }}분</p>
+                                            <p>영어 순공 시간 - {{ data.english_self_study|default_if_none:'' }}분</p>
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -62,15 +62,15 @@
                                     <div class="card border-secondary mb-3" style="height: 12rem">
                                         <div class="card-header bg-warning-subtle">국어</div>
                                         <div class="card-body">
-                                            <p>국어 자습 - {{ data.korean_self_study|default_if_none:'' }}분</p>
-                                            <p>국어 인강 - {{ data.korean_lecture_study|default_if_none:'' }}분</p>
+                                            <p>국어 총 시간 - {{ data.korean_study|default_if_none:'' }}분</p>
+                                            <p>국어 순공 시간 - {{ data.korean_self_study|default_if_none:'' }}분</p>
                                         </div>
                                     </div>
                                     <div class="card border-secondary mb-3" style="height: 12rem">
                                         <div class="card-header bg-info-subtle">{{ data.research1 }}</div>
                                         <div class="card-body">
-                                            <p>{{ data.research1 }} 자습 - {{ data.research1_self_study|default_if_none:'' }}분</p>
-                                            <p>{{ data.research1 }} 인강 - {{ data.research1_lecture_study|default_if_none:'' }}분</p>
+                                            <p>{{ data.research1 }} 총 시간 - {{ data.research1_study|default_if_none:'' }}분</p>
+                                            <p>{{ data.research1 }} 순공 시간 - {{ data.research1_self_study|default_if_none:'' }}분</p>
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -80,15 +80,15 @@
                                     <div class="card border-secondary mb-3" style="height: 12rem">
                                         <div class="card-header bg-success-subtle">수학</div>
                                         <div class="card-body">
-                                            <p>수학 자습 - {{ data.math_self_study|default_if_none:'' }}분</p>
-                                            <p>수학 인강 - {{ data.math_lecture_study|default_if_none:'' }}분</p>
+                                            <p>수학 총 시간 - {{ data.math_study|default_if_none:'' }}분</p>
+                                            <p>수학 순공 시간 - {{ data.math_self_study|default_if_none:'' }}분</p>
                                         </div>
                                     </div>
                                     <div class="card border-secondary mb-3" style="height: 12rem">
                                         <div class="card-header bg-primary-subtle">{{ data.research2 }}</div>
                                         <div class="card-body">
-                                            <p>{{ data.research2 }} 자습 - {{ data.research2_self_study|default_if_none:'' }}분</p>
-                                            <p>{{ data.research2 }} 인강 - {{ data.research2_lecture_study|default_if_none:'' }}분</p>
+                                            <p>{{ data.research2 }} 총 시간 - {{ data.research2_study|default_if_none:'' }}분</p>
+                                            <p>{{ data.research2 }} 순공 시간 - {{ data.research2_self_study|default_if_none:'' }}분</p>
                                         </div>
                                     </div>
                                 {% endfor %}
