@@ -40,6 +40,26 @@
 {#           aria-current="true">#}
 {#            데이터 가공#}
 {#        </a>#}
+    </ul>
+    <ul class="list-group dropdown-center mt-3">
+        <a href="{% url 'report:study_index' %}"
+           class="list-group-item list-group-item-action text-center"
+           aria-current="true">
+            학습 Report
+        </a>
+        <a href="#"
+{#        <a href="{% url 'report:reserve' %}"#}
+           class="list-group-item list-group-item-action text-center"
+           aria-current="true">
+            질문 Report
+        </a>
+        <a href="#"
+{#        <a href="{% url 'report:consulting' %}"#}
+           class="list-group-item list-group-item-action text-center"
+           aria-current="true">
+            상담 Report
+        </a>
+
         <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
             Report

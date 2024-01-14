@@ -6,112 +6,135 @@
             <div class="col-md-2 text-center">
                 <div class="card" style="height: 16rem">
                     <div class="card-header">
+                        <h5 class="card-title">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</h5>
                     </div>
                     <div class="scroll-container overflow-auto" data-bs-spy="scroll"
                          data-bs-smooth-scroll="true">
-                        {% for data in data %}
-                            <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
-                                 data-bs-smooth-scroll="true"
-                                 tabindex="0">
-                                {{ data.week_name }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card border-secondary mb-3" style="height: 16rem">
-                    <div class="card-header bg-secondary-subtle">
-                        <h5 class="card-title">{{ student_name }}</h5>
-                        <p class="card-text">{{ selected_week }}</p>
-                    </div>
-                    <div class="card-body">
-                        <p>자습 시간 - ??분</p>
-                        <p>인강 시간 - ??분</p>
-                    </div>
-                </div>
-                <div class="card border-secondary mb-3" style="height: 16rem">
-                    <div class="card-header bg-danger-subtle">영어</div>
-                    <div class="card-body">
-                        <p>영어 자습 - {{ data.english_self_study }}분</p>
-                        <p>영어 인강 - {{ data.english_lecture_study }}분</p>
-                    </div>
-                </div>
-            </div>
-
-            {% if selected_week %}
-                {% if filtered_data %}
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                {% if filtered_data %}
-                                    {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-secondary-subtle">
-                                                <h5 class="card-title">{{ student_name }}</h5>
-                                                <p class="card-text">{{ selected_week }}</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p>자습 시간 - ??분</p>
-                                                <p>인강 시간 - ??분</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-danger-subtle">영어</div>
-                                            <div class="card-body">
-                                                <p>영어 자습 - {{ data.english_self_study }}분</p>
-                                                <p>영어 인강 - {{ data.english_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-md-4">
-                                {% if filtered_data %}
-                                    {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-warning-subtle">국어</div>
-                                            <div class="card-body">
-                                                <p>국어 자습 - {{ data.korean_self_study }}분</p>
-                                                <p>국어 인강 - {{ data.korean_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-info-subtle">{{ data.research1 }}</div>
-                                            <div class="card-body">
-                                                <p>{{ data.research1 }} 자습 - {{ data.research1_self_study }}분</p>
-                                                <p>{{ data.research1 }} 인강 - {{ data.research1_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-md-4">
-                                {% if filtered_data %}
-                                    {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-success-subtle">수학</div>
-                                            <div class="card-body">
-                                                <p>수학 자습 - {{ data.math_self_study }}분</p>
-                                                <p>수학 인강 - {{ data.math_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 16rem">
-                                            <div class="card-header bg-primary-subtle">{{ data.research2 }}</div>
-                                            <div class="card-body">
-                                                <p>{{ data.research2 }} 자습 - {{ data.research2_self_study }}분</p>
-                                                <p>{{ data.research2 }} 인강 - {{ data.research2_lecture_study }}분</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {% for data in data %}
+                                <a href="{% url 'manager:planner_modify' data.id %}}"
+                                   class="list-group-item disabled">{{ data.week_name }}</a>
+                            {% endfor %}
                         </div>
                     </div>
+                </div>
+            </div>
+            {# 주차 선택하면 나올 수 있도록 #}
+            <div class="col-md-8">
+                {% if student %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 33em">
+                                    <div class="card-header bg-secondary-subtle">
+                                        <h5 class="card-title">{{ selected_week }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_week_name" class="form-label">주차</label>
+                                        <input type="text" class="form-control" id="id_week_name" name="week_name"
+                                               placeholder="1월 1주차"
+                                               value="{{ form.week_name.value|default_if_none:'' }}">
+
+                                        <label for="id_start_date" class="form-label mt-3">시작일</label>
+                                        <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                               value="{{ form.start_date.value|default_if_none:'' }}">
+
+                                        <label for="id_end_date" class="form-label mt-3">마지막일</label>
+                                        <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                               value="{{ form.end_date.value|default_if_none:'' }}">
+                                        {% include 'form_errors.html' %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-warning-subtle">국어</div>
+                                    <div class="card-body">
+                                        <label for="id_korean_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_korean_study" name="korean_study"
+                                               placeholder="분"
+                                               value="{{ form.korean_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_korean_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_korean_self_study" name="korean_self_study"
+                                               placeholder="분"
+                                               value="{{ form.korean_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-info-subtle">{{ data.research1 }}</div>
+                                    <div class="card-body">
+                                        <label for="id_research1_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_research1_study" name="research1_study"
+                                               placeholder="분"
+                                               value="{{ form.research1_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_research1_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_research1_self_study" name="research1_self_study"
+                                               placeholder="분"
+                                               value="{{ form.research1_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-success-subtle">수학</div>
+                                    <div class="card-body">
+                                        <label for="id_math_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_math_study" name="math_study"
+                                               placeholder="분"
+                                               value="{{ form.math_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_math_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_math_self_study" name="math_self_study"
+                                               placeholder="분"
+                                               value="{{ form.math_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-primary-subtle">{{ data.research2 }}</div>
+                                    <div class="card-body">
+                                        <label for="id_research2_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_research2_study" name="research2_study"
+                                               placeholder="분"
+                                               value="{{ form.research2_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_research2_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_research2_self_study" name="research2_self_study"
+                                               placeholder="분"
+                                               value="{{ form.research2_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-danger-subtle">영어</div>
+                                    <div class="card-body">
+                                        <label for="id_english_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_english_study" name="english_study"
+                                               placeholder="분"
+                                               value="{{ form.english_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_english_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"
+                                               placeholder="분"
+                                               value="{{ form.english_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">저장하기</button>
+                    </form>
                 {% endif %}
-            {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
