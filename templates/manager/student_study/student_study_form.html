@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="card border-secondary mb-3" style="height: 16rem">
-                                    <div class="card-header bg-info-subtle">{{ data.research1 }}</div>
+                                    <div class="card-header bg-info-subtle">{{ student.research1_select }}</div>
                                     <div class="card-body">
                                         <label for="id_research1_study" class="form-label">총 시간</label>
                                         <input type="text" class="form-control" id="id_research1_study" name="research1_study"
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="card border-secondary mb-3" style="height: 16rem">
-                                    <div class="card-header bg-primary-subtle">{{ data.research2 }}</div>
+                                    <div class="card-header bg-primary-subtle">{{ student.research2_select }}</div>
                                     <div class="card-body">
                                         <label for="id_research2_study" class="form-label">총 시간</label>
                                         <input type="text" class="form-control" id="id_research2_study" name="research2_study"
@@ -127,6 +127,22 @@
                                         <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"
                                                placeholder="분"
                                                value="{{ form.english_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-secondary-subtle">탐구 3</div>
+{#                                    <div class="card-header bg-primary-subtle">{{ student.research3_select }}</div>#}
+                                    <div class="card-body">
+                                        <label for="id_research3_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_research3_study" name="research3_study"
+                                               placeholder="분"
+                                               value="{{ form.research3_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_research3_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_research3_self_study" name="research3_self_study"
+                                               placeholder="분"
+                                               value="{{ form.research3_self_study.value|default_if_none:'' }}">
                                     </div>
                                 </div>
                             </div>

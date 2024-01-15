@@ -12,6 +12,12 @@ class StudentRegister(models.Model):
     parent_phone1 = models.CharField(max_length=15, null=True, blank=True)
     parent_phone2 = models.CharField(max_length=15, null=True, blank=True)
 
+    korean_select = models.CharField(max_length=10, null=True, blank=True, default=False)
+    math_select = models.CharField(max_length=10, null=True, blank=True, default=False)
+    research1_select = models.CharField(max_length=10, null=True, blank=True, default=False)
+    research2_select = models.CharField(max_length=10, null=True, blank=True, default=False)
+    research3_select = models.CharField(max_length=10, null=True, blank=True, default=False)
+
     register_date = models.DateField(null=True, blank=True)
     drop_date = models.DateField(null=True, blank=True)
     is_dropped = models.BooleanField(default=False)

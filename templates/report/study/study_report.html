@@ -7,7 +7,7 @@
             <div class="col-md-10">
                 <div class="row">
                     {% for report in weekly_reports %}
-                        <div class="container-fluid border mb-3" id="report_div_{{ forloop.counter }}" style="width:1160px; height:720px">
+                        <div class="container-fluid mb-3" id="report_div_{{ forloop.counter }}" style="width:1160px; height:720px">
                             <div class="row mt-2">
                                 <div class="col-md-2 mb-2">
                                     <div style="height:550px">
@@ -19,6 +19,8 @@
                                             </div>
                                             <div class="card-header">
                                                 <h5 class="card-text">{{ report.week_name }}</h5>
+                                            </div>
+                                            <div class="card-header">
                                                 <p class="card-text">{{ report.start_date }}
                                                     ~ {{ report.end_date }}</p>
                                             </div>
@@ -42,48 +44,48 @@
                                                              style="text-align: center">{{ report.focus_score.focus_score }}</div>
                                                     </div>
                                                 </li>
-                                                <li class="list-group-item bg-secondary"
-                                                    style="white-space: nowrap;"></li>
-                                                <li class="list-group-item" style="white-space: nowrap;">
-                                                    <div class="row">
-                                                        <div class="col-md-6" style="text-align: center">
-                                                            <strong>질의응답</strong>
-                                                        </div>
-                                                        <div class="col-md-6"
-                                                             style="text-align: center">{{ report.study_counts.question }}회
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="white-space: nowrap;">
-                                                    <div class="row">
-                                                        <div class="col-md-6" style="text-align: center">
-                                                            <strong>상담</strong>
-                                                        </div>
-                                                        <div class="col-md-6"
-                                                             style="text-align: center">{{ report.study_counts.consulting }}회
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="white-space: nowrap;">
-                                                    <div class="row">
-                                                        <div class="col-md-6" style="text-align: center">
-                                                            <strong>멘토링</strong>
-                                                        </div>
-                                                        <div class="col-md-6"
-                                                             style="text-align: center">{{ report.study_counts.mentoring }}회
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="white-space: nowrap;">
-                                                    <div class="row">
-                                                        <div class="col-md-6" style="text-align: center">
-                                                            <strong>계획정리</strong>
-                                                        </div>
-                                                        <div class="col-md-6"
-                                                             style="text-align: center">{{ report.study_counts.plan }}회
-                                                        </div>
-                                                    </div>
-                                                </li>
+{#                                                <li class="list-group-item bg-secondary"#}
+{#                                                    style="white-space: nowrap;"></li>#}
+{#                                                <li class="list-group-item" style="white-space: nowrap;">#}
+{#                                                    <div class="row">#}
+{#                                                        <div class="col-md-6" style="text-align: center">#}
+{#                                                            <strong>질의응답</strong>#}
+{#                                                        </div>#}
+{#                                                        <div class="col-md-6"#}
+{#                                                             style="text-align: center">{{ report.study_counts.question }}회#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </li>#}
+{#                                                <li class="list-group-item" style="white-space: nowrap;">#}
+{#                                                    <div class="row">#}
+{#                                                        <div class="col-md-6" style="text-align: center">#}
+{#                                                            <strong>상담</strong>#}
+{#                                                        </div>#}
+{#                                                        <div class="col-md-6"#}
+{#                                                             style="text-align: center">{{ report.study_counts.consulting }}회#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </li>#}
+{#                                                <li class="list-group-item" style="white-space: nowrap;">#}
+{#                                                    <div class="row">#}
+{#                                                        <div class="col-md-6" style="text-align: center">#}
+{#                                                            <strong>멘토링</strong>#}
+{#                                                        </div>#}
+{#                                                        <div class="col-md-6"#}
+{#                                                             style="text-align: center">{{ report.study_counts.mentoring }}회#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </li>#}
+{#                                                <li class="list-group-item" style="white-space: nowrap;">#}
+{#                                                    <div class="row">#}
+{#                                                        <div class="col-md-6" style="text-align: center">#}
+{#                                                            <strong>계획정리</strong>#}
+{#                                                        </div>#}
+{#                                                        <div class="col-md-6"#}
+{#                                                             style="text-align: center">{{ report.study_counts.plan }}회#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </li>#}
                                                 <li class="list-group-item bg-secondary"
                                                     style="white-space: nowrap;"></li>
                                                 <li class="list-group-item"
@@ -196,7 +198,7 @@
                     height: (7 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '집중 관찰 결과',
+                    text: '실시간 학습 점검 ( Real-time check )',
                     align: 'center',
                     verticalAlign: 'middle',
                     y: -60
@@ -318,7 +320,7 @@
                     height: (7 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '학생 플래너',
+                    text: '학생 주간 계획 ( Weekly Planner )',
                     align: 'center',
                     verticalAlign: 'middle',
                     y: -60
@@ -364,11 +366,11 @@
                             y: {{ report.study_data.english_study }}
                         },
                         {
-                            name: '탐구1',
+                            name: '{{ student.research1_select}}',
                             y: {{ report.study_data.research1_study }}
                         },
                         {
-                            name: '탐구2',
+                            name: '{{ student.research2_select}}',
                             y: {{ report.study_data.research2_study }}
                         },
                     ]
@@ -388,7 +390,7 @@
                     text: ''
                 },
                 xAxis: {
-                    categories: ['국어', '수학', '영어', '탐구1', '탐구2'],
+                    categories: ['국어', '수학', '영어', '{{ student.research1_select }}', '{{ student.research2_select }}'],
                     LineWidth: 0
                 },
                 yAxis: {

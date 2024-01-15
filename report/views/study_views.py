@@ -42,6 +42,7 @@ def study_report(request, student_id):
     ]
 
     study_datas = Student_Study_Data.objects.filter(user__id=student_id).order_by('-id')
+    student = StudentRegister.objects.get(id=student_id)
 
     weekly_reports = []
 
@@ -101,9 +102,6 @@ def study_report(request, student_id):
         average_total_self_study = int(total_korean_self_study + total_math_self_study + total_english_self_study + total_research1_self_study + total_research2_self_study / student_number) / student_number
         average_total_lecture_study = average_total_study - average_total_self_study
 
-        print(total_student_datas)
-        print("==========")
-
         patrol_datas = PatrolCheck.objects.filter(date__gte=study.start_date, date__lte=study.end_date, user__id=student_id)
 
         for patrol in patrol_datas:
@@ -151,12 +149,16 @@ def study_report(request, student_id):
         if total_focus_count == 0:
             focus_score = 0
         else:
-            three_focus_percent = (three_count / total_focus_count) * 100
-            two_focus_percent = (two_count / total_focus_count) * 100
-            one_focus_percent = (one_count / total_focus_count) * 100
+            # 집중도 단순 평균 공식
+            focus_score = round(((three_count * 3) + (two_count * 2) + one_count) / total_focus_count, 2)
 
-            focus_score = round((three_focus_percent * 1) + (two_focus_percent * 0.5) + (
-                        one_focus_percent * -1), 2)
+            # 집중도 퍼센트 공식
+            # three_focus_percent = (three_count / total_focus_count) * 100
+            # two_focus_percent = (two_count / total_focus_count) * 100
+            # one_focus_percent = (one_count / total_focus_count) * 100
+
+            # focus_score = round((three_focus_percent * 1) + (two_focus_percent * 0.5) + (
+            #             one_focus_percent * -1), 2)
 
         # week_report에 저장
         week_report['student_name'] = study.user.student
@@ -248,6 +250,6 @@ def study_report(request, student_id):
             'average_total_study': average_total_study
         }
         weekly_reports.append(week_report)
-    context = {'weekly_reports': weekly_reports, 'study_datas': study_datas}
+    context = {'weekly_reports': weekly_reports, 'study_datas': study_datas, 'student': student}
 
     return render(request, 'report/study/study_report.html', context)

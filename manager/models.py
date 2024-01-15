@@ -11,8 +11,9 @@ class Student_Study_Data(models.Model):
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
 
-    research1 = models.CharField(max_length=10, null=True, blank=True)
-    research2 = models.CharField(max_length=10, null=True, blank=True)
+    # research1 = models.CharField(max_length=10, null=True, blank=True)
+    # research2 = models.CharField(max_length=10, null=True, blank=True)
+    # research3 = models.ForeignKey(max_length=10, null=True, blank=True)
 
     korean_study = models.IntegerField(blank=True, default=0)
     korean_self_study = models.IntegerField( blank=True, default=0)
@@ -24,6 +25,8 @@ class Student_Study_Data(models.Model):
     research1_self_study = models.IntegerField(blank=True, default=0)
     research2_study = models.IntegerField(blank=True, default=0)
     research2_self_study = models.IntegerField(blank=True, default=0)
+    research3_study = models.IntegerField(blank=True, default=0)
+    research3_self_study = models.IntegerField(blank=True, default=0)
     total_study_time = models.IntegerField(blank=True, default=0)
 
 
