@@ -5,167 +5,173 @@
         <div class="row">
             {% include 'manager/manager_main_menu.html' %}
             <div class="col-md-10">
-                <div class="container-fluid mb-3 bg-light" id="report" style="width:1160px; height:200px">
+                <div class="container">
                     {% if student %}
                         <form method="GET" action="{% url 'report:question_report' student.id %}">
-                            <div class="card-header bg-primary-subtle">학과습 기간설정</div>
-                            <div class="card-body">
-                                <div class="input-group mb-4">
-                                    <label for="id_start_date" class="form-label">시작일</label>
-                                    <input type="date" class="form-control" id="id_start_date" name="start_date"
-                                           value="{{ form.start_date.value|default_if_none:'' }}">
-                                    <label for="id_end_date" class="form-label">마지막일</label>
-                                    <input type="date" class="form-control" id="id_end_date" name="end_date"
-                                           value="{{ form.end_date.value|default_if_none:'' }}">
-                                    <button class="btn btn-outline-success" type="submit" id="button">검색
-                                    </button>
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-success-subtle">
+                                            <h1>{{ student.student }}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border-secondary mb-3" style="height: 10rem">
+                                        <div class="card-header bg-danger-subtle">영어 단어</div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="id_start_date" class="form-label">시작일</label>
+                                                    <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                                           value="{{ form.start_date.value|default_if_none:'' }}">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="id_end_date" class="form-label">마지막일</label>
+                                                    <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                                           value="{{ form.end_date.value|default_if_none:'' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-secondary mb-3" style="height: 10rem">
+                                        <div class="card-header bg-info-subtle">질의응답</div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label for="id_start_date" class="form-label">시작일</label>
+                                                    <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                                           value="{{ form.start_date.value|default_if_none:'' }}">
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <label for="id_end_date" class="form-label">마지막일</label>
+                                                    <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                                           value="{{ form.end_date.value|default_if_none:'' }}">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-outline-success" type="submit" id="button"
+                                                            style="vertical-align: center">검색
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     {% endif %}
                 </div>
-                <div class="row">
-                    {% for report in weekly_reports %}
-                        <div class="container-fluid mb-3" id="report_div_{{ forloop.counter }}" style="width:1160px; height:720px">
-                            <div class="row mt-2">
-                                <div class="col-md-2 mb-2">
-                                    <div style="height:515px">
-                                        <div class="card">
-                                            <div class="card-header bg-success-subtle"
-                                                 style="display: flex; align-items: center;">
-                                                <h2 class="card-title" style="margin: 0;">
-                                                    <strong>{{ report.student_name }}</strong></h2>
-                                            </div>
-                                            <div class="card-header">
-                                                <h4 class="card-text">{{ report.week_name }}</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <p class="card-text" style="font-size:17px">{{ report.start_date }} ~ </p>
-                                                <p class="card-text" style="font-size:17px">{{ report.end_date }}</p>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item bg-light"
-                                                    style="white-space: nowrap;"></li>
-                                                <li class="list-group-item bg-danger text-white"
-                                                    style="white-space: nowrap; font-size:20px">
-                                                    <div class="row">
-                                                        <div class="col-md-6" style="text-align: center">
-                                                            <strong>수면</strong>
-                                                        </div>
-                                                        <div class="col-md-6">{{ report.study_counts.sleep }}회</div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item bg-light"
-                                                    style="white-space: nowrap;"></li>
-                                                <li class="list-group-item bg-info-subtle"
-                                                    style="white-space: nowrap; font-size:20px">
-                                                    <div class="row">
-                                                        <div class="col-md-6" style="text-align: center">
-                                                            <strong>집중도</strong>
-                                                        </div>
-                                                        <div class="col-md-6"
-                                                             style="text-align: center">{{ report.focus_score.focus_score }}</div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item bg-light"
-                                                    style="white-space: nowrap;"></li>
-                                                <li class="list-group-item"
-                                                    style="white-space: nowrap; font-size: 15px">
-                                                    <div class="row">
-                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
-                                                            <strong>총 인강</strong>
-                                                        </div>
-                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
-                                                            {{ report.study_data.total_lecture_study_hour }}h
-                                                            {{ report.study_data.total_lecture_study_min }}m
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item"
-                                                    style="white-space: nowrap; font-size: 15px">
-                                                    <div class="row">
-                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
-                                                            <strong>총 자습</strong>
-                                                        </div>
-                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
-                                                            {{ report.study_data.total_self_study_hour }}h
-                                                            {{ report.study_data.total_self_study_min }}m
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item bg-light"
-                                                    style="white-space: nowrap;"></li>
-                                                <li class="list-group-item"
-                                                    style="white-space: nowrap; font-size: 15px">
-                                                    <div class="row">
-                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
-                                                            <strong>총 학습</strong>
-                                                        </div>
-                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
-                                                            {{ report.study_data.total_study_hour }}h
-                                                            {{ report.study_data.total_study_min }}m
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                    <div class="container-fluid border mb-3" id="report_div_{{ forloop.counter }}" style="width:1160px; height:720px">
+                        <div class="row mt-2">
+                            <div class="col-md-2 mb-2">
+                                <div style="height:515px">
+                                    <div class="card">
+                                        <div class="card-header bg-success-subtle"
+                                             style="display: flex; align-items: center;">
+                                            <h2 class="card-title" style="margin: 0;">
+                                                <strong>{{ student.student }}</strong></h2>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <img style="max-height: 156px; margin-left:-20px" src="{% static '3.jpg' %}"
-                                             alt="logo"/>
-                                        <img src="{% static 'save_btn.png' %}"
-                                             class="save-btn"
-                                             data-target="report_div_{{ forloop.counter }}"
-                                             data-student-name="{{ report.student_name }}"
-                                             data-week-name="{{ report.week_name }}"
-                                             alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.05"/>
+                                        <div class="card-header">
+                                            <h4 class="card-text">{{ report.week_name }}</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text" style="font-size:17px">{{ report.start_date }} ~ </p>
+                                            <p class="card-text" style="font-size:17px">{{ report.end_date }}</p>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item bg-light"
+                                                style="white-space: nowrap;"></li>
+                                            <li class="list-group-item bg-danger text-white"
+                                                style="white-space: nowrap; font-size:20px">
+                                                <div class="row">
+                                                    <div class="col-md-6" style="text-align: center">
+                                                        <strong>수면</strong>
+                                                    </div>
+                                                    <div class="col-md-6">{{ report.study_counts.sleep }}회</div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item bg-light"
+                                                style="white-space: nowrap;"></li>
+                                            <li class="list-group-item bg-info-subtle"
+                                                style="white-space: nowrap; font-size:20px">
+                                                <div class="row">
+                                                    <div class="col-md-6" style="text-align: center">
+                                                        <strong>집중도</strong>
+                                                    </div>
+                                                    <div class="col-md-6"
+                                                         style="text-align: center">{{ report.focus_score.focus_score }}</div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item bg-light"
+                                                style="white-space: nowrap;"></li>
+                                            <li class="list-group-item"
+                                                style="white-space: nowrap; font-size: 15px">
+                                                <div class="row">
+                                                    <div class="col-md-5" style="text-align: left; font-size:18px">
+                                                        <strong>총 인강</strong>
+                                                    </div>
+                                                    <div class="col-md-7" style="text-align: left; font-size:18px">
+                                                        {{ report.study_data.total_lecture_study_hour }}h
+                                                        {{ report.study_data.total_lecture_study_min }}m
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item"
+                                                style="white-space: nowrap; font-size: 15px">
+                                                <div class="row">
+                                                    <div class="col-md-5" style="text-align: left; font-size:18px">
+                                                        <strong>총 자습</strong>
+                                                    </div>
+                                                    <div class="col-md-7" style="text-align: left; font-size:18px">
+                                                        {{ report.study_data.total_self_study_hour }}h
+                                                        {{ report.study_data.total_self_study_min }}m
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item bg-light"
+                                                style="white-space: nowrap;"></li>
+                                            <li class="list-group-item"
+                                                style="white-space: nowrap; font-size: 15px">
+                                                <div class="row">
+                                                    <div class="col-md-5" style="text-align: left; font-size:18px">
+                                                        <strong>총 학습</strong>
+                                                    </div>
+                                                    <div class="col-md-7" style="text-align: left; font-size:18px">
+                                                        {{ report.study_data.total_study_hour }}h
+                                                        {{ report.study_data.total_study_min }}m
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <div class="card border border-success" style="height:390px">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <figure class="highcharts-figure">
-                                                    <div id="container_semicircle_student_{{ forloop.counter }}"></div>
-                                                </figure>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <figure class="highcharts-figure">
-                                                    <div id="container_semicircle_patrol_{{ forloop.counter }}"></div>
-                                                </figure>
-                                            </div>
+                                <div>
+                                    <img style="max-height: 156px; margin-left:-20px" src="{% static '3.jpg' %}"
+                                         alt="logo"/>
+                                    <img src="{% static 'save_btn.png' %}"
+                                         class="save-btn"
+                                         data-target="report_div_{{ forloop.counter }}"
+                                         data-student-name="{{ report.student_name }}"
+                                         data-week-name="{{ report.week_name }}"
+                                         alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.05"/>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card border border-success" style="height:700px">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div id="demo-desktop-month-view"></div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <figure class="highcharts-figure">
-                                                <div id="container_stack_bar_student_{{ forloop.counter }}"></div>
-                                            </figure>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <figure class="highcharts-figure">
-                                                <div id="container_stack_bar_patrol_{{ forloop.counter }}"></div>
-                                            </figure>
-                                            </div>
-                                        </div>
-                                        <div class="card border border-success" style="height:290px">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <figure class="highcharts-figure">
-                                                        <div id="container_column_{{ forloop.counter }}"></div>
-                                                    </figure>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <figure class="highcharts-figure">
-                                                        <div id="container_column_total{{ forloop.counter }}"></div>
-                                                    </figure>
-                                                </div>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <div id="demo-desktop-month-view"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -195,5 +201,32 @@
             });
         });
     });
+    </script>
+    <script>
+        var inst = mobiscroll.eventcalendar('#demo-desktop-month-view', {
+          theme: 'auto',
+          themeVariant: 'light',
+          clickToCreate: false,
+          dragToCreate: false,
+          dragToMove: false,
+          dragToResize: false,
+          eventDelete: false,
+          view: {
+            calendar: { labels: true },
+          },
+          onEventClick: function (event, inst) {
+            mobiscroll.toast({
+              message: event.event.title,
+            });
+          },
+        });
+
+        mobiscroll.getJson(
+          'https://trial.mobiscroll.com/events/?vers=5',
+          function (events) {
+            inst.setEvents(events);
+          },
+          'jsonp',
+        );
     </script>
 {% endblock %}

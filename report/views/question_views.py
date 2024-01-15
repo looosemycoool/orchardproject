@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from check.models import StudentRegister, PatrolCheck
+from check.models import StudentRegister
 from reserve.models import Reserve
 
 def index(request):
