@@ -10,23 +10,25 @@
                         <div class="container-fluid mb-3" id="report_div_{{ forloop.counter }}" style="width:1160px; height:720px">
                             <div class="row mt-2">
                                 <div class="col-md-2 mb-2">
-                                    <div style="height:550px">
+                                    <div style="height:515px">
                                         <div class="card">
                                             <div class="card-header bg-success-subtle"
                                                  style="display: flex; align-items: center;">
-                                                <h4 class="card-title" style="margin: 0;">
-                                                    <strong>{{ report.student_name }}</strong></h4>
+                                                <h2 class="card-title" style="margin: 0;">
+                                                    <strong>{{ report.student_name }}</strong></h2>
                                             </div>
                                             <div class="card-header">
-                                                <h5 class="card-text">{{ report.week_name }}</h5>
+                                                <h4 class="card-text">{{ report.week_name }}</h4>
                                             </div>
-                                            <div class="card-header">
-                                                <p class="card-text">{{ report.start_date }}
-                                                    ~ {{ report.end_date }}</p>
+                                            <div class="card-body">
+                                                <p class="card-text" style="font-size:17px">{{ report.start_date }} ~ </p>
+                                                <p class="card-text" style="font-size:17px">{{ report.end_date }}</p>
                                             </div>
                                             <ul class="list-group list-group-flush">
+                                                <li class="list-group-item bg-light"
+                                                    style="white-space: nowrap;"></li>
                                                 <li class="list-group-item bg-danger text-white"
-                                                    style="white-space: nowrap;">
+                                                    style="white-space: nowrap; font-size:20px">
                                                     <div class="row">
                                                         <div class="col-md-6" style="text-align: center">
                                                             <strong>수면</strong>
@@ -34,8 +36,10 @@
                                                         <div class="col-md-6">{{ report.study_counts.sleep }}회</div>
                                                     </div>
                                                 </li>
+                                                <li class="list-group-item bg-light"
+                                                    style="white-space: nowrap;"></li>
                                                 <li class="list-group-item bg-info-subtle"
-                                                    style="white-space: nowrap;">
+                                                    style="white-space: nowrap; font-size:20px">
                                                     <div class="row">
                                                         <div class="col-md-6" style="text-align: center">
                                                             <strong>집중도</strong>
@@ -86,15 +90,15 @@
 {#                                                        </div>#}
 {#                                                    </div>#}
 {#                                                </li>#}
-                                                <li class="list-group-item bg-secondary"
+                                                <li class="list-group-item bg-light"
                                                     style="white-space: nowrap;"></li>
                                                 <li class="list-group-item"
                                                     style="white-space: nowrap; font-size: 15px">
                                                     <div class="row">
-                                                        <div class="col-md-5" style="text-align: left">
+                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
                                                             <strong>총 인강</strong>
                                                         </div>
-                                                        <div class="col-md-7" style="text-align: left">
+                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
                                                             {{ report.study_data.total_lecture_study_hour }}h
                                                             {{ report.study_data.total_lecture_study_min }}m
                                                         </div>
@@ -103,22 +107,24 @@
                                                 <li class="list-group-item"
                                                     style="white-space: nowrap; font-size: 15px">
                                                     <div class="row">
-                                                        <div class="col-md-5" style="text-align: left">
+                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
                                                             <strong>총 자습</strong>
                                                         </div>
-                                                        <div class="col-md-7" style="text-align: left">
+                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
                                                             {{ report.study_data.total_self_study_hour }}h
                                                             {{ report.study_data.total_self_study_min }}m
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <li class="list-group-item bg-light"
+                                                    style="white-space: nowrap;"></li>
                                                 <li class="list-group-item"
                                                     style="white-space: nowrap; font-size: 15px">
                                                     <div class="row">
-                                                        <div class="col-md-5" style="text-align: left">
+                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
                                                             <strong>총 학습</strong>
                                                         </div>
-                                                        <div class="col-md-7" style="text-align: left">
+                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
                                                             {{ report.study_data.total_study_hour }}h
                                                             {{ report.study_data.total_study_min }}m
                                                         </div>
@@ -128,14 +134,14 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <img style="max-height: 120px" src="{% static '3.jpg' %}"
+                                        <img style="max-height: 156px; margin-left:-20px" src="{% static '3.jpg' %}"
                                              alt="logo"/>
                                         <img src="{% static 'save_btn.png' %}"
-                                         class="save-btn"
-                                         data-target="report_div_{{ forloop.counter }}"
-                                         data-student-name="{{ report.student_name }}"
-                                         data-week-name="{{ report.week_name }}"
-                                         alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.05"/>
+                                             class="save-btn"
+                                             data-target="report_div_{{ forloop.counter }}"
+                                             data-student-name="{{ report.student_name }}"
+                                             data-week-name="{{ report.week_name }}"
+                                             alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.05"/>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
@@ -164,7 +170,7 @@
                                             </figure>
                                             </div>
                                         </div>
-                                        <div class="card border border-success" style="height:300px">
+                                        <div class="card border border-success" style="height:290px">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <figure class="highcharts-figure">
@@ -198,7 +204,7 @@
                     height: (7 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '실시간 학습 점검 ( Real-time check )',
+                    text: '실시간 학습 점검',
                     align: 'center',
                     verticalAlign: 'middle',
                     y: -60
@@ -320,7 +326,7 @@
                     height: (7 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '학생 주간 계획 ( Weekly Planner )',
+                    text: '학생 주간 계획',
                     align: 'center',
                     verticalAlign: 'middle',
                     y: -60
@@ -380,14 +386,14 @@
     </script>
     <script>
         {% for report in weekly_reports %}
-            Highcharts.Templating.helpers.abs = (value) => Math.abs(value);
+            {#Highcharts.Templating.helpers.abs = (value) => Math.abs(value);#}
             Highcharts.chart('container_stack_bar_student_{{ forloop.counter }}', {
                 chart: {
                     type: 'bar',
                     height: (6 / 16 * 100) + '%'
                 },
                 title: {
-                    text: ''
+                    text: null
                 },
                 xAxis: {
                     categories: ['국어', '수학', '영어', '{{ student.research1_select }}', '{{ student.research2_select }}'],
@@ -620,12 +626,17 @@
             var targetId = $(this).data('target');
             var studentName = $(this).data('student-name');
             var weekName = $(this).data('week-name');
+            var button = $(this); // 현재 버튼을 변수에 저장
+            button.hide(); // 버튼을 숨깁니다
+
             html2canvas($('#' + targetId)[0]).then(function(canvas){
                 var img = document.createElement("a");
                 img.download = studentName + '_' + weekName + '_report.png'; // 파일 이름 설정
-                img.href = canvas.toDataURL();
+                img.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 document.body.appendChild(img);
                 img.click();
+                document.body.removeChild(img); // 생성된 링크를 제거합니다
+                button.show(); // 이미지 캡쳐 후 버튼을 다시 보여줍니다
             });
         });
     });

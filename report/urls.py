@@ -1,13 +1,17 @@
 from django.urls import path
 
-from .views import study_views
+from .views import study_views, question_views
 
 app_name = 'report'
 
 urlpatterns = [
     # study_views
     path('study/', study_views.index, name='study_index'),
-    path('study/report/<int:student_id>', study_views.study_report, name='study_report')
+    path('study/report/<int:student_id>', study_views.study_report, name='study_report'),
+
+    # question_views
+    path('question/', question_views.index, name='question_index'),
+    path('question/report/<int:student_id>', question_views.question_report, name='question_report')
 
     # path('detail/<int:teacher_id>/', base_views.detail, name='detail'),
     # path('register/', base_views.notice_register, name='register'),
