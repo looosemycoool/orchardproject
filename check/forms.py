@@ -128,6 +128,7 @@ class StudentRegisterForm(forms.ModelForm):
     class Meta:
         model = StudentRegister
         fields = '__all__'
+
     def __init__(self, *args, **kwargs):
         super(StudentRegisterForm, self).__init__(*args, **kwargs)
         for field_name in self.fields.keys():

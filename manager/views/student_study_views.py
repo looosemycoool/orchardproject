@@ -33,20 +33,32 @@ def new_student_study(request):
 
 def new_student_study_detail(request, student_id):
     data = Student_Study_Data.objects.filter(user__id=student_id).order_by('-id')
-    student = StudentRegister.objects.filter(id=student_id)  # 단일 객체를 가져오기
+    student = StudentRegister.objects.filter(id=student_id) # 단일 객체를 가져오기
+    research1 = student.values('research1_select')[0]['research1_select']
+    research2 = student.values('research2_select')[0]['research2_select']
+    # research3 = student.values('research3_select')[0]['research3_select']
 
     selected_week = request.GET.get('selected_week')
 
     if selected_week:
         filtered_data = Student_Study_Data.objects.filter(week_name=selected_week, user__id=student_id)
+        total_study = filtered_data[0].korean_study + filtered_data[0].math_study + filtered_data[0].english_study + filtered_data[0].research1_study + filtered_data[0].research2_study
+        total_self_study = filtered_data[0].korean_self_study + filtered_data[0].math_self_study + filtered_data[0].english_self_study + filtered_data[0].research1_self_study + filtered_data[0].research2_self_study
     else:
         filtered_data = []
+        total_study = 0
+        total_self_study = 0
 
+    print(student)
     context = {
         'data': data,
         'student': student,
+        'research1': research1,
+        'research2': research2,
         'selected_week': selected_week,
         'filtered_data': filtered_data,
+        'total_study': total_study,
+        'total_self_study': total_self_study
     }
     return render(request, 'manager/student_study/student_study_detail.html', context)
 
@@ -123,6 +135,12 @@ def planner_modify(request, data_id):
 
     context = {'form': form, 'data': data, 'student': student, 'week_data': week_data}
     return render(request, 'manager/student_study/student_study_form.html', context)
+
+def planner_delete(request, data_id):
+    week_data = get_object_or_404(Student_Study_Data, id=data_id)
+    student_id = week_data.user_id
+    week_data.delete()
+    return redirect('manager:student_study_detail', student_id=student_id)
 
 def student_study(request):
     if request.method == 'POST':

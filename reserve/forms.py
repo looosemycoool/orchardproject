@@ -15,7 +15,7 @@ class ConsultForm(forms.ModelForm):
     CHOICES = (
         ('question', '질의응답'),
         ('new_counseling', '초기상담'),
-        ('study_conseling', '학습상담'),
+        ('study_counseling', '학습상담'),
         ('mentoring', '멘토링'),
     )
     type = forms.ChoiceField(choices=CHOICES,
@@ -29,6 +29,7 @@ class ConsultForm(forms.ModelForm):
         ('biology', '생명과학'),
         ('physics', '물리'),
         ('earth', '지구과학'),
+        ('science', '통합과학'),
         ('social', '사회탐구'),
     )
     subject = forms.ChoiceField(choices=SUBJECT_CHOICES,

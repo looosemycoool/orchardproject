@@ -16,7 +16,7 @@ class Student_Study_Data(models.Model):
     # research3 = models.ForeignKey(max_length=10, null=True, blank=True)
 
     korean_study = models.IntegerField(blank=True, default=0)
-    korean_self_study = models.IntegerField( blank=True, default=0)
+    korean_self_study = models.IntegerField(blank=True, default=0)
     math_study = models.IntegerField(blank=True, default=0)
     math_self_study = models.IntegerField(blank=True, default=0)
     english_study = models.IntegerField(blank=True, default=0)

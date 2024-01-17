@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import base_views, reserve_views, consulting_views, student_study_views, patrol_views, report_views, \
-    data_views, teacher_views
+    data_views, teacher_views, word_views
 
 app_name = 'manager'
 
@@ -31,10 +31,14 @@ urlpatterns = [
     path('student_study/detail/<int:student_id>', student_study_views.new_student_study_detail, name='student_study_detail'),
     path('student_study/create/<int:student_id>', student_study_views.planner_create, name="planner_create"),
     path('student_study/modify/<int:data_id>', student_study_views.planner_modify, name="planner_modify"),
+    path('student_study/delete/<int:data_id>', student_study_views.planner_delete, name="planner_delete"),
 
     path('student_study/upload/success', student_study_views.student_study_upload_success,
          name='student_study_upload_success'),
     path('student_study/upload/fail', student_study_views.student_study_upload_fail, name='student_study_upload_fail'),
+
+    # word
+    path('word/', word_views.index, name='word'),
 
     # patrol
     path('patrol/', patrol_views.patrol, name='patrol'),

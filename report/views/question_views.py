@@ -25,35 +25,42 @@ def question_report(request, student_id):
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
 
-    student = StudentRegister.objects.get(id=student_id)
-    question_data = Reserve.objects.filter(student_name__username=student.username)
+    student = StudentRegister.objects.get(id=student_id, is_dropped=False)
+
+    question_data = Reserve.objects.filter(student_name__username=student.username, date__range=[start_date, end_date])
+
+    subject_question_counts = {
+        'korean': 0,
+        'math': 0,
+        'english': 0,
+        'research': 0
+    }
+    subject_consulting_counts = {
+        'korean': 0,
+        'math': 0,
+        'english': 0,
+        'research': 0
+    }
 
     for data in question_data:
-        korean_count = 0
-        math_count = 0
-        english_count = 0
-        chemistry_count = 0
-        biology_count = 0
-        physics_count = 0
-        earth_count = 0
-        social_count = 0
+        if data.subject in subject_question_counts and data.type == 'question':
+            subject_question_counts[data.subject] += 1
+        elif data.subject in ['chemistry', 'biology', 'physics', 'earth', 'science', 'social'] and data.type == 'question':
+            subject_question_counts['research'] += 1
 
-        if data.subject == 'korean':
-            korean_count += 1
-        elif data.subject == 'math':
-            math_count += 1
-        elif data.subject == 'english':
-            english_count += 1
-        elif data.subject == 'chemistry':
-            chemistry_count += 1
-        elif data.subject == 'biology':
-            biology_count += 1
-        elif data.subject == 'physics':
-            physics_count += 1
-        elif data.subject == 'earth':
-            earth_count += 1
-        elif data.subject == 'social':
-            social_count += 1
+    for data in question_data:
+        if data.subject in subject_consulting_counts and (data.type == 'new_counseling' or data.type == 'study_counseling'):
+            subject_consulting_counts[data.subject] += 1
+        elif data.subject in ['chemistry', 'biology', 'physics', 'earth', 'science', 'social'] and (data.type == 'new_counseling' or data.type == 'study_counseling'):
+            subject_consulting_counts['research'] += 1
 
-    context = {'student': student}
+    report = {
+        'start_date': start_date,
+        'end_date': end_date,
+        'question_counts': subject_question_counts,
+        'consulting_counts': subject_consulting_counts
+    }
+    print(subject_question_counts['korean'])
+
+    context = {'student': student, 'report': report}
     return render(request, 'report/question/question_report.html', context)

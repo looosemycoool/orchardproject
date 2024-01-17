@@ -26,6 +26,7 @@ def register(request):
         form = StudentRegisterForm(request.POST)
         if form.is_valid():
             student_register_instance = form.save(commit=False)
+            student_register_instance.drop_date = form.cleaned_data['drop_date']
             # 월요일
             student_register_instance.mon8 = form.cleaned_data['mon8']
             student_register_instance.mon9 = form.cleaned_data['mon9']
@@ -271,6 +272,7 @@ def modify(request, student_id):
             student_register_instance.sun22 = form.cleaned_data['sun22']
 
             student_register_instance.save()
+
             return redirect('check:student')
     else:
         form = StudentRegisterForm(instance=student)
