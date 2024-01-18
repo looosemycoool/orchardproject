@@ -48,6 +48,22 @@
                                                    value="{{ week_data.end_date|date:'Y-m-d' }}">
                                             {% include 'form_errors.html' %}
                                         </div>
+                                    {% else %}
+                                        <div class="card-body">
+                                            <label for="id_week_name" class="form-label">주차</label>
+                                            <input type="text" class="form-control" id="id_week_name" name="week_name"
+                                                   placeholder="1월 1주차"
+                                                   value="{{ form.week_name.value|default_if_none:'' }}">
+
+                                            <label for="id_start_date" class="form-label mt-3">시작일</label>
+                                            <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                                   value="{{ week_data.start_date|date:'Y-m-d' }}">
+
+                                            <label for="id_end_date" class="form-label mt-3">마지막일</label>
+                                            <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                                   value="{{ week_data.end_date|date:'Y-m-d' }}">
+                                            {% include 'form_errors.html' %}
+                                        </div>
                                     {% endif %}
                                 </div>
                             </div>
