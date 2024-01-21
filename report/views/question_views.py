@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.models import User
 from check.models import StudentRegister
+from manager.models import WordTest
 from reserve.models import Reserve
 
 def index(request):
@@ -22,13 +24,23 @@ def index(request):
     return render(request, 'report/question/question_main.html', context)
 
 def question_report(request, student_id):
+    word_month = request.GET.get('word_month')
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
 
+    if not all([word_month, start_date, end_date]):
+        messages.error(request, "질문 예약 기간과 영단어 테스트 기간을 설정해주세요")
+
     student = StudentRegister.objects.get(id=student_id, is_dropped=False)
+    months = WordTest.objects.filter(student_id=student.id).values('month').order_by('-id')
 
     question_data = Reserve.objects.filter(student_name__username=student.username, date__range=[start_date, end_date])
 
+    word_data = WordTest.objects.filter(student_id=student.id, month=word_month)
+
+    total_question_data = question_data.count()
+
+    # 각 과목 별 질문 및 상담
     subject_question_counts = {
         'korean': 0,
         'math': 0,
@@ -58,9 +70,9 @@ def question_report(request, student_id):
         'start_date': start_date,
         'end_date': end_date,
         'question_counts': subject_question_counts,
-        'consulting_counts': subject_consulting_counts
+        'consulting_counts': subject_consulting_counts,
+        'total_question_data': total_question_data
     }
-    print(subject_question_counts['korean'])
 
-    context = {'student': student, 'report': report}
+    context = {'student': student, 'report': report, 'months': months, 'word_data': word_data}
     return render(request, 'report/question/question_report.html', context)

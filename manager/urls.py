@@ -39,6 +39,10 @@ urlpatterns = [
 
     # word
     path('word/', word_views.index, name='word'),
+    path('word/detail/<int:student_id>', word_views.word_detail, name='word_detail'),
+    path('word/create/<int:student_id>', word_views.word_create, name='word_create'),
+    path('word/modify/<int:data_id>', word_views.word_modify, name='word_modify'),
+    path('word/delete/<int:data_id>', word_views.word_delete, name='word_delete'),
 
     # patrol
     path('patrol/', patrol_views.patrol, name='patrol'),

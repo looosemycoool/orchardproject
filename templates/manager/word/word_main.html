@@ -3,52 +3,71 @@
     <div class="container-fluid">
         <div class="row">
             {% include 'manager/manager_main_menu.html' %}
-            <div class="col-md-2 text-center">
-                영단어 생성 폼
-                영단어 테스트 리스트
-            </div>
-            <div class="col-md-8 text-center">
-                <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">
-                    <span style="font-size:24px; "> 영단어 테스트 </span>
-                </h3>
-                <table class="table align-middle table-bordered" style="text-align: center">
-                    <thead style="position: sticky; top: 0px;">
-                        <tr class="table-success">
-                            <th style="width: 25%; white-space: nowrap;"></th>
-                            <th style="width: 5%; white-space: nowrap;">1</th>
-                            <th style="width: 5%; white-space: nowrap;">2</th>
-                            <th style="width: 5%; white-space: nowrap;">3</th>
-                            <th style="width: 5%; white-space: nowrap;">4</th>
-                            <th style="width: 5%; white-space: nowrap;">5</th>
-                            <th style="width: 5%; white-space: nowrap;">6</th>
-                            <th style="width: 5%; white-space: nowrap;">7</th>
-                            <th style="width: 5%; white-space: nowrap;">8</th>
-                            <th style="width: 5%; white-space: nowrap;">9</th>
-                            <th style="width: 5%; white-space: nowrap;">10</th>
-                            <th style="width: 5%; white-space: nowrap;">11</th>
-                            <th style="width: 5%; white-space: nowrap;">12</th>
-                            <th style="width: 5%; white-space: nowrap;">13</th>
-                            <th style="width: 5%; white-space: nowrap;">14</th>
-                            <th style="width: 5%; white-space: nowrap;">RT</th>
-                        </tr>
-                    </thead>
-                    <form method="post" action="{% url 'check:attendance_index_p' %}">
-                        {% csrf_token %}
-                        {% for student in students %}
-                            <input type="hidden" name="attendance_id" value="{{ student.id }}">
-                            <tbody>
-                                <tr>
-                                    <td class="bg-secondary">{{ student.class_name }}-{{ student.class_num }}
-                                        <br>
-                                        {{ student.student }}</td>
-                                </tr>
-                            <tr>
-
-                            </tr>
-                            </tbody>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        {% for student in students_p %}
+                            {% for num in p_line1 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:word_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         {% endfor %}
-                    </form>
-                </table>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_p %}
+                            {% for num in p_line2 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:word_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_s %}
+                            {% for num in s_line1 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:word_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_s %}
+                            {% for num in s_line2 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:word_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_s %}
+                            {% for num in s_line3 %}
+                                {% if student.class_num == num %}
+                                    <div class="card mb-2" style="max-width: 12rem;">
+                                        <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:word_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 text-center">
+                        {% for student in students_m %}
+                            <div class="card mb-2" style="max-width: 12rem;">
+                                <a type='button' style="font-size:16px" class="btn btn-lg btn-outline-secondary" href="{% url 'manager:word_detail' student.id %}">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

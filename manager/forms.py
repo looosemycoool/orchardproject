@@ -2,7 +2,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from reserve.models import Teacher
-from .models import Student_Study_Data
+from .models import Student_Study_Data, WordTest
+
 
 class TeacherForm(forms.ModelForm):
     class Meta:
@@ -43,3 +44,12 @@ class Student_Study_DataForm(forms.ModelForm):
     #
     #     return cleaned_data
 
+class WordTestForm(forms.ModelForm):
+    class Meta:
+        model = WordTest
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(WordTestForm, self).__init__(*args, **kwargs)
+        for field_name in self.fields.keys():
+            self.fields[field_name].required = False
+        self.fields['month'].required = True
