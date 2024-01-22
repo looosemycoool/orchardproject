@@ -30,6 +30,7 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-3">
+                                {% include 'form_errors.html' %}
                                 <div class="card border-secondary mb-3" style="height: 6rem">
                                     <div class="card-header bg-secondary-subtle">
                                         <h5 class="card-title">{{ select_month }}</h5>
@@ -38,7 +39,6 @@
                                         <input type="text" class="form-control" id="id_month" name="month"
                                                placeholder="1월"
                                                value="{{ form.month.value|default_if_none:'' }}">
-                                        {% include 'form_errors.html' %}
                                     </div>
                                 </div>
                                 <div class="card border-secondary mb-3" style="height: 11rem">
@@ -52,7 +52,6 @@
                                         <input type="text" class="form-control" id="id_random_word2" name="random_word2"
                                                placeholder="영단어 랜덤 테스트 2차"
                                                value="{{ form.random_word2.value|default_if_none:'' }}">
-                                        {% include 'form_errors.html' %}
                                     </div>
                                 </div>
                                 <div class="card border-secondary mb-3" style="height: 11rem">
@@ -66,7 +65,6 @@
                                         <input type="text" class="form-control" id="id_weekly_korean_test2" name="weekly_korean_test2"
                                                placeholder="국어 2차 시험 점수"
                                                value="{{ form.weekly_korean_test2.value|default_if_none:'' }}">
-                                        {% include 'form_errors.html' %}
                                     </div>
                                 </div>
                                 <div class="card border-secondary mb-3" style="height: 11rem">
@@ -80,7 +78,6 @@
                                         <input type="text" class="form-control" id="id_weekly_math_test2" name="weekly_math_test2"
                                                placeholder="수학 2차 시험 점수"
                                                value="{{ form.weekly_math_test2.value|default_if_none:'' }}">
-                                        {% include 'form_errors.html' %}
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">저장하기</button>
