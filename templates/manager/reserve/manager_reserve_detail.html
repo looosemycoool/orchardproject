@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                     {% for r in reserve_filter_teacher %}
-                        {% if r.title %}
+                        {% if r.student_name %}
                             <tr>
                                 <td style="white-space: nowrap">{{ r.time }}</td>
                                 <td style="white-space: nowrap">
@@ -41,7 +41,7 @@
                                         {% csrf_token %}
                                         <div class="d-flex justify-content-between">
                                             <div style="flex-basis: 70%;">
-                                                {{ r.title }}
+                                                {{ r.student_name }}
                                             </div>
                                             <div style="flex-basis: 15%;">
                                                 <button type="submit" name="action" value="초기화"
@@ -60,59 +60,29 @@
                             <tr>
                                 <td style="white-space: nowrap">{{ r.time }}</td>
                                 <td style="white-space: nowrap">
-                                    {% if r.student_name %}
-                                        <form method="post" action="{% url 'manager:reserve_update' reserve_id=r.id %}">
-                                            {% csrf_token %}
-                                            <div class="d-flex justify-content-between">
-                                                <div style="flex-basis: 70%;">
-                                                    <input type="text" class="form-control" id="id_student_name"
-                                                           name="student_name"
-                                                           value="{{ form.student_name.value }}" disabled>
-                                                </div>
-                                                <div style="flex-basis: 15%;">
-                                                    <button type="submit" name="action" value="상담"
-                                                            class="btn btn-outline-info" disabled>상담
-                                                    </button>
-                                                </div>
-                                                <div style="flex-basis: 15%;">
-                                                    <button type="submit" name="action" value="멘토링"
-                                                            class="btn btn-outline-primary" disabled>멘토링
-                                                    </button>
-                                                </div>
-                                                <div style="flex-basis: 15%;">
-                                                    <button type="submit" name="action" value="삭제"
-                                                            class="btn btn-danger">삭제
-                                                    </button>
-                                                </div>
+                                    <form method="post" action="{% url 'manager:reserve_update' reserve_id=r.id %}">
+                                        {% csrf_token %}
+                                        <div class="d-flex justify-content-between">
+                                            <div style="flex-basis: 70%;">
+                                                <select class="form-control" id="id_student_name" name="student_name">
+                                                    <option value="">학생 검색</option>
+                                                    {% for names in students %}
+                                                        <option value="{{ names.first_name }}">{{ names.first_name }}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
-                                        </form>
-                                    {% else %}
-                                        <form method="post" action="{% url 'manager:reserve_update' reserve_id=r.id %}">
-                                            {% csrf_token %}
-                                            <div class="d-flex justify-content-between">
-                                                <div style="flex-basis: 70%;">
-                                                    <input type="text" class="form-control" id="id_student_name"
-                                                           name="student_name"
-                                                           value="{{ form.student_name.value }}">
-                                                </div>
-                                                <div style="flex-basis: 15%;">
-                                                    <button type="submit" name="action" value="상담"
-                                                            class="btn btn-outline-info">상담
-                                                    </button>
-                                                </div>
-                                                <div style="flex-basis: 15%;">
-                                                    <button type="submit" name="action" value="멘토링"
-                                                            class="btn btn-outline-primary">멘토링
-                                                    </button>
-                                                </div>
-                                                <div style="flex-basis: 15%;">
-                                                    <button type="submit" name="action" value="삭제"
-                                                            class="btn btn-danger">삭제
-                                                    </button>
-                                                </div>
+                                            <div style="flex-basis: 15%;">
+                                                <button type="submit" name="action" value="상담"
+                                                        class="btn btn-outline-info">상담
+                                                </button>
                                             </div>
-                                        </form>
-                                    {% endif %}
+                                            <div style="flex-basis: 15%;">
+                                                <button type="submit" name="action" value="삭제"
+                                                        class="btn btn-danger">삭제
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         {% endif %}

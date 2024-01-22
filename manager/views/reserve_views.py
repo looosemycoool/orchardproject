@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from reserve.models import Teacher, Time_Table, Reserve
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 def reserve(request):
     teacher_table = Teacher.objects.order_by('id')
@@ -68,7 +69,6 @@ def reserve_detail(request, teacher_id):
     }
     return render(request, 'manager/reserve/manager_reserve_detail.html', context)
 
-
 def reserve_detail_teacher(request, teacher_id, date):
     current_teacher_id = int(teacher_id)
     teacher_table = Teacher.objects.order_by('id')
@@ -79,12 +79,15 @@ def reserve_detail_teacher(request, teacher_id, date):
     dates = Reserve.objects.filter(teacher_id=current_teacher_id).values_list('date', flat=True).distinct().order_by(
         '-date')
 
+    students = User.objects.filter(is_staff=False).values('first_name')
+
     context = {
         'current_teacher_id': current_teacher_id,
         'selected_date': selected_date,
         'reserve_filter_teacher': reserve_filter_teacher,
         'teacher_table': teacher_table,
         'dates': dates,
+        'students': students
     }
     return render(request, 'manager/reserve/manager_reserve_detail.html', context)
 
@@ -95,16 +98,17 @@ def reserve_update(request, reserve_id):
 
         if action == '상담':
             student_name = request.POST.get('student_name')
-            reserve.title = f'상담: {student_name}'
+            student = User.objects.get(first_name=student_name)
+            reserve.student_name = student
             reserve.save()
 
-        elif action == '멘토링':
-            student_name = request.POST.get('student_name')
-            reserve.title = f'멘토링: {student_name}'
-            reserve.save()
+        # elif action == '멘토링':
+        #     student_name = request.POST.get('student_name')
+        #     reserve.student_name = f'멘토링: {student_name}'
+        #     reserve.save()
 
         elif action == '초기화':
-            reserve.title = ''
+            reserve.student_name = None
             reserve.save()
             # 예약 상태 변경 후 리다이렉트 등의 동작 수행
         elif action == '삭제':
