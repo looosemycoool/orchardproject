@@ -28,9 +28,6 @@ def question_report(request, student_id):
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
 
-    if not all([word_month, start_date, end_date]):
-        messages.error(request, "질문 예약 기간과 영단어 테스트 기간을 설정해주세요")
-
     student = StudentRegister.objects.get(id=student_id, is_dropped=False)
     months = WordTest.objects.filter(student_id=student.id).values('month').order_by('-id')
 
