@@ -41,7 +41,7 @@
                                         {% csrf_token %}
                                         <div class="d-flex justify-content-between">
                                             <div style="flex-basis: 70%;">
-                                                {{ r.student_name }}
+                                                {{ r.student_name.first_name }}
                                             </div>
                                             <div style="flex-basis: 15%;">
                                                 <button type="submit" name="action" value="초기화"
@@ -64,15 +64,15 @@
                                         {% csrf_token %}
                                         <div class="d-flex justify-content-between">
                                             <div style="flex-basis: 70%;">
-                                                <select class="form-control" id="id_student_name" name="student_name">
-                                                    <option value="">학생 검색</option>
+                                                <select class="form-control" id="studentSelect_{{ r.id }}" name="student_name">
+                                                    <option value="">학생 선택</option>
                                                     {% for names in students %}
                                                         <option value="{{ names.first_name }}">{{ names.first_name }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
                                             <div style="flex-basis: 15%;">
-                                                <button type="submit" name="action" value="상담"
+                                                <button type="submit" name="action" value="상담" onclick="return validateStudentSelection({{ r.id }})"
                                                         class="btn btn-outline-info">상담
                                                 </button>
                                             </div>
@@ -92,4 +92,14 @@
             </div>
         </div>
     </div>
+    <script>
+        function validateStudentSelection(reserveId) {
+        var studentSelect = document.getElementById('studentSelect_' + reserveId);
+            if (studentSelect.value === '') {
+                alert('학생을 검색해주세요.');
+                return false;
+            }
+            return true;
+        }
+    </script>
 {% endblock %}
