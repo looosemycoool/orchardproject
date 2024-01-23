@@ -98,14 +98,9 @@ def reserve_update(request, reserve_id):
 
         if action == '상담':
             student_name = request.POST.get('student_name')
-            student = User.objects.get(first_name=student_name)
+            student = User.objects.get(first_name=student_name).order_by('first_name')
             reserve.student_name = student
             reserve.save()
-
-        # elif action == '멘토링':
-        #     student_name = request.POST.get('student_name')
-        #     reserve.student_name = f'멘토링: {student_name}'
-        #     reserve.save()
 
         elif action == '초기화':
             reserve.student_name = None
