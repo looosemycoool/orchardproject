@@ -98,7 +98,7 @@ def reserve_update(request, reserve_id):
 
         if action == '상담':
             student_name = request.POST.get('student_name')
-            student = User.objects.filter(first_name=student_name)
+            student = User.objects.get(first_name=student_name)
             reserve.student_name = student
             reserve.save()
 
