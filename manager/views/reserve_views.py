@@ -79,7 +79,7 @@ def reserve_detail_teacher(request, teacher_id, date):
     dates = Reserve.objects.filter(teacher_id=current_teacher_id).values_list('date', flat=True).distinct().order_by(
         '-date')
 
-    students = User.objects.filter(is_staff=False).values('first_name')
+    students = User.objects.filter(is_staff=False).values('first_name').order_by('first_name')
 
     context = {
         'current_teacher_id': current_teacher_id,
