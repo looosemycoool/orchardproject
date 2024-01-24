@@ -184,3 +184,9 @@ class WordTest(models.Model):
     weekly_korean_test2 = models.IntegerField(null=True, blank=True)
     weekly_math_test1 = models.IntegerField(null=True, blank=True)
     weekly_math_test2 = models.IntegerField( null=True, blank=True)
+
+class ConsultingReport(models.Model):
+    month = models.CharField(max_length=10, null=True, blank=False)
+    student = models.ForeignKey(StudentRegister, on_delete=models.CASCADE, null=True, blank=False)
+    subject_consulting = models.TextField(max_length=3000, null=True, blank=True)
+    study_review = models.TextField(max_length=3000, null=True, blank=True)

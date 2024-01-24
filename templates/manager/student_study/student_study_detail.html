@@ -39,20 +39,16 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     {% for data in filtered_data %}
-                                        <div class="card border-secondary mb-3" style="height: 12rem">
+                                        <div class="card border-secondary mb-3" style="height: 25rem">
                                             <div class="card-header bg-secondary-subtle">
                                                 <h5 class="card-title">{{ selected_week }}</h5>
                                             </div>
                                             <div class="card-body">
                                                 <p>총 자습 시간 - {{ total_study }}분</p>
                                                 <p>총 순공 시간 - {{ total_self_study }}분</p>
-                                            </div>
-                                        </div>
-                                        <div class="card border-secondary mb-3" style="height: 12rem">
-                                            <div class="card-header bg-danger-subtle">영어</div>
-                                            <div class="card-body">
-                                                <p>영어 총 시간 - {{ data.english_study|default_if_none:'' }}분</p>
-                                                <p>영어 순공 시간 - {{ data.english_self_study|default_if_none:'' }}분</p>
+                                                <br>
+                                                <p>시작일 - {{ data.start_date }}</p>
+                                                <p>마지막일 - {{ data.end_date }}</p>
                                             </div>
                                         </div>
                                     {% endfor %}
@@ -67,10 +63,10 @@
                                             </div>
                                         </div>
                                         <div class="card border-secondary mb-3" style="height: 12rem">
-                                            <div class="card-header bg-info-subtle">{{ research1 }}</div>
+                                            <div class="card-header bg-danger-subtle">영어</div>
                                             <div class="card-body">
-                                                <p>{{ data.research1 }} 총 시간 - {{ data.research1_study|default_if_none:'' }}분</p>
-                                                <p>{{ data.research1 }} 순공 시간 - {{ data.research1_self_study|default_if_none:'' }}분</p>
+                                                <p>영어 총 시간 - {{ data.english_study|default_if_none:'' }}분</p>
+                                                <p>영어 순공 시간 - {{ data.english_self_study|default_if_none:'' }}분</p>
                                             </div>
                                         </div>
                                     {% endfor %}
@@ -85,12 +81,19 @@
                                             </div>
                                         </div>
                                         <div class="card border-secondary mb-3" style="height: 12rem">
-                                            <div class="card-header bg-primary-subtle">{{ research2 }}</div>
+                                            <div class="card-header bg-info-subtle">탐구</div>
                                             <div class="card-body">
-                                                <p>{{ data.research2 }} 총 시간 - {{ data.research2_study|default_if_none:'' }}분</p>
-                                                <p>{{ data.research2 }} 순공 시간 - {{ data.research2_self_study|default_if_none:'' }}분</p>
+                                                <p>{{ data.research1 }} 총 시간 - {{ data.research1_study|default_if_none:'' }}분</p>
+                                                <p>{{ data.research1 }} 순공 시간 - {{ data.research1_self_study|default_if_none:'' }}분</p>
                                             </div>
                                         </div>
+{#                                        <div class="card border-secondary mb-3" style="height: 12rem">#}
+{#                                            <div class="card-header bg-primary-subtle">{{ research2 }}</div>#}
+{#                                            <div class="card-body">#}
+{#                                                <p>{{ data.research2 }} 총 시간 - {{ data.research2_study|default_if_none:'' }}분</p>#}
+{#                                                <p>{{ data.research2 }} 순공 시간 - {{ data.research2_self_study|default_if_none:'' }}분</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
                                     {% endfor %}
                                 </div>
                             </div>

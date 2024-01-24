@@ -92,11 +92,11 @@ def planner_create(request, student_id):
             study_data.research1_study = form.cleaned_data['research1_study']
             study_data.research1_self_study = form.cleaned_data['research1_self_study']
 
-            study_data.research2_study = form.cleaned_data['research2_study']
-            study_data.research2_self_study = form.cleaned_data['research2_self_study']
-
-            study_data.research3_study = form.cleaned_data['research3_study']
-            study_data.research3_self_study = form.cleaned_data['research3_self_study']
+            # study_data.research2_study = form.cleaned_data['research2_study']
+            # study_data.research2_self_study = form.cleaned_data['research2_self_study']
+            #
+            # study_data.research3_study = form.cleaned_data['research3_study']
+            # study_data.research3_self_study = form.cleaned_data['research3_self_study']
             study_data.save()  # 데이터 저장
             student_id = student.id
             return redirect('manager:student_study_detail', student_id=student_id)

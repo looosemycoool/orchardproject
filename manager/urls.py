@@ -21,11 +21,6 @@ urlpatterns = [
     path('teacher_create/', teacher_views.teacher_create, name='teacher_create'),
     path('teacher_modify/<int:teacher_id>', teacher_views.teacher_modify, name='teacher_modify'),
 
-    # consulting
-    path('consulting/', consulting_views.consulting, name='consulting'),
-    # 이거 검색에 따라서 url변동되도록 짜야할듯
-    path('consulting/detail', consulting_views.consulting, name='consulting_detail'),
-
     # student_study
     path('student_study/', student_study_views.new_student_study, name='student_study'),
     path('student_study/detail/<int:student_id>', student_study_views.new_student_study_detail, name='student_study_detail'),
@@ -43,6 +38,13 @@ urlpatterns = [
     path('word/create/<int:student_id>', word_views.word_create, name='word_create'),
     path('word/modify/<int:data_id>', word_views.word_modify, name='word_modify'),
     path('word/delete/<int:data_id>', word_views.word_delete, name='word_delete'),
+
+    # consulting
+    path('consulting/', consulting_views.index, name='consulting'),
+    path('consulting/detail/<int:student_id>', consulting_views.consulting_detail, name='consulting_detail'),
+    path('consulting/create/<int:student_id>', consulting_views.consulting_create, name='consulting_create'),
+    path('consulting/modify/<int:student_id>', consulting_views.consulting_modify, name='consulting_modify'),
+    path('consulting/delete/<int:student_id>', consulting_views.consulting_delete, name='consulting_delete'),
 
     # patrol
     path('patrol/', patrol_views.patrol, name='patrol'),

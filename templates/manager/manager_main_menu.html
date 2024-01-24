@@ -10,11 +10,11 @@
            aria-current="true">
             질문 내역
         </a>
-        <a href="{% url 'teacher:consulting_page' %}"
-           class="list-group-item list-group-item-action text-center disabled"
-           aria-current="true">
-            상담 내역
-        </a>
+{#        <a href="{% url 'teacher:consulting_page' %}"#}
+{#           class="list-group-item list-group-item-action text-center disabled"#}
+{#           aria-current="true">#}
+{#            상담 내역#}
+{#        </a>#}
         <a href="{% url 'manager:teacher' %}"
            class="list-group-item list-group-item-action text-center"
            aria-current="true">
@@ -25,16 +25,31 @@
 {#           aria-current="true">#}
 {#            상담 조회 페이지#}
 {#        </a>#}
-        <a href="{% url 'manager:student_study' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            학생 플래너
-        </a>
-        <a href="{% url 'manager:word' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            영단어 Test
-        </a>
+        <div class="card mt-3 border border-success">
+            <div class="card-header text-center bg-success-subtle">
+                <h5>레포트 입력</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group dropdown-center">
+                    <a href="{% url 'manager:student_study' %}"
+                       class="list-group-item list-group-item-action text-center"
+                       aria-current="true">
+                        학생 플래너
+                    </a>
+                    <a href="{% url 'manager:word' %}"
+                       class="list-group-item list-group-item-action text-center"
+                       aria-current="true">
+                        영단어 Test
+                    </a>
+                    <a href="#"
+{#                    <a href="{% url 'report:' %}"#}
+                       class="list-group-item list-group-item-action text-center"
+                       aria-current="true">
+                        학습 총평
+                    </a>
+                </ul>
+            </div>
+        </div>
 {#        <a href="{% url 'manager:patrol' %}"#}
 {#           class="list-group-item list-group-item-action text-center"#}
 {#           aria-current="true">#}
@@ -55,7 +70,7 @@
         <a href="{% url 'report:question_index' %}"
            class="list-group-item list-group-item-action text-center"
            aria-current="true">
-            질문 Report
+            영단어 Report
         </a>
         <a href="#"
 {#        <a href="{% url 'report:consulting' %}"#}
@@ -63,15 +78,15 @@
            aria-current="true">
             상담 Report
         </a>
-
-        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-            Report
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">성적 ex) 6평</a></li>
-            <li><a class="dropdown-item" href="{% url 'manager:report_study_main' %}">학과습 & 일일 순찰</a></li>
-            <li><a class="dropdown-item" href="{% url 'manager:report_consulting_main' %}">상담 & 질의</a></li>
-        </ul>
+{##}
+{#        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"#}
+{#                aria-expanded="false">#}
+{#            Report#}
+{#        </button>#}
+{#        <ul class="dropdown-menu">#}
+{#            <li><a class="dropdown-item" href="#">성적 ex) 6평</a></li>#}
+{#            <li><a class="dropdown-item" href="{% url 'manager:report_study_main' %}">학과습 & 일일 순찰</a></li>#}
+{#            <li><a class="dropdown-item" href="{% url 'manager:report_consulting_main' %}">상담 & 질의</a></li>#}
+{#        </ul>#}
     </ul>
 </div>
