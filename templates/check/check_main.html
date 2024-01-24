@@ -11,6 +11,13 @@
     </style>
     <div class="container-fluid">
         <div class="row">
+            {% if messages %}
+                <div id="messages" style="display:none;">
+                    {% for message in messages %}
+                        <span>{{ message }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div class="col-md-2 text-center">
                 {% include 'check/check_menu.html' %}
                 <ul class="list-group dropdown-center mt-3">
@@ -101,4 +108,15 @@
         return true;
     }
     </script>
+    <script type="text/javascript">
+    window.onload = function() {
+        var messageContainer = document.getElementById('messages');
+        if (messageContainer) {
+            var messages = messageContainer.getElementsByTagName('span');
+            for (var i = 0; i < messages.length; i++) {
+                alert(messages[i].textContent); // 각 메시지를 알림창으로 표시
+            }
+        }
+    };
+</script>
 {% endblock %}

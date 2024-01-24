@@ -74,14 +74,14 @@
                 <div class="container-fluid border mb-3" id="report_div" style="width:1160px; height:720px">
                     <div class="container-fluid mb-3" style="width:1180px; height:55px">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <img class="mt-2" style="max-height: 55px" src="{% static 'nav_logo.jpeg' %}"
                                      alt="logo"/>
                             </div>
-                            <div class="col-md-8 mt-3">
+                            <div class="col-md-8 mt-3 text-center">
                                 <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">
-                                    <span style="font-size:32px; ">The Premium 과수원 </span>
-                                    <span style="font-size:32px; "> 윈터클래스</span>
+                                    <span style="font-size:32px; ">The Premium 과수원</span>
+                                    <span style="font-size:32px; ">윈터클래스</span>
                                     <span style="font-size:32px; ">주간 테스트</span>
                                 </h3>
                             </div>
@@ -180,14 +180,14 @@
                                      data-target="report_div"
                                      data-student-name="{{ student.student }}"
                                      data-month-name="{{ data.month }}"
-                                     alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.05; margin-top: 100px"/>
+                                     alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.5; margin-top: 100px"/>
                             </div>
                         </div>
                         <div class="col-md-10">
                             <div class="container" style="height:624px">
                                 <div class="card border border-secondary" style="width: 58rem;">
                                   <div class="card-header bg-success-subtle" style="height:40px;">
-                                    <h5 class="card-title"><strong>1주차</strong></h5>
+                                    <h5 class="card-title"><strong>1주차 영단어</strong></h5>
                                   </div>
                                   <div class="card-body">
                                       <div class="row">
@@ -287,7 +287,7 @@
 {#                                2주차 #}
                                 <div class="card border border-secondary mt-2" style="width: 58rem;">
                                   <div class="card-header bg-primary-subtle" style="height:40px;">
-                                    <h5 class="card-title"><strong>2주차</strong></h5>
+                                    <h5 class="card-title"><strong>2주차 영단어</strong></h5>
                                   </div>
                                   <div class="card-body">
                                       <div class="row">
@@ -387,7 +387,7 @@
 {#                                3주차 #}
                                 <div class="card border border-secondary mt-2" style="width: 58rem;">
                                   <div class="card-header bg-success-subtle" style="height:40px">
-                                    <h5 class="card-title"><strong>3주차</strong></h5>
+                                    <h5 class="card-title"><strong>3주차 영단어</strong></h5>
                                   </div>
                                   <div class="card-body">
                                       <div class="row">
@@ -487,7 +487,7 @@
 {#                                4 주차#}
                                 <div class="card border border-secondary mt-2" style="width: 58rem;">
                                   <div class="card-header bg-primary-subtle" style="height:40px">
-                                    <h5 class="card-title"><strong>4주차</strong></h5>
+                                    <h5 class="card-title"><strong>4주차 영단어</strong></h5>
                                   </div>
                                   <div class="card-body">
                                       <div class="row">
@@ -608,7 +608,7 @@
 
             html2canvas($('#' + targetId)[0]).then(function(canvas){
                 var img = document.createElement("a");
-                img.download = studentName + '_' + monthName + '_report.png'; // 파일 이름 설정
+                img.download = studentName + '_' + monthName + '영단어_report.png'; // 파일 이름 설정
                 img.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 document.body.appendChild(img);
                 img.click();

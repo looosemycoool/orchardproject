@@ -25,30 +25,32 @@
 {#           aria-current="true">#}
 {#            상담 조회 페이지#}
 {#        </a>#}
-        <div class="card mt-3 border border-success">
+        <div class="card text-center mt-3 border border-success">
             <div class="card-header text-center bg-success-subtle">
                 <h5>레포트 입력</h5>
             </div>
-            <div class="card-body">
-                <ul class="list-group dropdown-center">
-                    <a href="{% url 'manager:student_study' %}"
-                       class="list-group-item list-group-item-action text-center"
-                       aria-current="true">
-                        학생 플래너
-                    </a>
-                    <a href="{% url 'manager:word' %}"
-                       class="list-group-item list-group-item-action text-center"
-                       aria-current="true">
-                        영단어 Test
-                    </a>
-                    <a href="#"
-{#                    <a href="{% url 'report:' %}"#}
-                       class="list-group-item list-group-item-action text-center"
-                       aria-current="true">
-                        학습 총평
-                    </a>
-                </ul>
-            </div>
+            <ul class="list-group list-group-flush">
+                <a href="{% url 'manager:student_study' %}"
+                   class="list-group-item list-group-item-action text-center"
+                   aria-current="true">
+                    학생 플래너
+                </a>
+                <a href="{% url 'manager:consulting' %}"
+                   class="list-group-item list-group-item-action text-center"
+                   aria-current="true">
+                    학습 총평
+                </a>
+                <a href="{% url 'manager:word' %}"
+                   class="list-group-item list-group-item-action text-center disabled"
+                   aria-current="true">
+                    영단어 Test
+                </a>
+                <a href="{% url 'manager:word' %}"
+                   class="list-group-item list-group-item-action text-center"
+                   aria-current="true">
+                    주간테스트 + 영단어
+                </a>
+            </ul>
         </div>
 {#        <a href="{% url 'manager:patrol' %}"#}
 {#           class="list-group-item list-group-item-action text-center"#}
@@ -72,11 +74,10 @@
            aria-current="true">
             영단어 Report
         </a>
-        <a href="#"
-{#        <a href="{% url 'report:consulting' %}"#}
+        <a href="{% url 'report:consulting_index' %}"
            class="list-group-item list-group-item-action text-center"
            aria-current="true">
-            상담 Report
+            학습 총평 Report
         </a>
 {##}
 {#        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"#}

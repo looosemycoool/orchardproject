@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-2 text-center">
+                <div class="card" style="height: 16rem">
+                    <div class="card-header">
+                        {% for student in student %}
+                            <h5 class="card-title">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</h5>
+                        {% endfor %}
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {% for data in data %}
+                                <a href="?select_month={{ data.month }}"
+                                   class="list-group-item">{{ data.month }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    {% for student in student %}
+                        <a class="btn btn-primary mt-3" href="{% url 'manager:consulting_create' student.id %}">학습 총평 입력</a>
+                    {% endfor %}
+                </div>
+            </div>
+            {# 주차 선택하면 나올 수 있도록 #}
+        {% if select_month %}
+            {% if filtered_data %}
+            <div class="col-md-8">
+                {% for data in filtered_data %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                {% include 'form_errors.html' %}
+                                <div class="card border-secondary mb-3">
+                                    <div class="card-header" style="height: 2rem">
+                                        <h6 class="card-title">{{ select_month }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                                <div class="card border-secondary" style="height: 20rem">
+                                    <div class="card-header bg-light" style="height: 2rem">
+                                        <h6 class="card-title">과목별 특이사항</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ data.subject_consulting|default_if_none:'' }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="card border-secondary" style="height: 14rem">
+                                    <div class="card-header bg-light" style="height: 2rem">
+                                        <h6 class="card-title">학습 총평</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ data.study_review|default_if_none:'' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'manager:consulting_modify' data.id %}" class="btn btn-outline-warning">수정하기</a>
+                        <a href="{% url 'manager:consulting_delete' data.id %}" class="btn btn-danger">삭제하기</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

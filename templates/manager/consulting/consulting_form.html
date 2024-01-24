@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-2 text-center">
+                <div class="card" style="height: 16rem">
+                    <div class="card-header">
+                        {% if student %}
+                            <h5 class="card-title">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</h5>
+                        {% endif %}
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {% for data in data %}
+                                <a href="{% url 'manager:consulting_modify' data.id %}}"
+                                   class="list-group-item disabled">{{ data.month }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# 주차 선택하면 나올 수 있도록 #}
+            <div class="col-md-8">
+                {% if student %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                {% include 'form_errors.html' %}
+                                <input type="text" class="form-control" id="id_month" name="month"
+                                       placeholder="1월" class="border-secondary"
+                                       value="{{ form.month.value|default_if_none:'' }}">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary">저장하기</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="id_subject_consulting" class="form-label">과목별 특이사항</label>
+                                <textarea class="form-control" id="id_subject_consulting" name="subject_consulting"
+                                          rows="12">{{ form.subject_consulting.value|default_if_none:'' }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_study_review" class="form-label">학습 총평</label>
+                                <textarea class="form-control" id="id_study_review" name="study_review"
+                                          rows="8">{{ form.study_review.value|default_if_none:'' }}</textarea>
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

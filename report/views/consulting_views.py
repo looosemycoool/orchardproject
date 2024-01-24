@@ -24,50 +24,21 @@ def index(request):
     return render(request, 'report/consulting/consulting_main.html', context)
 
 def consulting_report(request, student_id):
-    word_month = request.GET.get('word_month')
+    consulting_data = ConsultingReport.objects.filter(student_id=student_id).order_by('-id')
+    weekly_reports = []
 
-    # student = StudentRegister.objects.get(id=student_id, is_dropped=False)
-    # months = WordTest.objects.filter(student_id=student.id).values('month').order_by('-id')
-    #
-    # question_data = Reserve.objects.filter(student_name__username=student.username, date__range=[start_date, end_date])
-    #
-    # word_data = WordTest.objects.filter(student_id=student.id, month=word_month)
+    for data in consulting_data:
+        week_report = {}
 
-    total_question_data = question_data.count()
+        week_report['month'] = data.month
+        week_report['student_name'] = data.student.student
+        week_report['content'] = {
+            'subject_consulting': data.subject_consulting,
+            'study_review': data.study_review,
+        }
 
-    # 각 과목 별 질문 및 상담
-    subject_question_counts = {
-        'korean': 0,
-        'math': 0,
-        'english': 0,
-        'research': 0
-    }
-    subject_consulting_counts = {
-        'korean': 0,
-        'math': 0,
-        'english': 0,
-        'research': 0
-    }
+        weekly_reports.append(week_report)
+    print(consulting_data[0].subject_consulting)
 
-    for data in question_data:
-        if data.subject in subject_question_counts and data.type == 'question':
-            subject_question_counts[data.subject] += 1
-        elif data.subject in ['chemistry', 'biology', 'physics', 'earth', 'science', 'social'] and data.type == 'question':
-            subject_question_counts['research'] += 1
-
-    for data in question_data:
-        if data.subject in subject_consulting_counts and (data.type == 'new_counseling' or data.type == 'study_counseling'):
-            subject_consulting_counts[data.subject] += 1
-        elif data.subject in ['chemistry', 'biology', 'physics', 'earth', 'science', 'social'] and (data.type == 'new_counseling' or data.type == 'study_counseling'):
-            subject_consulting_counts['research'] += 1
-
-    report = {
-        'start_date': start_date,
-        'end_date': end_date,
-        'question_counts': subject_question_counts,
-        'consulting_counts': subject_consulting_counts,
-        'total_question_data': total_question_data
-    }
-
-    context = {'student': student, 'report': report, 'months': months, 'word_data': word_data}
-    return render(request, 'report/question/question_report.html', context)
+    context = {'weekly_reports': weekly_reports}
+    return render(request, 'report/consulting/consulting_report.html', context)

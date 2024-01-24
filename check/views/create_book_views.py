@@ -2,6 +2,7 @@ from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import user_passes_test
 from ..models import Attendance, StudentRegister, PatrolCheck
+from django.contrib import messages
 
 def get_day_of_week(selected_date):
     date_object = datetime.strptime(selected_date, "%Y-%m-%d").date()
@@ -22,6 +23,8 @@ def create_book(request):
         for student in students:
             if not Attendance.objects.filter(user=student, date=selected_date).exists():
                 create_attendance(request, student.id, selected_date)
+
+        messages.success(request, f'{selected_date} 출석부가 성공적으로 생성되었습니다.')
 
     return render(request, 'check/check_main.html')
 
@@ -72,6 +75,9 @@ def create_patrol_book(request):
         for student in students:
             if not PatrolCheck.objects.filter(user=student, date=selected_date).exists():
                 create_patrol(request, student.id, selected_date)
+
+        messages.success(request, f'{selected_date} 일일 순찰이 성공적으로 생성되었습니다.')
+
     return render(request, 'check/check_main.html')
 
 def create_patrol(request, student_register_id, selected_date):

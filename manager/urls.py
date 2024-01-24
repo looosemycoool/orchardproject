@@ -43,8 +43,8 @@ urlpatterns = [
     path('consulting/', consulting_views.index, name='consulting'),
     path('consulting/detail/<int:student_id>', consulting_views.consulting_detail, name='consulting_detail'),
     path('consulting/create/<int:student_id>', consulting_views.consulting_create, name='consulting_create'),
-    path('consulting/modify/<int:student_id>', consulting_views.consulting_modify, name='consulting_modify'),
-    path('consulting/delete/<int:student_id>', consulting_views.consulting_delete, name='consulting_delete'),
+    path('consulting/modify/<int:data_id>', consulting_views.consulting_modify, name='consulting_modify'),
+    path('consulting/delete/<int:data_id>', consulting_views.consulting_delete, name='consulting_delete'),
 
     # patrol
     path('patrol/', patrol_views.patrol, name='patrol'),

@@ -8,6 +8,7 @@ urlpatterns = [
     path('update/<int:attendance_id>',base_views.update_attendance, name='update_attendance'),
     path('specify/', base_views.specify, name='specify'),
     path('search/', base_views.search, name='search'),
+    #path('search/<str:selected_class>/<str:selected_date>/', base_views.search_result, name='search_result'),
 
     path('create_book/', create_book_views.create_book, name='create_book'),
     path('create_patrol/', create_book_views.create_patrol_book, name='create_patrol'),

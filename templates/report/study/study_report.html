@@ -141,7 +141,7 @@
                                              data-target="report_div_{{ forloop.counter }}"
                                              data-student-name="{{ report.student_name }}"
                                              data-week-name="{{ report.week_name }}"
-                                             alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.05"/>
+                                             alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.5"/>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
@@ -631,7 +631,7 @@
 
             html2canvas($('#' + targetId)[0]).then(function(canvas){
                 var img = document.createElement("a");
-                img.download = studentName + '_' + weekName + '_report.png'; // 파일 이름 설정
+                img.download = studentName + '_' + weekName + '학습_report.png'; // 파일 이름 설정
                 img.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 document.body.appendChild(img);
                 img.click();

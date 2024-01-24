@@ -59,7 +59,7 @@ class ConsultingReportForm(forms.ModelForm):
         model = ConsultingReport
         fields = '__all__'
     def __init__(self, *args, **kwargs):
-        super(WordTestForm, self).__init__(*args, **kwargs)
+        super(ConsultingReportForm, self).__init__(*args, **kwargs)
         for field_name in self.fields.keys():
             self.fields[field_name].required = False
         self.fields['month'].required = True
