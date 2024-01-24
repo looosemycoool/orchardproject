@@ -38,7 +38,6 @@ def consulting_report(request, student_id):
         }
 
         weekly_reports.append(week_report)
-    print(consulting_data[0].subject_consulting)
 
     context = {'weekly_reports': weekly_reports}
     return render(request, 'report/consulting/consulting_report.html', context)
