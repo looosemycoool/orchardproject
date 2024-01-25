@@ -372,12 +372,8 @@
                             y: {{ report.study_data.english_study }}
                         },
                         {
-                            name: '{{ student.research1_select}}',
+                            name: '탐구',
                             y: {{ report.study_data.research1_study }}
-                        },
-                        {
-                            name: '{{ student.research2_select}}',
-                            y: {{ report.study_data.research2_study }}
                         },
                     ]
                 }]
@@ -396,7 +392,7 @@
                     text: null
                 },
                 xAxis: {
-                    categories: ['국어', '수학', '영어', '{{ student.research1_select }}', '{{ student.research2_select }}'],
+                    categories: ['국어', '수학', '영어', '탐구'],
                     LineWidth: 0
                 },
                 yAxis: {
@@ -429,11 +425,11 @@
                 },
                 series: [{
                     name: '인강',
-                    data: [(-{{ report.study_data.korean_lecture_study }}), (-{{ report.study_data.math_lecture_study }}), (-{{ report.study_data.english_lecture_study }}), (-{{ report.study_data.research1_lecture_study }}), (-{{ report.study_data.research2_lecture_study }})],
+                    data: [(-{{ report.study_data.korean_lecture_study }}), (-{{ report.study_data.math_lecture_study }}), (-{{ report.study_data.english_lecture_study }}), (-{{ report.study_data.research1_lecture_study }})],
                     color: '#00FF00'
                 }, {
                     name: '자습',
-                    data: [{{ report.study_data.korean_self_study }}, {{ report.study_data.math_self_study }}, {{ report.study_data.english_self_study }}, {{ report.study_data.research1_self_study }}, {{ report.study_data.research2_self_study }}],
+                    data: [{{ report.study_data.korean_self_study }}, {{ report.study_data.math_self_study }}, {{ report.study_data.english_self_study }}, {{ report.study_data.research1_self_study }}],
                     color: '#00BFFF'
                 },
                 ]
