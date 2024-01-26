@@ -93,7 +93,7 @@ def study_report(request, student_id):
             total_math_self_study += data.math_self_study
             total_english_study += data.english_study
             total_english_self_study += data.english_self_study
-            total_research1_study += data.research1_self_study
+            total_research1_study += data.research1_study
             total_research1_self_study += data.research1_self_study
             total_research2_study += data.research2_study
             total_research2_self_study += data.research2_self_study
@@ -243,7 +243,7 @@ def study_report(request, student_id):
             'average_math_self_study': int(total_math_self_study / student_number),
             'average_english_lecture_study': int((total_english_study - total_english_self_study) / student_number),
             'average_english_self_study': int(total_english_self_study / student_number),
-            'average_research_lecture_study': int(((total_research1_study + total_research2_study) - (total_research1_self_study + total_research2_self_study)) / student_number),
+            'average_research_lecture_study': int(((total_research1_study) - (total_research1_self_study)) / student_number),
             'average_research_self_study': int((total_research1_self_study + total_research2_self_study) / student_number),
             'average_total_lecture_study': average_total_lecture_study,
             'average_total_self_study': average_total_self_study,
