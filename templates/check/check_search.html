@@ -30,7 +30,7 @@
                     M반
                 </a>
             </ul>
-            <form method="post" action="{% url 'check:search' %}" onsubmit="return validateForm()">
+            <form method="post" action="{% url 'check:index' %}" onsubmit="return validateForm()">
                 {% csrf_token %}
                 <div class="card border-secondary mt-3">
                     <div class="card-header bg-warning-subtle">

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import datetime
 from django.contrib.auth.decorators import user_passes_test
 from ..models import Attendance, StudentRegister, PatrolCheck
@@ -25,6 +25,7 @@ def create_book(request):
                 create_attendance(request, student.id, selected_date)
 
         messages.success(request, f'{selected_date} 출석부가 성공적으로 생성되었습니다.')
+        return redirect('check:index')
 
     return render(request, 'check/check_main.html')
 
@@ -77,6 +78,7 @@ def create_patrol_book(request):
                 create_patrol(request, student.id, selected_date)
 
         messages.success(request, f'{selected_date} 일일 순찰이 성공적으로 생성되었습니다.')
+        return redirect('check:index')
 
     return render(request, 'check/check_main.html')
 
