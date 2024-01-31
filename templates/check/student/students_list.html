@@ -93,32 +93,38 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 text-center">
                 <div class="btn-group">
                     <button class="btn btn-success btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         2023년에 등록된 계정
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="width:16rem; max-height: 200px; overflow-y: auto;">
                         {% for student in user_list_2023 %}
-                            <li class="dropdown-item">
+                            <li><a href="/admin/auth/user/{{ student.id }}/change/"
+                               class="dropdown-item">
                                 {{ student.first_name }} - {{ student.username }}
+                            </a>
                             </li>
                         {% endfor %}
                     </ul>
+{#                    <ul class="dropdown-menu">#}
+{#                        {% for student in user_list_2023 %}#}
+{#                            <li class="dropdown-item">#}
+{#                                {{ student.first_name }} - {{ student.username }}#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
                 </div>
-                <div class="btn-group mt-3 text-center">
+                <div class="btn-group mt-3">
                     <button class="btn btn-success btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         2024년에 등록된 계정
                     </button>
-                    <ul class="dropdown-menu" style="width:15rem">
+                    <ul class="dropdown-menu" style="width:16rem; max-height: 200px; overflow-y: auto;">
                         {% for student in user_list_2024 %}
-                            <li class="dropdown-item">
-                                <table style="width:100%">
-                                    <tr>
-                                        <td>{{ student.first_name }}</td>
-                                        <td>{{ student.username }}</td>
-                                    </tr>
-                                </table>
+                            <li><a href="/admin/auth/user/{{ student.id }}/change/"
+                               class="dropdown-item">
+                                {{ student.first_name }} - {{ student.username }}
+                            </a>
                             </li>
                         {% endfor %}
                     </ul>
