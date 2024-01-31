@@ -98,7 +98,7 @@
                     <button class="btn btn-success btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         2023년에 등록된 계정
                     </button>
-                    <ul class="dropdown-menu" style="width:16rem; max-height: 200px; overflow-y: auto;">
+                    <ul class="dropdown-menu" style="width:16rem; max-height: 600px; overflow-y: auto;">
                         {% for student in user_list_2023 %}
                             <li><a href="/admin/auth/user/{{ student.id }}/change/"
                                class="dropdown-item">
@@ -114,7 +114,7 @@
                     <button class="btn btn-success btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         2024년에 등록된 계정
                     </button>
-                    <ul class="dropdown-menu" style="width:16rem; max-height: 400px; overflow-y: auto;">
+                    <ul class="dropdown-menu" style="width:16rem; max-height: 600px; overflow-y: auto;">
                         {% for student in user_list_2024 %}
                             <li><a href="/admin/auth/user/{{ student.id }}/change/"
                                class="dropdown-item">
