@@ -32,5 +32,6 @@ urlpatterns = [
     # student
     path('student/', student_views.index, name='student'),
     path('student/register/', student_views.register, name='register'),
-    path('student/modify/<int:student_id>', student_views.modify, name='modify')
+    path('student/modify/<int:student_id>', student_views.modify, name='modify'),
+    path('students_list', student_views.students_list, name='students_list')
 ]

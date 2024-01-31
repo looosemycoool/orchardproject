@@ -279,3 +279,15 @@ def modify(request, student_id):
 
     context = {'form': form, 'students': students, 'student': student, 'teachers': teachers}
     return render(request, 'check/student/student_register_form.html', context)
+
+def students_list(request):
+    students_p = StudentRegister.objects.filter(class_name='P', is_dropped=False).order_by('class_num')
+    students_s = StudentRegister.objects.filter(class_name='S', is_dropped=False).order_by('class_num')
+    students_m = StudentRegister.objects.filter(class_name='M', is_dropped=False).order_by('class_num')
+    dropped_students = StudentRegister.objects.filter(is_dropped=True).order_by('class_num')
+
+    user_list_2023 = User.objects.filter(date_joined__year=2023, is_staff=False).order_by('first_name')
+    user_list_2024 = User.objects.filter(date_joined__year=2024, is_staff=False).order_by('first_name')
+    print(user_list_2024)
+    context = {'students_p': students_p, 'students_s': students_s, 'students_m': students_m, 'dropped_students': dropped_students, 'user_list_2023': user_list_2023, 'user_list_2024': user_list_2024}
+    return render(request, 'check/student/students_list.html', context)

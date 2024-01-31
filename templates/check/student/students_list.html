@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 text-center">
+                {% include 'check/student/student_menu.html' %}
+            </div>
+            <div class="col-md-6 text-center">
+                <table class="table align-middle" style="text-align: center">
+                    <thead>
+                    <tr class="table-success">
+                        <th style="width: 5%; white-space: nowrap;">반 번호</th>
+                        <th style="width: 5%; white-space: nowrap;">이름</th>
+                        <th style="width: 10%; white-space: nowrap;">담임선생님</th>
+                        <th style="width: 10%; white-space: nowrap;">질문예약 ID</th>
+                        <th style="width: 20%; white-space: nowrap;">등록일</th>
+                        <th style="width: 5%; white-space: nowrap;">퇴원</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in students_p %}
+                        <tr>
+                            <td style="white-space: nowrap" class="bg-warning-subtle">{{ student.class_name }}-{{ student.class_num }}</td>
+                            <td style="white-space: nowrap" class="bg-warning-subtle"><a href="{% url 'check:modify' student.id %}">{{ student.student }}</a></td>
+                            <td style="white-space: nowrap" class="bg-warning-subtle">{{ student.teacher.first_name|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-warning-subtle">{{ student.username|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-warning-subtle">{{ student.register_date|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-warning-subtle">
+                                {% if student.is_dropped %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckDisabled" checked disabled>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckCheckedDisabled" disabled>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for student in students_s %}
+                        <tr>
+                            <td style="white-space: nowrap" class="bg-primary-subtle">{{ student.class_name }}-{{ student.class_num }}</td>
+                            <td style="white-space: nowrap" class="bg-primary-subtle"><a href="{% url 'check:modify' student.id %}">{{ student.student }}</a></td>
+                            <td style="white-space: nowrap" class="bg-primary-subtle">{{ student.teacher.first_name|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-primary-subtle">{{ student.username|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-primary-subtle">{{ student.register_date|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-primary-subtle">
+                                {% if student.is_dropped %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckDisabled" checked disabled>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckCheckedDisabled" disabled>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for student in students_m %}
+                        <tr>
+                            <td style="white-space: nowrap" class="bg-info-subtle">{{ student.class_name }}-{{ student.class_num }}</td>
+                            <td style="white-space: nowrap" class="bg-info-subtle"><a href="{% url 'check:modify' student.id %}">{{ student.student }}</a></td>
+                            <td style="white-space: nowrap" class="bg-info-subtle">{{ student.teacher.first_name|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-info-subtle">{{ student.username|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-info-subtle">{{ student.register_date|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-info-subtle">
+                                {% if student.is_dropped %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckDisabled" checked disabled>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckCheckedDisabled" disabled>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for student in dropped_students %}
+                        <tr>
+                            <td style="white-space: nowrap" class="bg-secondary-subtle">{{ student.class_name }}-{{ student.class_num }}</td>
+                            <td style="white-space: nowrap" class="bg-secondary-subtle"><a href="{% url 'check:modify' student.id %}">{{ student.student }}</a></td>
+                            <td style="white-space: nowrap" class="bg-secondary-subtle">{{ student.teacher.first_name|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-secondary-subtle">{{ student.username|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-secondary-subtle">{{ student.register_date|default_if_none:'' }}</td>
+                            <td style="white-space: nowrap" class="bg-secondary-subtle">
+                                {% if student.is_dropped %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckDisabled" checked disabled>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckCheckedDisabled" disabled>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <div class="btn-group">
+                    <button class="btn btn-success btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        2023년에 등록된 계정
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% for student in user_list_2023 %}
+                            <li class="dropdown-item">
+                                {{ student.first_name }} - {{ student.username }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="btn-group mt-3 text-center">
+                    <button class="btn btn-success btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        2024년에 등록된 계정
+                    </button>
+                    <ul class="dropdown-menu" style="width:15rem">
+                        {% for student in user_list_2024 %}
+                            <li class="dropdown-item">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td>{{ student.first_name }}</td>
+                                        <td>{{ student.username }}</td>
+                                    </tr>
+                                </table>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

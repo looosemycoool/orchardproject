@@ -1,41 +1,16 @@
 {% include 'check/check_menu.html' %}
 <ul class="list-group dropdown-center mt-3">
     <a href="{% url 'check:register' %}"
-        class="list-group-item list-group-item-action text-center"
+        class="list-group-item list-group-item-action text-center bg-success-subtle border border-success"
         aria-current="true">
         재원생 등록
     </a>
 </ul>
-{#<form method="get" action="{% url 'check:modify' student_id %}">#}
-{#    {% csrf_token %}#}
-{#    <div class="card border-secondary mt-3">#}
-{#        <div class="card-header bg-primary-subtle">#}
-{#            <input type="date" name="selected_date" id="selected_date">#}
-{#            <select class="form-control" id="id_student_name" name="student_name">#}
-{#                <option value="">학생 선택</option>#}
-{#                {% for student in students %}#}
-{#                    <option value="{{ student.student.id }}">{{ student.student }}</option>#}
-{#                {% endfor %}#}
-{#            </select>#}
-{#        </div>#}
-{#        <div class="card-body">#}
-{#            <button type="submit" class="btn btn-outline-success">#}
-{#                재원생 수정#}
-{#            </button>#}
-{#        </div>#}
-{#    </div>#}
-{#</form>#}
-{##}
-{#<form method="GET" action="{% url 'manager:report_study_detail' %}">#}
-{#    <div class="card-body">#}
-{#        <div class="input-group">#}
-{#            {% csrf_token %}#}
-{#            <select class="form-control" id="id_student_name" name="student_name">#}
-{#                <option value="">학생 선택</option>#}
-{#                {% for names in student_names %}#}
-{#                    <option value="{{ names.student_name }}">{{ names.student_name }}</option>#}
-{#                {% endfor %}#}
-{#            </select>#}
-{#        </div>#}
-{#    </div>#}
-{#</form>#}
+<ul class="list-group dropdown-center mt-3">
+    <a href="{% url 'check:students_list' %}"
+    <a href="#"
+        class="list-group-item list-group-item-action text-center bg-primary-subtle border border-primary"
+        aria-current="true">
+        전체 학생 목록 보기
+    </a>
+</ul>
