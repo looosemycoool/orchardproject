@@ -47,10 +47,6 @@
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_staff %}
                                             {% if r.comment == blank %}
-                                                {% if r.title == blank %}
-                                                {% else %}
-                                                    {{ r.title }}
-                                                {% endif %}
                                             {% else %}
                                                 질문내용 : {{ r.comment }}
                                             {% endif %}
@@ -86,10 +82,6 @@
                                                     </div>
                                                 {% endif %}
                                             {% else %}
-                                                {% if r.title == blank %}
-                                                {% else %}
-                                                    {{ r.title }}
-                                                {% endif %}
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
