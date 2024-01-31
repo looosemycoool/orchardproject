@@ -7,8 +7,9 @@
         }
     </style>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
             {% include 'teacher/reserve/reserve_teacher_table_detail.html' %}
             {% include 'teacher/reserve/reserve_date_filter_table.html' %}
             <div class="col-md-6">
@@ -41,10 +42,10 @@
                                 {% if request.user.is_authenticated %}
                                     {% if request.user.is_staff %}
                                         {% if r.title == blank and r.content == blank %}
-                                            <a href="{% url 'reserve:consult_create' reserve_id=r.id %}"
+                                            <a href="{% url 'teacher:consult_create' reserve_id=r.id %}"
                                                class="btn btn-outline-info"> 등록 </a>
                                         {% else %}
-                                            <a href="{% url 'reserve:consult_modify' reserve_id=r.id %}"
+                                            <a href="{% url 'teacher:consult_modify' reserve_id=r.id %}"
                                                class="btn btn-outline-warning"> 수정 </a>
                                         {% endif %}
                                     {% endif %}

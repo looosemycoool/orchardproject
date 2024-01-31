@@ -7,8 +7,9 @@
         }
     </style>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
             {% include 'teacher/reserve/reserve_teacher_table_detail.html' %}
             {% include 'teacher/reserve/reserve_date_filter_table.html' %}
         </div>

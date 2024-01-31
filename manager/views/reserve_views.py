@@ -44,7 +44,7 @@ def reserve_create(request):
         # 모델에 필요한 데이터 조회 및 전달
         teachers = Teacher.objects.all()
         time_table = Time_Table.objects.all()
-        teacher_table = Teacher.objects.order_by('id')
+        teacher_table = Teacher.objects.filter(retired=False).order_by('id')
 
         context = {
             'teachers': teachers,

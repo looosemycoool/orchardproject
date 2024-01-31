@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block content %}
+    <div class="container">
+        <h5 class="my-3 border-bottom pb-2">{{ reserve.student_name.first_name }} - 상담 일지</h5>
+        <form method="post">
+            {% csrf_token %} {% include 'form_errors.html' %}
+            <!-- 템플릿(Template)에서 context에 추가된 딕셔너리를 참조합니다. -->
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    <label for="id_subject" class="form-label">과목</label>
+                    <select class="form-select" id="id_subject" name="subject">
+                        {% for key, value in form.subject.field.choices %}
+                            <option value="{{ key }}"
+                                    {% if key == form.subject.value %}selected{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-7">
+                    <label for="id_title" class="form-label">상담 제목</label>
+                    <input type="text" class="form-control" id="id_title" name="title"
+                           value="{{ form.title.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="id_type" class="form-label">상담 유형</label>
+                    <select class="form-select" id="id_type" name="type">
+                        {% for key, value in form.type.field.choices %}
+                            <option value="{{ key }}"
+                                    {% if key == form.type.value %}selected{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="id_content" class="form-label">상담 내용</label>
+                <textarea class="form-control" id="id_content" name="content"
+                          rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">저장하기</button>
+        </form>
+    </div>
+{% endblock %}
