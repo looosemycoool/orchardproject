@@ -34,6 +34,7 @@ def detail(request, selected_class, selected_date):
             'english': '영어',
             'research': '탐구',
             'guitar': '기타',
+            'specify': '특이',
         }
         # attendances_s의 값 변환
         for attendance in attendances:

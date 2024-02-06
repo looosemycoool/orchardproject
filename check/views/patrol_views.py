@@ -72,6 +72,7 @@ def patrol_p_class(request):
         'english': '영어',
         'research': '탐구',
         'guitar': '기타',
+        'specify': '특이',
     }
 
     # Attendance 데이터의 특정 필드 값을 번역
@@ -185,6 +186,7 @@ def patrol_s_class(request):
         'english': '영어',
         'research': '탐구',
         'guitar': '기타',
+        'specify': '특이',
     }
 
     # Attendance 데이터의 특정 필드 값을 번역

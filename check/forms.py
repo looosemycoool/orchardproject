@@ -11,6 +11,7 @@ class StudentRegisterForm(forms.ModelForm):
         ('english', '영어'),
         ('research', '탐구'),
         ('guitar', '기타'),
+        ('specify', '특이')
     )
     # 월요일
     mon8 = forms.ChoiceField(choices=CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
