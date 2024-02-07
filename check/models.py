@@ -233,4 +233,4 @@ class PatrolCheck(models.Model):
     time18_focus = models.CharField(max_length=10, null=True, blank=True, default=False)
 
 class Specify(models.Model):
-    content = models.CharField(max_length=2000, null=True, blank=True)
+    content = models.CharField(max_length=5000, null=True, blank=True)
