@@ -1,18 +1,19 @@
 from django.urls import path
 
-from .views import base_views
+from .views import base_views, planner_views
 
 app_name = 'mypage'
 
 urlpatterns = [
     # base_views
-    path('<int:user_id>', base_views.index, name='index'),
+    path('<int:user_id>/', base_views.index, name='index'),
     # path('detail/<int:teacher_id>/', base_views.detail, name='detail'),
     # path('register/', base_views.notice_register, name='register'),
-    #
-    # # reserve_views
-    # path('complete/<int:reserve_id>/', reserve_views.reserve, name='complete'),
-    # path('delete/<int:reserve_id>/', reserve_views.reserve_delete, name='delete'),
+
+    # planner_views
+    path('<int:user_id>/planner/', planner_views.index, name='planner_index'),
+    path('<int:user_id>/planner/<str:date>/', planner_views.search, name='planner_search'),
+    path('<int:user_id>/planner/detail', planner_views.detail, name='planner_detail'),
     #
     # # comment_views
     # path('comment_create/<int:reserve_id>', comment_views.comment_create, name='comment_create'),

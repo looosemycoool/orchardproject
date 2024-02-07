@@ -1,0 +1,240 @@
+{% extends 'mypage_base.html' %}
+{% block content %}
+    <div class="col-md-10" style="height:100px;">
+        {% include "mypage_titlebar.html" %}
+        <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <form method="POST" action="{% url 'mypage:planner_index' user.id %}">
+                    {% csrf_token %}
+                    <label for="id_date" class="form-label">날짜</label>
+                    <div class="col-md-9">
+                        <input type="date" class="form-control" id="id_date" name="date"
+                           value="{{ today_date|date:'Y-m-d' }}">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-success" type="submit" id="button"
+                                style="vertical-align: center">검색
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-10">
+                <form method="POST" action="{% url 'mypage:planner_index' user.id %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-7">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr class="table-success text-center">
+                                        <th style="width: 15%; white-space: nowrap;">과목</th>
+                                        <th style="width: 85%; white-space: nowrap;">내용</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo1_subject" name="todo1_subject"
+                                                value="{{ form.todo1_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo1_content" name="todo1_content"
+                                                value="{{ form.todo1_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo2_subject" name="todo2_subject"
+                                                value="{{ form.todo2_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo2_content" name="todo2_content"
+                                                value="{{ form.todo2_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo3_subject" name="todo3_subject"
+                                                value="{{ form.todo3_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo3_content" name="todo3_content"
+                                                value="{{ form.todo3_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo4_subject" name="todo4_subject"
+                                                value="{{ form.todo4_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo4_content" name="todo4_content"
+                                                value="{{ form.todo4_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo5_subject" name="todo5_subject"
+                                                value="{{ form.todo5_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo5_content" name="todo5_content"
+                                                value="{{ form.todo5_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo6_subject" name="todo6_subject"
+                                                value="{{ form.todo6_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo6_content" name="todo6_content"
+                                                value="{{ form.todo6_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo7_subject" name="todo7_subject"
+                                                value="{{ form.todo7_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo7_content" name="todo7_content"
+                                                value="{{ form.todo7_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo8_subject" name="todo8_subject"
+                                                value="{{ form.todo8_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo8_content" name="todo8_content"
+                                                value="{{ form.todo8_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo9_subject" name="todo9_subject"
+                                                value="{{ form.todo9_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo9_content" name="todo9_content"
+                                                value="{{ form.todo9_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo10_subject" name="todo10_subject"
+                                                value="{{ form.todo10_subject.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_todo10_content" name="todo10_content"
+                                                value="{{ form.todo10_content.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-5">
+                            <table class="table align-middle text-center">
+                                <thead>
+                                    <tr class="table-info">
+                                        <th style="width: 20%; white-space: nowrap;">과목</th>
+                                        <th colspan="2" style="width: 40%; white-space: nowrap;">수강시간</th>
+                                        <th colspan="2" style="width: 40%; white-space: nowrap;">자습시간</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>국어</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_korean_lecture_study_hour" name="korean_lecture_study_hour"
+                                                value="{{ form.korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="korean_lecture_study_min" name="korean_lecture_study_min"
+                                                value="{{ form.korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_korean_self_study_hour" name="korean_self_study_hour"
+                                                value="{{ form.korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="korean_self_study_min" name="korean_self_study_min"
+                                                value="{{ form.korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>수학</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_math_lecture_study_hour" name="math_lecture_study_hour"
+                                                value="{{ form.math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="math_lecture_study_min" name="math_lecture_study_min"
+                                                value="{{ form.math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_math_self_study_hour" name="math_self_study_hour"
+                                                value="{{ form.math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="math_self_study_min" name="math_self_study_min"
+                                                value="{{ form.math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>영어</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_english_lecture_study_hour" name="english_lecture_study_hour"
+                                                value="{{ form.english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="english_lecture_study_min" name="english_lecture_study_min"
+                                                value="{{ form.english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_english_self_study_hour" name="english_self_study_hour"
+                                                value="{{ form.english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="english_self_study_min" name="english_self_study_min"
+                                                value="{{ form.english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>탐구</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_research_lecture_study_hour" name="research_lecture_study_hour"
+                                                value="{{ form.research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="research_lecture_study_min" name="research_lecture_study_min"
+                                                value="{{ form.research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_research_self_study_hour" name="research_self_study_hour"
+                                                value="{{ form.research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="research_self_study_min" name="research_self_study_min"
+                                                value="{{ form.research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn btn-outline-primary" type="submit" id="button"
+                                    style="vertical-align: center">저장하기
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('save_button').addEventListener('click', function() {
+            document.getElementById('save_form').submit();
+        });
+    </script>
+{% endblock %}
