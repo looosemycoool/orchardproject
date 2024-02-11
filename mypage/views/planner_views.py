@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 @login_required(login_url='common:login')
 def index(request, user_id):
     today_date = datetime.today().date()
-    planner_instance, created = Planner.objects.get_or_create(date=today_date)
+    planner_instance, created = Planner.objects.get_or_create(username_id=user_id, date=today_date)
 
     # POST 요청 처리
     if request.method == 'POST':
