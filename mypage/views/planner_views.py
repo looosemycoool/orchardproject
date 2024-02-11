@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import Http404
 from ..models import Planner
 from ..forms import PlannerForm
 from datetime import datetime
@@ -8,6 +9,13 @@ from django.contrib.auth.models import User
 
 @login_required(login_url='common:login')
 def index(request, user_id):
+    # 현재 로그인한 사용자의 id
+    current_user_id = request.user.id
+
+    # 요청한 user_id와 현재 로그인한 사용자의 id 비교
+    if int(user_id) != current_user_id:
+        raise Http404("해당 페이지에 접근할 수 없습니다.")
+
     today_date = datetime.today().date()
     planner_instance, created = Planner.objects.get_or_create(username_id=user_id, date=today_date)
 
@@ -22,56 +30,40 @@ def index(request, user_id):
         planner_instance.korean_self_study_hour = request.POST.get('korean_self_study_hour', '')
         planner_instance.korean_self_study_min = request.POST.get('korean_self_study_min', '')
         # 필요한 경우 시간 필드의 빈 값을 처리
-        if not planner_instance.korean_lecture_study_hour:
-            planner_instance.korean_lecture_study_hour = 0
-        if not planner_instance.korean_lecture_study_min:
-            planner_instance.korean_lecture_study_min = 0
-        if not planner_instance.korean_self_study_hour:
-            planner_instance.korean_self_study_hour = 0
-        if not planner_instance.korean_self_study_min:
-            planner_instance.korean_self_study_min = 0
+        planner_instance.korean_lecture_study_hour = 0 if not planner_instance.korean_lecture_study_hour.isnumeric() else planner_instance.korean_lecture_study_hour
+        planner_instance.korean_lecture_study_min = 0 if not planner_instance.korean_lecture_study_min.isnumeric() else planner_instance.korean_lecture_study_min
+        planner_instance.korean_self_study_hour = 0 if not planner_instance.korean_self_study_hour.isnumeric() else planner_instance.korean_self_study_hour
+        planner_instance.korean_self_study_min = 0 if not planner_instance.korean_self_study_min.isnumeric() else planner_instance.korean_self_study_min
         # 수학 수업 정보 저장
         planner_instance.math_lecture_study_hour = request.POST.get('math_lecture_study_hour', '')
         planner_instance.math_lecture_study_min = request.POST.get('math_lecture_study_min', '')
         planner_instance.math_self_study_hour = request.POST.get('math_self_study_hour', '')
         planner_instance.math_self_study_min = request.POST.get('math_self_study_min', '')
         # 필요한 경우 시간 필드의 빈 값을 처리
-        if not planner_instance.math_lecture_study_hour:
-            planner_instance.math_lecture_study_hour = 0
-        if not planner_instance.math_lecture_study_min:
-            planner_instance.math_lecture_study_min = 0
-        if not planner_instance.math_self_study_hour:
-            planner_instance.math_self_study_hour = 0
-        if not planner_instance.math_self_study_min:
-            planner_instance.math_self_study_min = 0
+        planner_instance.math_lecture_study_hour = 0 if not planner_instance.math_lecture_study_hour.isnumeric() else planner_instance.math_lecture_study_hour
+        planner_instance.math_lecture_study_min = 0 if not planner_instance.math_lecture_study_min.isnumeric() else planner_instance.math_lecture_study_min
+        planner_instance.math_self_study_hour = 0 if not planner_instance.math_self_study_hour.isnumeric() else planner_instance.math_self_study_hour
+        planner_instance.math_self_study_min = 0 if not planner_instance.math_self_study_min.isnumeric() else planner_instance.math_self_study_min
         # 영어 수업 정보 저장
         planner_instance.english_lecture_study_hour = request.POST.get('english_lecture_study_hour', '')
         planner_instance.english_lecture_study_min = request.POST.get('english_lecture_study_min', '')
         planner_instance.english_self_study_hour = request.POST.get('english_self_study_hour', '')
         planner_instance.english_self_study_min = request.POST.get('english_self_study_min', '')
         # 필요한 경우 시간 필드의 빈 값을 처리
-        if not planner_instance.english_lecture_study_hour:
-            planner_instance.english_lecture_study_hour = 0
-        if not planner_instance.english_lecture_study_min:
-            planner_instance.english_lecture_study_min = 0
-        if not planner_instance.english_self_study_hour:
-            planner_instance.english_self_study_hour = 0
-        if not planner_instance.english_self_study_min:
-            planner_instance.english_self_study_min = 0
+        planner_instance.english_lecture_study_hour = 0 if not planner_instance.english_lecture_study_hour.isnumeric() else planner_instance.english_lecture_study_hour
+        planner_instance.english_lecture_study_min = 0 if not planner_instance.english_lecture_study_min.isnumeric() else planner_instance.english_lecture_study_min
+        planner_instance.english_self_study_hour = 0 if not planner_instance.english_self_study_hour.isnumeric() else planner_instance.english_self_study_hour
+        planner_instance.english_self_study_min = 0 if not planner_instance.english_self_study_min.isnumeric() else planner_instance.english_self_study_min
         # 탐구 수업 정보 저장
         planner_instance.research_lecture_study_hour = request.POST.get('research_lecture_study_hour', '')
         planner_instance.research_lecture_study_min = request.POST.get('research_lecture_study_min', '')
         planner_instance.research_self_study_hour = request.POST.get('research_self_study_hour', '')
         planner_instance.research_self_study_min = request.POST.get('research_self_study_min', '')
         # 필요한 경우 시간 필드의 빈 값을 처리
-        if not planner_instance.research_lecture_study_hour:
-            planner_instance.research_lecture_study_hour = 0
-        if not planner_instance.research_lecture_study_min:
-            planner_instance.research_lecture_study_min = 0
-        if not planner_instance.research_self_study_hour:
-            planner_instance.research_self_study_hour = 0
-        if not planner_instance.research_self_study_min:
-            planner_instance.research_self_study_min = 0
+        planner_instance.research_lecture_study_hour = 0 if not planner_instance.research_lecture_study_hour.isnumeric() else planner_instance.research_lecture_study_hour
+        planner_instance.research_lecture_study_min = 0 if not planner_instance.research_lecture_study_min.isnumeric() else planner_instance.research_lecture_study_min
+        planner_instance.research_self_study_hour = 0 if not planner_instance.research_self_study_hour.isnumeric() else planner_instance.research_self_study_hour
+        planner_instance.research_self_study_min = 0 if not planner_instance.research_self_study_min.isnumeric() else planner_instance.research_self_study_min
         # Todo 정보 저장
         planner_instance.todo1_subject = request.POST.get('todo1_subject', '')
         planner_instance.todo1_content = request.POST.get('todo1_content', '')
@@ -104,6 +96,8 @@ def index(request, user_id):
     }
     return render(request, 'mypage/planner/planner.html', context)
 
+def page_not_found(request, exception):
+    return render(request, 'common/404.html', {})
 @login_required(login_url='common:login')
 def search(request, user_id, date):
 
