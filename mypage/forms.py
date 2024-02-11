@@ -10,8 +10,8 @@ class PlannerForm(forms.ModelForm):
         model = Planner
         fields = '__all__'
 
-    def __init__(self, *args, **kwargs):
-        super(PlannerForm, self).__init__(*args, **kwargs)
-        for field_name in self.fields.keys():
-            self.fields[field_name].required = False
-        self.fields['date'].required = True
+    # def __init__(self, *args, **kwargs):
+    #     super(PlannerForm, self).__init__(*args, **kwargs)
+    #     for field_name in self.fields.keys():
+    #         self.fields[field_name].required = False
+    #     self.fields['date'].required = True
