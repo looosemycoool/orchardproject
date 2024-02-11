@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 값이 비어 있거나 숫자가 아닌 경우
             if (isNaN(parseFloat(fieldValue)) || !isFinite(fieldValue)) {
                 // 오류 메시지를 표시하고 해당 필드를 강조
-                alert('Error: ' + fieldName + ' 숫자를 입력해주세요');
+                alert('Error: ' + ' 숫자를 입력해주세요');
                 document.getElementById('id_' + fieldName).style.border = '2px solid red';
                 isError = true;
             } else {
