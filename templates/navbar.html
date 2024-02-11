@@ -1,4 +1,16 @@
 {% load static %}
+<style>
+        /* 기본 스타일 */
+    h5 a {
+        color: black; /* 텍스트 색상을 검정색으로 지정 */
+        text-decoration: none; /* 밑줄 제거 */
+    }
+
+    /* 마우스 호버 시 스타일 */
+    h5 a:hover {
+        text-decoration: underline; /* 마우스 호버 시 밑줄 추가 */
+    }
+</style>
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{% url 'reserve:index' %}">
@@ -53,9 +65,10 @@
                 id="navbarNav"
         >
             {% if user.is_authenticated %}
-{#                <h5 class="mt-5"><a href="{% url 'mypage:' %}">{{ user.first_name }} 님</a></h5>#}
-{#                <h5 class="mt-5"><a href="{% url 'mypage:index' user.id %}">{{ user.first_name }}</a></h5>#}
-                <h5 class="mt-5">{{ user.first_name }}</h5>
+{#                마이페이지에 다른 기능들이 생긴다면 mypage_main으로 링크 변경하기#}
+                <h5 class="mt-5"><a href="{% url 'mypage:planner_index' user.id %}">{{ user.first_name }}</a></h5>
+{#                <h5 class="mt-5"><a href="{% url 'mypage:index' user_id=user.id %}">{{ user.first_name }}</a></h5>#}
+{#                <h5 class="mt-5">{{ user.first_name }}</h5>#}
                 <a class="nav-link fs-6 mt-5" href="{% url 'common:logout' %}">로그아웃</a>
             {% else %}
                 <a class="nav-link fs-6 mt-5" href="{% url 'common:login' %}">로그인</a>

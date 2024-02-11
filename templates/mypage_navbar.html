@@ -1,11 +1,24 @@
 {% load static %}
+<style>
+        /* 기본 스타일 */
+    li a {
+        color: gray; /* 텍스트 색상을 회색으로 지정 */
+        text-decoration: none; /* 밑줄 제거 */
+    }
+
+    /* 마우스 호버 시 스타일 */
+    li a:hover {
+        text-decoration: underline; /* 마우스 호버 시 밑줄 추가 */
+    }
+</style>
 <div class='col-md-2'>
     <a class="navbar-brand" href="{% url 'reserve:index' %}">
         <img style="max-height: 120px" src="{% static '3.jpg' %}" alt="logo"/>
     </a>
-    <h4 class="mt-3">{{ user.first_name }}</h4>
+    <h4 class="mt-1">{{ user.first_name }}</h4>
     <hr>
-    <div>
-        <li><a href="#">플래너 시간 입력</a></li>
+    <div style="margin-left: 15px">
+        <li><a href="{% url 'mypage:planner_index' user.id %}">플래너 시간 입력</a></li>
+{#        <li><a href="{% url 'mypage:planner_detail' user.id %}">플래너 시각화</a></li>#}
     </div>
 </div>
