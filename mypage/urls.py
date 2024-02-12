@@ -12,8 +12,8 @@ urlpatterns = [
 
     # planner_views
     path('<int:user_id>/planner/', planner_views.index, name='planner_index'),
-    path('<int:user_id>/planner/<str:date>/', planner_views.search, name='planner_search'),
-    path('<int:user_id>/planner/detail', planner_views.detail, name='planner_detail'),
+    path('<int:user_id>/planner/search', planner_views.search, name='planner_search'),
+    path('<int:user_id>/planner/detail/<str:date>', planner_views.detail, name='planner_detail'),
     #
     # # comment_views
     # path('comment_create/<int:reserve_id>', comment_views.comment_create, name='comment_create'),

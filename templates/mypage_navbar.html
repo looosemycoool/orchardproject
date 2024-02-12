@@ -18,7 +18,22 @@
     <h4 class="mt-1">{{ user.first_name }}</h4>
     <hr>
     <div style="margin-left: 15px">
-        <li><a href="{% url 'mypage:planner_index' user.id %}">플래너 시간 입력</a></li>
-{#        <li><a href="{% url 'mypage:planner_detail' user.id %}">플래너 시각화</a></li>#}
+{#        <li><a href="{% url 'mypage:planner_index' user.id %}">플래너 시간 입력</a></li>#}
+        <li><a href="{% url 'mypage:planner_search' user.id %}">플래너 검색</a></li>
+{#        <li><a href="{% url 'mypage:planner_detail' user.id %}">플래너 검색</a></li>#}
     </div>
+{#    <form method="POST" action="{% url 'mypage:planner_index' user.id %}">#}
+{#        {% csrf_token %}#}
+{#        <div class="card border-secondary mt-3 text-center" style="height: 10rem">#}
+{#            <div class="card-header bg-warning-subtle">플래너 날짜 검색</div>#}
+{#            <div class="card-body">#}
+{#                <input type="date" name="selected_date" id="selected_date">#}
+{#            </div>#}
+{#            <div class="card-body">#}
+{#                <button class="btn btn-outline-success" type="submit" id="button"#}
+{#                    style="vertical-align: center;">검색#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
 </div>

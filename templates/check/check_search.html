@@ -152,14 +152,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    {% if attendance.late %}
-                        <p>지각 : {{ attendance.late }}</p>
-                    {% else %}
-                    {% endif %}
-                    {% if attendance.early_leave %}
-                        <p>조퇴 : {{ attendance.early_leave }}</p>
-                    {% else %}
-                    {% endif %}
                         <form method="post" action="{% url 'check:update_attendance' attendance.id %}">
                             {% csrf_token %}
                             <div class="form-check mb-3">
@@ -167,6 +159,31 @@
                                 <label class="form-check-label" for="absent-checkbox{{ attendance.id }}">결석 여부</label>
                                 <input type="hidden" name="attendance_id" value="{{ attendance.absent }}">  <!-- 출결 항목의 ID를 추가 -->
                             </div>
+                            <table class="table align-middle table-bordered" style="text-align: center">
+                                <thead style="position: sticky; top: 0px;">
+                                    <tr class="table-success">
+                                        <th style="width: 5%; white-space: nowrap;">오전</th>
+                                        <th style="width: 5%; white-space: nowrap;">점심</th>
+                                        <th style="width: 5%; white-space: nowrap;">오후</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="morning_check-checkbox{{ attendance.id }}" name="morning_check" {% if attendance.morning_check %}checked{% endif %}>
+                                            <input type="time" class="form-control" name="morning_late" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="lunch_check-checkbox{{ attendance.id }}" name="lunch_check" {% if attendance.lunch_check %}checked{% endif %}>
+                                            <input type="time" class="form-control" name="lunch_late" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="night_check" {% if attendance.night_check %}checked{% endif %}>
+                                            <input type="time" class="form-control" name="night_late" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <div class="mb-3">
                                 <label for="late-input" class="col-form-label">특이사항</label>
                                 <input type="text" class="form-control" name="memo" id="memo-input{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
@@ -180,15 +197,15 @@
                 </div>
             </div>
         </div>
-<script>
-    function validateForm() {
-        var selectedDate = document.getElementById("selected_date").value;
-        if (!selectedDate) {
-            alert("날짜를 지정해야 합니다.");
-            return false;
-        }
-        return true;
-    }
-</script>
+        <script>
+            function validateForm() {
+                var selectedDate = document.getElementById("selected_date").value;
+                if (!selectedDate) {
+                    alert("날짜를 지정해야 합니다.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
     {% endfor %}
 {% endblock %}

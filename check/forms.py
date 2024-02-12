@@ -152,10 +152,15 @@ class StudentRegisterForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
-        fields = ['late', 'early_leave', 'absent', 'memo']
+        fields = ['morning_late', 'lunch_late', 'night_late', 'morning_check', 'lunch_check', 'night_check', 'early_leave', 'absent', 'memo']
         widgets = {
-            'late': forms.TimeInput(attrs={'type': 'time'}),
+            'morning_late': forms.TimeInput(attrs={'type': 'time'}),
+            'lunch_late': forms.TimeInput(attrs={'type': 'time'}),
+            'night_late': forms.TimeInput(attrs={'type': 'time'}),
             'early_leave': forms.TimeInput(attrs={'type': 'time'}),
+            'morning_check': forms.CheckboxInput(),
+            'lunch_check': forms.CheckboxInput(),
+            'night_check': forms.CheckboxInput(),
             'absent': forms.CheckboxInput(),
             'memo': forms.Textarea()
         }

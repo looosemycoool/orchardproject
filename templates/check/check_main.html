@@ -37,7 +37,7 @@
                         M반
                     </a>
                 </ul>
-                <form method="POST" action="{% url 'check:index' %}">
+                <form method="POST" action="{% url 'check:index' %}" onsubmit="return validateForm()">
                     {% csrf_token %}
                     <div class="card border-secondary mt-3">
                         <div class="card-header bg-warning-subtle">
@@ -90,6 +90,15 @@
         </div>
     </div>
     <script>
+    function validateForm() {
+    var selectedDate = document.getElementById("selected_date").value;
+    if (!selectedDate) {
+        alert("날짜를 지정해야 합니다.");
+        return false;
+    }
+    return true;
+    }
+
     function validateForm1() {
     var selectedDate = document.getElementById("selected_date1").value;
     if (!selectedDate) {
