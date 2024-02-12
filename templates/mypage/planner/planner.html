@@ -6,7 +6,7 @@
         <form method="POST" action="{% url 'mypage:planner_index' user_id=user.id %}">
             {% csrf_token %}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <h4>{{ today_date }}</h4>
                     <table class="table align-middle text-center mt-3">
                         <thead>
@@ -99,121 +99,117 @@
                             style="vertical-align: center">저장하기
                     </button>
                 </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <table class="table align-middle">
-                                <thead>
-                                    <tr class="table-success text-center">
-                                        <th style="width: 15%; white-space: nowrap;">과목</th>
-                                        <th style="width: 85%; white-space: nowrap;">내용</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo1_subject" name="todo1_subject"
-                                                value="{{ planner_instance.todo1_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo1_content" name="todo1_content"
-                                                value="{{ planner_instance.todo1_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo2_subject" name="todo2_subject"
-                                                value="{{ planner_instance.todo2_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo2_content" name="todo2_content"
-                                                value="{{ planner_instance.todo2_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo3_subject" name="todo3_subject"
-                                                value="{{ planner_instance.todo3_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo3_content" name="todo3_content"
-                                                value="{{ planner_instance.todo3_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo4_subject" name="todo4_subject"
-                                                value="{{ planner_instance.todo4_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo4_content" name="todo4_content"
-                                                value="{{ planner_instance.todo4_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo5_subject" name="todo5_subject"
-                                                value="{{ planner_instance.todo5_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo5_content" name="todo5_content"
-                                                value="{{ v.todo5_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo6_subject" name="todo6_subject"
-                                                value="{{ planner_instance.todo6_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo6_content" name="todo6_content"
-                                                value="{{ planner_instance.todo6_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo7_subject" name="todo7_subject"
-                                                value="{{ planner_instance.todo7_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo7_content" name="todo7_content"
-                                                value="{{ planner_instance.todo7_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo8_subject" name="todo8_subject"
-                                                value="{{ planner_instance.todo8_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo8_content" name="todo8_content"
-                                                value="{{ planner_instance.todo8_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo9_subject" name="todo9_subject"
-                                                value="{{ planner_instance.todo9_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo9_content" name="todo9_content"
-                                                value="{{ planner_instance.todo9_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo10_subject" name="todo10_subject"
-                                                value="{{ planner_instance.todo10_subject|default_if_none:'' }}">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" id="id_todo10_content" name="todo10_content"
-                                                value="{{ planner_instance.todo10_content|default_if_none:'' }}">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="col-md-7">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr class="table-success text-center">
+                                <th style="width: 15%; white-space: nowrap;">과목</th>
+                                <th style="width: 85%; white-space: nowrap;">내용</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo1_subject" name="todo1_subject"
+                                        value="{{ planner_instance.todo1_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo1_content" name="todo1_content"
+                                        value="{{ planner_instance.todo1_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo2_subject" name="todo2_subject"
+                                        value="{{ planner_instance.todo2_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo2_content" name="todo2_content"
+                                        value="{{ planner_instance.todo2_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo3_subject" name="todo3_subject"
+                                        value="{{ planner_instance.todo3_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo3_content" name="todo3_content"
+                                        value="{{ planner_instance.todo3_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo4_subject" name="todo4_subject"
+                                        value="{{ planner_instance.todo4_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo4_content" name="todo4_content"
+                                        value="{{ planner_instance.todo4_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo5_subject" name="todo5_subject"
+                                        value="{{ planner_instance.todo5_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo5_content" name="todo5_content"
+                                        value="{{ v.todo5_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo6_subject" name="todo6_subject"
+                                        value="{{ planner_instance.todo6_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo6_content" name="todo6_content"
+                                        value="{{ planner_instance.todo6_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo7_subject" name="todo7_subject"
+                                        value="{{ planner_instance.todo7_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo7_content" name="todo7_content"
+                                        value="{{ planner_instance.todo7_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo8_subject" name="todo8_subject"
+                                        value="{{ planner_instance.todo8_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo8_content" name="todo8_content"
+                                        value="{{ planner_instance.todo8_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo9_subject" name="todo9_subject"
+                                        value="{{ planner_instance.todo9_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo9_content" name="todo9_content"
+                                        value="{{ planner_instance.todo9_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo10_subject" name="todo10_subject"
+                                        value="{{ planner_instance.todo10_subject|default_if_none:'' }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id_todo10_content" name="todo10_content"
+                                        value="{{ planner_instance.todo10_content|default_if_none:'' }}">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </form>
