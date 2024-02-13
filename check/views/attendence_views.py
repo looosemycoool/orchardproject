@@ -12,6 +12,7 @@ CHOICES = {
     'english': '영어',
     'research': '탐구',
     'guitar': '기타',
+    'specify': '특이',
 }
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def attendance_index_p(request):
