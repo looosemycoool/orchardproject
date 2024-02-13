@@ -23,13 +23,23 @@
                 <table class="table align-middle table-bordered" style="text-align: center">
                     <thead style="position: sticky; top: 0px;">
                         <tr class="table-success">
-                            <th style="width: 20%; white-space: nowrap;"></th>
+                            <th style="width: 10%; white-space: nowrap;"></th>
                             <th style="width: 5%; white-space: nowrap;">결석</th>
-                            <th style="width: 5%; white-space: nowrap;">오전</th>
-                            <th style="width: 5%; white-space: nowrap;">점심</th>
-                            <th style="width: 5%; white-space: nowrap;">오후</th>
-                            <th style="width: 5%; white-space: nowrap;">조퇴</th>
-                            <th style="width: 50%; white-space: nowrap;">특이사항</th>
+                            <th style="width: 5%; white-space: nowrap;">8</th>
+                            <th style="width: 5%; white-space: nowrap;">9</th>
+                            <th style="width: 5%; white-space: nowrap;">10</th>
+                            <th style="width: 5%; white-space: nowrap;">11</th>
+                            <th style="width: 5%; white-space: nowrap;">12</th>
+                            <th style="width: 5%; white-space: nowrap;">13</th>
+                            <th style="width: 5%; white-space: nowrap;">14</th>
+                            <th style="width: 5%; white-space: nowrap;">15</th>
+                            <th style="width: 5%; white-space: nowrap;">16</th>
+                            <th style="width: 5%; white-space: nowrap;">17</th>
+                            <th style="width: 5%; white-space: nowrap;">18</th>
+                            <th style="width: 5%; white-space: nowrap;">19</th>
+                            <th style="width: 5%; white-space: nowrap;">20</th>
+                            <th style="width: 5%; white-space: nowrap;">21</th>
+                            <th style="width: 5%; white-space: nowrap;">22</th>
                             <th style="width: 5%; white-space: nowrap;"></th>
                         </tr>
                     </thead>
@@ -39,77 +49,200 @@
                         <input type="hidden" name="attendance_id" value="{{ attendance.id }}">
                         <tbody>
                             <tr>
-                                {% if attendance.absent %}
-                                <td class="bg-secondary">{{ attendance.user.class_name }}-{{ attendance.user.class_num }}
+                            {% if attendance.absent %}
+                                <td rowspan="2" class="bg-secondary">{{ attendance.user.class_name }}-{{ attendance.user.class_num }}
                                     <br>
                                     {{ attendance.user.student }}</td>
-                                {% else %}
-                                    <td>
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ attendance.id }}">
-                                          {{ attendance.user.class_name }}-{{ attendance.user.class_num }}
-                                            <br>{{ attendance.user.student }}
-                                        </button>
-                                    </td>
-                                {% endif %}
-
-
-                                <!-- 체크박스 필드 -->
+                            {% else %}
+                                <td rowspan="2">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ attendance.id }}">
+                                      {{ attendance.user.class_name }}-{{ attendance.user.class_num }}
+                                        <br>{{ attendance.user.student }}
+                                    </button>
+                                </td>
+                            {% endif %}
                                 <td><input type="checkbox" name="absent_{{ attendance.id }}" {% if attendance.absent %}checked{% endif %}></td>
                             {% if attendance.time8 != "" %}
                                 <td class="bg-secondary">
-                                    <input type="checkbox" name="morning_check_{{ attendance.id }}" {% if attendance.morning_check %}checked{% endif %}>
-                                    <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
+                                    <input type="checkbox" name="time8_check_{{ attendance.id }}" {% if attendance.time8_check %}checked{% endif %}>
                                 </td>
                             {% else %}
                                 <td>
-                                    <input type="checkbox" name="morning_check_{{ attendance.id }}" {% if attendance.morning_check %}checked{% endif %}>
-                                    <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
+                                    <input type="checkbox" name="time8_check_{{ attendance.id }}" {% if attendance.time8_check %}checked{% endif %}>
                                 </td>
                             {% endif %}
-                            {% if attendance.time13 != "" %}
+
+                            {% if attendance.time9 != "" %}
                                 <td class="bg-secondary">
-                                    <input type="checkbox" name="lunch_check_{{ attendance.id }}" {% if attendance.lunch_check %}checked{% endif %}>
-                                    <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
+                                    <input type="checkbox" name="time9_check_{{ attendance.id }}" {% if attendance.time9_check %}checked{% endif %}>
                                 </td>
                             {% else %}
                                 <td>
-                                    <input type="checkbox" name="lunch_check_{{ attendance.id }}" {% if attendance.lunch_check %}checked{% endif %}>
-                                    <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
+                                    <input type="checkbox" name="time9_check_{{ attendance.id }}" {% if attendance.time9_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time10 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time10_check_{{ attendance.id }}" {% if attendance.time10_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time10_check_{{ attendance.id }}" {% if attendance.time10_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time11 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time11_check_{{ attendance.id }}" {% if attendance.time11_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time11_check_{{ attendance.id }}" {% if attendance.time11_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time12 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time12_check_{{ attendance.id }}" {% if attendance.time12_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time12_check_{{ attendance.id }}" {% if attendance.time12_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time13 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time13_check_{{ attendance.id }}" {% if attendance.time13_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time13_check_{{ attendance.id }}" {% if attendance.time13_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time14 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time14_check_{{ attendance.id }}" {% if attendance.time14_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time14_check_{{ attendance.id }}" {% if attendance.time14_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time15 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time15_check_{{ attendance.id }}" {% if attendance.time15_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time15_check_{{ attendance.id }}" {% if attendance.time15_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time16 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time16_check_{{ attendance.id }}" {% if attendance.time16_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time16_check_{{ attendance.id }}" {% if attendance.time16_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time17 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time17_check_{{ attendance.id }}" {% if attendance.time17_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time17_check_{{ attendance.id }}" {% if attendance.time17_check %}checked{% endif %}>
                                 </td>
                             {% endif %}
 
                             {% if attendance.time18 != "" %}
                                 <td class="bg-secondary">
-                                    <input type="checkbox" name="night_check_{{ attendance.id }}" {% if attendance.night_check %}checked{% endif %}>
-                                    <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
+                                    <input type="checkbox" name="time18_check_{{ attendance.id }}" {% if attendance.time18_check %}checked{% endif %}>
                                 </td>
                             {% else %}
                                 <td>
-                                    <input type="checkbox" name="night_check_{{ attendance.id }}" {% if attendance.night_check %}checked{% endif %}>
-                                    <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
+                                    <input type="checkbox" name="time18_check_{{ attendance.id }}" {% if attendance.time18_check %}checked{% endif %}>
                                 </td>
                             {% endif %}
-                                <td><input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}"></td><!-- 특이사항 입력란 -->
+
+                            {% if attendance.time19 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time19_check_{{ attendance.id }}" {% if attendance.time19_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
                                 <td>
+                                    <input type="checkbox" name="time19_check_{{ attendance.id }}" {% if attendance.time19_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time20 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time20_check_{{ attendance.id }}" {% if attendance.time20_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time20_check_{{ attendance.id }}" {% if attendance.time20_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time21 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time21_check_{{ attendance.id }}" {% if attendance.time21_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time21_check_{{ attendance.id }}" {% if attendance.time21_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+
+                            {% if attendance.time22 != "" %}
+                                <td class="bg-secondary">
+                                    <input type="checkbox" name="time22_check_{{ attendance.id }}" {% if attendance.time22_check %}checked{% endif %}>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <input type="checkbox" name="time22_check_{{ attendance.id }}" {% if attendance.time22_check %}checked{% endif %}>
+                                </td>
+                            {% endif %}
+{#                            조퇴는 이따가 #}
+{#                                <td><input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}"></td><!-- 특이사항 입력란 -->#}
+                                <!-- 저장 버튼 -->
+                                <td rowspan="2">
+                                    <button type="submit" class="btn btn-primary btn-sm">저장</button>
+                                </td>
+                            </tr>
+{#                            두번째 줄 #}
+                            <tr>
+                                <td colspan="3">
+                                    <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
+                                </td>
+                                <td colspan="3">
+                                    <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
+                                </td>
+                                <td colspan="3">
+                                    <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
+                                </td>
+{#                                조퇴 #}
+{#                                <td colspan="3">#}
+{#                                    <input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}">#}
+{#                                </td><!-- 특이사항 입력란 -->#}
+                                <td colspan="7">
                                     <input type="text" class="form-control" name="memo_{{ attendance.id }}" id="memo_{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
                                 </td>
                                 <!-- 저장 버튼 -->
-                                <td>
-                                    <button type="submit" class="btn btn-primary btn-sm">저장</button>
-                                </td>
                             </tr>
                         </tbody>
                     {% endfor %}
                 </form>
                 </table>
             </div>
-{#            <div class="col-md-5">#}
-{#                <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">#}
-{#                    <span style="color:mediumseagreen; font-size:24px; "> {{ selected_date }} </span>#}
-{#                    <span style="color:dodgerblue; font-size:24px; "> S반 </span>#}
-{#                    <span style="font-size:24px; "> 출석부 </span>#}
-{#                </h3>#}
-{#            </div>#}
         </div>
     </div>
     <!-- Modal -->
