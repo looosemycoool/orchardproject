@@ -161,6 +161,22 @@ class AttendanceForm(forms.ModelForm):
             'morning_check': forms.CheckboxInput(),
             'lunch_check': forms.CheckboxInput(),
             'night_check': forms.CheckboxInput(),
+            #####
+            'time8_check': forms.CheckboxInput(),
+            'time9_check': forms.CheckboxInput(),
+            'time10_check': forms.CheckboxInput(),
+            'time11_check': forms.CheckboxInput(),
+            'time12_check': forms.CheckboxInput(),
+            'time13_check': forms.CheckboxInput(),
+            'time14_check': forms.CheckboxInput(),
+            'time15_check': forms.CheckboxInput(),
+            'time16_check': forms.CheckboxInput(),
+            'time17_check': forms.CheckboxInput(),
+            'time18_check': forms.CheckboxInput(),
+            'time19_check': forms.CheckboxInput(),
+            'time20_check': forms.CheckboxInput(),
+            'time21_check': forms.CheckboxInput(),
+            'time22_check': forms.CheckboxInput(),
             'absent': forms.CheckboxInput(),
             'memo': forms.Textarea()
         }

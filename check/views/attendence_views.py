@@ -100,47 +100,23 @@ def update_attendance(request, attendance_id):
     attendance.night_late = night_late_value if night_late_value else None
     attendance.early_leave = early_leave_value if early_leave_value else None
 
+    attendance.time8_check = 'time8_check_{}'.format(attendance_id) in request.POST
+    attendance.time9_check = 'time9_check_{}'.format(attendance_id) in request.POST
+    attendance.time10_check = 'time10_check_{}'.format(attendance_id) in request.POST
+    attendance.time11_check = 'time11_check_{}'.format(attendance_id) in request.POST
+    attendance.time12_check = 'time12_check_{}'.format(attendance_id) in request.POST
+    attendance.time13_check = 'time13_check_{}'.format(attendance_id) in request.POST
+    attendance.time14_check = 'time14_check_{}'.format(attendance_id) in request.POST
+    attendance.time15_check = 'time15_check_{}'.format(attendance_id) in request.POST
+    attendance.time16_check = 'time16_check_{}'.format(attendance_id) in request.POST
+    attendance.time17_check = 'time17_check_{}'.format(attendance_id) in request.POST
+    attendance.time18_check = 'time18_check_{}'.format(attendance_id) in request.POST
+    attendance.time19_check = 'time19_check_{}'.format(attendance_id) in request.POST
+    attendance.time20_check = 'time20_check_{}'.format(attendance_id) in request.POST
+    attendance.time21_check = 'time21_check_{}'.format(attendance_id) in request.POST
+    attendance.time22_check = 'time22_check_{}'.format(attendance_id) in request.POST
+
     attendance.save()
 
     # Redirect back to the attendance page to see the updated records
     return redirect('check:index')
-
-# def attendance_p(request, attendance_id):
-#     attendance = Attendance.objects.get(id=attendance_id)
-#     if request.method == 'POST':
-#         form = AttendanceForm(request.POST, instance=attendance)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('check:attendance_index_p')
-
-
-# def attendance_index_s(request):
-#     current_date = datetime.now().date()
-#     attendances_s = Attendance.objects.filter(user__class_name='S', date=current_date, user__is_dropped=False).order_by('user__class_num')
-#
-#     # 딕셔너리 정의: CHOICES에 맞게 값 변환
-#     translation_dict = {
-#         'False': ' ',
-#         'korean': '국어',
-#         'math': '수학',
-#         'english': '영어',
-#         'research': '탐구',
-#         'guitar': '기타',
-#     }
-#
-#     # attendances_s의 값 변환
-#     for attendance in attendances_s:
-#         for field in ['time8', 'time9', 'time10', 'time11', 'time12', 'time13', 'time14', 'time15', 'time16', 'time17',
-#                       'time18', 'time19', 'time20', 'time21', 'time22']:
-#             setattr(attendance, field, translation_dict.get(getattr(attendance, field), getattr(attendance, field)))
-#
-#     context = {'attendances_s': attendances_s}
-#     return render(request, 'check/attendance/attendance_s_class.html', context)
-
-# def attendance_s(request, attendance_id):
-#     attendance = Attendance.objects.get(id=attendance_id)
-#     if request.method == 'POST':
-#         form = AttendanceForm(request.POST, instance=attendance)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('check:attendance_index_s')
