@@ -148,9 +148,9 @@ class Attendance(models.Model):
     late = models.TimeField(null=True, blank=True)
     absent = models.BooleanField(null=True, blank=True, default=False)
 
-    morning_late = models.TimeField(null=True, blank=True)
-    lunch_late = models.TimeField(null=True, blank=True)
-    night_late = models.TimeField(null=True, blank=True)
+    # morning_late = models.TimeField(null=True, blank=True)
+    # lunch_late = models.TimeField(null=True, blank=True)
+    # night_late = models.TimeField(null=True, blank=True)
 
     morning_check = models.BooleanField(null=True, blank=True, default=False)
     lunch_check = models.BooleanField(null=True, blank=True, default=False)
