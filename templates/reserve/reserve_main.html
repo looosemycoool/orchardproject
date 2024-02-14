@@ -31,9 +31,9 @@
             <div class="col-md-3">
                 <div class="card border-success mb-3" style="max-width: 18rem;">
                     <div class="card-header bg-success text-light"><strong>공지사항</strong></div>
-                    <div class="card-header text-success">{{ notice.notice_header }}</div>
+                    <div class="card-header text-success">{{ notice.notice_header|default_if_none:'' }}</div>
                     <div class="card-body">
-                        <p class="card-text">{{ notice.notice_body }}</p>
+                        <p class="card-text">{{ notice.notice_body|default_if_none:'' }}</p>
                     </div>
                 </div>
                 {% if request.user.is_staff %}
