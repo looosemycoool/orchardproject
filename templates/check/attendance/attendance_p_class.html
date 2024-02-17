@@ -24,7 +24,7 @@
                     <thead style="position: sticky; top: 0px;">
                         <tr class="table-success">
                             <th style="width: 10%; white-space: nowrap;"></th>
-                            <th style="width: 5%; white-space: nowrap;">결석</th>
+                            <th class="bg-secondary-subtle" style="width: 5%; white-space: nowrap;">결석</th>
                             <th class="bg-warning-subtle" style="width: 5%; white-space: nowrap;">8</th>
                             <th style="width: 5%; white-space: nowrap;">9</th>
                             <th style="width: 5%; white-space: nowrap;">10</th>
@@ -61,7 +61,7 @@
                                     </button>
                                 </td>
                             {% endif %}
-                                <td><input type="checkbox" name="absent_{{ attendance.id }}" {% if attendance.absent %}checked{% endif %}></td>
+                                <td class="bg-danger-subtle"><input type="checkbox" name="absent_{{ attendance.id }}" {% if attendance.absent %}checked{% endif %}></td>
                             {% if attendance.time8 != "" %}
                                 <td class="bg-secondary">
                                     <input type="checkbox" name="time8_check_{{ attendance.id }}" {% if attendance.time8_check %}checked{% endif %}>
@@ -221,22 +221,22 @@
 {#                            두번째 줄 #}
                             <tr>
                                 <td>오전</td>
-                                <td colspan="2">
+                                <td colspan="3">
                                     <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
                                 </td>
                                 <td>점심</td>
-                                <td colspan="2">
+                                <td colspan="3">
                                     <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
                                 </td>
                                 <td>저녁</td>
-                                <td colspan="2">
+                                <td colspan="3">
                                     <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
                                 </td>
 {#                                조퇴 #}
 {#                                <td colspan="3">#}
 {#                                    <input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}">#}
 {#                                </td><!-- 특이사항 입력란 -->#}
-                                <td colspan="7">
+                                <td colspan="4">
                                     <input type="text" class="form-control" name="memo_{{ attendance.id }}" id="memo_{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
                                 </td>
                                 <!-- 저장 버튼 -->
