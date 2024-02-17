@@ -23,7 +23,7 @@
                 <table class="table align-middle table-bordered" style="text-align: center">
                     <thead style="position: sticky; top: 0px;">
                         <tr class="table-success">
-                            <th style="width: 10%; white-space: nowrap;"></th>
+                            <th style="width: 15%; white-space: nowrap;"></th>
                             <th class="bg-secondary-subtle" style="width: 5%; white-space: nowrap;">결석</th>
                             <th class="bg-warning-subtle" style="width: 3%; white-space: nowrap;">8</th>
                             <th style="width: 3%; white-space: nowrap;">9</th>
@@ -216,7 +216,7 @@
 {#                                <td><input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}"></td><!-- 특이사항 입력란 -->#}
                                 <!-- 저장 버튼 -->
                                 <td rowspan="2">
-                                    <input type="text" class="form-control" name="memo_{{ attendance.id }}" id="memo_{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
+                                    <input type="text" placeholder="특이사항" class="form-control" name="memo_{{ attendance.id }}" id="memo_{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
                                 </td>
                                 <td rowspan="2">
                                     <button type="submit" class="btn btn-primary btn-sm">저장</button>
