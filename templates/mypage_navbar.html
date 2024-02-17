@@ -25,13 +25,11 @@
       <ul class="dropdown-menu">
         <form method="POST" action="{% url 'mypage:planner_search' user.id %}" onsubmit="return validateForm()">
             {% csrf_token %}
-            <div class="card mt-3 text-center">
+            <div class="text-center">
                 <input type="date" name="selected_date" id="selected_date">
-                <div class="card-body">
-                    <button class="btn btn-outline-success" type="submit" id="button"
-                        style="vertical-align: center;">검색
-                    </button>
-                </div>
+                <button class="btn btn-outline-success mt-2" type="submit" id="button"
+                    style="vertical-align: center;">검색
+                </button>
             </div>
         </form>
       </ul>
