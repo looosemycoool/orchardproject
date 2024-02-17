@@ -25,13 +25,11 @@
     {% csrf_token %}
     <div class="card border-secondary mt-3">
         <div class="card-header bg-warning-subtle">
-            <input type="date" name="selected_date" id="selected_date">
+            <h5>출석부 날짜 검색</h5>
         </div>
         <div class="card-body">
-            <button type="submit" class="btn btn-outline-primary" name="class_button">검색</button>
-{#            <button type="submit" class="btn btn-outline-primary" name="class_button" value="P">P반</button>#}
-{#            <button type="submit" class="btn btn-outline-info" name="class_button" value="S">S반</button>#}
-{#            <button type="submit" class="btn btn-outline-warning" name="class_button" value="M">M반</button>#}
+            <input type="date" name="selected_date" id="selected_date">
+            <button type="submit" class="btn btn-outline-primary mt-3" name="class_button">검색</button>
         </div>
     </div>
 </form>

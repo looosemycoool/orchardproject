@@ -25,21 +25,22 @@
                         <tr class="table-success">
                             <th style="width: 10%; white-space: nowrap;"></th>
                             <th class="bg-secondary-subtle" style="width: 5%; white-space: nowrap;">결석</th>
-                            <th class="bg-warning-subtle" style="width: 5%; white-space: nowrap;">8</th>
-                            <th style="width: 5%; white-space: nowrap;">9</th>
-                            <th style="width: 5%; white-space: nowrap;">10</th>
-                            <th style="width: 5%; white-space: nowrap;">11</th>
-                            <th style="width: 5%; white-space: nowrap;">12</th>
-                            <th class="bg-warning-subtle" style="width: 5%; white-space: nowrap;">13</th>
-                            <th style="width: 5%; white-space: nowrap;">14</th>
-                            <th style="width: 5%; white-space: nowrap;">15</th>
-                            <th style="width: 5%; white-space: nowrap;">16</th>
-                            <th style="width: 5%; white-space: nowrap;">17</th>
-                            <th class="bg-warning-subtle" style="width: 5%; white-space: nowrap;">18</th>
-                            <th style="width: 5%; white-space: nowrap;">19</th>
-                            <th style="width: 5%; white-space: nowrap;">20</th>
-                            <th style="width: 5%; white-space: nowrap;">21</th>
-                            <th style="width: 5%; white-space: nowrap;">22</th>
+                            <th class="bg-warning-subtle" style="width: 3%; white-space: nowrap;">8</th>
+                            <th style="width: 3%; white-space: nowrap;">9</th>
+                            <th style="width: 3%; white-space: nowrap;">10</th>
+                            <th style="width: 3%; white-space: nowrap;">11</th>
+                            <th style="width: 3%; white-space: nowrap;">12</th>
+                            <th class="bg-warning-subtle" style="width: 3%; white-space: nowrap;">13</th>
+                            <th style="width: 3%; white-space: nowrap;">14</th>
+                            <th style="width: 3%; white-space: nowrap;">15</th>
+                            <th style="width: 3%; white-space: nowrap;">16</th>
+                            <th style="width: 3%; white-space: nowrap;">17</th>
+                            <th class="bg-warning-subtle" style="width: 3%; white-space: nowrap;">18</th>
+                            <th style="width: 3%; white-space: nowrap;">19</th>
+                            <th style="width: 3%; white-space: nowrap;">20</th>
+                            <th style="width: 3%; white-space: nowrap;">21</th>
+                            <th style="width: 3%; white-space: nowrap;">22</th>
+                            <th style="width: 35%; white-space: nowrap;"></th>
                             <th style="width: 5%; white-space: nowrap;"></th>
                         </tr>
                     </thead>
@@ -215,31 +216,23 @@
 {#                                <td><input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}"></td><!-- 특이사항 입력란 -->#}
                                 <!-- 저장 버튼 -->
                                 <td rowspan="2">
+                                    <input type="text" class="form-control" name="memo_{{ attendance.id }}" id="memo_{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
+                                </td>
+                                <td rowspan="2">
                                     <button type="submit" class="btn btn-primary btn-sm">저장</button>
                                 </td>
                             </tr>
-{#                            두번째 줄 #}
                             <tr>
-                                <td>오전</td>
-                                <td colspan="3">
+                                <td>시간</td>
+                                <td colspan="5">
                                     <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
                                 </td>
-                                <td>점심</td>
-                                <td colspan="3">
+                                <td colspan="5">
                                     <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
                                 </td>
-                                <td>저녁</td>
-                                <td colspan="3">
+                                <td colspan="5">
                                     <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
                                 </td>
-{#                                조퇴 #}
-{#                                <td colspan="3">#}
-{#                                    <input type="time" class="form-control" name="early_leave_{{ attendance.id }}" id="early_leave_{{ attendance.id }}" value="{{ attendance.early_leave|default:''|date:'H:i' }}">#}
-{#                                </td><!-- 특이사항 입력란 -->#}
-                                <td colspan="4">
-                                    <input type="text" class="form-control" name="memo_{{ attendance.id }}" id="memo_{{ attendance.id }}" value="{{ attendance.memo|default_if_none:'' }}">
-                                </td>
-                                <!-- 저장 버튼 -->
                             </tr>
                         </tbody>
                     {% endfor %}
