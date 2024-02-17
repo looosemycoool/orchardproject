@@ -95,31 +95,26 @@ def index(request, user_id):
     }
     return render(request, 'mypage/planner/planner.html', context)
 
-# @login_required(login_url='common:login')
-# def planner_modify(request, user_id):
-
-
 @login_required(login_url='common:login')
 def search(request, user_id):
     if request.method == 'POST':
         selected_date = request.POST.get('selected_date')
+        print(selected_date)
         return redirect('mypage:planner_detail', user_id, selected_date)
     # 현재 로그인한 사용자의 id
     current_user_id = request.user.id
-
     # 요청한 user_id와 현재 로그인한 사용자의 id 비교
     if int(user_id) != current_user_id:
         raise Http404("해당 페이지에 접근할 수 없습니다.")
 
     context = {
     }
-    return render(request, 'mypage/planner/planner_search.html', context)
+    return render(request, 'mypage/planner/planner_detail.html', context)
 
 @login_required(login_url='common:login')
-def planner_submit(request, user_id, date):
+def detail(request, user_id, date):
     # 현재 로그인한 사용자의 id
     current_user_id = request.user.id
-
     # 요청한 user_id와 현재 로그인한 사용자의 id 비교
     if int(user_id) != current_user_id:
         raise Http404("해당 페이지에 접근할 수 없습니다.")
@@ -195,18 +190,18 @@ def planner_submit(request, user_id, date):
 
         planner_instance.save()
 
-        return redirect('mypage:planner_search', user_id=user_id, date=date)
+        return redirect('mypage:planner_detail', user_id=user_id, date=date)
 
     context = {
         'planner_instance': planner_instance,
         'date': date
     }
-    return render(request, 'mypage/planner/planner_search.html', context)
+    return render(request, 'mypage/planner/planner_detail.html', context)
 
-@login_required(login_url='common:login')
-def detail(request, user_id, date):
-
-    return render(request, 'mypage/planner/planner_detail.html')
-
-def page_not_found(request, exception):
-    return render(request, 'common/404.html', {})
+# @login_required(login_url='common:login')
+# def detail(request, user_id, date):
+#
+#     return render(request, 'mypage/planner/planner_detail.html')
+#
+# def page_not_found(request, exception):
+#     return render(request, 'common/404.html', {})

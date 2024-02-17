@@ -9,7 +9,7 @@ urlpatterns = [
     path('specify/', base_views.specify, name='specify'),
 
     #path('search/', base_views.search, name='search'),
-    path('detail/<str:selected_class>/<str:selected_date>', base_views.detail, name='detail'),
+    path('detail/<str:selected_date>', base_views.detail, name='detail'),
     #path('search/<str:selected_class>/<str:selected_date>/', base_views.search_result, name='search_result'),
 
     path('create_book/', create_book_views.create_book, name='create_book'),

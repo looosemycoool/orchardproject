@@ -18,25 +18,31 @@
                     {% endfor %}
                 </div>
             {% endif %}
+
             <div class="col-md-2 text-center">
                 {% include 'check/check_menu.html' %}
-                <ul class="list-group dropdown-center mt-3">
-                    <a href="{% url 'check:attendance_index_p' %}"
-                        class="list-group-item list-group-item-action text-center"
-                        aria-current="true">
-                        P반
-                    </a>
-                    <a href="{% url 'check:attendance_index_s' %}"
-                        class="list-group-item list-group-item-action text-center"
-                        aria-current="true">
-                        S반
-                    </a>
-                    <a href="{% url 'check:attendance_index_m' %}"
-                        class="list-group-item list-group-item-action text-center"
-                        aria-current="true">
-                        M반
-                    </a>
-                </ul>
+                <div class="card text-center mt-3 border border-success">
+                    <div class="card-header text-center bg-success-subtle">
+                        <h5>출석체크</h5>
+                    </div>
+                    <ul class="list-group dropdown-center mt-3">
+                        <a href="{% url 'check:attendance_index_p' %}"
+                            class="list-group-item list-group-item-action text-center"
+                            aria-current="true">
+                            P반
+                        </a>
+                        <a href="{% url 'check:attendance_index_s' %}"
+                            class="list-group-item list-group-item-action text-center"
+                            aria-current="true">
+                            S반
+                        </a>
+                        <a href="{% url 'check:attendance_index_m' %}"
+                            class="list-group-item list-group-item-action text-center"
+                            aria-current="true">
+                            M반
+                        </a>
+                    </ul>
+                </div>
                 <form method="POST" action="{% url 'check:index' %}" onsubmit="return validateForm()">
                     {% csrf_token %}
                     <div class="card border-secondary mt-3">
@@ -44,9 +50,10 @@
                             <input type="date" name="selected_date" id="selected_date">
                         </div>
                         <div class="card-body">
-                            <button type="submit" class="btn btn-outline-primary" name="class_button" value="P">P반</button>
-                            <button type="submit" class="btn btn-outline-info" name="class_button" value="S">S반</button>
-                            <button type="submit" class="btn btn-outline-warning" name="class_button" value="M">M반</button>
+                            <button type="submit" class="btn btn-outline-primary" name="class_button">검색</button>
+{#                            <button type="submit" class="btn btn-outline-primary" name="class_button" value="P">P반</button>#}
+{#                            <button type="submit" class="btn btn-outline-info" name="class_button" value="S">S반</button>#}
+{#                            <button type="submit" class="btn btn-outline-warning" name="class_button" value="M">M반</button>#}
                         </div>
                     </div>
                 </form>

@@ -17,6 +17,25 @@
     </a>
     <h4 class="mt-1">{{ user.first_name }}</h4>
     <hr>
+    <!-- Example single danger button -->
+    <div class="btn-group">
+      <button type="button" class="btn border dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        플래너 날짜 검색
+      </button>
+      <ul class="dropdown-menu">
+        <form method="POST" action="{% url 'mypage:planner_search' user.id %}" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="card mt-3 text-center">
+                <input type="date" name="selected_date" id="selected_date">
+                <div class="card-body">
+                    <button class="btn btn-outline-success" type="submit" id="button"
+                        style="vertical-align: center;">검색
+                    </button>
+                </div>
+            </div>
+        </form>
+      </ul>
+    </div>
     <div style="margin-left: 15px">
 {#        <li><a href="{% url 'mypage:planner_index' user.id %}">플래너 시간 입력</a></li>#}
 {#        <li><a href="{% url 'mypage:planner_search' user.id %}">플래너 검색</a></li>#}
@@ -37,3 +56,13 @@
 {#        </div>#}
 {#    </form>#}
 </div>
+<script>
+    function validateForm() {
+    var selectedDate = document.getElementById("selected_date").value;
+    if (!selectedDate) {
+        alert("날짜를 지정해야 합니다.");
+        return false;
+    }
+    return true;
+    }
+</script>

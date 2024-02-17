@@ -220,13 +220,16 @@
                             </tr>
 {#                            두번째 줄 #}
                             <tr>
-                                <td colspan="3">
+                                <td>오전</td>
+                                <td colspan="2">
                                     <input type="time" class="form-control" name="morning_late_{{ attendance.id }}" id="morning_late_{{ attendance.id }}" value="{{ attendance.morning_late|default:''|date:'H:i' }}">
                                 </td>
-                                <td colspan="3">
+                                <td>점심</td>
+                                <td colspan="2">
                                     <input type="time" class="form-control" name="lunch_late_{{ attendance.id }}" id="lunch_late_{{ attendance.id }}" value="{{ attendance.lunch_late|default:''|date:'H:i' }}">
                                 </td>
-                                <td colspan="3">
+                                <td>저녁</td>
+                                <td colspan="2">
                                     <input type="time" class="form-control" name="night_late_{{ attendance.id }}" id="night_late_{{ attendance.id }}" value="{{ attendance.night_late|default:''|date:'H:i' }}">
                                 </td>
 {#                                조퇴 #}
