@@ -107,9 +107,7 @@ def search(request, user_id):
     if int(user_id) != current_user_id:
         raise Http404("해당 페이지에 접근할 수 없습니다.")
 
-    context = {
-    }
-    return render(request, 'mypage/planner/planner_detail.html', context)
+    return render(request, 'mypage/planner/planner_detail.html')
 
 @login_required(login_url='common:login')
 def detail(request, user_id, date):
@@ -197,11 +195,3 @@ def detail(request, user_id, date):
         'date': date
     }
     return render(request, 'mypage/planner/planner_detail.html', context)
-
-# @login_required(login_url='common:login')
-# def detail(request, user_id, date):
-#
-#     return render(request, 'mypage/planner/planner_detail.html')
-#
-# def page_not_found(request, exception):
-#     return render(request, 'common/404.html', {})
