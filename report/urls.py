@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import study_views, question_views, consulting_views, newstudy_views
+from .views import study_views, question_views, consulting_views, newstudy_views, word_views
 
 app_name = 'report'
 
@@ -20,4 +20,8 @@ urlpatterns = [
     # newstudy_views
     path('newstudy/', newstudy_views.index, name='newstudy_index'),
     path('newstudy/report/<int:student_id>', newstudy_views.newstudy_report, name='newstudy_report'),
+
+    # word_views
+    path('word/', word_views.index, name='word_index'),
+    path('word/report/<int:student_id>', word_views.word_report, name='word_report'),
 ]

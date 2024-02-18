@@ -10,7 +10,7 @@
                     <h4>{{ today_date }}</h4>
                     <table class="table align-middle text-center mt-3">
                         <thead>
-                            <tr class="table-info">
+                            <tr class="table-primary">
                                 <th style="width: 10%; white-space: nowrap;">과목</th>
                                 <th colspan="2" style="width: 45%; white-space: nowrap;">수강시간</th>
                                 <th colspan="2" style="width: 45%; white-space: nowrap;">자습시간</th>
@@ -19,7 +19,7 @@
                         <tbody>
                             <tr>
                                 <td>국어</td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_korean_lecture_study_hour" name="korean_lecture_study_hour"
                                             value="{{ planner_instance.korean_lecture_study_hour|default_if_none:'' }}">
@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="korean_lecture_study_min" name="korean_lecture_study_min"
                                             value="{{ planner_instance.korean_lecture_study_min|default_if_none:'' }}">
@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_korean_self_study_hour" name="korean_self_study_hour"
                                             value="{{ planner_instance.korean_self_study_hour|default_if_none:'' }}">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="korean_self_study_min" name="korean_self_study_min"
                                             value="{{ planner_instance.korean_self_study_min|default_if_none:'' }}">
@@ -58,7 +58,7 @@
                             </tr>
                             <tr>
                                 <td>수학</td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_math_lecture_study_hour" name="math_lecture_study_hour"
                                             value="{{ planner_instance.math_lecture_study_hour|default_if_none:'' }}">
@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="math_lecture_study_min" name="math_lecture_study_min"
                                             value="{{ planner_instance.math_lecture_study_min|default_if_none:'' }}">
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_math_self_study_hour" name="math_self_study_hour"
                                             value="{{ planner_instance.math_self_study_hour|default_if_none:'' }}">
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="math_self_study_min" name="math_self_study_min"
                                             value="{{ planner_instance.math_self_study_min|default_if_none:'' }}">
@@ -97,7 +97,7 @@
                             </tr>
                             <tr>
                                 <td>영어</td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_english_lecture_study_hour" name="english_lecture_study_hour"
                                             value="{{ planner_instance.english_lecture_study_hour|default_if_none:'' }}">
@@ -106,7 +106,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="english_lecture_study_min" name="english_lecture_study_min"
                                             value="{{ planner_instance.english_lecture_study_min|default_if_none:'' }}">
@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_english_self_study_hour" name="english_self_study_hour"
                                             value="{{ planner_instance.english_self_study_hour|default_if_none:'' }}">
@@ -124,7 +124,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="english_self_study_min" name="english_self_study_min"
                                             value="{{ planner_instance.english_self_study_min|default_if_none:'' }}">
@@ -136,7 +136,7 @@
                             </tr>
                             <tr>
                                 <td>탐구</td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_research_lecture_study_hour" name="research_lecture_study_hour"
                                             value="{{ planner_instance.research_lecture_study_hour|default_if_none:'' }}">
@@ -145,7 +145,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-info-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="research_lecture_study_min" name="research_lecture_study_min"
                                             value="{{ planner_instance.research_lecture_study_min|default_if_none:'' }}">
@@ -154,7 +154,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="id_research_self_study_hour" name="research_self_study_hour"
                                             value="{{ planner_instance.research_self_study_hour|default_if_none:'' }}">
@@ -163,7 +163,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="bg-success-subtle">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="research_self_study_min" name="research_self_study_min"
                                             value="{{ planner_instance.research_self_study_min|default_if_none:'' }}">
@@ -290,7 +290,6 @@
 {#                            </tr>#}
 {#                        </tbody>#}
 {#                    </table>#}
-                </div>
             </div>
         </form>
     </div>
