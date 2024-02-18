@@ -1,13 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User
 from ..models import WordTest
 from check.models import StudentRegister
 from ..forms import WordTestForm
-from django.conf import settings
-from collections import defaultdict
-
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext as _
 
 def index(request):
     # students = StudentRegister.objects.filter(is_dropped=False)

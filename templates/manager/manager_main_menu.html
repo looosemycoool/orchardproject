@@ -1,30 +1,31 @@
 <div class="col-md-2">
+    <div class="card text-center border border-secondary">
+        <div class="card-header text-center bg-primary-subtle">
+            <h5>질문 예약 관리</h5>
+        </div>
+        <ul class="list-group list-group-flush"><a href="{% url 'manager:reserve' %}"
+               class="list-group-item list-group-item-action text-center"
+               aria-current="true">
+                질문 예약 생성
+            </a>
+            <a href="{% url 'teacher:index' %}"
+               class="list-group-item list-group-item-action text-center"
+               aria-current="true">
+                질문 내역
+            </a>
+    {#        <a href="{% url 'teacher:consulting_page' %}"#}
+    {#           class="list-group-item list-group-item-action text-center disabled"#}
+    {#           aria-current="true">#}
+    {#            상담 내역#}
+    {#        </a>#}
+            <a href="{% url 'manager:teacher' %}"
+               class="list-group-item list-group-item-action text-center"
+               aria-current="true">
+                선생님 관리
+            </a>
+        </ul>
+    </div>
     <ul class="list-group dropdown-center">
-        <a href="{% url 'manager:reserve' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            질문 예약 생성
-        </a>
-        <a href="{% url 'teacher:index' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            질문 내역
-        </a>
-{#        <a href="{% url 'teacher:consulting_page' %}"#}
-{#           class="list-group-item list-group-item-action text-center disabled"#}
-{#           aria-current="true">#}
-{#            상담 내역#}
-{#        </a>#}
-        <a href="{% url 'manager:teacher' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            선생님 관리
-        </a>
-{#        <a href="{% url 'manager:consulting' %}"#}
-{#           class="list-group-item list-group-item-action text-center"#}
-{#           aria-current="true">#}
-{#            상담 조회 페이지#}
-{#        </a>#}
         <div class="card text-center mt-3 border border-success">
             <div class="card-header text-center bg-success-subtle">
                 <h5>레포트 입력</h5>
@@ -40,15 +41,15 @@
                    aria-current="true">
                     학습 총평
                 </a>
-                <a href="{% url 'manager:word' %}"
-                   class="list-group-item list-group-item-action text-center disabled"
-                   aria-current="true">
-                    영단어 Test
-                </a>
+{#                <a href="{% url 'manager:wordmaster' %}"#}
+{#                   class="list-group-item list-group-item-action text-center disabled"#}
+{#                   aria-current="true">#}
+{#                    영단어 Test#}
+{#                </a>#}
                 <a href="{% url 'manager:word' %}"
                    class="list-group-item list-group-item-action text-center"
                    aria-current="true">
-                    주간테스트 + 영단어
+                    영단어 + 주간테스트
                 </a>
             </ul>
         </div>
@@ -63,22 +64,39 @@
 {#            데이터 가공#}
 {#        </a>#}
     </ul>
+    <div class="card text-center mt-3 border border-info">
+        <div class="card-header text-center bg-info-subtle">
+            <h5>레포트 출력</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <a href="{% url 'report:newstudy_index' %}"
+               class="list-group-item list-group-item-action text-center"
+               aria-current="true">
+                학습 Report(정규반)
+            </a>
+            <a href="{% url 'report:question_index' %}"
+               class="list-group-item list-group-item-action text-center disabled"
+               aria-current="true">
+                영단어 Report
+            </a>
+            <a href="{% url 'report:consulting_index' %}"
+               class="list-group-item list-group-item-action text-center"
+               aria-current="true">
+                학습 총평 Report
+            </a>
+            <a href="{% url 'report:study_index' %}"
+               class="list-group-item list-group-item-action text-center"
+               aria-current="true">
+                학습 Report(이전)
+            </a>
+            <a href="{% url 'report:question_index' %}"
+               class="list-group-item list-group-item-action text-center"
+               aria-current="true">
+                영단어 Report(윈터)
+            </a>
+        </ul>
+    </div>
     <ul class="list-group dropdown-center mt-3">
-        <a href="{% url 'report:study_index' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            학습 Report
-        </a>
-        <a href="{% url 'report:question_index' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            영단어 Report
-        </a>
-        <a href="{% url 'report:consulting_index' %}"
-           class="list-group-item list-group-item-action text-center"
-           aria-current="true">
-            학습 총평 Report
-        </a>
 {##}
 {#        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"#}
 {#                aria-expanded="false">#}
