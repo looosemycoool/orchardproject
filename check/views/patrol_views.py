@@ -33,9 +33,9 @@ def patrol_detail(request, selected_date):
         'guitar': '기타'
     }
     # Patrol 페이지 목록 보여주기
-    patrols_p = PatrolCheck.objects.filter(user__class_name='P', date=selected_date).order_by('class_num')
-    patrols_s = PatrolCheck.objects.filter(user__class_name='S', date=selected_date).order_by('class_num')
-    patrols_m = PatrolCheck.objects.filter(user__class_name='M', date=selected_date).order_by('class_num')
+    patrols_p = PatrolCheck.objects.filter(user__class_name='P', date=selected_date).order_by('user__class_num')
+    patrols_s = PatrolCheck.objects.filter(user__class_name='S', date=selected_date).order_by('user__class_num')
+    patrols_m = PatrolCheck.objects.filter(user__class_name='M', date=selected_date).order_by('user__class_num')
 
     # 출석 데이터의 특정 필드 값을 번역
     for patrol in patrols_p:
