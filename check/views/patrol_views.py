@@ -7,12 +7,66 @@ from reserve.models import Reserve
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
 def index(request):
+    if request.method == 'POST':
+        selected_date = request.POST.get('selected_date')
+
+        return redirect('check:patrol_detail',  selected_date)
     return render(request, 'check/patrol/patrol_main.html')
 
 @user_passes_test(lambda u: u.is_staff, login_url='common:login')
-def patrol(request):
-    # patrol 페이지 목록 보여주기
-    return render(request, 'check/patrol/patrol_main.html')
+def patrol_detail(request, selected_date):
+    translation_dict = {
+        'False': ' ',
+        'k_ss': '국자',
+        'k_il': '국인',
+        'm_ss': '수자',
+        'm_il': '수인',
+        'e_ss': '영자',
+        'e_il': '영인',
+        'r_ss': '탐자',
+        'r_il': '탐인',
+        'question': '질의',
+        'mentoring': '멘토링',
+        'plan': '계획',
+        'consulting': '상담',
+        'sleep': '수면',
+        'guitar': '기타'
+    }
+    # Patrol 페이지 목록 보여주기
+    patrols_p = PatrolCheck.objects.filter(user__class_name='P', date=selected_date)
+    patrols_s = PatrolCheck.objects.filter(user__class_name='S', date=selected_date)
+    patrols_m = PatrolCheck.objects.filter(user__class_name='M', date=selected_date)
+
+    # 출석 데이터의 특정 필드 값을 번역
+    for patrol in patrols_p:
+        for field in ['time1_study', 'time2_study', 'time3_study', 'time4_study', 'time5_study', 'time6_study',
+                      'time7_study', 'time8_study', 'time9_study', 'time10_study', 'time11_study', 'time12_study',
+                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study']:
+            original_value = getattr(patrol, field, None)
+            if original_value is not None:
+                translated_value = translation_dict.get(original_value, original_value)
+                setattr(patrol, field, translated_value)
+
+    for patrol in patrols_s:
+        for field in ['time1_study', 'time2_study', 'time3_study', 'time4_study', 'time5_study', 'time6_study',
+                      'time7_study', 'time8_study', 'time9_study', 'time10_study', 'time11_study', 'time12_study',
+                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study']:
+            original_value = getattr(patrol, field, None)
+            if original_value is not None:
+                translated_value = translation_dict.get(original_value, original_value)
+                setattr(patrol, field, translated_value)
+
+    for patrol in patrols_m:
+        for field in ['time1_study', 'time2_study', 'time3_study', 'time4_study', 'time5_study', 'time6_study',
+                      'time7_study', 'time8_study', 'time9_study', 'time10_study', 'time11_study', 'time12_study',
+                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study']:
+            original_value = getattr(patrol, field, None)
+            if original_value is not None:
+                translated_value = translation_dict.get(original_value, original_value)
+                setattr(patrol, field, translated_value)
+
+    context = {'patrols_p': patrols_p, 'patrols_s': patrols_s, 'patrols_m': patrols_m, 'selected_date':selected_date}
+    return render(request, 'check/patrol/patrol_detail.html', context)
 
 def get_day_of_week(selected_date):
     date_object = datetime.strptime(selected_date, "%Y-%m-%d").date()

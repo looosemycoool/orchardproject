@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'check/patrol/patrol_menu.html' %}
+            <div class="col-md-10">
+                <h3 style="font-family: 'PyeongChangPeace-Bold', sans-serif;">
+                    <span style="color:mediumseagreen; font-size:22px; "> {{ selected_date }} </span>
+                    <span style="font-size:22px; "> 일일순찰 </span>
+                </h3>
+                <table class="table align-middle" style="text-align: center">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th style="width: 2%; white-space: nowrap;">반-번호</th>
+                            <th style="width: 3%; white-space: nowrap;">이름</th>
+                            <th class="bg-info-subtle" colspan="2" style="width: 3%; white-space: nowrap;">08:50</th>
+                            <th class="bg-info-subtle" colspan="2" style="width: 3%; white-space: nowrap;">09:20</th>
+                            <th class="bg-info-subtle" colspan="2" style="width: 3%; white-space: nowrap;">09:50</th>
+                            <th class="bg-info-subtle" colspan="2" style="width: 3%; white-space: nowrap;">10:30</th>
+                            <th class="bg-info-subtle" colspan="2" style="width: 3%; white-space: nowrap;">11:20</th>
+                            <th class="bg-info-subtle" colspan="2" style="width: 3%; white-space: nowrap;">11:50</th>
+                            <th class="bg-primary-subtle" colspan="2" style="width: 3%; white-space: nowrap;">13:30</th>
+                            <th class="bg-primary-subtle" colspan="2" style="width: 3%; white-space: nowrap;">14:10</th>
+                            <th class="bg-primary-subtle" colspan="2" style="width: 3%; white-space: nowrap;">15:00</th>
+                            <th class="bg-primary-subtle" colspan="2" style="width: 3%; white-space: nowrap;">15:40</th>
+                            <th class="bg-primary-subtle" colspan="2" style="width: 3%; white-space: nowrap;">16:40</th>
+                            <th class="bg-primary-subtle" colspan="2" style="width: 3%; white-space: nowrap;">17:20</th>
+                            <th class="bg-success-subtle" colspan="2" style="width: 3%; white-space: nowrap;">19:40</th>
+                            <th class="bg-success-subtle" colspan="2" style="width: 3%; white-space: nowrap;">20:00</th>
+                            <th class="bg-success-subtle" colspan="2" style="width: 3%; white-space: nowrap;">21:00</th>
+                            <th class="bg-success-subtle" colspan="2" style="width: 3%; white-space: nowrap;">21:30</th>
+                            <th class="bg-success-subtle" colspan="2" style="width: 3%; white-space: nowrap;">22:30</th>
+                            <th class="bg-success-subtle" colspan="2" style="width: 3%; white-space: nowrap;">23:30</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patrol in patrols_p %}
+                            <tr>
+                                <td class="bg-warning-subtle" style="white-space: nowrap">{{ patrol.user.class_name }}-{{ patrol.user.class_num }}</td>
+                                <td class="bg-warning-subtle" style="white-space: nowrap">{{ patrol.user }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time1_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time1_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time2_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time2_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time3_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time3_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time4_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time4_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time5_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time5_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time6_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time6_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time7_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time7_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time8_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time8_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time9_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time9_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time10_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time10_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time11_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time11_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time12_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time12_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time13_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time13_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time14_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time14_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time15_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time15_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time16_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time16_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time17_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time17_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time18_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time18_focus|default_if_none:'' }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% for patrol in patrols_s %}
+                            <tr>
+                                <td class="bg-primary-subtle" style="white-space: nowrap">{{ patrol.user.class_name }}-{{ patrol.user.class_num }}</td>
+                                <td class="bg-primary-subtle" style="white-space: nowrap">{{ patrol.user }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time1_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time1_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time2_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time2_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time3_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time3_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time4_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time4_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time5_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time5_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time6_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time6_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time7_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time7_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time8_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time8_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time9_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time9_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time10_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time10_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time11_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time11_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time12_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time12_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time13_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time13_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time14_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time14_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time15_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time15_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time16_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time16_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time17_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time17_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time18_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time18_focus|default_if_none:'' }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% for student in students_m %}
+                            <tr>
+                                <td class="bg-info-subtle" style="white-space: nowrap">{{ patrol.user.class_name }}-{{ patrol.user.class_num }}</td>
+                                <td class="bg-info-subtle" style="white-space: nowrap">{{ patrol.user }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time1_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time1_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time2_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time2_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time3_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time3_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time4_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time4_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time5_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time5_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time6_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time6_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time7_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time7_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time8_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time8_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time9_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time9_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time10_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time10_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time11_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time11_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time12_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time12_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time13_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time13_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time14_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time14_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time15_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time15_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time16_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time16_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time17_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time17_focus|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time18_study|default_if_none:'' }}</td>
+                                <td style="white-space: nowrap">{{ patrol.time18_focus|default_if_none:'' }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

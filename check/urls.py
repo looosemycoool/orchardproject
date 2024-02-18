@@ -22,6 +22,7 @@ urlpatterns = [
 
     # patrol
     path('patrol/', patrol_views.index, name='patrol'),
+    path('patrol/detail/<str:selected_date>', patrol_views.patrol_detail, name='patrol_detail'),
 
     path('patrol/p_class', patrol_views.patrol_p_class, name='patrol_p_class'),
     path('patrol/p_class/<int:patrol_id>', patrol_views.patrol_check_p, name='patrol_check_p'),
