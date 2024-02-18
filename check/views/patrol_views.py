@@ -41,7 +41,10 @@ def patrol_detail(request, selected_date):
     for patrol in patrols_p:
         for field in ['time1_study', 'time2_study', 'time3_study', 'time4_study', 'time5_study', 'time6_study',
                       'time7_study', 'time8_study', 'time9_study', 'time10_study', 'time11_study', 'time12_study',
-                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study']:
+                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study',
+                      'time1_focus', 'time2_focus', 'time3_focus', 'time4_focus', 'time5_focus', 'time6_focus',
+                      'time7_focus', 'time8_focus', 'time9_focus', 'time10_focus', 'time11_focus', 'time12_focus',
+                      'time13_focus', 'time14_focus', 'time15_focus', 'time16_focus', 'time17_focus', 'time18_focus']:
             original_value = getattr(patrol, field, None)
             if original_value is not None:
                 translated_value = translation_dict.get(original_value, original_value)
@@ -50,7 +53,10 @@ def patrol_detail(request, selected_date):
     for patrol in patrols_s:
         for field in ['time1_study', 'time2_study', 'time3_study', 'time4_study', 'time5_study', 'time6_study',
                       'time7_study', 'time8_study', 'time9_study', 'time10_study', 'time11_study', 'time12_study',
-                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study']:
+                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study',
+                      'time1_focus', 'time2_focus', 'time3_focus', 'time4_focus', 'time5_focus', 'time6_focus',
+                      'time7_focus', 'time8_focus', 'time9_focus', 'time10_focus', 'time11_focus', 'time12_focus',
+                      'time13_focus', 'time14_focus', 'time15_focus', 'time16_focus', 'time17_focus', 'time18_focus']:
             original_value = getattr(patrol, field, None)
             if original_value is not None:
                 translated_value = translation_dict.get(original_value, original_value)
@@ -59,7 +65,10 @@ def patrol_detail(request, selected_date):
     for patrol in patrols_m:
         for field in ['time1_study', 'time2_study', 'time3_study', 'time4_study', 'time5_study', 'time6_study',
                       'time7_study', 'time8_study', 'time9_study', 'time10_study', 'time11_study', 'time12_study',
-                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study']:
+                      'time13_study', 'time14_study', 'time15_study', 'time16_study', 'time17_study', 'time18_study',
+                      'time1_focus', 'time2_focus', 'time3_focus', 'time4_focus', 'time5_focus', 'time6_focus',
+                      'time7_focus', 'time8_focus', 'time9_focus', 'time10_focus', 'time11_focus', 'time12_focus',
+                      'time13_focus', 'time14_focus', 'time15_focus', 'time16_focus', 'time17_focus', 'time18_focus']:
             original_value = getattr(patrol, field, None)
             if original_value is not None:
                 translated_value = translation_dict.get(original_value, original_value)
