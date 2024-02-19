@@ -112,44 +112,12 @@ def detail(request, selected_date):
     return render(request, 'check/check_search.html', context)
 
 def update_attendance(request, attendance_id):
-    attendance = get_object_or_404(Attendance, id=attendance_id)
-
-    attendance.morning_check = 'morning_check_{}'.format(attendance_id) in request.POST
-    attendance.lunch_check = 'lunch_check_{}'.format(attendance_id) in request.POST
-    attendance.night_check = 'night_check_{}'.format(attendance_id) in request.POST
-    attendance.absent = 'absent_{}'.format(attendance_id) in request.POST
-    attendance.memo = request.POST.get('memo_{}'.format(attendance_id), '')
-
-    morning_late_value = request.POST.get(f'morning_late_{attendance_id}', '').strip()
-    lunch_late_value = request.POST.get(f'lunch_late_{attendance_id}', '').strip()
-    night_late_value = request.POST.get(f'night_late_{attendance_id}', '').strip()
-    early_leave_value = request.POST.get(f'early_leave_{attendance_id}', '').strip()
-
-    attendance.morning_late = morning_late_value if morning_late_value else None
-    attendance.lunch_late = lunch_late_value if lunch_late_value else None
-    attendance.night_late = night_late_value if night_late_value else None
-    attendance.early_leave = early_leave_value if early_leave_value else None
-
-    attendance.time8_check = 'time8_check_{}'.format(attendance_id) in request.POST
-    attendance.time9_check = 'time9_check_{}'.format(attendance_id) in request.POST
-    attendance.time10_check = 'time10_check_{}'.format(attendance_id) in request.POST
-    attendance.time11_check = 'time11_check_{}'.format(attendance_id) in request.POST
-    attendance.time12_check = 'time12_check_{}'.format(attendance_id) in request.POST
-    attendance.time13_check = 'time13_check_{}'.format(attendance_id) in request.POST
-    attendance.time14_check = 'time14_check_{}'.format(attendance_id) in request.POST
-    attendance.time15_check = 'time15_check_{}'.format(attendance_id) in request.POST
-    attendance.time16_check = 'time16_check_{}'.format(attendance_id) in request.POST
-    attendance.time17_check = 'time17_check_{}'.format(attendance_id) in request.POST
-    attendance.time18_check = 'time18_check_{}'.format(attendance_id) in request.POST
-    attendance.time19_check = 'time19_check_{}'.format(attendance_id) in request.POST
-    attendance.time20_check = 'time20_check_{}'.format(attendance_id) in request.POST
-    attendance.time21_check = 'time21_check_{}'.format(attendance_id) in request.POST
-    attendance.time22_check = 'time22_check_{}'.format(attendance_id) in request.POST
-
-    attendance.save()
-
-    # Redirect back to the attendance page to see the updated records
-    return redirect('check:detail', attendance.date)
+    attendance = Attendance.objects.get(id=attendance_id)
+    if request.method == 'POST':
+        form = AttendanceForm(request.POST, instance=attendance)
+        if form.is_valid():
+            form.save()
+            return redirect('check:detail', attendance.date)
 
 def specify(request):
     # 데이터베이스에서 Specify 인스턴스를 가져오거나, 없으면 생성합니다.

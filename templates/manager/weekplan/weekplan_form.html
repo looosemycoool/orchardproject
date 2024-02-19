@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-2 text-center">
+                <div class="card" style="height: 16rem">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</h5>
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+                            {% for data in data %}
+                                <a href="{% url 'manager:planner_modify' data.id %}}"
+                                   class="list-group-item disabled">{{ data.week_name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# 주차 선택하면 나올 수 있도록 #}
+            <div class="col-md-8">
+                {% if student %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 33em">
+                                    <div class="card-header bg-secondary-subtle">
+                                        <h5 class="card-title">{{ selected_week }}</h5>
+                                    </div>
+                                    {% if week_data %}
+                                        <div class="card-body">
+                                            <label for="id_week_name" class="form-label">주차</label>
+                                            <input type="text" class="form-control" id="id_week_name" name="week_name"
+                                                   placeholder="1월 1주차"
+                                                   value="{{ form.week_name.value|default_if_none:'' }}">
+
+                                            <label for="id_start_date" class="form-label mt-3">시작일</label>
+                                            <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                                   value="{{ week_data.start_date|date:'Y-m-d' }}">
+
+                                            <label for="id_end_date" class="form-label mt-3">마지막일</label>
+                                            <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                                   value="{{ week_data.end_date|date:'Y-m-d' }}">
+                                            {% include 'form_errors.html' %}
+                                        </div>
+                                    {% else %}
+                                        <div class="card-body">
+                                            <label for="id_week_name" class="form-label">주차</label>
+                                            <input type="text" class="form-control" id="id_week_name" name="week_name"
+                                                   placeholder="1월 1주차"
+                                                   value="{{ form.week_name.value|default_if_none:'' }}">
+
+                                            <label for="id_start_date" class="form-label mt-3">시작일</label>
+                                            <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                                   value="{{ week_data.start_date|date:'Y-m-d' }}">
+
+                                            <label for="id_end_date" class="form-label mt-3">마지막일</label>
+                                            <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                                   value="{{ week_data.end_date|date:'Y-m-d' }}">
+                                            {% include 'form_errors.html' %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-warning-subtle">국어</div>
+                                    <div class="card-body">
+                                        <label for="id_korean_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_korean_study" name="korean_study"
+                                               placeholder="분"
+                                               value="{{ form.korean_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_korean_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_korean_self_study" name="korean_self_study"
+                                               placeholder="분"
+                                               value="{{ form.korean_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-danger-subtle">영어</div>
+                                    <div class="card-body">
+                                        <label for="id_english_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_english_study" name="english_study"
+                                               placeholder="분"
+                                               value="{{ form.english_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_english_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"
+                                               placeholder="분"
+                                               value="{{ form.english_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
+{#                                    <div class="card-header bg-info-subtle">{{ student.research1_select }}</div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_research1_study" class="form-label">총 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_research1_study" name="research1_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.research1_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_research1_self_study" class="form-label">순공 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_research1_self_study" name="research1_self_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.research1_self_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-success-subtle">수학</div>
+                                    <div class="card-body">
+                                        <label for="id_math_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_math_study" name="math_study"
+                                               placeholder="분"
+                                               value="{{ form.math_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_math_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_math_self_study" name="math_self_study"
+                                               placeholder="분"
+                                               value="{{ form.math_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="height: 16rem">
+                                    <div class="card-header bg-info-subtle">탐구</div>
+                                    <div class="card-body">
+                                        <label for="id_research1_study" class="form-label">총 시간</label>
+                                        <input type="text" class="form-control" id="id_research1_study" name="research1_study"
+                                               placeholder="분"
+                                               value="{{ form.research1_study.value|default_if_none:'' }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="id_research1_self_study" class="form-label">순공 시간</label>
+                                        <input type="text" class="form-control" id="id_research1_self_study" name="research1_self_study"
+                                               placeholder="분"
+                                               value="{{ form.research1_self_study.value|default_if_none:'' }}">
+                                    </div>
+                                </div>
+{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
+{#                                    <div class="card-header bg-primary-subtle">{{ student.research2_select }}</div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_research2_study" class="form-label">총 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_research2_study" name="research2_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.research2_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_research2_self_study" class="form-label">순공 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_research2_self_study" name="research2_self_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.research2_self_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+{#                            <div class="col-md-3">#}
+{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
+{#                                    <div class="card-header bg-danger-subtle">영어</div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_english_study" class="form-label">총 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_english_study" name="english_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.english_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_english_self_study" class="form-label">순공 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.english_self_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
+{#                                    <div class="card-header bg-secondary-subtle">탐구 3</div>#}
+{#                                    <div class="card-header bg-primary-subtle">{{ student.research3_select }}</div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_research3_study" class="form-label">총 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_research3_study" name="research3_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.research3_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                    <div class="card-body">#}
+{#                                        <label for="id_research3_self_study" class="form-label">순공 시간</label>#}
+{#                                        <input type="text" class="form-control" id="id_research3_self_study" name="research3_self_study"#}
+{#                                               placeholder="분"#}
+{#                                               value="{{ form.research3_self_study.value|default_if_none:'' }}">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+                        </div>
+                        <button type="submit" class="btn btn-primary">저장하기</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

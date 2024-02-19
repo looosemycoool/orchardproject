@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-2 text-center">
+                <div class="card" style="height: 16rem">
+                    <div class="card-header">
+                        {% for student in student %}
+                            <h5 class="card-title">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</h5>
+                        {% endfor %}
+                    </div>
+                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
+                         data-bs-smooth-scroll="true">
+                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
+                             data-bs-smooth-scroll="true"
+                             tabindex="0">
+{#                            {% for data in data %}#}
+{#                                <a href="{% url 'manager:student_study_detail' student.id %}}"#}
+{#                                   class="list-group-item">{{ data.week_name }}</a>#}
+{#                            {% endfor %}#}
+                            {% for data in data %}
+                                <a href="?selected_week={{ data.week_name }}"
+                                   class="list-group-item">{{ data.week_name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    {% for student in student %}
+                        <a class="btn btn-primary mt-3" href="{% url 'manager:planner_create' student.id %}">플래너 입력</a>
+                    {% endfor %}
+                </div>
+            </div>
+            {# 주차 선택하면 나올 수 있도록 #}
+                {% if selected_week %}
+                    {% if filtered_data %}
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {% for data in filtered_data %}
+                                        <div class="card border-secondary mb-3" style="height: 25rem">
+                                            <div class="card-header bg-secondary-subtle">
+                                                <h5 class="card-title">{{ selected_week }}</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p>총 자습 시간 - {{ total_study }}분</p>
+                                                <p>총 순공 시간 - {{ total_self_study }}분</p>
+                                                <br>
+                                                <p>시작일 - {{ data.start_date }}</p>
+                                                <p>마지막일 - {{ data.end_date }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-4">
+                                    {% for data in filtered_data %}
+                                        <div class="card border-secondary mb-3" style="height: 12rem">
+                                            <div class="card-header bg-warning-subtle">국어</div>
+                                            <div class="card-body">
+                                                <p>국어 총 시간 - {{ data.korean_study|default_if_none:'' }}분</p>
+                                                <p>국어 순공 시간 - {{ data.korean_self_study|default_if_none:'' }}분</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-secondary mb-3" style="height: 12rem">
+                                            <div class="card-header bg-danger-subtle">영어</div>
+                                            <div class="card-body">
+                                                <p>영어 총 시간 - {{ data.english_study|default_if_none:'' }}분</p>
+                                                <p>영어 순공 시간 - {{ data.english_self_study|default_if_none:'' }}분</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-4">
+                                    {% for data in filtered_data %}
+                                        <div class="card border-secondary mb-3" style="height: 12rem">
+                                            <div class="card-header bg-success-subtle">수학</div>
+                                            <div class="card-body">
+                                                <p>수학 총 시간 - {{ data.math_study|default_if_none:'' }}분</p>
+                                                <p>수학 순공 시간 - {{ data.math_self_study|default_if_none:'' }}분</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-secondary mb-3" style="height: 12rem">
+                                            <div class="card-header bg-info-subtle">탐구</div>
+                                            <div class="card-body">
+                                                <p>{{ data.research1 }} 총 시간 - {{ data.research1_study|default_if_none:'' }}분</p>
+                                                <p>{{ data.research1 }} 순공 시간 - {{ data.research1_self_study|default_if_none:'' }}분</p>
+                                            </div>
+                                        </div>
+{#                                        <div class="card border-secondary mb-3" style="height: 12rem">#}
+{#                                            <div class="card-header bg-primary-subtle">{{ research2 }}</div>#}
+{#                                            <div class="card-body">#}
+{#                                                <p>{{ data.research2 }} 총 시간 - {{ data.research2_study|default_if_none:'' }}분</p>#}
+{#                                                <p>{{ data.research2 }} 순공 시간 - {{ data.research2_self_study|default_if_none:'' }}분</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% for data in filtered_data %}
+                            <a href="{% url 'manager:planner_modify' data.id %}" class="btn btn-outline-warning">수정하기</a>
+                            <a href="{% url 'manager:planner_delete' data.id %}" class="btn btn-danger">삭제하기</a>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+        </div>
+    </div>
+{% endblock %}
