@@ -3,7 +3,7 @@
     <div class="col-md-10" style="height:100px;">
         {% include "mypage_titlebar.html" %}
         <hr>
-        <form method="POST" action="{% url 'mypage:planner_index' user_id=user.id %}">
+        <form method="POST" action="{% url 'mypage:planner_detail' user_id=user.id date=date %}">
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-8">
