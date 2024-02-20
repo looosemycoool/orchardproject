@@ -14,7 +14,7 @@
                              data-bs-smooth-scroll="true"
                              tabindex="0">
                             {% for data in data %}
-                                <a href="{% url 'manager:planner_modify' data.id %}}"
+                                <a href="{% url 'manager:weekplan_modify' data.id %}}"
                                    class="list-group-item disabled">{{ data.week_name }}</a>
                             {% endfor %}
                         </div>
@@ -28,7 +28,7 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="card border-secondary mb-3" style="height: 33em">
+                                <div class="card border-secondary mb-3" style="height: 31rem">
                                     <div class="card-header bg-secondary-subtle">
                                         <h5 class="card-title">{{ selected_week }}</h5>
                                     </div>
@@ -47,6 +47,7 @@
                                             <input type="date" class="form-control" id="id_end_date" name="end_date"
                                                    value="{{ week_data.end_date|date:'Y-m-d' }}">
                                             {% include 'form_errors.html' %}
+                                            <button type="submit" class="btn btn-primary mt-3">저장하기</button>
                                         </div>
                                     {% else %}
                                         <div class="card-body">
@@ -63,139 +64,725 @@
                                             <input type="date" class="form-control" id="id_end_date" name="end_date"
                                                    value="{{ week_data.end_date|date:'Y-m-d' }}">
                                             {% include 'form_errors.html' %}
+                                            <button type="submit" class="btn btn-primary mt-3">저장하기</button>
                                         </div>
                                     {% endif %}
                                 </div>
+                                <table class="table align-middle border mb-3" style="text-align: center">
+                                    <tr class="table-secondary">
+                                        <th style="width: 20%; white-space: nowrap;">목</th>
+                                        <th colspan="3" style="width: 80%; white-space: nowrap;">
+                                            <input type="date" class="form-control" id="id_thu_date" name="thu_date"
+                                               value="{{ form.thu_date.value|date:'Y-m-d' }}">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">국어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_korean_lecture_study_hour" name="thu_korean_lecture_study_hour"
+                                               value="{{ form.thu_korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_korean_lecture_study_min" name="thu_korean_lecture_study_min"
+                                               value="{{ form.thu_korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_korean_self_study_hour" name="thu_korean_self_study_hour"
+                                               value="{{ form.thu_korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_korean_self_study_min" name="thu_korean_self_study_min"
+                                               value="{{ form.thu_korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">수학</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_math_lecture_study_hour" name="thu_math_lecture_study_hour"
+                                               value="{{ form.thu_math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_math_lecture_study_min" name="thu_math_lecture_study_min"
+                                               value="{{ form.thu_math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_math_self_study_hour" name="thu_math_self_study_hour"
+                                               value="{{ form.thu_math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_math_self_study_min" name="thu_math_self_study_min"
+                                               value="{{ form.thu_math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">영어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_english_lecture_study_hour" name="thu_english_lecture_study_hour"
+                                               value="{{ form.thu_english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_english_lecture_study_min" name="thu_english_lecture_study_min"
+                                               value="{{ form.thu_english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_english_self_study_hour" name="thu_english_self_study_hour"
+                                               value="{{ form.thu_english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_english_self_study_min" name="thu_english_self_study_min"
+                                               value="{{ form.thu_english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">탐구</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_research_lecture_study_hour" name="thu_research_lecture_study_hour"
+                                               value="{{ form.thu_research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_research_lecture_study_min" name="thu_research_lecture_study_min"
+                                               value="{{ form.thu_research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_research_self_study_hour" name="thu_research_self_study_hour"
+                                               value="{{ form.thu_research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_thu_research_self_study_min" name="thu_research_self_study_min"
+                                               value="{{ form.thu_research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="col-md-3">
-                                <div class="card border-secondary mb-3" style="height: 16rem">
-                                    <div class="card-header bg-warning-subtle">국어</div>
-                                    <div class="card-body">
-                                        <label for="id_korean_study" class="form-label">총 시간</label>
-                                        <input type="text" class="form-control" id="id_korean_study" name="korean_study"
-                                               placeholder="분"
-                                               value="{{ form.korean_study.value|default_if_none:'' }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <label for="id_korean_self_study" class="form-label">순공 시간</label>
-                                        <input type="text" class="form-control" id="id_korean_self_study" name="korean_self_study"
-                                               placeholder="분"
-                                               value="{{ form.korean_self_study.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-                                <div class="card border-secondary mb-3" style="height: 16rem">
-                                    <div class="card-header bg-danger-subtle">영어</div>
-                                    <div class="card-body">
-                                        <label for="id_english_study" class="form-label">총 시간</label>
-                                        <input type="text" class="form-control" id="id_english_study" name="english_study"
-                                               placeholder="분"
-                                               value="{{ form.english_study.value|default_if_none:'' }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <label for="id_english_self_study" class="form-label">순공 시간</label>
-                                        <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"
-                                               placeholder="분"
-                                               value="{{ form.english_self_study.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
-{#                                    <div class="card-header bg-info-subtle">{{ student.research1_select }}</div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_research1_study" class="form-label">총 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_research1_study" name="research1_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.research1_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_research1_self_study" class="form-label">순공 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_research1_self_study" name="research1_self_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.research1_self_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                </div>#}
+                                <table class="table align-middle border mb-3" style="text-align: center">
+                                    <tr class="table-secondary">
+                                        <th style="width: 20%; white-space: nowrap;">월</th>
+                                        <th colspan="3" style="width: 80%; white-space: nowrap;">
+                                            <input type="date" class="form-control" id="id_mon_date" name="mon_date"
+                                               value="{{ form.mon_date.value|date:'Y-m-d' }}">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">국어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_korean_lecture_study_hour" name="mon_korean_lecture_study_hour"
+                                               value="{{ form.mon_korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_korean_lecture_study_min" name="mon_korean_lecture_study_min"
+                                               value="{{ form.mon_korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_korean_self_study_hour" name="mon_korean_self_study_hour"
+                                               value="{{ form.mon_korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_korean_self_study_min" name="mon_korean_self_study_min"
+                                               value="{{ form.mon_korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">수학</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_math_lecture_study_hour" name="mon_math_lecture_study_hour"
+                                               value="{{ form.mon_math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_math_lecture_study_min" name="mon_math_lecture_study_min"
+                                               value="{{ form.mon_math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_math_self_study_hour" name="mon_math_self_study_hour"
+                                               value="{{ form.mon_math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_math_self_study_min" name="mon_math_self_study_min"
+                                               value="{{ form.mon_math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">영어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_english_lecture_study_hour" name="mon_english_lecture_study_hour"
+                                               value="{{ form.mon_english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_english_lecture_study_min" name="mon_english_lecture_study_min"
+                                               value="{{ form.mon_english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_english_self_study_hour" name="mon_english_self_study_hour"
+                                               value="{{ form.mon_english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_english_self_study_min" name="mon_english_self_study_min"
+                                               value="{{ form.mon_english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">탐구</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_research_lecture_study_hour" name="mon_research_lecture_study_hour"
+                                               value="{{ form.mon_research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_research_lecture_study_min" name="mon_research_lecture_study_min"
+                                               value="{{ form.mon_research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_research_self_study_hour" name="mon_research_self_study_hour"
+                                               value="{{ form.mon_research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_mon_research_self_study_min" name="mon_research_self_study_min"
+                                               value="{{ form.mon_research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </table>
+                               <table class="table align-middle border mb-3" style="text-align: center">
+                                    <tr class="table-secondary">
+                                        <th style="width: 20%; white-space: nowrap;">금</th>
+                                        <th colspan="3" style="width: 80%; white-space: nowrap;">
+                                            <input type="date" class="form-control" id="id_fri_date" name="fri_date"
+                                               value="{{ form.fri_date.value|date:'Y-m-d' }}">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">국어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_korean_lecture_study_hour" name="fri_korean_lecture_study_hour"
+                                               value="{{ form.fri_korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_korean_lecture_study_min" name="fri_korean_lecture_study_min"
+                                               value="{{ form.fri_korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_korean_self_study_hour" name="fri_korean_self_study_hour"
+                                               value="{{ form.fri_korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_korean_self_study_min" name="fri_korean_self_study_min"
+                                               value="{{ form.fri_korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">수학</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_math_lecture_study_hour" name="fri_math_lecture_study_hour"
+                                               value="{{ form.fri_math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_math_lecture_study_min" name="fri_math_lecture_study_min"
+                                               value="{{ form.fri_math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_math_self_study_hour" name="fri_math_self_study_hour"
+                                               value="{{ form.fri_math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_math_self_study_min" name="fri_math_self_study_min"
+                                               value="{{ form.fri_math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">영어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_english_lecture_study_hour" name="fri_english_lecture_study_hour"
+                                               value="{{ form.fri_english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_english_lecture_study_min" name="fri_english_lecture_study_min"
+                                               value="{{ form.fri_english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_english_self_study_hour" name="fri_english_self_study_hour"
+                                               value="{{ form.fri_english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_english_self_study_min" name="fri_english_self_study_min"
+                                               value="{{ form.fri_english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">탐구</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_research_lecture_study_hour" name="fri_research_lecture_study_hour"
+                                               value="{{ form.fri_research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_research_lecture_study_min" name="fri_research_lecture_study_min"
+                                               value="{{ form.fri_research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_research_self_study_hour" name="fri_research_self_study_hour"
+                                               value="{{ form.fri_research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_fri_research_self_study_min" name="fri_research_self_study_min"
+                                               value="{{ form.fri_research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="col-md-3">
-                                <div class="card border-secondary mb-3" style="height: 16rem">
-                                    <div class="card-header bg-success-subtle">수학</div>
-                                    <div class="card-body">
-                                        <label for="id_math_study" class="form-label">총 시간</label>
-                                        <input type="text" class="form-control" id="id_math_study" name="math_study"
-                                               placeholder="분"
-                                               value="{{ form.math_study.value|default_if_none:'' }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <label for="id_math_self_study" class="form-label">순공 시간</label>
-                                        <input type="text" class="form-control" id="id_math_self_study" name="math_self_study"
-                                               placeholder="분"
-                                               value="{{ form.math_self_study.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-                                <div class="card border-secondary mb-3" style="height: 16rem">
-                                    <div class="card-header bg-info-subtle">탐구</div>
-                                    <div class="card-body">
-                                        <label for="id_research1_study" class="form-label">총 시간</label>
-                                        <input type="text" class="form-control" id="id_research1_study" name="research1_study"
-                                               placeholder="분"
-                                               value="{{ form.research1_study.value|default_if_none:'' }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <label for="id_research1_self_study" class="form-label">순공 시간</label>
-                                        <input type="text" class="form-control" id="id_research1_self_study" name="research1_self_study"
-                                               placeholder="분"
-                                               value="{{ form.research1_self_study.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
-{#                                    <div class="card-header bg-primary-subtle">{{ student.research2_select }}</div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_research2_study" class="form-label">총 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_research2_study" name="research2_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.research2_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_research2_self_study" class="form-label">순공 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_research2_self_study" name="research2_self_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.research2_self_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                </div>#}
+                                <table class="table align-middle border mb-3" style="text-align: center">
+                                    <tr class="table-secondary">
+                                        <th style="width: 20%; white-space: nowrap;">화</th>
+                                        <th colspan="3" style="width: 80%; white-space: nowrap;">
+                                            <input type="date" class="form-control" id="id_tue_date" name="tue_date"
+                                               value="{{ form.tue_date.value|date:'Y-m-d' }}">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">국어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_korean_lecture_study_hour" name="tue_korean_lecture_study_hour"
+                                               value="{{ form.tue_korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_korean_lecture_study_min" name="tue_korean_lecture_study_min"
+                                               value="{{ form.tue_korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_korean_self_study_hour" name="tue_korean_self_study_hour"
+                                               value="{{ form.tue_korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_korean_self_study_min" name="tue_korean_self_study_min"
+                                               value="{{ form.tue_korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">수학</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_math_lecture_study_hour" name="tue_math_lecture_study_hour"
+                                               value="{{ form.tue_math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_math_lecture_study_min" name="tue_math_lecture_study_min"
+                                               value="{{ form.tue_math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_math_self_study_hour" name="tue_math_self_study_hour"
+                                               value="{{ form.tue_math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_math_self_study_min" name="tue_math_self_study_min"
+                                               value="{{ form.tue_math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">영어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_english_lecture_study_hour" name="tue_english_lecture_study_hour"
+                                               value="{{ form.tue_english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_english_lecture_study_min" name="tue_english_lecture_study_min"
+                                               value="{{ form.tue_english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_english_self_study_hour" name="tue_english_self_study_hour"
+                                               value="{{ form.tue_english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_english_self_study_min" name="tue_english_self_study_min"
+                                               value="{{ form.tue_english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">탐구</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_research_lecture_study_hour" name="tue_research_lecture_study_hour"
+                                               value="{{ form.tue_research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_research_lecture_study_min" name="tue_research_lecture_study_min"
+                                               value="{{ form.tue_research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_research_self_study_hour" name="tue_research_self_study_hour"
+                                               value="{{ form.tue_research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_tue_research_self_study_min" name="tue_research_self_study_min"
+                                               value="{{ form.tue_research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table align-middle border mb-3" style="text-align: center">
+                                    <tr class="table-secondary">
+                                        <th style="width: 20%; white-space: nowrap;">토</th>
+                                        <th colspan="3" style="width: 80%; white-space: nowrap;">
+                                            <input type="date" class="form-control" id="id_sat_date" name="sat_date"
+                                               value="{{ form.sat_date.value|date:'Y-m-d' }}">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">국어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_korean_lecture_study_hour" name="sat_korean_lecture_study_hour"
+                                               value="{{ form.sat_korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_korean_lecture_study_min" name="sat_korean_lecture_study_min"
+                                               value="{{ form.sat_korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_korean_self_study_hour" name="sat_korean_self_study_hour"
+                                               value="{{ form.sat_korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_korean_self_study_min" name="sat_korean_self_study_min"
+                                               value="{{ form.sat_korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">수학</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_math_lecture_study_hour" name="sat_math_lecture_study_hour"
+                                               value="{{ form.sat_math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_math_lecture_study_min" name="sat_math_lecture_study_min"
+                                               value="{{ form.sat_math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_math_self_study_hour" name="sat_math_self_study_hour"
+                                               value="{{ form.sat_math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_math_self_study_min" name="sat_math_self_study_min"
+                                               value="{{ form.sat_math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">영어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_english_lecture_study_hour" name="sat_english_lecture_study_hour"
+                                               value="{{ form.sat_english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_english_lecture_study_min" name="sat_english_lecture_study_min"
+                                               value="{{ form.sat_english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_english_self_study_hour" name="sat_english_self_study_hour"
+                                               value="{{ form.sat_english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_english_self_study_min" name="sat_english_self_study_min"
+                                               value="{{ form.sat_english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">탐구</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_research_lecture_study_hour" name="sat_research_lecture_study_hour"
+                                               value="{{ form.sat_research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_research_lecture_study_min" name="sat_research_lecture_study_min"
+                                               value="{{ form.sat_research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_research_self_study_hour" name="sat_research_self_study_hour"
+                                               value="{{ form.sat_research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sat_research_self_study_min" name="sat_research_self_study_min"
+                                               value="{{ form.sat_research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-{#                            <div class="col-md-3">#}
-{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
-{#                                    <div class="card-header bg-danger-subtle">영어</div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_english_study" class="form-label">총 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_english_study" name="english_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.english_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_english_self_study" class="form-label">순공 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_english_self_study" name="english_self_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.english_self_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="card border-secondary mb-3" style="height: 16rem">#}
-{#                                    <div class="card-header bg-secondary-subtle">탐구 3</div>#}
-{#                                    <div class="card-header bg-primary-subtle">{{ student.research3_select }}</div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_research3_study" class="form-label">총 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_research3_study" name="research3_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.research3_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                    <div class="card-body">#}
-{#                                        <label for="id_research3_self_study" class="form-label">순공 시간</label>#}
-{#                                        <input type="text" class="form-control" id="id_research3_self_study" name="research3_self_study"#}
-{#                                               placeholder="분"#}
-{#                                               value="{{ form.research3_self_study.value|default_if_none:'' }}">#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
+                            <div class="col-md-3">
+                                <table class="table align-middle border mb-3" style="text-align: center">
+                                    <tr class="table-secondary">
+                                        <th style="width: 20%; white-space: nowrap;">수</th>
+                                        <th colspan="3" style="width: 80%; white-space: nowrap;">
+                                            <input type="date" class="form-control" id="id_wed_date" name="wed_date"
+                                               value="{{ form.wed_date.value|date:'Y-m-d' }}">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">국어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_korean_lecture_study_hour" name="wed_korean_lecture_study_hour"
+                                               value="{{ form.wed_korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_korean_lecture_study_min" name="wed_korean_lecture_study_min"
+                                               value="{{ form.wed_korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_korean_self_study_hour" name="wed_korean_self_study_hour"
+                                               value="{{ form.wed_korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_korean_self_study_min" name="wed_korean_self_study_min"
+                                               value="{{ form.wed_korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">수학</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_math_lecture_study_hour" name="wed_math_lecture_study_hour"
+                                               value="{{ form.wed_math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_math_lecture_study_min" name="wed_math_lecture_study_min"
+                                               value="{{ form.wed_math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_math_self_study_hour" name="wed_math_self_study_hour"
+                                               value="{{ form.wed_math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_math_self_study_min" name="wed_math_self_study_min"
+                                               value="{{ form.wed_math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">영어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_english_lecture_study_hour" name="wed_english_lecture_study_hour"
+                                               value="{{ form.wed_english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_english_lecture_study_min" name="wed_english_lecture_study_min"
+                                               value="{{ form.wed_english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_english_self_study_hour" name="wed_english_self_study_hour"
+                                               value="{{ form.wed_english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_english_self_study_min" name="wed_english_self_study_min"
+                                               value="{{ form.wed_english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">탐구</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_research_lecture_study_hour" name="wed_research_lecture_study_hour"
+                                               value="{{ form.wed_research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_research_lecture_study_min" name="wed_research_lecture_study_min"
+                                               value="{{ form.wed_research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_research_self_study_hour" name="wed_research_self_study_hour"
+                                               value="{{ form.wed_research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_wed_research_self_study_min" name="wed_research_self_study_min"
+                                               value="{{ form.wed_research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table align-middle border mb-3" style="text-align: center">
+                                    <tr class="table-secondary">
+                                        <th style="width: 20%; white-space: nowrap;">일</th>
+                                        <th colspan="3" style="width: 80%; white-space: nowrap;">
+                                            <input type="date" class="form-control" id="id_sun_date" name="sun_date"
+                                               value="{{ form.sun_date.value|date:'Y-m-d' }}">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">국어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_korean_lecture_study_hour" name="sun_korean_lecture_study_hour"
+                                               value="{{ form.sun_korean_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_korean_lecture_study_min" name="sun_korean_lecture_study_min"
+                                               value="{{ form.sun_korean_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_korean_self_study_hour" name="sun_korean_self_study_hour"
+                                               value="{{ form.sun_korean_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_korean_self_study_min" name="sun_korean_self_study_min"
+                                               value="{{ form.sun_korean_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">수학</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_math_lecture_study_hour" name="sun_math_lecture_study_hour"
+                                               value="{{ form.sun_math_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_math_lecture_study_min" name="sun_math_lecture_study_min"
+                                               value="{{ form.sun_math_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_math_self_study_hour" name="sun_math_self_study_hour"
+                                               value="{{ form.sun_math_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_math_self_study_min" name="sun_math_self_study_min"
+                                               value="{{ form.sun_math_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">영어</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_english_lecture_study_hour" name="sun_english_lecture_study_hour"
+                                               value="{{ form.sun_english_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_english_lecture_study_min" name="sun_english_lecture_study_min"
+                                               value="{{ form.sun_english_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_english_self_study_hour" name="sun_english_self_study_hour"
+                                               value="{{ form.sun_english_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_english_self_study_min" name="sun_english_self_study_min"
+                                               value="{{ form.sun_english_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%;">탐구</td>
+                                        <td style="width: 20%;">수강</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_research_lecture_study_hour" name="sun_research_lecture_study_hour"
+                                               value="{{ form.sun_research_lecture_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_research_lecture_study_min" name="sun_research_lecture_study_min"
+                                               value="{{ form.sun_research_lecture_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>자습</td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_research_self_study_hour" name="sun_research_self_study_hour"
+                                               value="{{ form.sun_research_self_study_hour.value|default_if_none:'' }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="id_sun_research_self_study_min" name="sun_research_self_study_min"
+                                               value="{{ form.sun_research_self_study_min.value|default_if_none:'' }}">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">저장하기</button>
                     </form>
                 {% endif %}
             </div>

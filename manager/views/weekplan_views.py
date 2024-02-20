@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from ..models import Student_Study_Data, Average_Study_Data
+from ..models import Student_Study_Data, WeekPlan
 from check.models import StudentRegister
-from ..forms import Student_Study_DataForm
+from ..forms import Student_Study_DataForm, WeekPlanForm
 from django.conf import settings
 from collections import defaultdict
 
@@ -30,106 +30,151 @@ def weekplan(request):
     return render(request, 'manager/weekplan/weekplan_main.html', context)
 
 def weekplan_detail(request, student_id):
-    data = Student_Study_Data.objects.filter(user__id=student_id).order_by('-id')
+    data = WeekPlan.objects.filter(user__id=student_id).order_by('-id')
     student = StudentRegister.objects.filter(id=student_id) # 단일 객체를 가져오기
-    research1 = student.values('research1_select')[0]['research1_select']
-    research2 = student.values('research2_select')[0]['research2_select']
-    # research3 = student.values('research3_select')[0]['research3_select']
 
     selected_week = request.GET.get('selected_week')
 
     if selected_week:
-        filtered_data = Student_Study_Data.objects.filter(week_name=selected_week, user__id=student_id)
-        total_study = filtered_data[0].korean_study + filtered_data[0].math_study + filtered_data[0].english_study + filtered_data[0].research1_study + filtered_data[0].research2_study
-        total_self_study = filtered_data[0].korean_self_study + filtered_data[0].math_self_study + filtered_data[0].english_self_study + filtered_data[0].research1_self_study + filtered_data[0].research2_self_study
+        filtered_data = WeekPlan.objects.filter(week_name=selected_week, user__id=student_id)
+        week_total_korean_lecture_study = (filtered_data[0].mon_korean_lecture_study_hour * 60) + filtered_data[0].mon_korean_lecture_study_min + (filtered_data[0].tue_korean_lecture_study_hour * 60) + filtered_data[0].tue_korean_lecture_study_min + (filtered_data[0].wed_korean_lecture_study_hour * 60) + filtered_data[0].wed_korean_lecture_study_min + (filtered_data[0].thu_korean_lecture_study_hour * 60) + filtered_data[0].thu_korean_lecture_study_min + (filtered_data[0].fri_korean_lecture_study_hour * 60) + filtered_data[0].fri_korean_lecture_study_min + (filtered_data[0].sat_korean_lecture_study_hour * 60) + filtered_data[0].sat_korean_lecture_study_min + (filtered_data[0].sun_korean_lecture_study_hour * 60) + filtered_data[0].sun_korean_lecture_study_min
+        week_total_korean_self_study = (filtered_data[0].mon_korean_self_study_hour * 60) + filtered_data[0].mon_korean_self_study_min + (filtered_data[0].tue_korean_self_study_hour * 60) + filtered_data[0].tue_korean_self_study_min + (filtered_data[0].wed_korean_self_study_hour * 60) + filtered_data[0].wed_korean_self_study_min + (filtered_data[0].thu_korean_self_study_hour * 60) + filtered_data[0].thu_korean_self_study_min + (filtered_data[0].fri_korean_self_study_hour * 60) + filtered_data[0].fri_korean_self_study_min + (filtered_data[0].sat_korean_self_study_hour * 60) + filtered_data[0].sat_korean_self_study_min + (filtered_data[0].sun_korean_self_study_hour * 60) + filtered_data[0].sun_korean_self_study_min
+        week_total_math_lecture_study = (filtered_data[0].mon_math_lecture_study_hour * 60) + filtered_data[0].mon_math_lecture_study_min + (filtered_data[0].tue_math_lecture_study_hour * 60) + filtered_data[0].tue_math_lecture_study_min + (filtered_data[0].wed_math_lecture_study_hour * 60) + filtered_data[0].wed_math_lecture_study_min + (filtered_data[0].thu_math_lecture_study_hour * 60) + filtered_data[0].thu_math_lecture_study_min + (filtered_data[0].fri_math_lecture_study_hour * 60) + filtered_data[0].fri_math_lecture_study_min + (filtered_data[0].sat_math_lecture_study_hour * 60) + filtered_data[0].sat_math_lecture_study_min + (filtered_data[0].sun_math_lecture_study_hour * 60) + filtered_data[0].sun_math_lecture_study_min
+        week_total_math_self_study = (filtered_data[0].mon_math_self_study_hour * 60) + filtered_data[0].mon_math_self_study_min + (filtered_data[0].tue_math_self_study_hour * 60) + filtered_data[0].tue_math_self_study_min + (filtered_data[0].wed_math_self_study_hour * 60) + filtered_data[0].wed_math_self_study_min + (filtered_data[0].thu_math_self_study_hour * 60) + filtered_data[0].thu_math_self_study_min + (filtered_data[0].fri_math_self_study_hour * 60) + filtered_data[0].fri_math_self_study_min + (filtered_data[0].sat_math_self_study_hour * 60) + filtered_data[0].sat_math_self_study_min + (filtered_data[0].sun_math_self_study_hour * 60) + filtered_data[0].sun_math_self_study_min
+
+        week_total_english_lecture_study = (filtered_data[0].mon_english_lecture_study_hour * 60) + filtered_data[
+            0].mon_english_lecture_study_min + (filtered_data[0].tue_english_lecture_study_hour * 60) + filtered_data[
+                                            0].tue_english_lecture_study_min + (
+                                                    filtered_data[0].wed_english_lecture_study_hour * 60) + filtered_data[
+                                            0].wed_english_lecture_study_min + (
+                                                    filtered_data[0].thu_english_lecture_study_hour * 60) + filtered_data[
+                                            0].thu_english_lecture_study_min + (
+                                                    filtered_data[0].fri_english_lecture_study_hour * 60) + filtered_data[
+                                            0].fri_english_lecture_study_min + (
+                                                    filtered_data[0].sat_english_lecture_study_hour * 60) + filtered_data[
+                                            0].sat_english_lecture_study_min + (
+                                                    filtered_data[0].sun_english_lecture_study_hour * 60) + filtered_data[
+                                            0].sun_english_lecture_study_min
+        week_total_english_self_study = (filtered_data[0].mon_english_self_study_hour * 60) + filtered_data[
+            0].mon_math_self_study_min + (filtered_data[0].tue_english_self_study_hour * 60) + filtered_data[
+                                         0].tue_english_self_study_min + (filtered_data[0].wed_english_self_study_hour * 60) + \
+                                     filtered_data[0].wed_english_self_study_min + (
+                                                 filtered_data[0].thu_english_self_study_hour * 60) + filtered_data[
+                                         0].thu_english_self_study_min + (filtered_data[0].fri_english_self_study_hour * 60) + \
+                                     filtered_data[0].fri_english_self_study_min + (
+                                                 filtered_data[0].sat_english_self_study_hour * 60) + filtered_data[
+                                         0].sat_english_self_study_min + (filtered_data[0].sun_english_self_study_hour * 60) + \
+                                     filtered_data[0].sun_english_self_study_min
+
+        week_total_research_lecture_study = (filtered_data[0].mon_research_lecture_study_hour * 60) + filtered_data[
+            0].mon_english_lecture_study_min + (filtered_data[0].tue_research_lecture_study_hour * 60) + filtered_data[
+                                               0].tue_research_lecture_study_min + (
+                                                   filtered_data[0].wed_research_lecture_study_hour * 60) + \
+                                           filtered_data[
+                                               0].wed_research_lecture_study_min + (
+                                                   filtered_data[0].thu_research_lecture_study_hour * 60) + \
+                                           filtered_data[
+                                               0].thu_research_lecture_study_min + (
+                                                   filtered_data[0].fri_research_lecture_study_hour * 60) + \
+                                           filtered_data[
+                                               0].fri_research_lecture_study_min + (
+                                                   filtered_data[0].sat_research_lecture_study_hour * 60) + \
+                                           filtered_data[
+                                               0].sat_research_lecture_study_min + (
+                                                   filtered_data[0].sun_research_lecture_study_hour * 60) + \
+                                           filtered_data[
+                                               0].sun_research_lecture_study_min
+        week_total_research_self_study = (filtered_data[0].mon_research_self_study_hour * 60) + filtered_data[
+            0].mon_research_self_study_min + (filtered_data[0].tue_research_self_study_hour * 60) + filtered_data[
+                                            0].tue_research_self_study_min + (
+                                                    filtered_data[0].wed_research_self_study_hour * 60) + \
+                                        filtered_data[0].wed_research_self_study_min + (
+                                                filtered_data[0].thu_research_self_study_hour * 60) + filtered_data[
+                                            0].thu_research_self_study_min + (
+                                                    filtered_data[0].fri_research_self_study_hour * 60) + \
+                                        filtered_data[0].fri_research_self_study_min + (
+                                                filtered_data[0].sat_research_self_study_hour * 60) + filtered_data[
+                                            0].sat_research_self_study_min + (
+                                                    filtered_data[0].sun_research_self_study_hour * 60) + \
+                                        filtered_data[0].sun_research_self_study_min
+
+        week_total_lecture_study = week_total_korean_lecture_study + week_total_math_lecture_study + week_total_english_lecture_study + week_total_research_lecture_study
+        week_total_self_study = week_total_korean_self_study + week_total_math_self_study + week_total_english_self_study + week_total_research_self_study
     else:
         filtered_data = []
-        total_study = 0
-        total_self_study = 0
+        week_total_korean_lecture_study = 0
+        week_total_math_lecture_study = 0
+        week_total_english_lecture_study = 0
+        week_total_research_lecture_study = 0
+
+        week_total_korean_self_study = 0
+        week_total_math_self_study = 0
+        week_total_english_self_study = 0
+        week_total_research_self_study = 0
+        week_total_lecture_study = 0
+        week_total_self_study = 0
 
     print(student)
     context = {
         'data': data,
         'student': student,
-        'research1': research1,
-        'research2': research2,
         'selected_week': selected_week,
         'filtered_data': filtered_data,
-        'total_study': total_study,
-        'total_self_study': total_self_study
+        'week_total_korean_lecture_study': week_total_korean_lecture_study,
+        'week_total_math_lecture_study': week_total_math_lecture_study,
+        'week_total_english_lecture_study': week_total_english_lecture_study,
+        'week_total_research_lecture_study': week_total_research_lecture_study,
+        'week_total_korean_self_study': week_total_korean_self_study,
+        'week_total_math_self_study': week_total_math_self_study,
+        'week_total_english_self_study': week_total_english_self_study,
+        'week_total_research_self_study': week_total_research_self_study,
+        'week_total_lecture_study': week_total_lecture_study,
+        'week_total_self_study': week_total_self_study,
     }
     return render(request, 'manager/weekplan/weekplan_detail.html', context)
 
 def weekplan_create(request, student_id):
     student = StudentRegister.objects.get(id=student_id)  # 단일 객체 가져오기
-    data = Student_Study_Data.objects.filter(user__id=student_id).order_by('-id')
+    data = WeekPlan.objects.filter(user__id=student_id).order_by('-id')
 
     if request.method == 'POST':
-        form = Student_Study_DataForm(request.POST)
+        form = WeekPlanForm(request.POST)
         if form.is_valid():
             week_name = form.cleaned_data['week_name']
             # 중복 검사
-            if Student_Study_Data.objects.filter(user=student, week_name=week_name).exists():
+            if WeekPlan.objects.filter(user=student, week_name=week_name).exists():
                 form.add_error('week_name', ValidationError(_("이미 등록된 기간입니다.")))
                 context = {'student': student, 'form': form, 'data': data}
                 return render(request, 'manager/weekplan/weekplan_form.html', context)
 
-            study_data = form.save(commit=False)
-            study_data.week_name = form.cleaned_data['week_name']
-            # study_data.student_name = student
-            study_data.user = student
-            study_data.korean_study = form.cleaned_data['korean_study']
-            study_data.korean_self_study = form.cleaned_data['korean_self_study']
-
-            study_data.math_study = form.cleaned_data['math_study']
-            study_data.math_self_study = form.cleaned_data['math_self_study']
-
-            study_data.english_study = form.cleaned_data['english_study']
-            study_data.english_self_study = form.cleaned_data['english_self_study']
-
-            study_data.research1_study = form.cleaned_data['research1_study']
-            study_data.research1_self_study = form.cleaned_data['research1_self_study']
-
-            # study_data.research2_study = form.cleaned_data['research2_study']
-            # study_data.research2_self_study = form.cleaned_data['research2_self_study']
-            #
-            # study_data.research3_study = form.cleaned_data['research3_study']
-            # study_data.research3_self_study = form.cleaned_data['research3_self_study']
-            study_data.save()  # 데이터 저장
+            weekplan = form.save(commit=False)
+            weekplan.user = StudentRegister.objects.get(id=student_id)
             student_id = student.id
+            weekplan.save()
             return redirect('manager:weekplan_detail', student_id=student_id)
     else:
-        form = Student_Study_DataForm()
+        form = WeekPlanForm()
 
     context = {'student': student, 'form': form, 'data': data}
     return render(request, 'manager/weekplan/weekplan_form.html', context)
 
 def weekplan_modify(request, data_id):
-    week_data = get_object_or_404(Student_Study_Data, id=data_id)  # 단일 객체 가져오기
-    data = Student_Study_Data.objects.filter(user__id=week_data.user_id).order_by('-id')
+    week_data = get_object_or_404(WeekPlan, id=data_id)  # 단일 객체 가져오기
+    data = WeekPlan.objects.filter(user__id=week_data.user_id).order_by('-id')
 
     student = get_object_or_404(StudentRegister, id=week_data.user_id)
     student_id = student.id
 
     if request.method == 'POST':
-        form = Student_Study_DataForm(request.POST, instance=week_data)
-        # if form.is_valid():
-        #     study_data = form.save(commit=False)
-        #     study_data.user = student.id
-        #     # 필요한 경우 study_data의 추가 필드를 업데이트
-        #     study_data.save()  # 데이터 저장
-        #     student_id = student.id
-        #     return redirect('manager:student_study_detail', student_id=student_id)
+        form = WeekPlanForm(request.POST, instance=week_data)
         if form.is_valid():
             study_data = form.save(commit=False)
-            # student_id = form.cleaned_data.get('user')  # 또는 week_data.user_id 등을 사용
             study_data.user = StudentRegister.objects.get(id=student_id)  # StudentRegister 인스턴스를 할당
-            # study_data.student_name = week_data.student_name
             study_data.save()
             return redirect('manager:weekplan_detail', student_id=student_id)
 
     else:
-        form = Student_Study_DataForm(instance=week_data)
+        form = WeekPlanForm(instance=week_data)
 
     context = {'form': form, 'data': data, 'student': student, 'week_data': week_data}
     return render(request, 'manager/weekplan/weekplan_form.html', context)
