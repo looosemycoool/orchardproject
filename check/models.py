@@ -12,6 +12,10 @@ class StudentRegister(models.Model):
     parent_phone1 = models.CharField(max_length=15, null=True, blank=True)
     parent_phone2 = models.CharField(max_length=15, null=True, blank=True)
 
+    address = models.CharField(max_length=200, null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
+    school = models.CharField(max_length=25, null=True, blank=True)
+
     korean_select = models.CharField(max_length=10, null=True, blank=True, default=None)
     math_select = models.CharField(max_length=10, null=True, blank=True, default=None)
     research1_select = models.CharField(max_length=10, null=True, blank=True, default=None)

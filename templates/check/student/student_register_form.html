@@ -90,6 +90,23 @@
 {#                           value="{{ form.research3_select.value|default_if_none:'' }}">#}
 {#                </div>#}
             </div>
+        <div class="row mb-3">
+                <div class="col-md-2">
+                    <label for="id_school" class="form-label">출신학교</label>
+                    <input type="text" class="form-control" id="id_school" name="school"
+                           value="{{ form.school.value|default_if_none:'' }}">
+                </div>
+                <div class="col-md-2">
+                    <label for="id_birthday" class="form-label">생년월일</label>
+                    <input type="date" class="form-control" id="id_birthday" name="birthday"
+                           value="{{ student.birthday|date:'Y-m-d' }}">
+                </div>
+                <div class="col-md-8">
+                    <label for="id_address" class="form-label">주소</label>
+                    <input type="text" class="form-control" id="id_address" name="address"
+                           value="{{ form.address.value|default_if_none:'' }}">
+                </div>
+            </div>
             <div class="mb-3">
                 <label for="id_consulting_content" class="form-label"></label>
                 <table class="table align-middle table-bordered" style="text-align: center">
