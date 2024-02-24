@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-2">
+                        <form method="GET" action="{% url 'report:mypage_search_detail' student.id %}">
+                            <div class="card border-secondary mb-3" style="height: 18rem">
+                                <div class="card-header bg-info-subtle">날짜 선택</div>
+                                <div class="card-body">
+                                    <label for="id_start_date" class="form-label">시작일</label>
+                                    <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                           value="{{ form.start_date.value|default_if_none:'' }}">
+                                </div>
+                                <div class="card-body">
+                                    <label for="id_end_date" class="form-label">마지막일</label>
+                                    <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                           value="{{ form.end_date.value|default_if_none:'' }}">
+                                    <button class="btn btn-outline-success mt-2" type="submit" id="button"
+                                            style="vertical-align: center">검색
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-10">
+                            <table class="table align-middle" style="text-align: center">
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th style="width: 2%; white-space: nowrap;">선택 기간 총합</th>
+                                        <th style="width: 3%; white-space: nowrap;">국어</th>
+                                        <th style="width: 3%; white-space: nowrap;">수학</th>
+                                        <th style="width: 3%; white-space: nowrap;">영어</th>
+                                        <th style="width: 3%; white-space: nowrap;">탐구</th>
+                                        <th style="width: 3%; white-space: nowrap;">총</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="white-space: nowrap">수강시간</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.korean_lecture_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.math_lecture_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.english_lecture_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.research_lecture_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.total_lecture_study }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="white-space: nowrap">자습시간</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.korean_self_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.math_self_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.english_self_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.research_self_study }}</td>
+                                        <td style="white-space: nowrap">{{ report.total_study_hours.total_self_study }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">총</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ report.total_study_hours.total_korean_study }}</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ report.total_study_hours.total_math_study }}</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ report.total_study_hours.total_english_study }}</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ report.total_study_hours.total_research_study }}</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ report.total_study_hours.total_study }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% for date, data in report.daily_study.items %}
+                            <table class="table align-middle" style="text-align: center">
+                                <thead>
+                                    <tr class="table-success">
+                                        <th style="width: 2%; white-space: nowrap;">{{ date }}</th>
+                                        <th style="width: 3%; white-space: nowrap;">국어</th>
+                                        <th style="width: 3%; white-space: nowrap;">수학</th>
+                                        <th style="width: 3%; white-space: nowrap;">영어</th>
+                                        <th style="width: 3%; white-space: nowrap;">탐구</th>
+                                        <th style="width: 3%; white-space: nowrap;">총</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="white-space: nowrap">수강시간</td>
+                                        <td style="white-space: nowrap">{{ data.korean_lecture_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.math_lecture_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.english_lecture_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.research_lecture_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.lecture_study }} 분</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="white-space: nowrap">자습시간</td>
+                                        <td style="white-space: nowrap">{{ data.korean_self_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.math_self_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.english_self_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.research_self_study }} 분</td>
+                                        <td style="white-space: nowrap">{{ data.self_study }} 분</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">총</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ data.korean_study }} 분</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ data.math_study }} 분</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ data.english_study }} 분</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ data.research_study }} 분</td>
+                                        <td class="bg-secondary-subtle" style="white-space: nowrap">{{ data.total_study }} 분</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

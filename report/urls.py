@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import study_views, question_views, consulting_views, newstudy_views, word_views
+from .views import study_views, question_views, consulting_views, newstudy_views, word_views, mypage_search_views
 
 app_name = 'report'
 
@@ -24,4 +24,8 @@ urlpatterns = [
     # word_views
     path('word/', word_views.index, name='word_index'),
     path('word/report/<int:student_id>', word_views.word_report, name='word_report'),
+
+    # mypage_search_views
+    path('mypage/', mypage_search_views.index, name='mypage_search_index'),
+    path('mypage/detail/<int:student_id>', mypage_search_views.mypage_search_detail, name='mypage_search_detail')
 ]

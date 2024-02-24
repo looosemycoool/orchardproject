@@ -54,8 +54,8 @@
                 <div class="container-fluid border mb-3" id="report_div" style="width:1100px; height:720px">
                     <div class="container-fluid mb-3" style="width:1180px; height:55px">
                         <div class="row">
-                            <div class="col-md-2">
-                                <div class="card mt-3">
+                            <div class="col-md-2 mt-2">
+                                <div class="card">
                                     <div class="card-header bg-success-subtle text-center"
                                          style="height: 3rem; align-items: center;">
                                         <p class="card-title" style="margin-top:-12px ; font-size:38px;">
@@ -481,6 +481,12 @@
                         </div>
                     </div>
                 </div>
+                <img src="{% static 'save_btn.png' %}"
+                                     class="save-btn"
+                                     data-target="report_div"
+                                     data-student-name="{{ student.student }}"
+                                     data-month-name="{{ data.month }}"
+                                     alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.5; margin-top:-10px"/>
                 </div>
             {% endfor %}
             </div>
