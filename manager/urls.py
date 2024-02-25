@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import base_views, reserve_views, consulting_views, student_study_views, patrol_views, report_views, \
-    data_views, teacher_views, word_views, wordmaster_views, weekplan_views
+    data_views, teacher_views, word_views, weekplan_views
 
 app_name = 'manager'
 
@@ -45,9 +45,6 @@ urlpatterns = [
     path('word/create/<int:student_id>', word_views.word_create, name='word_create'),
     path('word/modify/<int:data_id>', word_views.word_modify, name='word_modify'),
     path('word/delete/<int:data_id>', word_views.word_delete, name='word_delete'),
-
-    # wordmaster
-    path('wordmaster/', wordmaster_views.index, name='wordmaster'),
 
     # consulting
     path('consulting/', consulting_views.index, name='consulting'),
