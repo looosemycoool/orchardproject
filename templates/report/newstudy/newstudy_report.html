@@ -7,28 +7,28 @@
             <div class="col-md-10">
                 <div class="row">
                     {% for report in weekly_reports %}
-                        <div class="container-fluid mb-3" id="report_div_{{ forloop.counter }}" style="width:1660px; height:720px">
+                        <div class="container mb-3" id="report_div_{{ forloop.counter }}" style="width:2000px; height:800px">
                             <div class="row mt-2">
                                 <div class="col-md-2 mb-2">
                                     <div style="height:515px">
                                         <div class="card">
                                             <div class="card-header bg-success-subtle"
                                                  style="display: flex; align-items: center;">
-                                                <p class="card-title" style="margin: 0; font-size:44px;">
+                                                <p class="card-title" style="margin: 0; font-size:58px;">
                                                     <strong>{{ report.student_name }}</strong></p>
                                             </div>
                                             <div class="card-header">
-                                                <h4 class="card-text">{{ report.week_name }}</h4>
+                                                <h3 class="card-text">{{ report.week_name }}</h3>
                                             </div>
                                             <div class="card-body">
-                                                <p class="card-text" style="font-size:15px">{{ report.start_date }} ~ </p>
-                                                <p class="card-text" style="font-size:15px">{{ report.end_date }}</p>
+                                                <p class="card-text" style="font-size:20px">{{ report.start_date }} ~ </p>
+                                                <p class="card-text" style="font-size:20px">{{ report.end_date }}</p>
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item bg-light"
                                                     style="white-space: nowrap;"></li>
                                                 <li class="list-group-item bg-danger text-white"
-                                                    style="white-space: nowrap; font-size:20px">
+                                                    style="white-space: nowrap; font-size:26px">
                                                     <div class="row">
                                                         <div class="col-md-6" style="text-align: center">
                                                             <strong>수면</strong>
@@ -39,7 +39,7 @@
                                                 <li class="list-group-item bg-light"
                                                     style="white-space: nowrap;"></li>
                                                 <li class="list-group-item bg-info-subtle"
-                                                    style="white-space: nowrap; font-size:20px">
+                                                    style="white-space: nowrap; font-size:26px">
                                                     <div class="row">
                                                         <div class="col-md-6" style="text-align: center">
                                                             <strong>집중도</strong>
@@ -51,26 +51,26 @@
                                                 <li class="list-group-item bg-light"
                                                     style="white-space: nowrap;"></li>
                                                 <li class="list-group-item"
-                                                    style="white-space: nowrap; font-size: 15px">
+                                                    style="white-space: nowrap;">
                                                     <div class="row">
-                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
+                                                        <div class="col-md-5" style="text-align: left; font-size:24px">
                                                             <strong>총 인강</strong>
                                                         </div>
-                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
-                                                            {{ report.study_data.total_lecture_study_hour }}h
-                                                            {{ report.study_data.total_lecture_study_min }}m
+                                                        <div class="col-md-7" style="text-align: left; font-size:24px">
+                                                            {{ report.my_data.my_lecture_study_hour }}h
+                                                            {{ report.my_data.my_lecture_study_min }}m
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item"
                                                     style="white-space: nowrap; font-size: 15px">
                                                     <div class="row">
-                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
+                                                        <div class="col-md-5" style="text-align: left; font-size:24px">
                                                             <strong>총 자습</strong>
                                                         </div>
-                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
-                                                            {{ report.study_data.total_self_study_hour }}h
-                                                            {{ report.study_data.total_self_study_min }}m
+                                                        <div class="col-md-7" style="text-align: left; font-size:24px">
+                                                            {{ report.my_data.my_self_study_hour }}h
+                                                            {{ report.my_data.my_self_study_min }}m
                                                         </div>
                                                     </div>
                                                 </li>
@@ -79,12 +79,12 @@
                                                 <li class="list-group-item"
                                                     style="white-space: nowrap; font-size: 15px">
                                                     <div class="row">
-                                                        <div class="col-md-5" style="text-align: left; font-size:18px">
+                                                        <div class="col-md-5" style="text-align: left; font-size:24px">
                                                             <strong>총 학습</strong>
                                                         </div>
-                                                        <div class="col-md-7" style="text-align: left; font-size:18px">
-                                                            {{ report.study_data.total_study_hour }}h
-                                                            {{ report.study_data.total_study_min }}m
+                                                        <div class="col-md-7" style="text-align: left; font-size:24px">
+                                                            {{ report.my_data.my_study_hour }}h
+                                                            {{ report.my_data.my_study_min }}m
                                                         </div>
                                                     </div>
                                                 </li>
@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <img style="max-height: 156px; margin-left:-20px;margin-top: 35px" src="{% static '3.jpg' %}"
+                                        <img style="max-height: 180px; margin-left:-10px;margin-top: 90px" src="{% static '3.jpg' %}"
                                              alt="logo"/>
                                         <img src="{% static 'save_btn.png' %}"
                                              class="save-btn"
@@ -103,41 +103,56 @@
                                     </div>
                                 </div>
                                 <div class="col-md-10">
-                                    <div class="card border border-success" style="height:390px">
+                                    <div class="card border border-success" style="height:430px">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <figure class="highcharts-figure">
                                                     <div id="container_semicircle_student_{{ forloop.counter }}"></div>
                                                 </figure>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <figure class="highcharts-figure">
                                                     <div id="container_semicircle_patrol_{{ forloop.counter }}"></div>
                                                 </figure>
                                             </div>
+                                            <div class="col-md-4">
+                                                <figure class="highcharts-figure">
+                                                    <div id="container_semicircle_plan_{{ forloop.counter }}"></div>
+                                                </figure>
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <figure class="highcharts-figure">
                                                 <div id="container_stack_bar_student_{{ forloop.counter }}"></div>
                                             </figure>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <figure class="highcharts-figure">
                                                 <div id="container_stack_bar_patrol_{{ forloop.counter }}"></div>
                                             </figure>
                                             </div>
+                                            <div class="col-md-4">
+                                                <figure class="highcharts-figure">
+                                                <div id="container_stack_bar_plan_{{ forloop.counter }}"></div>
+                                            </figure>
+                                            </div>
                                         </div>
-                                        <div class="card border border-success" style="height:290px">
+                                        <div class="card border border-success" style="height:500px">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <figure class="highcharts-figure">
                                                         <div id="container_column_{{ forloop.counter }}"></div>
                                                     </figure>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <figure class="highcharts-figure">
                                                         <div id="container_column_total{{ forloop.counter }}"></div>
+                                                    </figure>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <figure class="highcharts-figure">
+                                                        <div id="container_column_top{{ forloop.counter }}"></div>
                                                     </figure>
                                                 </div>
                                             </div>
@@ -159,13 +174,16 @@
                     plotBackgroundColor: null,
                     plotBorderWidth: 0,
                     plotShadow: false,
-                    height: (7 / 16 * 100) + '%'
+                    height: (9 / 16 * 100) + '%'
                 },
                 title: {
                     text: '실시간 학습 점검',
                     align: 'center',
                     verticalAlign: 'middle',
-                    y: -60
+                    y: -75,
+                    style:{
+                        fonsSize:'100px'
+                    }
                 },
                 accessibility: {
                     point: {
@@ -180,7 +198,7 @@
                             formatter: function () {
                                 return this.point.name + ':' + Math.round(this.percentage / {{ report.study_counts.total_study_count}} * 100) + '%';
                             },
-                            distance: -40,
+                            distance: -50,
                             color: 'black',
                         },
                         startAngle: -90,
@@ -217,12 +235,13 @@
         {% endfor %}
     </script>
     <script>
+{#     일일 순찰 스택바 #}
         {% for report in weekly_reports %}
             {#Highcharts.Templating.helpers.abs = (value) => Math.abs(value);#}
             Highcharts.chart('container_stack_bar_patrol_{{ forloop.counter }}', {
                 chart: {
                     type: 'bar',
-                    height: (6 / 16 * 100) + '%'
+                    height: (7 / 16 * 100) + '%'
                 },
                 title: {
                     text: null,
@@ -274,20 +293,20 @@
         {% endfor %}
     </script>
     <script>
-    {#    플래너 semicircle 차트 #}
+    {#    학생 주간 계획표 semicircle 차트 #}
         {% for report in weekly_reports %}
             Highcharts.chart('container_semicircle_student_{{ forloop.counter }}', {
                 chart: {
                     plotBackgroundColor: null,
                     plotBorderWidth: 0,
                     plotShadow: false,
-                    height: (7 / 16 * 100) + '%'
+                    height: (9 / 16 * 100) + '%'
                 },
                 title: {
                     text: '학생 주간 계획',
                     align: 'center',
                     verticalAlign: 'middle',
-                    y: -60
+                    y: -75
                 },
                 accessibility: {
                     point: {
@@ -300,9 +319,9 @@
                                 enabled: true,
                                 format: '{point.name}:{point.percentage:.1f}%',
                                 formatter: function () {
-                                    return this.point.name + ':' + Math.round(this.percentage / {{ report.study_data.total_study }} * 100) + '%';
+                                    return this.point.name + ':' + Math.round(this.percentage / {{ report.week_plan.week_plan_total_study }} * 100) + '%';
                                 },
-                                distance: -18,
+                                distance: -50,
                                 color: 'black',
                             },
                             startAngle: -90,
@@ -319,19 +338,19 @@
                     data: [
                         {
                             name: '국어',
-                            y: {{ report.study_data.korean_study }}
+                            y: {{ report.week_plan.week_plan_korean_study }}
                         },
                         {
                             name: '수학',
-                            y: {{ report.study_data.math_study }}
+                            y: {{ report.week_plan.week_plan_math_study }}
                         },
                         {
                             name: '영어',
-                            y: {{ report.study_data.english_study }}
+                            y: {{ report.week_plan.week_plan_english_study }}
                         },
                         {
                             name: '탐구',
-                            y: {{ report.study_data.research1_study }}
+                            y: {{ report.week_plan.week_plan_research_study }}
                         },
                     ]
                 }]
@@ -344,7 +363,7 @@
             Highcharts.chart('container_stack_bar_student_{{ forloop.counter }}', {
                 chart: {
                     type: 'bar',
-                    height: (6 / 16 * 100) + '%'
+                    height: (7 / 16 * 100) + '%'
                 },
                 title: {
                     text: null
@@ -383,11 +402,133 @@
                 },
                 series: [{
                     name: '인강',
-                    data: [(-{{ report.study_data.korean_lecture_study }}), (-{{ report.study_data.math_lecture_study }}), (-{{ report.study_data.english_lecture_study }}), (-{{ report.study_data.research1_lecture_study }})],
+                    data: [(-{{ report.week_plan.week_plan_korean_lecture_study }}), (-{{ report.week_plan.week_plan_math_lecture_study }}), (-{{ report.week_plan.week_plan_english_lecture_study }}), (-{{ report.week_plan.week_plan_research_lecture_study }})],
                     color: '#00FF00'
                 }, {
                     name: '자습',
-                    data: [{{ report.study_data.korean_self_study }}, {{ report.study_data.math_self_study }}, {{ report.study_data.english_self_study }}, {{ report.study_data.research1_self_study }}],
+                    data: [{{ report.week_plan.week_plan_korean_self_study }}, {{ report.week_plan.week_plan_math_self_study }}, {{ report.week_plan.week_plan_english_self_study }}, {{ report.week_plan.week_plan_research_self_study }}],
+                    color: '#00BFFF'
+                },
+                ]
+            });
+        {% endfor %}
+    </script>
+    <script>
+    {#    마이페이지 semicircle 차트 #}
+        {% for report in weekly_reports %}
+            Highcharts.chart('container_semicircle_plan_{{ forloop.counter }}', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false,
+                    height: (9 / 16 * 100) + '%'
+                },
+                title: {
+                    text: '학생 학습(마이페이지)',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: -75
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}:{point.percentage:.1f}%',
+                            formatter: function () {
+                                return this.point.name + ':' + Math.round(this.percentage / {{ report.my_data.my_total_study}} * 100) + '%';
+                            },
+                            distance: -50,
+                            color: 'black',
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ['50%', '128%'],
+                        size: '230%',
+                        colors: ['#FFE699', '#8BE88B', '#FFA931', '#63C9E8', '#A795D7']
+                    },
+                },
+                series: [{
+                    type: 'pie',
+                    name: '',
+                    innerSize: '40%',
+                    data: [
+                        {
+                            name: '국어',
+                            y: {{ report.my_data.my_korean_study }}
+                        },
+                        {
+                            name: '수학',
+                            y: {{ report.my_data.my_math_study }}
+                        },
+                        {
+                            name: '영어',
+                            y: {{ report.my_data.my_english_study }}
+                        },
+                        {
+                            name: '탐구',
+                            y: {{ report.my_data.my_research_study }}
+                        }
+                    ]
+                }]
+            });
+        {% endfor %}
+    </script>
+    <script>
+{#    마이페이지 스택바 #}
+        {% for report in weekly_reports %}
+            {#Highcharts.Templating.helpers.abs = (value) => Math.abs(value);#}
+            Highcharts.chart('container_stack_bar_plan_{{ forloop.counter }}', {
+                chart: {
+                    type: 'bar',
+                    height: (7 / 16 * 100) + '%'
+                },
+                title: {
+                    text: null
+                },
+                xAxis: {
+                    categories: ['국어', '수학', '영어', '탐구'],
+                    LineWidth: 0
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        format: "{abs value}",
+                    },
+                },
+                legend: {
+                    reversed: false
+                },
+                plotOptions: {
+                    bar: {
+                        colorByPoint: false,
+                        groupPadding: 0.05, // 그룹 간격 설정
+                        pointWidth: 10,
+                    },
+                    series: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function () {
+                                return Math.abs(this.y);
+                            }
+                        },
+                        borderRadius: "50%",
+                    }
+                },
+                series: [{
+                    name: '인강',
+                    data: [(-{{ report.my_data.my_korean_lecture_study }}), (-{{ report.my_data.my_math_lecture_study }}), (-{{ report.my_data.my_english_lecture_study }}), (-{{ report.my_data.my_research_lecture_study }})],
+                    color: '#00FF00'
+                }, {
+                    name: '자습',
+                    data: [{{ report.my_data.my_korean_self_study }}, {{ report.my_data.my_math_self_study }}, {{ report.my_data.my_english_self_study }}, {{ report.my_data.my_research_self_study }}],
                     color: '#00BFFF'
                 },
                 ]
@@ -400,7 +541,7 @@
             Highcharts.chart('container_column_{{ forloop.counter }}', {
                 chart: {
                     type: 'column',
-                    height: (10 / 16 * 100) + '%'
+                    height: (13 / 16 * 100) + '%'
                 },
                 title: {
                     text: '전체 학생 대비 과목별 내 공부량'
@@ -436,14 +577,14 @@
                     name: '총 학생 인강 시간 평균',
                     {# 연두색 #}
                     color: 'rgba(144,238,144,1)',
-                    data: [{{ report.average_data.average_korean_lecture_study }}, {{ report.average_data.average_math_lecture_study }}, {{ report.average_data.average_english_lecture_study }}, {{ report.average_data.average_research_lecture_study }}],
+                    data: [{{ report.average_data.average_korean_lecture }}, {{ report.average_data.average_math_lecture }}, {{ report.average_data.average_english_lecture }}, {{ report.average_data.average_research_lecture }}],
                     pointPadding: 0.3,
                     pointPlacement: -0.2
                 }, {
                     name: '내 인강 시간',
                     {# 색상 #}
                     color: 'rgba(0,128,0,.9)',
-                    data: [{{ report.study_data.korean_lecture_study }}, {{ report.study_data.math_lecture_study }}, {{ report.study_data.english_lecture_study }}, {{ report.study_data.research_lecture_study }}],
+                    data: [{{ report.my_data.my_korean_lecture_study }}, {{ report.my_data.my_math_lecture_study }}, {{ report.my_data.my_english_lecture_study }}, {{ report.my_data.my_research_lecture_study }}],
                     pointPadding: 0.4,
                     pointPlacement: -0.2
                 }, {
@@ -457,7 +598,7 @@
                     name: '내 자습 시간',
                     {# 색상 #}
                     color: 'rgba(0,0,128,.9)',
-                    data: [{{ report.study_data.korean_self_study }}, {{ report.study_data.math_self_study }}, {{ report.study_data.english_self_study }}, {{ report.study_data.research_self_study}}],
+                    data: [{{ report.my_data.my_korean_self_study }}, {{ report.my_data.my_math_self_study }}, {{ report.my_data.my_english_self_study }}, {{ report.my_data.my_research_self_study}}],
                     pointPadding: 0.4,
                     pointPlacement: 0.2,
                 }]
@@ -471,7 +612,7 @@
             Highcharts.chart('container_column_total{{ forloop.counter }}', {
                 chart: {
                     type: 'column',
-                    height: (10 / 16 * 100) + '%'
+                    height: (12.4 / 16 * 100) + '%'
                 },
                 title: {
                     text: '전체 학생 대비 내 공부량'
@@ -506,14 +647,69 @@
                     name: '총 학습 평균',
                     {# 연두색 #}
                     color: 'rgba(255,192,76,1)',
-                    data: [{{ report.average_data.average_total_lecture_study }}, {{ report.average_data.average_total_self_study }}, {{ report.average_data.average_total_study }}],
+                    data: [{{ report.average_data.average_lecture_study }}, {{ report.average_data.average_self_study }}, {{ report.average_data.average_total_study }}],
                     pointPadding: 0.3,
                     pointPlacement: -0.2
                 }, {
                     name: '내 학습 시간',
                     {# 색상 #}
                     color: 'rgba(255,0,0,.9)',
-                    data: [{{ report.study_data.total_lecture_study }}, {{ report.study_data.total_self_study}}, {{ report.study_data.total_study }}],
+                    data: [{{ report.my_data.my_lecture_study }}, {{ report.my_data.my_self_study}}, {{ report.my_data.my_total_study }}],
+                    pointPadding: 0.4,
+                    pointPlacement: -0.2
+                }]
+            });
+        {% endfor %}
+    </script>
+{#    상위 30프로 차트#}
+    <script>
+        {% for report in weekly_reports %}
+            Highcharts.chart('container_column_top{{ forloop.counter }}', {
+                chart: {
+                    type: 'column',
+                    height: (12.4 / 16 * 100) + '%'
+                },
+                title: {
+                    text: '상위 30프로 대비 내 공부량'
+                },
+                xAxis: {
+                    categories: [
+                        '총 인강 시간',
+                        '총 자습 시간',
+                        '총 학습 시간'
+                    ]
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                },
+                legend: {
+                    shadow: false
+                },
+                tooltip: {
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        grouping: false,
+                        shadow: false,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '총 학습 평균',
+                    {# 연두색 #}
+                    color: 'rgba(255,192,76,1)',
+                    data: [{{ report.top.top_30_percent_lecture }}, {{ report.top.top_30_percent_self_study }}, {{ report.top.top_30_percent_study }}],
+                    pointPadding: 0.3,
+                    pointPlacement: -0.2
+                }, {
+                    name: '내 학습 시간',
+                    {# 색상 #}
+                    color: 'rgba(255,0,0,.9)',
+                    data: [{{ report.my_data.my_lecture_study }}, {{ report.my_data.my_self_study}}, {{ report.my_data.my_total_study }}],
                     pointPadding: 0.4,
                     pointPlacement: -0.2
                 }]
@@ -521,56 +717,6 @@
         {% endfor %}
     </script>
 
-    {#    정규분포 #}
-{#    <script>#}
-{#        {% for report in weekly_reports %}#}
-{#            var week_data = [#}
-{#                {% for week, data_list in week_data.items %}#}
-{#                    {% if week in data.filtered.week_name %}#}
-{#                        {#}
-{#                            name: '{{ week }}',#}
-{#                            type: 'line',#}
-{#                            data: {{ data_list }},#}
-{#                            accessibility: {#}
-{#                                exposeAsGroupOnly: true#}
-{#                            },#}
-{#                            marker: {#}
-{#                                radius: 1.5#}
-{#                            }#}
-{#                        }#}
-{#                    {% endif %}#}
-{#                {% endfor %}#}
-{#            ];#}
-{##}
-{#            Highcharts.chart('container_bell_curve_{{ forloop.counter }}', {#}
-{#                chart: {#}
-{#                    height: (11 / 16 * 100) + '%'#}
-{#                },#}
-{#                title: {#}
-{#                    text: '총 학습 시간 순위'#}
-{#                },#}
-{#                xAxis: [{#}
-{#                    title: {#}
-{#                        text: ''#}
-{#                    },#}
-{#                    alignTicks: false#}
-{#                }, {#}
-{#                    title: {#}
-{#                        text: 'Bell curve'#}
-{#                    },#}
-{#                    alignTicks: false,#}
-{#                    opposite: true#}
-{#                }],#}
-{#                yAxis: [{#}
-{#                    title: {text: 'Data'}#}
-{#                }, {#}
-{#                    title: {text: 'Bell curve'},#}
-{#                    opposite: true#}
-{#                }],#}
-{#                series: week_data#}
-{#            });#}
-{#        {% endfor %}#}
-{#    </script>#}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 

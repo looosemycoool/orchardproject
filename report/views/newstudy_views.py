@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from django.conf import settings
 from collections import defaultdict
+import operator
 
 from check.models import StudentRegister, PatrolCheck
 from mypage.models import Planner
@@ -49,10 +50,8 @@ def newstudy_report(request, student_id):
     ]
 
     week_plan_datas = WeekPlan.objects.filter(user__id=student_id).order_by('-id')
-    print(week_plan_datas)
-    # study_datas = Student_Study_Data.objects.filter(user__id=student_id).order_by('-id')
     student = StudentRegister.objects.get(id=student_id, is_dropped=False)
-    # print(student.username)
+
     weekly_reports = []
 
     # 각자 학생들의 patrol 데이터
@@ -129,10 +128,9 @@ def newstudy_report(request, student_id):
             week_plan_research_self_study += getattr(week_plan, f"{day}_research_self_study_min", 0)
             week_plan_research_study = week_plan_research_lecture_study + week_plan_research_self_study
 
-        print('week_plan_research_study: ' ,week_plan_research_study)
-
-        total_student_datas = Planner.objects.filter(date__gte=week_plan.start_date, date__lte=week_plan.end_date)
-        student_number = len(total_student_datas)
+        week_plan_lecture_study = week_plan_korean_lecture_study + week_plan_math_lecture_study + week_plan_english_lecture_study + week_plan_research_lecture_study
+        week_plan_self_study = week_plan_korean_self_study + week_plan_math_self_study + week_plan_english_self_study + week_plan_research_self_study
+        week_plan_total_study = week_plan_lecture_study + week_plan_self_study
 
         ##### 학생 개별 마이페이지 플래너 시간 #####
         my_korean_study = 0
@@ -155,26 +153,8 @@ def newstudy_report(request, student_id):
         my_self_study = 0
         my_total_study = 0
 
-
-        # for data in total_student_datas:
-        #     total_korean_study += data.korean_study
-        #     total_korean_self_study += data.korean_self_study
-        #     total_math_study += data.math_study
-        #     total_math_self_study += data.math_self_study
-        #     total_english_study += data.english_study
-        #     total_english_self_study += data.english_self_study
-        #     total_research1_study += data.research1_study
-        #     total_research1_self_study += data.research1_self_study
-        #     total_research2_study += data.research2_study
-        #     total_research2_self_study += data.research2_self_study
-        #
-        # average_total_study = int(total_korean_study + total_math_study + total_english_study + total_research1_study + total_research2_study) / student_number
-        # average_total_self_study = int(total_korean_self_study + total_math_self_study + total_english_self_study + total_research1_self_study + total_research2_self_study / student_number) / student_number
-        # average_total_lecture_study = average_total_study - average_total_self_study
-
         patrol_datas = PatrolCheck.objects.filter(date__gte=week_plan.start_date, date__lte=week_plan.end_date, user__id=student_id)
         planner_datas = Planner.objects.filter(date__gte=week_plan.start_date, date__lte=week_plan.end_date, username=student.username)
-        print(planner_datas)
 
         ## 학생 개인 일일순찰 데이터
         for patrol in patrol_datas:
@@ -264,12 +244,6 @@ def newstudy_report(request, student_id):
 
         my_total_study = my_lecture_study + my_self_study
 
-        print('국어 강의시간', my_korean_lecture_study)
-        print('수학 강의시간', my_math_lecture_study)
-        print('영어 강의시간', my_english_lecture_study)
-        print('탐구 강의시간', my_research_lecture_study)
-        print('강의시간', my_lecture_study)
-
         # focus score 공식
         total_focus_count = three_count + two_count + one_count
 
@@ -279,13 +253,175 @@ def newstudy_report(request, student_id):
             # 집중도 단순 평균 공식
             focus_score = round(((three_count * 3) + (two_count * 2) + one_count) / total_focus_count, 2)
 
-            # 집중도 퍼센트 공식
-            # three_focus_percent = (three_count / total_focus_count) * 100
-            # two_focus_percent = (two_count / total_focus_count) * 100
-            # one_focus_percent = (one_count / total_focus_count) * 100
+        total_student_datas = Planner.objects.filter(date__gte=week_plan.start_date, date__lte=week_plan.end_date)
+        student_subject_study_time = {}
+        for student_data in total_student_datas:
+            student_username = student_data.username.username
 
-            # focus_score = round((three_focus_percent * 1) + (two_focus_percent * 0.5) + (
-            #             one_focus_percent * -1), 2)
+            if student_username not in student_subject_study_time:
+                student_subject_study_time[student_username] = {
+                    'korean_self_study': 0,
+                    'math_self_study': 0,
+                    'english_self_study': 0,
+                    'research_self_study': 0,
+                    'korean_lecture': 0,
+                    'math_lecture': 0,
+                    'english_lecture': 0,
+                    'research_lecture': 0,
+                    'total_self_study': 0,
+                    'total_lecture': 0,
+                    'total_study_time': 0  # 총 시간 추가
+                }
+
+            # 과목별 자습 시간 누적
+            student_subject_study_time[student_username]['korean_self_study'] += (
+                                                                                         student_data.korean_self_study_hour or 0) * 60 + (
+                                                                                         student_data.korean_self_study_min or 0)
+            student_subject_study_time[student_username]['math_self_study'] += (
+                                                                                       student_data.math_self_study_hour or 0) * 60 + (
+                                                                                       student_data.math_self_study_min or 0)
+            student_subject_study_time[student_username]['english_self_study'] += (
+                                                                                          student_data.english_self_study_hour or 0) * 60 + (
+                                                                                          student_data.english_self_study_min or 0)
+            student_subject_study_time[student_username]['research_self_study'] += (
+                                                                                           student_data.research_self_study_hour or 0) * 60 + (
+                                                                                           student_data.research_self_study_min or 0)
+
+            # 과목별 인강 시간 누적
+            student_subject_study_time[student_username]['korean_lecture'] += (
+                                                                                      student_data.korean_lecture_study_hour or 0) * 60 + (
+                                                                                      student_data.korean_lecture_study_min or 0)
+            student_subject_study_time[student_username]['math_lecture'] += (
+                                                                                    student_data.math_lecture_study_hour or 0) * 60 + (
+                                                                                    student_data.math_lecture_study_min or 0)
+            student_subject_study_time[student_username]['english_lecture'] += (
+                                                                                       student_data.english_lecture_study_hour or 0) * 60 + (
+                                                                                       student_data.english_lecture_study_min or 0)
+            student_subject_study_time[student_username]['research_lecture'] += (
+                                                                                        student_data.research_lecture_study_hour or 0) * 60 + (
+                                                                                        student_data.research_lecture_study_min or 0)
+
+            # 총 자습 시간과 총 인강 시간 누적
+            student_subject_study_time[student_username]['total_self_study'] += (
+                                                                                        student_data.korean_self_study_hour or 0) * 60 + (
+                                                                                        student_data.korean_self_study_min or 0)
+            student_subject_study_time[student_username]['total_self_study'] += (
+                                                                                        student_data.math_self_study_hour or 0) * 60 + (
+                                                                                        student_data.math_self_study_min or 0)
+            student_subject_study_time[student_username]['total_self_study'] += (
+                                                                                        student_data.english_self_study_hour or 0) * 60 + (
+                                                                                        student_data.english_self_study_min or 0)
+            student_subject_study_time[student_username]['total_self_study'] += (
+                                                                                        student_data.research_self_study_hour or 0) * 60 + (
+                                                                                        student_data.research_self_study_min or 0)
+
+            student_subject_study_time[student_username]['total_lecture'] += (
+                                                                                     student_data.korean_lecture_study_hour or 0) * 60 + (
+                                                                                     student_data.korean_lecture_study_min or 0)
+            student_subject_study_time[student_username]['total_lecture'] += (
+                                                                                     student_data.math_lecture_study_hour or 0) * 60 + (
+                                                                                     student_data.math_lecture_study_min or 0)
+            student_subject_study_time[student_username]['total_lecture'] += (
+                                                                                     student_data.english_lecture_study_hour or 0) * 60 + (
+                                                                                     student_data.english_lecture_study_min or 0)
+            student_subject_study_time[student_username]['total_lecture'] += (
+                                                                                     student_data.research_lecture_study_hour or 0) * 60 + (
+                                                                                     student_data.research_lecture_study_min or 0)
+
+            # 총 시간 계산 (자습 시간과 인강 시간 합산)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.korean_self_study_hour or 0) * 60 + (
+                                                                                        student_data.korean_self_study_min or 0)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.math_self_study_hour or 0) * 60 + (
+                                                                                        student_data.math_self_study_min or 0)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.english_self_study_hour or 0) * 60 + (
+                                                                                        student_data.english_self_study_min or 0)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.research_self_study_hour or 0) * 60 + (
+                                                                                        student_data.research_self_study_min or 0)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.korean_lecture_study_hour or 0) * 60 + (
+                                                                                        student_data.korean_lecture_study_min or 0)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.math_lecture_study_hour or 0) * 60 + (
+                                                                                        student_data.math_lecture_study_min or 0)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.english_lecture_study_hour or 0) * 60 + (
+                                                                                        student_data.english_lecture_study_min or 0)
+            student_subject_study_time[student_username]['total_study_time'] += (
+                                                                                        student_data.research_lecture_study_hour or 0) * 60 + (
+                                                                                        student_data.research_lecture_study_min or 0)
+            # 각 과목별 합계 초기화
+        total_korean_self_study = 0
+        total_math_self_study = 0
+        total_english_self_study = 0
+        total_research_self_study = 0
+        total_korean_lecture = 0
+        total_math_lecture = 0
+        total_english_lecture = 0
+        total_research_lecture = 0
+        total_self_study = 0
+        total_lecture_study = 0
+        total_study = 0
+
+        # 학생 수 초기화
+        num_students = len(student_subject_study_time)
+
+        # 학생별로 과목별 시간을 합산
+        for student_data in student_subject_study_time.values():
+            total_korean_self_study += student_data['korean_self_study']
+            total_math_self_study += student_data['math_self_study']
+            total_english_self_study += student_data['english_self_study']
+            total_research_self_study += student_data['research_self_study']
+            total_korean_lecture += student_data['korean_lecture']
+            total_math_lecture += student_data['math_lecture']
+            total_english_lecture += student_data['english_lecture']
+            total_research_lecture += student_data['research_lecture']
+            total_self_study += student_data['total_self_study']
+            total_lecture_study += student_data['total_lecture']
+            total_study += student_data['total_study_time']
+
+        # 과목별 평균 계산
+        average_korean_self_study = total_korean_self_study / num_students
+        average_math_self_study = total_math_self_study / num_students
+        average_english_self_study = total_english_self_study / num_students
+        average_research_self_study = total_research_self_study / num_students
+        average_korean_lecture = total_korean_lecture / num_students
+        average_math_lecture = total_math_lecture / num_students
+        average_english_lecture = total_english_lecture / num_students
+        average_research_lecture = total_research_lecture / num_students
+        average_self_study = total_self_study / num_students
+        average_lecture_study = total_lecture_study / num_students
+        average_total_study = total_study / num_students
+
+        # 총 자습 시간을 기준으로 정렬된 학생 데이터
+        sorted_total_self_study_times = sorted(student_subject_study_time.items(),
+                                               key=lambda x: x[1]['total_self_study'], reverse=True)
+
+        # 총 인강 시간을 기준으로 정렬된 학생 데이터
+        sorted_total_lecture_times = sorted(student_subject_study_time.items(), key=lambda x: x[1]['total_lecture'],
+                                            reverse=True)
+        print(sorted_total_lecture_times)
+
+        # 총 학습 시간을 기준으로 정렬된 학생 데이터
+        sorted_total_study_times = sorted(student_subject_study_time.items(), key=lambda x: x[1]['total_study_time'],
+                                          reverse=True)
+
+        # 상위 30% 학생 수 계산
+        top_30_percent_index = int(0.3 * len(sorted_total_self_study_times))
+
+        # 총 자습 시간에서의 상위 30% 학생 데이터
+        top_30_percent_self_study = [data['total_self_study'] for _, data in
+                                     sorted_total_self_study_times[:top_30_percent_index]]
+
+        # 총 인강 시간에서의 상위 30% 학생 데이터
+        top_30_percent_lecture = [data['total_lecture'] for _, data in
+                                  sorted_total_lecture_times[:top_30_percent_index]]
+
+        # 총 학습 시간에서의 상위 30% 학생 데이터
+        top_30_percent_study = [data['total_study_time'] for _, data in sorted_total_study_times[:top_30_percent_index]]
 
         # week_report에 저장
         week_report['student_name'] = week_plan.user.student
@@ -311,6 +447,10 @@ def newstudy_report(request, student_id):
             'week_plan_research_study': week_plan_research_study,
             'week_plan_research_lecture_study': week_plan_research_lecture_study,
             'week_plan_research_self_study': week_plan_research_self_study,
+
+            'week_plan_lecture_study': week_plan_lecture_study,
+            'week_plan_self_study': week_plan_self_study,
+            'week_plan_total_study': week_plan_total_study
         }
         ## 마이페이지에 저장한 데이터
         week_report['my_data'] = {
@@ -334,11 +474,11 @@ def newstudy_report(request, student_id):
             'my_self_study': my_self_study,
             'my_total_study': my_total_study,
 
-            'my_study_hour': (my_total_study / 60),
+            'my_study_hour': (my_total_study // 60),
             'my_study_min': (my_total_study % 60),
-            'my_self_study_hour': (my_self_study / 60),
+            'my_self_study_hour': (my_self_study // 60),
             'my_self_study_min': (my_self_study % 60),
-            'my_lecture_study_hour': (my_lecture_study / 60),
+            'my_lecture_study_hour': (my_lecture_study // 60),
             'my_lecture_study_min': (my_lecture_study % 60)
         }
         week_report['focus_score'] = {
@@ -376,20 +516,29 @@ def newstudy_report(request, student_id):
             'consulting': consulting,
             'sleep': sleep,
         }
-        # week_report['average_data'] = {
-        #     'average_korean_lecture_study': int((total_korean_study - total_korean_self_study) / student_number),
-        #     'average_korean_self_study': int(total_korean_self_study / student_number),
-        #     'average_math_lecture_study': int((total_math_study - total_math_self_study) / student_number),
-        #     'average_math_self_study': int(total_math_self_study / student_number),
-        #     'average_english_lecture_study': int((total_english_study - total_english_self_study) / student_number),
-        #     'average_english_self_study': int(total_english_self_study / student_number),
-        #     'average_research_lecture_study': int(((total_research1_study) - (total_research1_self_study)) / student_number),
-        #     'average_research_self_study': int((total_research1_self_study + total_research2_self_study) / student_number),
-        #     'average_total_lecture_study': average_total_lecture_study,
-        #     'average_total_self_study': average_total_self_study,
-        #     'average_total_study': average_total_study
-        # }
+        week_report['average_data'] = {
+            'average_korean_self_study': average_korean_self_study,  # 한국어 과목의 자습 평균
+            'average_math_self_study': average_math_self_study,  # 수학 과목의 자습 평균
+            'average_english_self_study': average_english_self_study,  # 영어 과목의 자습 평균
+            'average_research_self_study': average_research_self_study,  # 연구 과목의 자습 평균
+            'average_korean_lecture': average_korean_lecture,  # 한국어 과목의 인강 평균
+            'average_math_lecture': average_math_lecture,  # 수학 과목의 인강 평균
+            'average_english_lecture': average_english_lecture,  # 영어 과목의 인강 평균
+            'average_research_lecture': average_research_lecture,  # 연구 과목의 인강 평균
+            'average_self_study': average_self_study,
+            'average_lecture_study': average_lecture_study,
+            'average_total_study': average_total_study
+        }
+        week_report['top'] = {
+            'top_30_percent_self_study': top_30_percent_self_study,
+            'top_30_percent_lecture': top_30_percent_lecture,
+            'top_30_percent_study': top_30_percent_study
+        }
         weekly_reports.append(week_report)
-    context = {'weekly_reports': weekly_reports, 'student': student}
+
+    context = {
+        'weekly_reports': weekly_reports,  # 주간 보고서
+        'student': student,  # 학생
+    }
 
     return render(request, 'report/newstudy/newstudy_report.html', context)
