@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from django.conf import settings
 from collections import defaultdict
+from datetime import timedelta, datetime
 
 from check.models import StudentRegister, PatrolCheck
 from mypage.models import Planner
@@ -120,3 +121,71 @@ def mypage_search_detail(request, student_id):
 
     context = {'report': report, 'student': student}
     return render(request, 'report/mypage_search/mypage_search_detail.html', context)
+def mypage_check(request):
+    if request.method == 'GET' and 'start_date' in request.GET and 'end_date' in request.GET:
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+
+        if start_date and end_date:
+            # Convert start_date and end_date to datetime objects
+            start_date = datetime.strptime(start_date, '%Y-%m-%d')
+            end_date = datetime.strptime(end_date, '%Y-%m-%d')
+
+            # Generate a list of dates within the selected range
+            date_range = [start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)]
+
+            students_p = StudentRegister.objects.filter(class_name='P', is_dropped=False).order_by('class_num')
+            students_s = StudentRegister.objects.filter(class_name='S', is_dropped=False).order_by('class_num')
+            students_m = StudentRegister.objects.filter(class_name='M', is_dropped=False).order_by('class_num')
+
+            student_data = []
+
+            for student in students_p:
+                if student.username is not None:
+                    data_status = []
+                    for date in date_range:
+                        planner_data = Planner.objects.filter(username_id=student.username.id, date=date).first()
+                        has_data = planner_data is not None and planner_data.korean_lecture_study_hour is not None
+                        data_status.append({'date': date, 'has_data': has_data})
+                    # If there's no data for any date, mark 'X'
+                    if not any(status['has_data'] for status in data_status):
+                        data_status = [{'date': date, 'has_data': False} for date in date_range]
+                    student_data.append({'name': student.student, 'data_status': data_status, 'class_name': student.class_name, 'class_num': student.class_num})
+
+            for student in students_s:
+                if student.username is not None:
+                    data_status = []
+                    for date in date_range:
+                        planner_data = Planner.objects.filter(username_id=student.username.id, date=date).first()
+                        has_data = planner_data is not None and planner_data.korean_lecture_study_hour is not None
+                        data_status.append({'date': date, 'has_data': has_data})
+                    # If there's no data for any date, mark 'X'
+                    if not any(status['has_data'] for status in data_status):
+                        data_status = [{'date': date, 'has_data': False} for date in date_range]
+                    student_data.append({'name': student.student, 'data_status': data_status, 'class_name': student.class_name, 'class_num': student.class_num})
+
+            for student in students_m:
+                if student.username is not None:
+                    data_status = []
+                    for date in date_range:
+                        planner_data = Planner.objects.filter(username_id=student.username.id, date=date).first()
+                        has_data = planner_data is not None and planner_data.korean_lecture_study_hour is not None
+                        data_status.append({'date': date, 'has_data': has_data})
+                    # If there's no data for any date, mark 'X'
+                    if not any(status['has_data'] for status in data_status):
+                        data_status = [{'date': date, 'has_data': False} for date in date_range]
+                    student_data.append({'name': student.student, 'data_status': data_status, 'class_name': student.class_name, 'class_num': student.class_num})
+
+            report = {
+                'start_date': start_date.strftime('%Y-%m-%d'),
+                'end_date': end_date.strftime('%Y-%m-%d'),
+                'students': student_data,
+                'date_range': date_range,
+            }
+
+            context = {'report': report}
+            return render(request, 'report/mypage_search/mypage_check.html', context)
+
+    # If start_date or end_date is not provided or it's not a GET request, show the default page
+    return render(request, 'report/mypage_search/mypage_check.html')
+

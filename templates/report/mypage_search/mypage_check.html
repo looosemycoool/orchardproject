@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'manager/manager_main_menu.html' %}
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-2">
+                        <form method="GET" action="{% url 'report:mypage_check'%}">
+                            <div class="card border-secondary mb-3" style="height: 18rem">
+                                <div class="card-header bg-info-subtle">날짜 선택</div>
+                                <div class="card-body">
+                                    <label for="id_start_date" class="form-label">시작일</label>
+                                    <input type="date" class="form-control" id="id_start_date" name="start_date"
+                                           value="{{ form.start_date.value|default_if_none:'' }}">
+                                </div>
+                                <div class="card-body">
+                                    <label for="id_end_date" class="form-label">마지막일</label>
+                                    <input type="date" class="form-control" id="id_end_date" name="end_date"
+                                           value="{{ form.end_date.value|default_if_none:'' }}">
+                                    <button class="btn btn-outline-success mt-2" type="submit" id="button"
+                                            style="vertical-align: center">검색
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-10">
+                        <table class="table align-middle" style="text-align: center">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th></th>
+                                    <th></th>
+                                    {% for date in report.date_range %}
+                                        <th>{{ date|date:"m-d" }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in report.students %}
+                                <tr>
+                                    <td>{{ student.class_name }} - {{ student.class_num }}</td>
+                                    <td>{{ student.name }}</td>
+                                    {% for data in student.data_status %}
+                                        <td>
+                                            {% if data.has_data %}
+                                                <span style="color: green;">●</span>
+                                            {% else %}
+                                                <span style="color: red;">✘</span>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
