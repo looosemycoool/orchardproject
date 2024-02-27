@@ -56,7 +56,7 @@ def weekplan_detail(request, student_id):
                                                     filtered_data[0].sun_english_lecture_study_hour * 60) + filtered_data[
                                             0].sun_english_lecture_study_min
         week_total_english_self_study = (filtered_data[0].mon_english_self_study_hour * 60) + filtered_data[
-            0].mon_math_self_study_min + (filtered_data[0].tue_english_self_study_hour * 60) + filtered_data[
+            0].mon_english_self_study_min + (filtered_data[0].tue_english_self_study_hour * 60) + filtered_data[
                                          0].tue_english_self_study_min + (filtered_data[0].wed_english_self_study_hour * 60) + \
                                      filtered_data[0].wed_english_self_study_min + (
                                                  filtered_data[0].thu_english_self_study_hour * 60) + filtered_data[
@@ -67,7 +67,7 @@ def weekplan_detail(request, student_id):
                                      filtered_data[0].sun_english_self_study_min
 
         week_total_research_lecture_study = (filtered_data[0].mon_research_lecture_study_hour * 60) + filtered_data[
-            0].mon_english_lecture_study_min + (filtered_data[0].tue_research_lecture_study_hour * 60) + filtered_data[
+            0].mon_research_lecture_study_min + (filtered_data[0].tue_research_lecture_study_hour * 60) + filtered_data[
                                                0].tue_research_lecture_study_min + (
                                                    filtered_data[0].wed_research_lecture_study_hour * 60) + \
                                            filtered_data[
