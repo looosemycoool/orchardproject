@@ -180,7 +180,7 @@ def weekplan_modify(request, data_id):
     return render(request, 'manager/weekplan/weekplan_form.html', context)
 
 def weekplan_delete(request, data_id):
-    week_data = get_object_or_404(Student_Study_Data, id=data_id)
+    week_data = get_object_or_404(WeekPlan, id=data_id)
     student_id = week_data.user_id
     week_data.delete()
     return redirect('manager:weekplan_detail', student_id=student_id)

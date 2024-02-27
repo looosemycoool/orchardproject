@@ -7,7 +7,7 @@
             <div class="col-md-10">
                 <div class="row">
                     {% for report in weekly_reports %}
-                        <div class="container mb-3" id="report_div_{{ forloop.counter }}" style="width:2000px; height:800px">
+                        <div class="container mb-3" id="report_div_{{ forloop.counter }}" style="width:1800px; height:800px">
                             <div class="row mt-2">
                                 <div class="col-md-2 mb-2">
                                     <div style="height:515px">
@@ -544,7 +544,7 @@
                     height: (13 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '전체 학생 대비 과목별 내 공부량'
+                    text: '전체 학생 대비 과목별 나의 공부량'
                 },
                 xAxis: {
                     categories: [
@@ -615,7 +615,7 @@
                     height: (12.4 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '전체 학생 대비 내 공부량'
+                    text: '전체 학생 대비 나의 공부량'
                 },
                 xAxis: {
                     categories: [
@@ -670,7 +670,7 @@
                     height: (12.4 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '상위 30프로 대비 내 공부량'
+                    text: '상위 30프로 대비 나의 공부량'
                 },
                 xAxis: {
                     categories: [
@@ -699,7 +699,7 @@
                     }
                 },
                 series: [{
-                    name: '총 학습 평균',
+                    name: '상위 30% 학습 시간',
                     {# 연두색 #}
                     color: 'rgba(255,192,76,1)',
                     data: [{{ report.top.top_30_percent_lecture }}, {{ report.top.top_30_percent_self_study }}, {{ report.top.top_30_percent_study }}],
