@@ -652,14 +652,14 @@
                 series: [{
                     name: '총 학습 평균',
                     {# 연두색 #}
-                    color: 'rgba(255,192,76,1)',
+                    color: 'rgba(255,200,76,0.9)',
                     data: [{{ report.average_data.average_lecture_study }}, {{ report.average_data.average_self_study }}, {{ report.average_data.average_total_study }}],
                     pointPadding: 0.3,
                     pointPlacement: -0.2
                 }, {
                     name: '내 학습 시간',
                     {# 색상 #}
-                    color: 'rgba(255,0,0,.9)',
+                    color: 'rgba(255,99,71,.9)',
                     data: [{{ report.my_data.my_lecture_study }}, {{ report.my_data.my_self_study}}, {{ report.my_data.my_total_study }}],
                     pointPadding: 0.4,
                     pointPlacement: -0.2
@@ -707,14 +707,14 @@
                 series: [{
                     name: '상위 30% 학습 시간',
                     {# 연두색 #}
-                    color: 'rgba(165,42,42,0.5)',
+                    color: 'rgba(255,153,0,0.9)',
                     data: [{{ report.top.top_30_percent_lecture }}, {{ report.top.top_30_percent_self_study }}, {{ report.top.top_30_percent_study }}],
                     pointPadding: 0.3,
                     pointPlacement: -0.2
                 }, {
                     name: '내 학습 시간',
                     {# 색상 #}
-                    color: 'rgba(148,0,211,.9)',
+                    color: 'rgba(255,0,0,1)',
                     data: [{{ report.my_data.my_lecture_study }}, {{ report.my_data.my_self_study}}, {{ report.my_data.my_total_study }}],
                     pointPadding: 0.4,
                     pointPlacement: -0.2
