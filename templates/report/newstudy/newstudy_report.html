@@ -112,12 +112,12 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <figure class="highcharts-figure">
-                                                    <div id="container_semicircle_patrol_{{ forloop.counter }}"></div>
+                                                    <div id="container_semicircle_plan_{{ forloop.counter }}"></div>
                                                 </figure>
                                             </div>
                                             <div class="col-md-4">
                                                 <figure class="highcharts-figure">
-                                                    <div id="container_semicircle_plan_{{ forloop.counter }}"></div>
+                                                    <div id="container_semicircle_patrol_{{ forloop.counter }}"></div>
                                                 </figure>
                                             </div>
                                         </div>
@@ -129,12 +129,12 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <figure class="highcharts-figure">
-                                                <div id="container_stack_bar_patrol_{{ forloop.counter }}"></div>
+                                                <div id="container_stack_bar_plan_{{ forloop.counter }}"></div>
                                             </figure>
                                             </div>
                                             <div class="col-md-4">
                                                 <figure class="highcharts-figure">
-                                                <div id="container_stack_bar_plan_{{ forloop.counter }}"></div>
+                                                <div id="container_stack_bar_patrol_{{ forloop.counter }}"></div>
                                             </figure>
                                             </div>
                                         </div>
@@ -652,14 +652,14 @@
                 series: [{
                     name: '총 학습 평균',
                     {# 연두색 #}
-                    color: 'rgba(255,99,71,.9)',
+                    color: 'rgba(230,230,250,0.8)',
                     data: [{{ report.average_data.average_lecture_study }}, {{ report.average_data.average_self_study }}, {{ report.average_data.average_total_study }}],
                     pointPadding: 0.3,
                     pointPlacement: -0.2
                 }, {
                     name: '내 학습 시간',
                     {# 색상 #}
-                    color: 'rgba(255,255,0,1)',
+                    color: 'rgba(138,43,226,1)',
                     data: [{{ report.my_data.my_lecture_study }}, {{ report.my_data.my_self_study}}, {{ report.my_data.my_total_study }}],
                     pointPadding: 0.4,
                     pointPlacement: -0.2
@@ -707,14 +707,14 @@
                 series: [{
                     name: '상위 30% 학습 시간',
                     {# 연두색 #}
-                    color: 'rgba(230,230,250,0.9)',
+                    color: 'rgba(255,200,60,0.9)',
                     data: [{{ report.top.top_30_percent_lecture }}, {{ report.top.top_30_percent_self_study }}, {{ report.top.top_30_percent_study }}],
                     pointPadding: 0.3,
                     pointPlacement: -0.2
                 }, {
                     name: '내 학습 시간',
                     {# 색상 #}
-                    color: 'rgba(138,43,226,1)',
+                    color: 'rgba(255,0,0,1)',
                     data: [{{ report.my_data.my_lecture_study }}, {{ report.my_data.my_self_study}}, {{ report.my_data.my_total_study }}],
                     pointPadding: 0.4,
                     pointPlacement: -0.2
