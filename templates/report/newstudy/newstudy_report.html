@@ -432,7 +432,8 @@
                     verticalAlign: 'middle',
                     y: -58,
                     style: {
-                        fontSize: '28px' // 여기서 원하는 크기로 조절하세요
+                        fontSize: '28px',
+                        marginTop: '10px'// 여기서 원하는 크기로 조절하세요
                     }
                 },
                 accessibility: {
@@ -448,7 +449,7 @@
                             formatter: function () {
                                 return this.point.name + ':' + Math.round(this.percentage / {{ report.my_data.my_total_study}} * 100) + '%';
                             },
-                            distance: -10,
+                            distance: -50,
                             color: 'black',
                         },
                         startAngle: -90,
