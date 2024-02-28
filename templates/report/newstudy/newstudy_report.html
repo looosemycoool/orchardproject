@@ -45,7 +45,9 @@
                                                             <strong>집중도</strong>
                                                         </div>
                                                         <div class="col-md-6"
-                                                             style="text-align: center">{{ report.focus_score.focus_score }}</div>
+                                                             style="text-align: center">{{ report.focus_score.focus_score }}
+                                                            <span class="text-secondary" style="font-size:20px;">/ 3</span>
+                                                        </div>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item bg-light"
@@ -427,7 +429,7 @@
                     height: (11 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '일일 학습 실행 시간',
+                    text: '주간 학습 실행',
                     align: 'center',
                     verticalAlign: 'middle',
                     y: -70,
@@ -553,7 +555,7 @@
                 title: {
                     text: '전체 학생 대비 과목별 나의 총 학습량',
                     style: {
-                        fontSize: '22px', // 여기서 원하는 크기로 조절하세요
+                        fontSize: '20px', // 여기서 원하는 크기로 조절하세요
                     }
                 },
                 xAxis: {
@@ -628,7 +630,7 @@
                 title: {
                     text: '전체 학생 대비 나의 총 학습량',
                     style: {
-                        fontSize: '22px', // 여기서 원하는 크기로 조절하세요
+                        fontSize: '21px', // 여기서 원하는 크기로 조절하세요
                     }
                 },
                 xAxis: {
@@ -687,7 +689,7 @@
                 title: {
                     text: '상위 30프로 대비 나의 총 학습량',
                     style: {
-                        fontSize: '22px', // 여기서 원하는 크기로 조절하세요
+                        fontSize: '21px', // 여기서 원하는 크기로 조절하세요
                     }
                 },
                 xAxis: {
