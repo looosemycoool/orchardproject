@@ -92,18 +92,18 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <img style="max-height: 200px; margin-left:-20px;margin-top: 90px" src="{% static '3.jpg' %}"
+                                        <img style="max-height: 220px; margin-left:-35px;margin-top: 190px" src="{% static '3.jpg' %}"
                                              alt="logo"/>
                                         <img src="{% static 'save_btn.png' %}"
                                              class="save-btn"
                                              data-target="report_div_{{ forloop.counter }}"
                                              data-student-name="{{ report.student_name }}"
                                              data-week-name="{{ report.week_name }}"
-                                             alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.5"/>
+                                             alt="이미지 저장" style="cursor:pointer; height:30px; width:30px; opacity:0.5; margin-top: -30px"/>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
-                                    <div class="card border border-success mt-3" style="height:500px">
+                                    <div class="card border border-success" style="height:520px">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <figure class="highcharts-figure">
@@ -121,7 +121,7 @@
                                                 </figure>
                                             </div>
                                         </div>
-                                        <div class="row" style="margin-top:20px">
+                                        <div class="row" style="margin-top: 10px">
                                             <div class="col-md-4">
                                                 <figure class="highcharts-figure">
                                                 <div id="container_stack_bar_student_{{ forloop.counter }}"></div>
@@ -138,19 +138,19 @@
                                             </figure>
                                             </div>
                                         </div>
-                                        <div class="card border border-success" style="height:500px; margin-top:20px">
+                                        <div class="card border border-success" style="height:500px; margin-top:5px">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 mt-3">
                                                     <figure class="highcharts-figure">
                                                         <div id="container_column_{{ forloop.counter }}"></div>
                                                     </figure>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 mt-3">
                                                     <figure class="highcharts-figure">
                                                         <div id="container_column_total{{ forloop.counter }}"></div>
                                                     </figure>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 mt-3">
                                                     <figure class="highcharts-figure">
                                                         <div id="container_column_top{{ forloop.counter }}"></div>
                                                     </figure>
@@ -174,13 +174,13 @@
                     plotBackgroundColor: null,
                     plotBorderWidth: 0,
                     plotShadow: false,
-                    height: (9 / 16 * 100) + '%'
+                    height: (11 / 16 * 100) + '%'
                 },
                 title: {
                     text: '실시간 학습 점검',
                     align: 'center',
                     verticalAlign: 'middle',
-                    y: -58,
+                    y: -70,
                     style: {
                         fontSize: '28px' // 여기서 원하는 크기로 조절하세요
                     }
@@ -203,8 +203,8 @@
                         },
                         startAngle: -90,
                         endAngle: 90,
-                        center: ['50%', '128%'],
-                        size: '220%',
+                        center: ['50%', '112%'],
+                        size: '170%',
                         colors: ['#FFE699', '#8BE88B', '#FFA931', '#63C9E8', '#A795D7']
                     },
                 },
@@ -241,7 +241,7 @@
             Highcharts.chart('container_stack_bar_patrol_{{ forloop.counter }}', {
                 chart: {
                     type: 'bar',
-                    height: (8 / 16 * 100) + '%'
+                    height: (9 / 16 * 100) + '%'
                 },
                 title: {
                     text: null,
@@ -300,13 +300,13 @@
                     plotBackgroundColor: null,
                     plotBorderWidth: 0,
                     plotShadow: false,
-                    height: (9 / 16 * 100) + '%'
+                    height: (11 / 16 * 100) + '%'
                 },
                 title: {
-                    text: '학생 주간 계획',
+                    text: '주간 학습 계획',
                     align: 'center',
                     verticalAlign: 'middle',
-                    y: -58,
+                    y: -70,
                     style: {
                         fontSize: '28px' // 여기서 원하는 크기로 조절하세요
                     }
@@ -329,8 +329,8 @@
                             },
                             startAngle: -90,
                             endAngle: 90,
-                            center: ['50%', '128%'],
-                            size: '220%',
+                            center: ['50%', '112%'],
+                            size: '170%',
                             colors: ['#FFE699', '#8BE88B', '#FFA931', '#63C9E8', '#A795D7']
                         },
                     },
@@ -366,7 +366,7 @@
             Highcharts.chart('container_stack_bar_student_{{ forloop.counter }}', {
                 chart: {
                     type: 'bar',
-                    height: (8 / 16 * 100) + '%'
+                    height: (9 / 16 * 100) + '%'
                 },
                 title: {
                     text: null
@@ -424,13 +424,13 @@
                     plotBackgroundColor: null,
                     plotBorderWidth: 0,
                     plotShadow: false,
-                    height: (9 / 16 * 100) + '%'
+                    height: (11 / 16 * 100) + '%'
                 },
                 title: {
                     text: '일일 학습 실행 시간',
                     align: 'center',
                     verticalAlign: 'middle',
-                    y: -58,
+                    y: -70,
                     style: {
                         fontSize: '28px', // 여기서 원하는 크기로 조절하세요
                     }
@@ -453,8 +453,8 @@
                         },
                         startAngle: -90,
                         endAngle: 90,
-                        center: ['50%', '150%'],
-                        size: '220%',
+                        center: ['50%', '112%'],
+                        size: '170%',
                         colors: ['#FFE699', '#8BE88B', '#FFA931', '#63C9E8', '#A795D7']
                     },
                 },
@@ -491,7 +491,7 @@
             Highcharts.chart('container_stack_bar_plan_{{ forloop.counter }}', {
                 chart: {
                     type: 'bar',
-                    height: (8 / 16 * 100) + '%'
+                    height: (9 / 16 * 100) + '%'
                 },
                 title: {
                     text: null
@@ -547,10 +547,14 @@
             Highcharts.chart('container_column_{{ forloop.counter }}', {
                 chart: {
                     type: 'column',
-                    height: (13 / 16 * 100) + '%'
+                    height: (14 / 16 * 100) + '%',
+                    marginTop: 80,
                 },
                 title: {
-                    text: '전체 학생 대비 과목별 나의 공부량',
+                    text: '전체 학생 대비 과목별 나의 총 학습량',
+                    style: {
+                        fontSize: '22px', // 여기서 원하는 크기로 조절하세요
+                    }
                 },
                 xAxis: {
                     categories: [
@@ -618,10 +622,14 @@
             Highcharts.chart('container_column_total{{ forloop.counter }}', {
                 chart: {
                     type: 'column',
-                    height: (12.4 / 16 * 100) + '%'
+                    height: (14 / 16 * 100) + '%',
+                    marginTop: 80,
                 },
                 title: {
-                    text: '전체 학생 대비 나의 공부량',
+                    text: '전체 학생 대비 나의 총 학습량',
+                    style: {
+                        fontSize: '22px', // 여기서 원하는 크기로 조절하세요
+                    }
                 },
                 xAxis: {
                     categories: [
@@ -673,10 +681,14 @@
             Highcharts.chart('container_column_top{{ forloop.counter }}', {
                 chart: {
                     type: 'column',
-                    height: (12.4 / 16 * 100) + '%'
+                    height: (14 / 16 * 100) + '%',
+                    marginTop: 80,
                 },
                 title: {
-                    text: '상위 30프로 대비 나의 공부량',
+                    text: '상위 30프로 대비 나의 총 학습량',
+                    style: {
+                        fontSize: '22px', // 여기서 원하는 크기로 조절하세요
+                    }
                 },
                 xAxis: {
                     categories: [
