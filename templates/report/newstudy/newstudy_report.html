@@ -706,15 +706,15 @@
                 },
                 series: [{
                     name: '상위 30% 학습 시간',
-                    {# 연두색 #}
-                    color: 'rgba(255,200,60,0.9)',
+                    {# 연두색 'rgba(255,200,60,0.9) #}
+                    color: 'rgba(250,128,114,0.9)',
                     data: [{{ report.top.top_30_percent_lecture }}, {{ report.top.top_30_percent_self_study }}, {{ report.top.top_30_percent_study }}],
                     pointPadding: 0.3,
                     pointPlacement: -0.2
                 }, {
                     name: '내 학습 시간',
-                    {# 색상 #}
-                    color: 'rgba(255,0,0,1)',
+                    {# 색상 'rgba(255,0,0,1)' #}
+                    color: 'rgba(139,0,0,1)',
                     data: [{{ report.my_data.my_lecture_study }}, {{ report.my_data.my_self_study}}, {{ report.my_data.my_total_study }}],
                     pointPadding: 0.4,
                     pointPlacement: -0.2
