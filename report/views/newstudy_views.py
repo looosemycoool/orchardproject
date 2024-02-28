@@ -422,6 +422,7 @@ def newstudy_report(request, student_id):
 
         # 총 학습 시간에서의 상위 30% 학생 데이터
         top_30_percent_study = [data['total_study_time'] for _, data in sorted_total_study_times[:top_30_percent_index]]
+        print('상위 30프로', top_30_percent_study)
 
         # week_report에 저장
         week_report['student_name'] = week_plan.user.student
@@ -540,5 +541,4 @@ def newstudy_report(request, student_id):
         'weekly_reports': weekly_reports,  # 주간 보고서
         'student': student,  # 학생
     }
-
     return render(request, 'report/newstudy/newstudy_report.html', context)
