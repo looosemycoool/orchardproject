@@ -403,7 +403,7 @@ def newstudy_report(request, student_id):
         # 총 인강 시간을 기준으로 정렬된 학생 데이터
         sorted_total_lecture_times = sorted(student_subject_study_time.items(), key=lambda x: x[1]['total_lecture'],
                                             reverse=True)
-        print(sorted_total_lecture_times)
+        print(sorted_total_lecture_times[0])
 
         # 총 학습 시간을 기준으로 정렬된 학생 데이터
         sorted_total_study_times = sorted(student_subject_study_time.items(), key=lambda x: x[1]['total_study_time'],
@@ -422,7 +422,7 @@ def newstudy_report(request, student_id):
 
         # 총 학습 시간에서의 상위 30% 학생 데이터
         top_30_percent_study = [data['total_study_time'] for _, data in sorted_total_study_times[:top_30_percent_index]]
-        print('상위 30프로', top_30_percent_study)
+        print('상위 30프로', top_30_percent_study[0])
 
         # week_report에 저장
         week_report['student_name'] = week_plan.user.student
@@ -531,9 +531,9 @@ def newstudy_report(request, student_id):
             'average_total_study': average_total_study
         }
         week_report['top'] = {
-            'top_30_percent_self_study': top_30_percent_self_study,
-            'top_30_percent_lecture': top_30_percent_lecture,
-            'top_30_percent_study': top_30_percent_study
+            'top_30_percent_self_study': top_30_percent_self_study[0],
+            'top_30_percent_lecture': top_30_percent_lecture[0],
+            'top_30_percent_study': top_30_percent_study[0]
         }
         weekly_reports.append(week_report)
 
