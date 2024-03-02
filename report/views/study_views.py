@@ -42,7 +42,7 @@ def study_report(request, student_id):
     ]
 
     study_datas = Student_Study_Data.objects.filter(user__id=student_id).order_by('-id')
-    student = StudentRegister.objects.get(id=student_id, is_dropped=False)
+    student = StudentRegister.objects.get(id=student_id, is_dropped=True)
 
     weekly_reports = []
 
