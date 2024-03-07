@@ -26,15 +26,15 @@
         </ul>
     </div>
     <ul class="list-group dropdown-center mt-3">
-        <a href="{% url 'report:mypage_search_index' %}"
-            class="list-group-item list-group-item-action text-center"
-            aria-current="true">
-            학생별 마이페이지 확인
-        </a>
+{#        <a href="{% url 'report:mypage_search_index' %}"#}
+{#            class="list-group-item list-group-item-action text-center"#}
+{#            aria-current="true">#}
+{#            학생별 마이페이지 확인#}
+{#        </a>#}
         <a href="{% url 'report:mypage_check' %}"
             class="list-group-item list-group-item-action text-center"
             aria-current="true">
-            학생별 마이페이지 확인 2
+            학생별 마이페이지 확인
         </a>
     </ul>
     <ul class="list-group dropdown-center">
@@ -48,11 +48,11 @@
                    aria-current="true">
                     학생 주간 계획표
                 </a>
-                <a href="{% url 'manager:student_study' %}"
-                   class="list-group-item list-group-item-action text-center"
-                   aria-current="true">
-                    학생 플래너
-                </a>
+{#                <a href="{% url 'manager:student_study' %}"#}
+{#                   class="list-group-item list-group-item-action text-center"#}
+{#                   aria-current="true">#}
+{#                    학생 플래너#}
+{#                </a>#}
                 <a href="{% url 'manager:consulting' %}"
                    class="list-group-item list-group-item-action text-center"
                    aria-current="true">
@@ -63,10 +63,11 @@
 {#                   aria-current="true">#}
 {#                    영단어 Test#}
 {#                </a>#}
+{#                주간테스트는 추가하면 됨 #}
                 <a href="{% url 'manager:word' %}"
                    class="list-group-item list-group-item-action text-center"
                    aria-current="true">
-                    영단어 + 주간테스트
+                    영단어 Test
                 </a>
             </ul>
         </div>
@@ -104,13 +105,13 @@
             <a href="{% url 'report:study_index' %}"
                class="list-group-item list-group-item-action text-center"
                aria-current="true">
-                학습 Report(이전)
+                학습 Report(윈터클래스)
             </a>
-            <a href="{% url 'report:question_index' %}"
-               class="list-group-item list-group-item-action text-center"
-               aria-current="true">
-                영단어 Report(윈터)
-            </a>
+{#            <a href="{% url 'report:question_index' %}"#}
+{#               class="list-group-item list-group-item-action text-center"#}
+{#               aria-current="true">#}
+{#                영단어 Report(윈터)#}
+{#            </a>#}
         </ul>
     </div>
     <ul class="list-group dropdown-center mt-3">
