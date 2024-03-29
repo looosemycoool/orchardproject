@@ -40,13 +40,15 @@
                                         <h5 class="card-title">{{ select_month }}</h5>
                                     </div>
                                 </div>
-                                <div class="card border-secondary mb-3" style="height: 11rem">
+                                <div class="card border-secondary mb-3" style="height: 14rem">
                                     <div class="card-header bg-danger-subtle">
                                         <h5 class="card-title">영단어 랜덤 테스트</h5>
                                     </div>
                                     <div class="card-body">
                                         <p>1차 점수 - {{ data.random_word1|default_if_none:'' }}</p>
                                         <p>2차 점수 - {{ data.random_word2|default_if_none:'' }}</p>
+                                        <p>3차 점수 - {{ data.random_word3|default_if_none:'' }}</p>
+                                        <p>4차 점수 - {{ data.random_word4|default_if_none:'' }}</p>
                                         {% include 'form_errors.html' %}
                                     </div>
                                 </div>

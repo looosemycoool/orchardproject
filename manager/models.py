@@ -312,11 +312,13 @@ class WordTest(models.Model):
 
     random_word1 = models.IntegerField(null=True, blank=True)
     random_word2 = models.IntegerField(null=True, blank=True)
+    random_word3 = models.IntegerField(null=True, blank=True)
+    random_word4 = models.IntegerField(null=True, blank=True)
 
     weekly_korean_test1 = models.IntegerField(null=True, blank=True)
     weekly_korean_test2 = models.IntegerField(null=True, blank=True)
     weekly_math_test1 = models.IntegerField(null=True, blank=True)
-    weekly_math_test2 = models.IntegerField( null=True, blank=True)
+    weekly_math_test2 = models.IntegerField(null=True, blank=True)
 
 class ConsultingReport(models.Model):
     month = models.CharField(max_length=10, null=True, blank=False)
