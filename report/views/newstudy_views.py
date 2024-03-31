@@ -531,10 +531,16 @@ def newstudy_report(request, student_id):
             'average_total_study': average_total_study
         }
         week_report['top'] = {
-            'top_30_percent_self_study': top_30_percent_self_time,
-            'top_30_percent_lecture': top_30_percent_lecture_time,
-            'top_30_percent_study': top_30_percent_study_time
+            'top_30_percent_self_study': top_30_percent_self_study[0],
+            'top_30_percent_lecture': top_30_percent_lecture[0],
+            'top_30_percent_study': top_30_percent_study[0]
         }
+
+        # week_report['top'] = {
+        #     'top_30_percent_self_study': top_30_percent_self_time,
+        #     'top_30_percent_lecture': top_30_percent_lecture_time,
+        #     'top_30_percent_study': top_30_percent_study_time
+        # }
         weekly_reports.append(week_report)
 
     context = {
