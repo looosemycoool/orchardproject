@@ -403,19 +403,17 @@ def newstudy_report(request, student_id):
         # 총 인강 시간을 기준으로 정렬된 학생 데이터
         sorted_total_lecture_times = sorted(student_subject_study_time.items(), key=lambda x: x[1]['total_lecture'],
                                             reverse=True)
-        print(sorted_total_lecture_times[0])
 
         # 총 학습 시간을 기준으로 정렬된 학생 데이터
         sorted_total_study_times = sorted(student_subject_study_time.items(), key=lambda x: x[1]['total_study_time'],
                                           reverse=True)
 
         # 상위 30% 학생 수 계산
-        top_30_percent_index = int(0.3 * len(sorted_total_self_study_times))
+        top_30_percent_index = int(0.3 * num_students)
 
         # 총 자습 시간에서의 상위 30% 학생 데이터
         top_30_percent_self_study = [data['total_self_study'] for _, data in
                                      sorted_total_self_study_times[:top_30_percent_index]]
-
         # 총 인강 시간에서의 상위 30% 학생 데이터
         top_30_percent_lecture = [data['total_lecture'] for _, data in
                                   sorted_total_lecture_times[:top_30_percent_index]]
