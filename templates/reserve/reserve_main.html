@@ -32,8 +32,8 @@
                 <div class="card border-success mb-3" style="max-width: 18rem;">
                     <div class="card-header bg-success text-light"><strong>공지사항</strong></div>
                     <div class="card-header text-success">{{ notice.notice_header|default_if_none:'' }}</div>
-                    <div class="card-body">
-                        <p class="card-text">{{ notice.notice_body|default_if_none:'' }}</p>
+                    <div style="overflow:hidden" class="card-body">
+                        <pre style="overflow:hidden; white-space: pre-wrap" class="card-text">{{ notice.notice_body|default_if_none:'' }}</pre>
                     </div>
                 </div>
                 {% if request.user.is_staff %}
