@@ -170,7 +170,7 @@
                                                           <p>
 {#                                                              <span style="font-size:24px;">{{ data.random_word1|default_if_none:'' }}</span>#}
                                                               <span style="font-size:24px;">{{ data.random_word1|default_if_none:'' }}</span>
-                                                              <span class="text-secondary" style="font-size:14px;">/ 50</span>
+                                                              <span class="text-secondary" style="font-size:14px;">/ 80</span>
                                                           </p>
                                                       {% endif %}
                                                   </div>
@@ -270,7 +270,7 @@
                                                       {% if data.random_word2 %}
                                                           <p>
                                                               <span style="font-size:24px;">{{ data.random_word2|default_if_none:'' }}</span>
-                                                              <span class="text-secondary" style="font-size:14px;">/ 50</span>
+                                                              <span class="text-secondary" style="font-size:14px;">/ 80</span>
                                                           </p>
                                                       {% endif %}
                                                   </div>
@@ -407,6 +407,21 @@
                                                     <h6 class="card-title" style="font-size:20px">Day 11, 12</h6>
                                                   </div>
                                                   <div class="card-title" style="height:30px; font-size:24px">
+                                                      {% if data.day17 %}
+                                                          <p>
+                                                              <span style="font-size:24px;">{{ data.day17|default_if_none:'' }}</span>
+                                                              <span class="text-secondary" style="font-size:14px;">/ 80</span>
+                                                          </p>
+                                                      {% endif %}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-2">
+                                              <div class="card text-center">
+                                                  <div class="card-header" style="height:40px; background-color: #C3E7FA">
+                                                    <h6 class="card-title" style="font-size:20px">Day 13, 14</h6>
+                                                  </div>
+                                                  <div class="card-title" style="height:30px; font-size:24px">
                                                       {% if data.day18 %}
                                                           <p>
                                                               <span style="font-size:24px;">{{ data.day18|default_if_none:'' }}</span>
@@ -419,7 +434,7 @@
                                           <div class="col-md-2">
                                               <div class="card text-center">
                                                   <div class="card-header" style="height:40px; background-color: #C3E7FA">
-                                                    <h6 class="card-title" style="font-size:20px">Day 13, 14</h6>
+                                                    <h6 class="card-title" style="font-size:20px">모의고사</h6>
                                                   </div>
                                                   <div class="card-title" style="height:30px; font-size:24px">
                                                       {% if data.day19 %}
@@ -434,27 +449,12 @@
                                           <div class="col-md-2">
                                               <div class="card text-center">
                                                   <div class="card-header" style="height:40px; background-color: #C3E7FA">
-                                                    <h6 class="card-title" style="font-size:20px">모의고사</h6>
+                                                    <h6 class="card-title" style="font-size:20px">Day 15, 16</h6>
                                                   </div>
                                                   <div class="card-title" style="height:30px; font-size:24px">
                                                       {% if data.day20 %}
                                                           <p>
                                                               <span style="font-size:24px;">{{ data.day20|default_if_none:'' }}</span>
-                                                              <span class="text-secondary" style="font-size:14px;">/ 80</span>
-                                                          </p>
-                                                      {% endif %}
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="col-md-2">
-                                              <div class="card text-center">
-                                                  <div class="card-header" style="height:40px; background-color: #C3E7FA">
-                                                    <h6 class="card-title" style="font-size:20px">Day 15, 16</h6>
-                                                  </div>
-                                                  <div class="card-title" style="height:30px; font-size:24px">
-                                                      {% if data.day25 %}
-                                                          <p>
-                                                              <span style="font-size:24px;">{{ data.day25|default_if_none:'' }}</span>
                                                               <span class="text-secondary" style="font-size:14px;">/ 80</span>
                                                           </p>
                                                       {% endif %}
