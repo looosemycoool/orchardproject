@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Attendance, StudentRegister, PatrolCheck, Specify
 class StudentRegisterAdmin(admin.ModelAdmin):
-    list_display = ('student', 'class_name', 'username', 'teacher')
+    list_display = ('student', 'class_name', 'username', 'is_dropped')
     search_fields = ['student', 'username']
 
 class AttendanceAdmin(admin.ModelAdmin):
