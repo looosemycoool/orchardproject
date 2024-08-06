@@ -11,7 +11,7 @@ logger = logging.getLogger('pybo')
 @login_required(login_url='common:login')
 def index(request):
     logger.info("INFO 레벨로 출력")
-    teacher_table = Teacher.objects.order_by('id')
+    teacher_table = Teacher.objects.order_by('order_num')
     teacher = Teacher.objects.order_by('order_num')
     notice = Notice.objects.latest('id')
     context = {'teacher': teacher, 'teacher_table': teacher_table, 'notice': notice}
