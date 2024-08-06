@@ -12,7 +12,7 @@ logger = logging.getLogger('pybo')
 def index(request):
     logger.info("INFO 레벨로 출력")
     teacher_table = Teacher.objects.order_by('id')
-    teacher = Teacher.objects.order_by('id')
+    teacher = Teacher.objects.order_by('order_num')
     notice = Notice.objects.latest('id')
     context = {'teacher': teacher, 'teacher_table': teacher_table, 'notice': notice}
     return render(request, 'reserve/reserve_main.html', context)
@@ -21,7 +21,7 @@ def index(request):
 def detail(request, teacher_id):
     today = date.today()
     current_teacher_id = int(teacher_id)
-    teacher_table = Teacher.objects.order_by('id')
+    teacher_table = Teacher.objects.order_by('order_num')
     teacher = Teacher.objects.get(id=teacher_id)
     reserve = Reserve.objects.order_by('time_id')
     context = {'teacher': teacher, 'teacher_table': teacher_table, 'reserve': reserve, 'today': today, 'current_teacher_id': current_teacher_id}

@@ -6,7 +6,7 @@ class ReserveAdmin(admin.ModelAdmin):
     search_fields = ["teacher_id__name", "student_name__first_name", "date"]
 
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('name', 'subject', 'duty_day', 'duty_time')
+    list_display = ('name', 'subject', 'order_num', 'duty_day', 'duty_time')
     search_fields = ["name"]
 
 class NoticeAdmin(admin.ModelAdmin):

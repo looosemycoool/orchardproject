@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Teacher(models.Model):
     id = models.BigAutoField(primary_key=True)
+    order_num = models.IntegerField(null=True, blank=True)
     name = models.CharField(max_length=10)
     subject = models.CharField(max_length=10)
     duty_day = models.CharField(max_length=10, null=True, blank=True)
