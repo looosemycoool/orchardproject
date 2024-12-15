@@ -15,15 +15,3 @@ urlpatterns = [
     path('consulting_detail/<int:consulting_id>', consulting_views.consulting_detail, name="consulting_detail"),
     path('consulting_create/', consulting_views.consulting_create, name="consulting_create"),
 ]
-
-
-
-
-
-
-
-
-
-
-
-

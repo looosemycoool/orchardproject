@@ -1,448 +1,645 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            {% include 'manager/manager_main_menu.html' %}
-            <div class="col-md-2 text-center">
-                <div class="card" style="height: 16rem">
-                    <div class="card-header">
-                        {% if student %}
-                            <h5 class="card-title">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</h5>
-                        {% endif %}
-                    </div>
-                    <div class="scroll-container overflow-auto" data-bs-spy="scroll"
-                         data-bs-smooth-scroll="true">
-                        <div class="text-center list-group list-group-flush" id="list-example" data-bs-spy="scroll"
-                             data-bs-smooth-scroll="true"
-                             tabindex="0">
-                            {% for data in data %}
-                                <a href="{% url 'manager:word_modify' data.id %}}"
-                                   class="list-group-item disabled">{{ data.month }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {# 주차 선택하면 나올 수 있도록 #}
-            <div class="col-md-8">
-                {% if student %}
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-md-3">
-                                {% include 'form_errors.html' %}
-                                <div class="card border-secondary mb-3" style="height: 6rem">
-                                    <div class="card-header bg-secondary-subtle">
-                                        <h5 class="card-title">{{ select_month }}</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control" id="id_month" name="month"
-                                               placeholder="1월"
-                                               value="{{ form.month.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-                                <div class="card border-secondary mb-3" style="height: 18rem">
-                                    <div class="card-header bg-danger-subtle">
-                                        <h5 class="card-title">영단어 랜덤 테스트</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control mb-3" id="id_random_word1" name="random_word1"
-                                               placeholder="영단어 랜덤 테스트 1차"
-                                               value="{{ form.random_word1.value|default_if_none:'' }}">
-                                        <input type="text" class="form-control mb-3" id="id_random_word2" name="random_word2"
-                                               placeholder="영단어 랜덤 테스트 2차"
-                                               value="{{ form.random_word2.value|default_if_none:'' }}">
-                                        <input type="text" class="form-control mb-3" id="id_random_word3" name="random_word3"
-                                               placeholder="영단어 랜덤 테스트 3차"
-                                               value="{{ form.random_word3.value|default_if_none:'' }}">
-                                        <input type="text" class="form-control" id="id_random_word4" name="random_word4"
-                                               placeholder="영단어 랜덤 테스트 4차"
-                                               value="{{ form.random_word4.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-                                <div class="card border-secondary mb-3" style="height: 11rem">
-                                    <div class="card-header bg-warning-subtle">
-                                        <h5 class="card-title">국어 주간 테스트</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control mb-3" id="id_weekly_korean_test1" name="weekly_korean_test1"
-                                               placeholder="국어 1차 시험 점수"
-                                               value="{{ form.weekly_korean_test1.value|default_if_none:'' }}">
-                                        <input type="text" class="form-control" id="id_weekly_korean_test2" name="weekly_korean_test2"
-                                               placeholder="국어 2차 시험 점수"
-                                               value="{{ form.weekly_korean_test2.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-                                <div class="card border-secondary mb-3" style="height: 11rem">
-                                    <div class="card-header bg-success-subtle">
-                                        <h5 class="card-title">수학 주간 테스트</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control mb-3" id="id_weekly_math_test1" name="weekly_math_test1"
-                                               placeholder="수학 1차 시험 점수"
-                                               value="{{ form.weekly_math_test1.value|default_if_none:'' }}">
-                                        <input type="text" class="form-control" id="id_weekly_math_test2" name="weekly_math_test2"
-                                               placeholder="수학 2차 시험 점수"
-                                               value="{{ form.weekly_math_test2.value|default_if_none:'' }}">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">저장하기</button>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <h5>1주차</h5>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">1일 월</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day1" name="day1"
-                                                       value="{{ form.day1.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">2일 화</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day2" name="day2"
-                                                       value="{{ form.day2.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">3일 수</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day3" name="day3"
-                                                       value="{{ form.day3.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">4일 목</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day4" name="day4"
-                                                       value="{{ form.day4.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">5일 금</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day5" name="day5"
-                                                       value="{{ form.day5.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">6일 토</h6>
-                                            </div>
-{#                                            <div class="card-body">#}
-{#                                                <input type="text" class="form-control" id="id_day6" name="day6"#}
-{#                                                       value="{{ form.day6.value|default_if_none:'' }}" disabled>#}
-{#                                            </div>#}
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5>2주차</h5>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">1일 월</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day6" name="day6"
-                                                       value="{{ form.day6.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">2일 화</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day7" name="day7"
-                                                       value="{{ form.day7.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">3일 수</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day8" name="day8"
-                                                       value="{{ form.day8.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">4일 목</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day9" name="day9"
-                                                       value="{{ form.day9.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">5일 금</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day10" name="day10"
-                                                       value="{{ form.day10.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">6일 토</h6>
-                                            </div>
-{#                                            <div class="card-body">#}
-{#                                                <input type="text" class="form-control" id="id_day12" name="day12"#}
-{#                                                       value="{{ form.day12.value|default_if_none:'' }}" disabled>#}
-{#                                            </div>#}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5>3주차</h5>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">1일 월</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day11" name="day11"
-                                                       value="{{ form.day11.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">2일 화</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day12" name="day12"
-                                                       value="{{ form.day12.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">3일 수</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day13" name="day13"
-                                                       value="{{ form.day13.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">4일 목</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day14" name="day14"
-                                                       value="{{ form.day14.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">5일 금</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day15" name="day15"
-                                                       value="{{ form.day15.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">6일 토</h6>
-                                            </div>
-{#                                            <div class="card-body">#}
-{#                                                <input type="text" class="form-control" id="id_day18" name="day18"#}
-{#                                                       value="{{ form.day18.value|default_if_none:'' }}" disabled>#}
-{#                                            </div>#}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5>4주차</h5>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">1일 월</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day16" name="day16"
-                                                       value="{{ form.day16.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">2일 화</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day17" name="day17"
-                                                       value="{{ form.day17.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">3일 수</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day18" name="day18"
-                                                       value="{{ form.day18.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">4일 목</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day19" name="day19"
-                                                       value="{{ form.day19.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">5일 금</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day20" name="day20"
-                                                       value="{{ form.day20.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">6일 토</h6>
-                                            </div>
-{#                                            <div class="card-body">#}
-{#                                                <input type="text" class="form-control" id="id_day24" name="day24"#}
-{#                                                       value="{{ form.day24.value|default_if_none:'' }}" disabled>#}
-{#                                            </div>#}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5>5주차</h5>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">1일 월</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day25" name="day25"
-                                                       value="{{ form.day25.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">2일 화</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day26" name="day26"
-                                                       value="{{ form.day26.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">3일 수</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day27" name="day27"
-                                                       value="{{ form.day27.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">4일 목</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day28" name="day28"
-                                                       value="{{ form.day28.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">5일 금</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day29" name="day29"
-                                                       value="{{ form.day29.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="card border-secondary mb-3" style="height: 6rem">
-                                            <div class="card-header bg-light" style="height: 2rem">
-                                                <h6 class="card-title">6일 토</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <input type="text" class="form-control" id="id_day30" name="day30"
-                                                       value="{{ form.day30.value|default_if_none:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid">
+	<div class="row">
+		{% include 'manager/manager_main_menu.html' %}
+		<div class="col-md-2 text-center">
+			<div class="card" style="height: 16rem">
+				<div class="card-header">
+					{% if student %}
+					<h5 class="card-title">{{ student.class_name }}-{{ student.class_num }} {{ student.student }}</h5>
+					{% endif %}
+				</div>
+				<div class="scroll-container overflow-auto" data-bs-spy="scroll" data-bs-smooth-scroll="true">
+					<div
+						class="text-center list-group list-group-flush"
+						id="list-example"
+						data-bs-spy="scroll"
+						data-bs-smooth-scroll="true"
+						tabindex="0"
+					>
+						{% for data in data %}
+						<a href="{% url 'manager:word_modify' data.id %}}" class="list-group-item disabled">{{ data.month }}</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+		{# 주차 선택하면 나올 수 있도록 #}
+		<div class="col-md-8">
+			{% if student %}
+			<form method="post">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-md-3">
+						{% include 'form_errors.html' %}
+						<div class="card border-secondary mb-3" style="height: 6rem">
+							<div class="card-header bg-secondary-subtle">
+								<h5 class="card-title">{{ select_month }}</h5>
+							</div>
+							<div class="card-body">
+								<input
+									type="text"
+									class="form-control"
+									id="id_month"
+									name="month"
+									placeholder="1월"
+									value="{{ form.month.value|default_if_none:'' }}"
+								/>
+							</div>
+						</div>
+						<div class="card border-secondary mb-3" style="height: 18rem">
+							<div class="card-header bg-danger-subtle">
+								<h5 class="card-title">영단어 랜덤 테스트</h5>
+							</div>
+							<div class="card-body">
+								<input
+									type="text"
+									class="form-control mb-3"
+									id="id_random_word1"
+									name="random_word1"
+									placeholder="영단어 랜덤 테스트 1차"
+									value="{{ form.random_word1.value|default_if_none:'' }}"
+								/>
+								<input
+									type="text"
+									class="form-control mb-3"
+									id="id_random_word2"
+									name="random_word2"
+									placeholder="영단어 랜덤 테스트 2차"
+									value="{{ form.random_word2.value|default_if_none:'' }}"
+								/>
+								<input
+									type="text"
+									class="form-control mb-3"
+									id="id_random_word3"
+									name="random_word3"
+									placeholder="영단어 랜덤 테스트 3차"
+									value="{{ form.random_word3.value|default_if_none:'' }}"
+								/>
+								<input
+									type="text"
+									class="form-control"
+									id="id_random_word4"
+									name="random_word4"
+									placeholder="영단어 랜덤 테스트 4차"
+									value="{{ form.random_word4.value|default_if_none:'' }}"
+								/>
+							</div>
+						</div>
+						<div class="card border-secondary mb-3" style="height: 11rem">
+							<div class="card-header bg-warning-subtle">
+								<h5 class="card-title">국어 주간 테스트</h5>
+							</div>
+							<div class="card-body">
+								<input
+									type="text"
+									class="form-control mb-3"
+									id="id_weekly_korean_test1"
+									name="weekly_korean_test1"
+									placeholder="국어 1차 시험 점수"
+									value="{{ form.weekly_korean_test1.value|default_if_none:'' }}"
+								/>
+								<input
+									type="text"
+									class="form-control"
+									id="id_weekly_korean_test2"
+									name="weekly_korean_test2"
+									placeholder="국어 2차 시험 점수"
+									value="{{ form.weekly_korean_test2.value|default_if_none:'' }}"
+								/>
+							</div>
+						</div>
+						<div class="card border-secondary mb-3" style="height: 11rem">
+							<div class="card-header bg-success-subtle">
+								<h5 class="card-title">수학 주간 테스트</h5>
+							</div>
+							<div class="card-body">
+								<input
+									type="text"
+									class="form-control mb-3"
+									id="id_weekly_math_test1"
+									name="weekly_math_test1"
+									placeholder="수학 1차 시험 점수"
+									value="{{ form.weekly_math_test1.value|default_if_none:'' }}"
+								/>
+								<input
+									type="text"
+									class="form-control"
+									id="id_weekly_math_test2"
+									name="weekly_math_test2"
+									placeholder="수학 2차 시험 점수"
+									value="{{ form.weekly_math_test2.value|default_if_none:'' }}"
+								/>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">저장하기</button>
+					</div>
+					<div class="col-md-9">
+						<div class="row">
+							<h5>1주차</h5>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">1일 월</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day1"
+											name="day1"
+											value="{{ form.day1.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">2일 화</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day2"
+											name="day2"
+											value="{{ form.day2.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">3일 수</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day3"
+											name="day3"
+											value="{{ form.day3.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">4일 목</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day4"
+											name="day4"
+											value="{{ form.day4.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">5일 금</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day5"
+											name="day5"
+											value="{{ form.day5.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">6일 토</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day6"
+											name="day6"
+											value="{{ form.day6.value|default_if_none:'' }}"
+											disabled
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h5>2주차</h5>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">1일 월</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day6"
+											name="day6"
+											value="{{ form.day6.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">2일 화</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day7"
+											name="day7"
+											value="{{ form.day7.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">3일 수</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day8"
+											name="day8"
+											value="{{ form.day8.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">4일 목</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day9"
+											name="day9"
+											value="{{ form.day9.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">5일 금</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day10"
+											name="day10"
+											value="{{ form.day10.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">6일 토</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day12"
+											name="day12"
+											value="{{ form.day12.value|default_if_none:'' }}"
+											disabled
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h5>3주차</h5>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">1일 월</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day11"
+											name="day11"
+											value="{{ form.day11.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">2일 화</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day12"
+											name="day12"
+											value="{{ form.day12.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">3일 수</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day13"
+											name="day13"
+											value="{{ form.day13.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">4일 목</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day14"
+											name="day14"
+											value="{{ form.day14.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">5일 금</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day15"
+											name="day15"
+											value="{{ form.day15.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">6일 토</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day18"
+											name="day18"
+											value="{{ form.day18.value|default_if_none:'' }}"
+											disabled
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h5>4주차</h5>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">1일 월</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day16"
+											name="day16"
+											value="{{ form.day16.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">2일 화</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day17"
+											name="day17"
+											value="{{ form.day17.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">3일 수</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day18"
+											name="day18"
+											value="{{ form.day18.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">4일 목</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day19"
+											name="day19"
+											value="{{ form.day19.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">5일 금</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day20"
+											name="day20"
+											value="{{ form.day20.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">6일 토</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day24"
+											name="day24"
+											value="{{ form.day24.value|default_if_none:'' }}"
+											disabled
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h5>5주차</h5>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">1일 월</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day25"
+											name="day25"
+											value="{{ form.day21.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">2일 화</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day26"
+											name="day26"
+											value="{{ form.day22.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">3일 수</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day27"
+											name="day27"
+											value="{{ form.day23.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">4일 목</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day28"
+											name="day28"
+											value="{{ form.day24.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">5일 금</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day29"
+											name="day29"
+											value="{{ form.day25.value|default_if_none:'' }}"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card border-secondary mb-3" style="height: 6rem">
+									<div class="card-header bg-light" style="height: 2rem">
+										<h6 class="card-title">6일 토</h6>
+									</div>
+									<div class="card-body">
+										<input
+											type="text"
+											class="form-control"
+											id="id_day30"
+											name="day30"
+											value="{{ form.day30.value|default_if_none:'' }}"
+											disabled
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			{% endif %}
+		</div>
+	</div>
+</div>
 {% endblock %}
