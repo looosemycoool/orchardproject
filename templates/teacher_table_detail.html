@@ -3,11 +3,11 @@
         {% for t in teacher_table %}
             {% if current_teacher_id == t.id %}
                 <a href="{% url 'reserve:detail' teacher_id=t.id %}" class="list-group-item list-group-item-action text-success border border-success text-center" aria-current="true">
-                    <strong>{{ t.subject }}</strong> {{ t.name }}선생님
+                    <strong>{{ t.subject }}</strong> {{ t.name }}
                 </a>
             {% else %}
                 <a href="{% url 'reserve:detail' teacher_id=t.id %}" class="list-group-item list-group-item-action text-center">
-                    <strong>{{ t.subject }}</strong> {{ t.name }}선생님
+                    <strong>{{ t.subject }}</strong> {{ t.name }}
                 </a>
             {% endif %}
         {% endfor %}
